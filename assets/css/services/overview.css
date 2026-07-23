@@ -1,0 +1,368 @@
+/*====================================
+        SERVICES OVERVIEW
+=====================================*/
+
+.services-overview{
+    position:relative;
+    overflow:hidden;
+
+    padding:120px 8%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fbff
+        );
+}
+
+
+/*====================================
+        BACKGROUND GLOW
+=====================================*/
+
+.services-overview::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    top:-180px;
+    left:-180px;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    opacity:.08;
+
+    filter:blur(120px);
+
+}
+
+.services-overview::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:380px;
+    height:380px;
+
+    bottom:-180px;
+    right:-180px;
+
+    border-radius:50%;
+
+    background:#0ea5e9;
+
+    opacity:.08;
+
+    filter:blur(120px);
+
+}
+
+
+/*====================================
+        SECTION HEADING
+=====================================*/
+
+.services-overview .section-heading{
+
+    max-width:760px;
+
+    margin:0 auto 70px;
+
+    text-align:center;
+
+}
+
+.services-overview .section-heading h2{
+
+    font-size:3rem;
+
+    color:#0f172a;
+
+    margin:20px 0;
+
+    line-height:1.2;
+
+}
+
+.services-overview .section-heading h2 span{
+
+    color:#0ea5e9;
+
+}
+
+.services-overview .section-heading p{
+
+    color:#64748b;
+
+    line-height:1.9;
+
+    font-size:1.05rem;
+
+}
+
+
+/*====================================
+        GRID
+=====================================*/
+
+.overview-grid{
+
+    position:relative;
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+}
+
+
+/*====================================
+        CARD
+=====================================*/
+
+.overview-card{
+
+    position:relative;
+
+    padding:40px 35px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    border:1px solid rgba(14,165,233,.08);
+
+    box-shadow:
+        0 15px 45px rgba(15,23,42,.06);
+
+    transition:.4s;
+
+    overflow:hidden;
+
+}
+
+.overview-card:hover{
+
+    transform:
+        translateY(-12px);
+
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 25px 60px rgba(14,165,233,.18);
+
+}
+
+
+/*====================================
+        TOP BORDER
+=====================================*/
+
+.overview-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0ea5e9,
+            #38bdf8
+        );
+
+}
+
+
+/*====================================
+        ICON
+=====================================*/
+
+.overview-icon{
+
+    width:75px;
+    height:75px;
+
+    margin-bottom:25px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #38bdf8
+        );
+
+    color:#fff;
+
+    font-size:1.9rem;
+
+    box-shadow:
+        0 15px 35px rgba(56,189,248,.30);
+
+    transition:.35s;
+
+}
+
+.overview-card:hover .overview-icon{
+
+    transform:
+        rotate(-8deg)
+        scale(1.08);
+
+}
+
+
+/*====================================
+        TITLE
+=====================================*/
+
+.overview-card h3{
+
+    font-size:1.45rem;
+
+    color:#0f172a;
+
+    margin-bottom:15px;
+
+}
+
+
+/*====================================
+        TEXT
+=====================================*/
+
+.overview-card p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+}
+
+
+/*====================================
+        HOVER GLOW
+=====================================*/
+
+.overview-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    top:-120px;
+    right:-120px;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    opacity:0;
+
+    filter:blur(80px);
+
+    transition:.4s;
+
+}
+
+.overview-card:hover::after{
+
+    opacity:.12;
+
+}
+
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:992px){
+
+    .overview-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .services-overview{
+
+        padding:90px 6%;
+
+    }
+
+    .services-overview .section-heading h2{
+
+        font-size:2.4rem;
+
+    }
+
+    .overview-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .services-overview{
+
+        padding:80px 5%;
+
+    }
+
+    .services-overview .section-heading h2{
+
+        font-size:2rem;
+
+    }
+
+    .overview-card{
+
+        padding:30px 25px;
+
+    }
+
+    .overview-icon{
+
+        width:65px;
+        height:65px;
+
+        font-size:1.6rem;
+
+    }
+
+}

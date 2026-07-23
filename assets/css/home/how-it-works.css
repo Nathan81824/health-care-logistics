@@ -1,0 +1,428 @@
+/*==================================================
+            HOW IT WORKS
+==================================================*/
+
+.how-it-works{
+    position:relative;
+    overflow:hidden;
+    padding:120px 8%;
+
+
+    background:
+    linear-gradient(
+        rgba(5,20,45,.85),
+        rgba(5,20,45,.92)
+    ),
+    url("/assets/images/19c586fc-defd-445d-90de-defac6277318.png");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+}
+
+
+/* Background Glow */
+
+.how-it-works::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    right:-150px;
+    top:100px;
+
+    background:#20b8ff;
+
+    opacity:.15;
+
+    filter:blur(120px);
+
+}
+
+
+/*==================================================
+            CONTAINER
+==================================================*/
+
+
+.process-container{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+
+/*==================================================
+            HEADING
+==================================================*/
+
+
+.section-heading{
+
+    text-align:center;
+
+    max-width:850px;
+
+    margin:0 auto 80px;
+
+}
+
+
+.section-heading h2{
+
+    color:#fff;
+
+    font-size:3rem;
+
+    font-weight:800;
+
+    line-height:1.2;
+
+    margin:25px 0;
+
+}
+
+
+.section-heading h2 span{
+
+    color:#20b8ff;
+
+}
+
+
+.section-heading p{
+
+    color:
+
+    rgba(255,255,255,.7);
+
+    font-size:1.05rem;
+
+    line-height:1.8;
+
+}
+
+
+
+/*==================================================
+            PROCESS GRID
+==================================================*/
+
+
+.process-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:35px;
+
+    position:relative;
+
+}
+
+
+/* Connecting line */
+
+.process-grid::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:55px;
+
+    left:12%;
+
+    right:12%;
+
+    height:2px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #20b8ff,
+        #2563eb
+    );
+
+
+    opacity:.45;
+
+}
+
+
+
+/*==================================================
+            PROCESS CARD
+==================================================*/
+
+
+.process-card-why{
+
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,.12),
+        rgba(255,255,255,.04)
+    );
+
+    border:1px solid rgba(255,255,255,.15);
+
+    backdrop-filter:blur(20px);
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.25);
+
+    transition:.4s ease;
+    border-radius: 1.3rem;
+
+    padding:40px 25px;
+
+}
+
+
+
+
+.process-card-why:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#20b8ff;
+
+    box-shadow:
+    0 25px 60px rgba(32,184,255,.25);
+
+}
+
+
+
+/* Top glow */
+
+.process-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+
+    width:60px;
+
+    height:3px;
+
+
+    background:#20b8ff;
+
+
+    border-radius:20px;
+
+}
+
+
+
+.process-card:hover{
+
+    transform:translateY(-12px);
+
+
+    border-color:#20b8ff;
+
+
+    box-shadow:
+
+    0 25px 60px rgba(32,184,255,.25);
+
+}
+
+
+
+/*==================================================
+            NUMBER
+==================================================*/
+
+
+.step-number{
+
+    position:absolute;
+
+    top:18px;
+
+    right:20px;
+
+
+    font-size:3rem;
+
+    font-weight:900;
+
+
+    color:
+
+    rgba(255, 255, 255, 0.986);
+
+}
+
+
+
+/*==================================================
+            ICON
+==================================================*/
+
+
+.process-icon{
+
+    width:85px;
+
+    height:85px;
+
+
+    margin:0 auto 30px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    border-radius:50%;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #20b8ff,
+        #2563eb
+    );
+
+
+    color:white;
+
+
+    font-size:2rem;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(32,184,255,.35);
+
+
+    transition:.4s ease;
+
+}
+
+
+
+.process-card:hover .process-icon{
+
+    transform:scale(1.1) rotate(5deg);
+
+
+}
+
+
+
+/*==================================================
+            TEXT
+==================================================*/
+
+
+.process-card-why h3{
+
+    color:#ffffff;
+    font-size:1.25rem;
+    font-weight:700;
+
+
+    margin-bottom:15px;
+
+}
+
+
+
+.process-card-why p{
+
+    color:rgba(255,255,255,.75);
+    line-height:1.8;
+
+}
+
+
+
+/*==================================================
+            MOBILE
+==================================================*/
+
+
+@media(max-width:1100px){
+
+
+    .process-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+
+    .process-grid::before{
+
+        display:none;
+
+    }
+
+}
+
+
+
+@media(max-width:700px){a
+
+
+    .how-it-works{
+
+        padding:80px 5%;
+
+    }
+
+
+    .section-heading h2{
+
+        font-size:2.2rem;
+
+    }
+
+
+    .process-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .process-card{
+
+        padding:35px 20px;
+
+    }
+
+}

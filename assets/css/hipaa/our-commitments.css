@@ -1,0 +1,272 @@
+/*====================================
+        HIPAA COMMITMENT
+=====================================*/
+
+.hipaa-commitment{
+    position:relative;
+    overflow:hidden;
+
+    padding:120px 8%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #021b35,
+        #053b66,
+        #02213f
+    );
+
+    color:#fff;
+}
+
+/* Decorative Glow */
+
+.hipaa-commitment::before{
+    content:"";
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    top:-180px;
+    right:-180px;
+
+    border-radius:50%;
+
+    background:rgba(56,189,248,.12);
+
+    filter:blur(90px);
+}
+
+.hipaa-commitment::after{
+    content:"";
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    bottom:-170px;
+    left:-170px;
+
+    border-radius:50%;
+
+    background:rgba(14,165,233,.10);
+
+    filter:blur(90px);
+}
+
+/*====================================
+            HEADING
+=====================================*/
+
+.section-heading{
+    position:relative;
+    z-index:2;
+
+    max-width:760px;
+    margin:auto;
+    text-align:center;
+    margin-bottom:5rem;
+}
+
+.section-heading .section-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:.7rem;
+
+    padding:.75rem 1.4rem;
+
+    border-radius:40px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    color:#7dd3fc;
+
+    font-weight:600;
+}
+
+.section-heading h2{
+    margin:1.6rem 0;
+
+    font-size:3rem;
+    line-height:1.2;
+}
+
+.section-heading h2 span{
+    color:#38bdf8;
+}
+
+.section-heading p{
+    font-size:1.05rem;
+    line-height:1.9;
+
+    color:rgba(255,255,255,.75);
+}
+
+/*====================================
+        TIMELINE
+=====================================*/
+
+.commitment-timeline{
+    position:relative;
+
+    max-width:900px;
+    margin:auto;
+
+    display:flex;
+    flex-direction:column;
+    gap:2.5rem;
+}
+
+/* Vertical Line */
+
+.commitment-timeline::before{
+    content:"";
+    position:absolute;
+
+    left:35px;
+    top:0;
+    bottom:0;
+
+    width:3px;
+
+    background:linear-gradient(
+        to bottom,
+        #38bdf8,
+        rgba(255,255,255,.2)
+    );
+}
+
+/*====================================
+        TIMELINE ITEM
+=====================================*/
+
+.timeline-item{
+    position:relative;
+
+    display:flex;
+    align-items:flex-start;
+    gap:2rem;
+
+    z-index:2;
+}
+
+.timeline-icon{
+    width:70px;
+    height:70px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #38bdf8,
+        #0284c7
+    );
+
+    color:#fff;
+
+    font-size:1.4rem;
+
+    box-shadow:
+        0 0 25px rgba(56,189,248,.45);
+}
+
+.timeline-content{
+    flex:1;
+
+    padding:2rem;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.07);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(14px);
+
+    transition:.35s;
+}
+
+.timeline-content:hover{
+    transform:translateY(-8px);
+
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.25);
+}
+
+.timeline-content h3{
+    margin-bottom:.8rem;
+
+    font-size:1.4rem;
+}
+
+.timeline-content p{
+    line-height:1.8;
+
+    color:rgba(255,255,255,.75);
+}
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:768px){
+
+    .hipaa-commitment{
+        padding:90px 7%;
+    }
+
+    .section-heading h2{
+        font-size:2.2rem;
+    }
+
+    .commitment-timeline::before{
+        left:30px;
+    }
+
+    .timeline-item{
+        gap:1.3rem;
+    }
+
+    .timeline-icon{
+        width:60px;
+        height:60px;
+
+        font-size:1.2rem;
+    }
+
+    .timeline-content{
+        padding:1.5rem;
+    }
+
+}
+
+@media(max-width:550px){
+
+    .section-heading h2{
+        font-size:1.9rem;
+    }
+
+    .timeline-item{
+        flex-direction:column;
+    }
+
+    .commitment-timeline::before{
+        display:none;
+    }
+
+    .timeline-icon{
+        margin-bottom:.5rem;
+    }
+
+}

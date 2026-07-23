@@ -1,0 +1,284 @@
+/*====================================
+        HIPAA PROCESS
+=====================================*/
+
+.hipaa-process{
+    position:relative;
+    overflow:hidden;
+
+    padding:120px 8%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #f8fbff,
+        #eef7ff,
+        #ffffff
+    );
+}
+
+/* Decorative Background */
+
+.hipaa-process::before{
+    content:"";
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    top:-180px;
+    right:-180px;
+
+    border-radius:50%;
+
+    background:rgba(56,189,248,.08);
+
+    filter:blur(80px);
+}
+
+.hipaa-process::after{
+    content:"";
+    position:absolute;
+
+    width:340px;
+    height:340px;
+
+    bottom:-140px;
+    left:-140px;
+
+    border-radius:50%;
+
+    background:rgba(2,132,199,.08);
+
+    filter:blur(80px);
+}
+
+/*====================================
+        HEADING
+=====================================*/
+
+.hipaa-process .section-heading{
+    position:relative;
+    z-index:2;
+
+    max-width:760px;
+    margin:0 auto 5rem;
+
+    text-align:center;
+}
+
+.hipaa-process .section-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:.7rem;
+
+    padding:.75rem 1.4rem;
+
+    border-radius:50px;
+
+    background:#e0f2fe;
+
+    color:#0284c7;
+
+    font-weight:600;
+}
+
+.hipaa-process h2{
+    margin:1.5rem 0;
+
+    font-size:3rem;
+    line-height:1.2;
+
+    color:#0f172a;
+}
+
+.hipaa-process h2 span{
+    color:#0284c7;
+}
+
+.hipaa-process .section-heading p{
+    max-width:700px;
+    margin:auto;
+
+    line-height:1.9;
+
+    color:#475569;
+}
+
+/*====================================
+        PROCESS GRID
+=====================================*/
+
+.process-grid{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+
+    gap:2rem;
+}
+
+/*====================================
+        PROCESS CARD
+=====================================*/
+
+.process-card{
+    position:relative;
+
+    padding:2.5rem 2rem;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    border:1px solid rgba(2,132,199,.08);
+
+    text-align:center;
+
+    transition:.4s;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 15px 40px rgba(15,23,42,.08);
+}
+
+.process-card::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:100%;
+    height:5px;
+
+    background:linear-gradient(
+        90deg,
+        #0284c7,
+        #38bdf8
+    );
+
+    transform:scaleX(0);
+
+    transition:.4s;
+}
+
+.process-card:hover{
+    transform:translateY(-10px);
+
+    box-shadow:
+        0 25px 55px rgba(2,132,199,.18);
+}
+
+.process-card:hover::before{
+    transform:scaleX(1);
+}
+
+/*====================================
+        STEP NUMBER
+=====================================*/
+
+.step-number{
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    font-size:2.5rem;
+    font-weight:800;
+
+    color:rgba(2,132,199,.08);
+
+    user-select:none;
+}
+
+/*====================================
+            ICON
+=====================================*/
+
+.process-card i{
+    width:80px;
+    height:80px;
+
+    margin:auto auto 1.8rem;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:22px;
+
+    background:linear-gradient(
+        135deg,
+        #0284c7,
+        #38bdf8
+    );
+
+    color:#fff;
+
+    font-size:2rem;
+
+    box-shadow:
+        0 15px 35px rgba(2,132,199,.25);
+}
+
+/*====================================
+        TEXT
+=====================================*/
+
+.process-card h3{
+    margin-bottom:1rem;
+
+    font-size:1.35rem;
+
+    color:#0f172a;
+}
+
+.process-card p{
+    line-height:1.8;
+
+    color:#64748b;
+}
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:1200px){
+
+    .process-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .hipaa-process{
+        padding:90px 7%;
+    }
+
+    .hipaa-process h2{
+        font-size:2.3rem;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .process-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hipaa-process h2{
+        font-size:2rem;
+    }
+
+    .process-card{
+        padding:2rem 1.5rem;
+    }
+
+}

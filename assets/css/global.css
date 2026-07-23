@@ -1,0 +1,123 @@
+@import"core/main.css";
+@import"home/index.css";
+@import"about/index.css";
+@import"services/index.css";
+@import"industries-we-serve/index.css";
+@import url("./hipaa/index.css");
+@import url("./contact/index.css");
+@import url("./auth/auth.css");
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    animation : slideLeft .7s ease forwards ;
+    transition: 1.7s ease-in-out;
+    
+}
+
+/* GLOBAL */
+body {
+    
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-white);
+    color: var(--text-dark);
+
+}
+
+/* TYPOGRAPHY */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text-dark);
+}
+
+p {
+    color: #475569;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-family: 'Inter', sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: 'Inter', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* OVERLAY */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+}
+
+/* ==========================================
+   CUSTOM SCROLLBAR
+========================================== */
+
+/* Firefox */
+html{
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-side-color) var(--scrollbar-track);
+}
+
+/* Chrome, Edge & Safari */
+::-webkit-scrollbar{
+    width: 12px;
+}
+
+::-webkit-scrollbar-track{
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(
+        180deg,
+        var(--primary-side-color),
+        var(--secondary-side-color)
+    );
+    border-radius: 20px;
+    border: 3px solid var(--scrollbar-track);
+    transition: .3s;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: linear-gradient(
+        180deg,
+        var(--secondary-side-color),
+        var(--primary-side-color)
+    );
+}
+
+::-webkit-scrollbar-corner{
+    background: var(--scrollbar-track);
+}

@@ -1,0 +1,23 @@
+/*====================================
+        REVERSE LAYOUT
+=====================================*/
+
+.industry-details.reverse .industry-details__image{
+    order:2;
+}
+
+.industry-details.reverse .industry-details__content{
+    order:1;
+}
+
+@media(max-width:992px){
+
+    .industry-details.reverse .industry-details__image{
+        order:1;
+    }
+
+    .industry-details.reverse .industry-details__content{
+        order:2;
+    }
+
+}

@@ -1,0 +1,297 @@
+/*====================================
+        SERVICE COVERAGE
+=====================================*/
+
+.service-coverage{
+    position:relative;
+    overflow:hidden;
+
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:5rem;
+
+    padding:120px 8%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #f8fbff,
+        #eef7ff,
+        #ffffff
+    );
+}
+
+/*====================================
+        BACKGROUND
+=====================================*/
+
+.service-coverage::before{
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    top:-170px;
+    right:-170px;
+
+    border-radius:50%;
+
+    background:rgba(56,189,248,.08);
+
+    filter:blur(90px);
+}
+
+.service-coverage::after{
+    content:"";
+
+    position:absolute;
+
+    width:320px;
+    height:320px;
+
+    bottom:-120px;
+    left:-120px;
+
+    border-radius:50%;
+
+    background:rgba(2,132,199,.08);
+
+    filter:blur(80px);
+}
+
+/*====================================
+        CONTENT
+=====================================*/
+
+.coverage-content{
+    position:relative;
+    z-index:2;
+}
+
+.coverage-content .section-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:.7rem;
+
+    padding:.8rem 1.4rem;
+
+    border-radius:40px;
+
+    background:#dff5ff;
+
+    color:#0284c7;
+
+    font-weight:600;
+
+    margin-bottom:1.5rem;
+}
+
+.coverage-content h2{
+    font-size:3rem;
+    line-height:1.2;
+
+    color:#0f172a;
+
+    margin-bottom:1.5rem;
+}
+
+.coverage-content h2 span{
+    color:#0284c7;
+}
+
+.coverage-content p{
+    line-height:1.9;
+
+    color:#64748b;
+
+    margin-bottom:2.5rem;
+
+    max-width:620px;
+}
+
+/*====================================
+        COVERAGE LIST
+=====================================*/
+
+.coverage-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1.2rem;
+}
+
+.coverage-item{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+
+    padding:1.2rem 1.4rem;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    border:1px solid rgba(2,132,199,.08);
+
+    box-shadow:
+        0 15px 35px rgba(15,23,42,.08);
+
+    transition:.35s;
+}
+
+.coverage-item:hover{
+
+    transform:translateY(-6px);
+
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 20px 45px rgba(2,132,199,.16);
+
+}
+
+.coverage-item i{
+
+    width:55px;
+    height:55px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border-radius:15px;
+
+    background:linear-gradient(
+        135deg,
+        #0284c7,
+        #38bdf8
+    );
+
+    color:#fff;
+
+    font-size:1.2rem;
+}
+
+.coverage-item span{
+
+    font-weight:600;
+
+    color:#0f172a;
+}
+
+/*====================================
+        STATS
+=====================================*/
+
+.coverage-stats{
+    position:relative;
+    z-index:2;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+
+    gap:1.5rem;
+}
+
+.stat-card{
+
+    padding:2rem;
+
+    border-radius:24px;
+
+    background:#fff;
+
+    border:1px solid rgba(2,132,199,.08);
+
+    text-align:center;
+
+    box-shadow:
+        0 20px 45px rgba(15,23,42,.08);
+
+    transition:.35s;
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 25px 55px rgba(2,132,199,.18);
+
+}
+
+.stat-card h3{
+
+    font-size:2.5rem;
+
+    color:#0284c7;
+
+    margin-bottom:.8rem;
+}
+
+.stat-card p{
+
+    color:#64748b;
+
+    font-weight:500;
+}
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:1100px){
+
+    .service-coverage{
+
+        grid-template-columns:1fr;
+
+        gap:4rem;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .service-coverage{
+
+        padding:90px 7%;
+
+    }
+
+    .coverage-content h2{
+
+        font-size:2.3rem;
+
+    }
+
+    .coverage-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:550px){
+
+    .coverage-content h2{
+
+        font-size:2rem;
+
+    }
+
+    .coverage-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

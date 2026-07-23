@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDOKO LEGACY - Authentication</title>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/css/global.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body data-page="auth">
+
+<section class="auth">
+
+    <!-- LEFT PANEL -->
+
+    <div class="auth-left">
+
+        <div class="auth-overlay"></div>
+
+        <div class="auth-content">
+
+            <img
+                src="assets/logo/logo.png"
+                alt="IDOKO LEGACY Logo"
+                class="auth-logo">
+
+            <span class="auth-tag">
+
+                <i class="fa-solid fa-shield-heart"></i>
+
+                Secure Healthcare Platform
+
+            </span>
+
+            <h1>
+
+                Reliable Healthcare
+                <span>Logistics Starts Here.</span>
+
+            </h1>
+
+            <p>
+
+                Access secure healthcare logistics, manage deliveries,
+                monitor shipments and collaborate securely with
+                IDOKO LEGACY.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT PANEL -->
+
+    <div class="auth-right">
+
+        <div class="form-container">
+
+
+            <!-- LOGIN -->
+
+            <div
+                id="loginFormContainer"
+                class="active">
+
+                <form id="loginForm">
+
+                    <h2>Welcome Back</h2>
+
+                    <p>Sign in to continue.</p>
+
+                    <div class="input-group">
+
+                        <label>Email Address</label>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Password</label>
+
+                        <div class="password-box">
+
+                            <input
+                                type="password"
+                                id="loginPassword"
+                                placeholder="Enter your password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                data-target="loginPassword">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="auth-btn">
+
+                        Sign In
+
+                    </button>
+
+                    <p class="switch-form">
+
+                        Don't have an account?
+
+                        <span id="showSignup">
+
+                            Create Account
+
+                        </span>
+
+                    </p>
+
+                </form>
+
+            </div>
+
+
+
+            <!-- SIGN UP -->
+
+            <div
+                id="signupFormContainer">
+
+                <form id="signupForm">
+
+                    <h2>Create Account</h2>
+
+                    <p>Create your account.</p>
+
+                    <div class="input-group">
+
+                        <label>Full Name</label>
+
+                        <input
+                            type="text"
+                            id="signupName"
+                            placeholder="Full Name"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Email Address</label>
+
+                        <input
+                            type="email"
+                            id="signupEmail"
+                            placeholder="Email Address"
+                            required>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Password</label>
+
+                        <div class="password-box">
+
+                            <input
+                                type="password"
+                                id="signupPassword"
+                                placeholder="Password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                data-target="signupPassword">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <label>Confirm Password</label>
+
+                        <div class="password-box">
+
+                            <input
+                                type="password"
+                                id="signupConfirmPassword"
+                                placeholder="Confirm Password"
+                                required>
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                data-target="signupConfirmPassword">
+
+                                <i class="fa-solid fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="auth-btn">
+
+                        Create Account
+
+                    </button>
+
+                    <p class="switch-form">
+
+                        Already have an account?
+
+                        <span id="showLogin">
+
+                            Sign In
+
+                        </span>
+
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Core -->
+<script src="assets/js/core/helpers.js"></script>
+<script src="assets/js/core/storage.js"></script>
+<script src="assets/js/core/utilities.js"></script>
+<script src="assets/js/core/observer.js"></script>
+<script src="assets/js/core/scroll.js"></script>
+<script src="assets/js/core/scrollReveal.js"></script>
+
+<!-- Loader -->
+<script src="assets/js/core/loader.js"></script>
+
+<!-- Auth -->
+<script src="assets/js/auth/auth.js"></script>
+
+<!-- Main -->
+<script src="assets/js/core/main.js"></script>
+
+</body>
+</html>

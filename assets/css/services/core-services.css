@@ -1,0 +1,474 @@
+/*====================================
+        CORE SERVICES
+=====================================*/
+
+.core-services{
+    position:relative;
+    overflow:hidden;
+
+    padding:120px 8%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fbff,
+            #ffffff
+        );
+}
+
+
+/*====================================
+        BACKGROUND GLOW
+=====================================*/
+
+.core-services::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    top:-180px;
+    left:-180px;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    opacity:.08;
+
+    filter:blur(130px);
+
+}
+
+.core-services::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:380px;
+    height:380px;
+
+    bottom:-180px;
+    right:-180px;
+
+    border-radius:50%;
+
+    background:#0ea5e9;
+
+    opacity:.08;
+
+    filter:blur(120px);
+
+}
+
+
+/*====================================
+        HEADING
+=====================================*/
+
+.core-services .section-heading{
+
+    max-width:760px;
+
+    margin:0 auto 70px;
+
+    text-align:center;
+
+}
+
+.core-services .section-heading h2{
+
+    font-size:3rem;
+
+    color:#0f172a;
+
+    margin:20px 0;
+
+    line-height:1.2;
+
+}
+
+.core-services .section-heading h2 span{
+
+    color:#0ea5e9;
+
+}
+
+.core-services .section-heading p{
+
+    color:#64748b;
+
+    line-height:1.9;
+
+}
+
+
+/*====================================
+        GRID
+=====================================*/
+
+.services-grid{
+
+    position:relative;
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(340px,1fr));
+
+    gap:35px;
+
+}
+
+
+/*====================================
+        CARD
+=====================================*/
+
+.service-card{
+
+    position:relative;
+
+    padding:40px;
+
+    background:#fff;
+
+    border-radius:28px;
+
+    border:1px solid rgba(14,165,233,.08);
+
+    box-shadow:
+        0 20px 50px rgba(15,23,42,.08);
+
+    transition:.4s;
+
+    overflow:hidden;
+
+}
+
+.service-card:hover{
+
+    transform:
+        translateY(-12px);
+
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 30px 70px rgba(14,165,233,.20);
+
+}
+
+
+/*====================================
+        TOP BORDER
+=====================================*/
+
+.service-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0ea5e9,
+            #38bdf8
+        );
+
+}
+
+
+/*====================================
+        ICON
+=====================================*/
+
+.service-icon{
+
+    width:80px;
+    height:80px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    margin-bottom:30px;
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #38bdf8
+        );
+
+    color:#fff;
+
+    font-size:2rem;
+
+    box-shadow:
+        0 18px 35px rgba(56,189,248,.30);
+
+    transition:.4s;
+
+}
+
+.service-card:hover .service-icon{
+
+    transform:
+        rotate(-8deg)
+        scale(1.08);
+
+}
+
+
+/*====================================
+        TITLE
+=====================================*/
+
+.service-card h3{
+
+    color:#0f172a;
+
+    font-size:1.6rem;
+
+    margin-bottom:18px;
+
+}
+
+
+/*====================================
+        TEXT
+=====================================*/
+
+.service-card p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+
+}
+
+
+/*====================================
+        LIST
+=====================================*/
+
+.service-card ul{
+
+    list-style:none;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-bottom:35px;
+
+}
+
+.service-card li{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:#334155;
+
+    font-weight:600;
+
+}
+
+.service-card li i{
+
+    color:#0ea5e9;
+
+    font-size:.9rem;
+
+}
+
+
+/*====================================
+        BUTTON
+=====================================*/
+
+.service-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px 28px;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #38bdf8
+        );
+
+    transition:.35s;
+
+    box-shadow:
+        0 12px 25px rgba(56,189,248,.25);
+
+}
+
+.service-btn:hover{
+
+    transform:
+        translateX(8px);
+
+    box-shadow:
+        0 20px 35px rgba(56,189,248,.35);
+
+}
+
+.service-btn i{
+
+    transition:.35s;
+
+}
+
+.service-btn:hover i{
+
+    transform:translateX(5px);
+
+}
+
+
+/*====================================
+        HOVER GLOW
+=====================================*/
+
+.service-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:240px;
+    height:240px;
+
+    top:-120px;
+    right:-120px;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    opacity:0;
+
+    filter:blur(90px);
+
+    transition:.4s;
+
+}
+
+.service-card:hover::after{
+
+    opacity:.12;
+
+}
+
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:992px){
+
+    .services-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .core-services{
+
+        padding:90px 6%;
+
+    }
+
+    .core-services .section-heading h2{
+
+        font-size:2.4rem;
+
+    }
+
+    .services-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .core-services{
+
+        padding:80px 5%;
+
+    }
+
+    .core-services .section-heading h2{
+
+        font-size:2rem;
+
+    }
+
+    .service-card{
+
+        padding:30px 25px;
+
+    }
+
+    .service-icon{
+
+        width:70px;
+        height:70px;
+
+        font-size:1.7rem;
+
+    }
+
+    .service-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}

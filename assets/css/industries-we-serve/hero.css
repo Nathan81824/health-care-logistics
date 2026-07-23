@@ -1,0 +1,397 @@
+/*====================================
+        INDUSTRIES HERO
+=====================================*/
+
+.industries-hero{
+    position:relative;
+    overflow:hidden;
+
+    min-height:100vh;
+
+    padding:140px 8% 100px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:5rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(248,251,255,.98),
+            rgba(239,248,255,.96)
+        );
+}
+
+
+/*====================================
+        BACKGROUND EFFECTS
+=====================================*/
+
+.industries-hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:520px;
+    height:520px;
+
+    top:-220px;
+    left:-220px;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    opacity:.08;
+
+    filter:blur(120px);
+
+}
+
+.industries-hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    right:-180px;
+    bottom:-180px;
+
+    border-radius:50%;
+
+    background:#0ea5e9;
+
+    opacity:.08;
+
+    filter:blur(120px);
+
+}
+
+
+/*====================================
+        CONTENT
+=====================================*/
+
+.industries-hero__content{
+
+    position:relative;
+    z-index:2;
+
+    flex:1;
+
+    max-width:620px;
+
+}
+
+
+/*====================================
+        BADGE
+=====================================*/
+
+.hero-badge{
+
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+
+    padding:12px 22px;
+
+    border-radius:50px;
+
+    background:#e0f2fe;
+
+    color:#0284c7;
+
+    font-weight:700;
+
+    margin-bottom:30px;
+
+}
+
+.hero-badge i{
+
+    font-size:1rem;
+
+}
+
+
+/*====================================
+        TITLE
+=====================================*/
+
+.industries-hero__content h1{
+
+    font-size:4rem;
+
+    line-height:1.15;
+
+    color:#0f172a;
+
+    margin-bottom:25px;
+
+}
+
+.industries-hero__content h1 span{
+
+    display:block;
+
+    color:#0ea5e9;
+
+}
+
+
+/*====================================
+        TEXT
+=====================================*/
+
+.industries-hero__content p{
+
+    font-size:1.1rem;
+
+    line-height:2;
+
+    color:#64748b;
+
+    margin-bottom:40px;
+
+}
+
+
+/*====================================
+        BUTTONS
+=====================================*/
+
+.hero-buttons{
+
+    display:flex;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn{
+
+    display:inline-flex;
+
+    justify-content:center;
+    align-items:center;
+
+    text-decoration:none;
+
+    padding:16px 34px;
+
+    border-radius:50px;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.btn--primary{
+
+    background:
+        linear-gradient(
+            135deg,
+            #0ea5e9,
+            #38bdf8
+        );
+
+    color:#fff;
+
+    box-shadow:
+        0 18px 35px rgba(56,189,248,.25);
+
+}
+
+.btn--primary:hover{
+
+    transform:
+        translateY(-6px);
+
+    box-shadow:
+        0 25px 45px rgba(56,189,248,.35);
+
+}
+
+.btn--secondary{
+
+    border:2px solid #0ea5e9;
+
+    color:#0284c7;
+
+    background:#fff;
+
+}
+
+.btn--secondary:hover{
+
+    background:#0ea5e9;
+
+    color:#fff;
+
+    transform:
+        translateY(-6px);
+
+}
+
+
+/*====================================
+        IMAGE
+=====================================*/
+
+.industries-hero__image{
+
+    position:relative;
+
+    z-index:2;
+
+    flex:1;
+
+    display:flex;
+    justify-content:center;
+
+}
+
+.industries-hero__image img{
+
+    width:100%;
+    max-width:650px;
+
+    animation:floatImage 5s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 30px 60px rgba(2,132,199,.18)
+        );
+
+}
+
+
+/*====================================
+        FLOAT ANIMATION
+=====================================*/
+
+@keyframes floatImage{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-18px);
+
+    }
+
+}
+
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:992px){
+
+    .industries-hero{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:120px 6% 80px;
+
+    }
+
+    .industries-hero__content{
+
+        max-width:100%;
+
+    }
+
+    .hero-buttons{
+
+        justify-content:center;
+
+    }
+
+    .industries-hero__content h1{
+
+        font-size:3rem;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .industries-hero{
+
+        min-height:auto;
+
+        gap:3rem;
+
+    }
+
+    .industries-hero__content h1{
+
+        font-size:2.5rem;
+
+    }
+
+    .industries-hero__content p{
+
+        font-size:1rem;
+
+    }
+
+    .industries-hero__image img{
+
+        max-width:500px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .industries-hero{
+
+        padding:100px 5% 70px;
+
+    }
+
+    .industries-hero__content h1{
+
+        font-size:2rem;
+
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+    .industries-hero__image img{
+
+        max-width:100%;
+
+    }
+
+}

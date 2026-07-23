@@ -1,0 +1,1699 @@
+
+
+/*==================================================
+                    HEADER
+==================================================*/
+
+.header{
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:1000;
+
+
+
+
+background:
+linear-gradient(
+180deg,
+rgba(5, 20, 40, 0.664),
+rgba(5, 20, 40, 0.432)
+);
+
+backdrop-filter:blur(25px); 
+
+    -webkit-backdrop-filter:blur(25px);
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,.35);
+
+
+    box-shadow:
+
+    0 10px 40px rgba(0,0,0,.08);
+
+}
+
+/* Scroll */
+
+.header.scrolled{
+
+    background:rgba(6,20,42,.96);
+
+    box-shadow:
+    0 15px 45px rgba(0,0,0,.25);
+
+}
+
+/*==================================================
+                    NAVBAR
+==================================================*/
+
+.navbar{
+
+    max-width:1500px;
+
+    height:86px;
+
+    margin:auto;
+
+    padding:0 45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+}
+
+/*==================================================
+                    LEFT
+==================================================*/
+
+.nav-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+    flex:1;
+
+}
+
+/*==================================================
+                    LOGO
+==================================================*/
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    text-decoration:none;
+
+    user-select:none;
+
+
+}
+
+.logo img{
+
+    width:190px;
+    height:170px;
+
+    object-fit:contain;
+        filter:
+    drop-shadow(0 0 8px rgba(32,184,255,.25));
+
+}
+
+.logo-content{
+
+    position:relative;
+
+    padding-left:18px;
+
+}
+
+
+.logo-content::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:1px;
+
+    height:40px;
+
+    background:rgba(255,255,255,.15);
+
+}
+
+/*==================================================
+                NAVIGATION
+==================================================*/
+
+.nav-links{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    list-style:none;
+
+}
+
+.nav-links li{
+
+    position:relative;
+
+}
+
+.nav-links a{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    height:46px;
+
+    padding:0 18px;
+
+    text-decoration:none;
+
+    color:rgba(255,255,255,.75);
+
+    font-size:.80rem;
+
+    font-weight:500;
+
+    border-radius:14px;
+
+    transition:.35s ease;
+
+}
+
+/* Hover */
+
+.nav-links a:hover{
+
+    color:#fff;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+/* Active */
+
+.nav-links a.active{
+
+    color:#fff;
+
+    background:
+    linear-gradient(
+        135deg,
+        #1aa8ff,
+        #2563eb
+    );
+
+    box-shadow:
+    0 10px 30px rgba(37,99,235,.35);
+
+}
+
+/* Underline Animation */
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:-6px;
+
+    transform:translateX(-50%);
+
+    width:0;
+
+    height:3px;
+
+    border-radius:20px;
+
+    background:#25b5ff;
+
+    transition:.35s;
+
+}
+
+.nav-links a:hover::after{
+
+    width:55%;
+
+}
+
+.nav-links a.active::after{
+
+    display:none;
+
+}
+
+/*==================================================
+                    RIGHT
+==================================================*/
+
+.nav-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+/*==================================================
+                ICON BUTTONS
+==================================================*/
+
+.icon-btn{
+
+    position:relative;
+
+    width:52px;
+
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:none;
+
+    outline:none;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-size:1.05rem;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    backdrop-filter:blur(15px);
+
+    transition:.35s ease;
+
+}
+
+
+.icon-btn:hover{
+
+    transform:translateY(-4px);
+
+    background:
+    linear-gradient(
+        135deg,
+        #1bbcff,
+        #2563eb
+    );
+
+    box-shadow:
+    0 15px 35px rgba(37,99,235,.35);
+
+}
+
+
+/*==================================================
+                THEME TOGGLE
+==================================================*/
+
+.theme-toggle i{
+
+    transition:.5s ease;
+
+}
+
+
+.theme-toggle:hover i{
+
+    transform:rotate(180deg);
+
+}
+
+
+/*==================================================
+                NOTIFICATION
+==================================================*/
+
+
+.notification-btn{
+
+    overflow:visible;
+
+}
+
+
+.notification-dot{
+
+    position:absolute;
+
+    top:10px;
+
+    right:11px;
+
+    width:9px;
+
+    height:9px;
+
+    background:#22c55e;
+
+    border-radius:50%;
+
+    border:2px solid #06142a;
+
+    animation:pulse 2s infinite;
+
+}
+
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+
+    50%{
+
+        transform:scale(1.35);
+
+    }
+
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+
+/*==================================================
+                PROFILE CONTAINER
+==================================================*/
+
+
+.profile{
+
+    position:relative;
+
+}
+
+
+/*==================================================
+                PROFILE BUTTON
+==================================================*/
+
+
+.profile-card{
+
+    height:52px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:0 12px 0 8px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:18px;
+
+    background:
+
+    rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+
+    transition:.35s ease;
+
+}
+
+
+
+.profile-card:hover{
+
+    transform:translateY(-3px);
+
+    border-color:#23b8ff;
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.25);
+
+}
+
+
+/*==================================================
+                AVATAR
+==================================================*/
+
+
+.profile-avatar{
+
+    position:relative;
+
+    width:44px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+    border-radius:50%;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #22c1ff,
+        #2563eb
+    );
+
+
+    color:#fff;
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+}
+
+
+
+.profile-avatar img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+/* Online Status */
+
+
+.online-status{
+
+    position:absolute;
+
+    right:1px;
+
+    bottom:1px;
+
+
+    width:12px;
+
+    height:12px;
+
+
+    border-radius:50%;
+
+
+    background:#22c55e;
+
+
+    border:2px solid #06142a;
+
+}
+
+
+
+/*==================================================
+                PROFILE INFO
+==================================================*/
+
+
+.profile-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    text-align:left;
+
+}
+
+
+
+.profile-info h4{
+
+    color:#fff;
+
+    font-size:.92rem;
+
+    font-weight:600;
+
+    line-height:1.2;
+
+}
+
+
+
+.profile-info span{
+
+    margin-top:3px;
+
+    color:rgba(255,255,255,.55);
+
+    font-size:.75rem;
+
+}
+
+
+
+/* Arrow */
+
+
+.profile-card > i{
+
+    color:rgba(255,255,255,.65);
+
+    font-size:.8rem;
+
+    transition:.35s;
+
+}
+
+
+.profile-card:hover > i{
+
+    color:#23b8ff;
+
+    transform:rotate(180deg);
+
+}
+
+
+
+/*==================================================
+                PROFILE DROPDOWN
+==================================================*/
+
+
+.profile-dropdown{
+
+    position:absolute;
+
+    right:0;
+
+    top:70px;
+
+    width:230px;
+
+
+    padding:12px;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+
+    background:
+
+    rgba(8,25,50,.95);
+
+
+    backdrop-filter:blur(20px);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.35);
+
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:
+
+    translateY(-15px);
+
+
+    transition:.35s ease;
+
+}
+
+
+
+/* Open Dropdown */
+
+
+.profile.active .profile-dropdown{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+
+    translateY(0);
+
+}
+
+
+
+/* Dropdown Links */
+
+
+.profile-dropdown a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+
+    padding:12px 14px;
+
+
+    border-radius:14px;
+
+
+    text-decoration:none;
+
+
+    color:
+
+    rgba(255,255,255,.8);
+
+
+    font-size:.9rem;
+
+    font-weight:500;
+
+
+    transition:.3s;
+
+}
+
+
+
+.profile-dropdown a:hover{
+
+    color:#fff;
+
+
+    background:
+
+    rgba(255,255,255,.1);
+
+}
+
+
+
+.profile-dropdown a i{
+
+    width:20px;
+
+    color:#20b8ff;
+
+}
+
+/*==================================================
+                MOBILE MENU BUTTON
+==================================================*/
+
+.menu-btn{
+
+    display:none;
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    cursor:pointer;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    backdrop-filter:blur(15px);
+
+    transition:.35s ease;
+
+}
+
+
+.menu-btn:hover{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #20b8ff,
+        #2563eb
+    );
+
+}
+
+
+
+/* Hamburger Lines */
+
+
+.menu-btn span{
+
+    display:block;
+
+    width:25px;
+
+    height:3px;
+
+    margin:5px auto;
+
+    border-radius:20px;
+
+    background:#fff;
+
+    transition:.35s ease;
+
+}
+
+
+
+/* Active Hamburger */
+
+
+.menu-btn.active span:nth-child(1){
+
+    transform:
+
+    translateY(8px)
+
+    rotate(45deg);
+
+}
+
+
+
+.menu-btn.active span:nth-child(2){
+
+    opacity:0;
+
+}
+
+
+
+.menu-btn.active span:nth-child(3){
+
+    transform:
+
+    translateY(-8px)
+
+    rotate(-45deg);
+
+}
+
+
+
+/*==================================================
+                TABLET DESIGN
+==================================================*/
+
+
+@media(max-width:1200px){
+
+
+    .navbar{
+
+        padding:0 25px;
+
+    }
+
+
+    .nav-left{
+
+        gap:35px;
+
+    }
+
+
+    .nav-links{
+
+        gap:5px;
+
+    }
+
+
+    .nav-links a{
+
+        padding:0 14px;
+
+        font-size:.9rem;
+
+    }
+
+
+    .profile-info{
+
+        display:none;
+
+    }
+
+
+    .profile-card{
+
+        padding-right:8px;
+
+    }
+
+
+}
+
+
+
+/*==================================================
+                MOBILE NAVBAR
+==================================================*/
+
+
+@media(max-width:1000px){
+
+
+
+    .navbar{
+
+        height:78px;
+
+    }
+
+
+
+    .nav-left{
+
+        gap:0;
+
+    }
+
+
+
+    /* Hide desktop navigation */
+
+
+    .nav-links{
+
+        position:fixed;
+
+
+        top:78px;
+
+        left:0;
+
+
+        width:100%;
+
+
+        padding:40px 25px;
+
+
+        flex-direction:column;
+
+
+        gap:15px;
+
+
+        background:
+
+        rgba(6,20,42,.96);
+
+
+        backdrop-filter:blur(20px);
+
+
+        border-top:
+
+        1px solid rgba(255,255,255,.08);
+
+
+        transform:
+
+        translateY(-30px);
+
+
+        opacity:0;
+
+
+        visibility:hidden;
+
+
+        transition:.4s ease;
+
+
+    }
+
+
+
+
+    .nav-links.active{
+
+
+        transform:
+
+        translateY(0);
+
+
+        opacity:1;
+
+
+        visibility:visible;
+
+
+    }
+
+
+
+
+    .nav-links li{
+
+
+        width:100%;
+
+
+    }
+
+
+
+
+    .nav-links a{
+
+
+        width:100%;
+
+
+        justify-content:flex-start;
+
+
+        height:55px;
+
+
+        padding:0 20px;
+
+
+    }
+
+
+
+
+    .menu-btn{
+
+
+        display:block;
+
+
+    }
+
+
+
+}
+
+
+
+
+/*==================================================
+                SMALL MOBILE
+==================================================*/
+
+
+@media(max-width:700px){
+
+
+
+    .navbar{
+
+        padding:0 15px;
+
+    }
+
+
+
+    .logo img{
+
+        width:70px;
+
+    }
+
+
+
+    .logo-content{
+
+        display:none;
+
+    }
+
+
+
+    .nav-right{
+
+        gap:10px;
+
+    }
+
+
+
+    .icon-btn{
+
+        width:42px;
+
+        height:42px;
+
+        border-radius:13px;
+
+    }
+
+
+
+    .theme-toggle{
+
+        display:flex;
+
+    }
+
+
+
+    .notification-btn{
+
+        display:none;
+
+    }
+
+
+
+    .profile-card{
+
+        width:48px;
+
+        height:48px;
+
+        padding:0;
+
+        justify-content:center;
+
+        border-radius:50%;
+
+    }
+
+
+
+    .profile-info,
+
+    .profile-card > i{
+
+        display:none;
+
+    }
+
+
+
+    .profile-avatar{
+
+        width:40px;
+
+        height:40px;
+
+    }
+
+
+
+}
+
+
+
+
+/*==================================================
+                VERY SMALL DEVICES
+==================================================*/
+
+
+@media(max-width:400px){
+
+
+    .search-btn{
+
+        display:none;
+
+    }
+
+
+    .logo img{
+
+        width:60px;
+
+    }
+
+
+}
+/*==================================================
+            ROOT THEME VARIABLES
+==================================================*/
+
+:root{
+
+    --primary:#20b8ff;
+
+    --primary-dark:#2563eb;
+
+    --dark-bg:#06142a;
+
+    --glass:
+
+    rgba(255,255,255,.08);
+
+    --border:
+
+    rgba(255,255,255,.12);
+
+    --text:#ffffff;
+
+    --muted:
+
+    rgba(255,255,255,.65);
+
+    --shadow:
+
+    0 20px 50px rgba(0,0,0,.25);
+
+}
+
+
+
+/*==================================================
+            LIGHT MODE
+==================================================*/
+
+
+body.light-mode{
+
+    --dark-bg:#ffffff;
+
+    --text:#0f172a;
+
+    --muted:#64748b;
+
+    --glass:
+
+    rgba(255,255,255,.75);
+
+    --border:
+
+    rgba(15,23,42,.1);
+
+}
+
+
+
+/* Header Light Mode */
+
+
+body.light-mode .header{
+
+    background:
+
+    rgba(255,255,255,.75);
+
+
+    border-bottom:
+
+    1px solid rgba(0,0,0,.08);
+
+
+}
+
+
+
+body.light-mode .nav-links a{
+
+    color:#475569;
+
+}
+
+
+
+body.light-mode .nav-links a:hover,
+
+body.light-mode .nav-links a.active{
+
+    color:#0f172a;
+
+}
+
+
+
+body.light-mode .logo-content h2,
+
+body.light-mode .profile-info h4{
+
+    color:#0f172a;
+
+}
+
+
+
+body.light-mode .logo-content p,
+
+body.light-mode .profile-info span{
+
+    color:#64748b;
+
+}
+
+
+
+/*==================================================
+            GLASS SHINE EFFECT
+==================================================*/
+
+
+.logo,
+.icon-btn,
+.profile-card,
+.menu-btn{
+
+
+    position:relative;
+
+    overflow:hidden;
+
+
+}
+
+
+
+.logo::before,
+.icon-btn::before,
+.profile-card::before,
+.menu-btn::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    top:0;
+
+    left:-120%;
+
+
+    width:80%;
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.18),
+
+        transparent
+
+    );
+
+
+    transition:.6s;
+
+
+}
+
+
+
+
+.icon-btn:hover::before,
+.profile-card:hover::before,
+.menu-btn:hover::before{
+
+
+    left:130%;
+
+
+}
+
+
+
+/*==================================================
+            NAV LOAD ANIMATION
+==================================================*/
+
+
+.header{
+
+    animation:
+
+    navDrop .8s ease forwards;
+
+}
+
+
+
+@keyframes navDrop{
+
+
+    from{
+
+
+        opacity:0;
+
+        transform:
+
+        translateY(-40px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+        transform:
+
+        translateY(0);
+
+
+    }
+
+
+}
+
+
+
+
+/*==================================================
+            PROFILE FLOAT EFFECT
+==================================================*/
+
+
+.profile-card{
+
+
+    animation:
+
+    profileFloat 4s ease-in-out infinite;
+
+
+}
+
+
+
+@keyframes profileFloat{
+
+
+    0%,
+    100%{
+
+
+        transform:
+
+        translateY(0);
+
+
+    }
+
+
+
+    50%{
+
+
+        transform:
+
+        translateY(-3px);
+
+
+    }
+
+
+}
+
+
+
+
+/*==================================================
+            ICON PULSE
+==================================================*/
+
+
+.icon-btn:hover i{
+
+
+    animation:
+
+    iconPop .4s ease;
+
+
+}
+
+
+
+@keyframes iconPop{
+
+
+    0%{
+
+
+        transform:scale(1);
+
+
+    }
+
+
+    50%{
+
+
+        transform:scale(1.25);
+
+
+    }
+
+
+    100%{
+
+
+        transform:scale(1);
+
+
+    }
+
+
+}
+
+
+
+/*==================================================
+            ACTIVE LINK GLOW
+==================================================*/
+
+
+.nav-links a.active{
+
+
+    position:relative;
+
+
+}
+
+
+
+.nav-links a.active::before{
+
+
+    content:"";
+
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    border-radius:14px;
+
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        rgba(32,184,255,.25),
+
+        transparent
+
+    );
+
+
+    filter:blur(12px);
+
+
+    z-index:-1;
+
+
+}
+
+
+
+/*==================================================
+            DROPDOWN ANIMATION
+==================================================*/
+
+
+.profile-dropdown a{
+
+
+    animation:
+
+    dropdownItem .35s ease forwards;
+
+
+    opacity:0;
+
+
+}
+
+
+
+.profile-dropdown a:nth-child(1){
+
+    animation-delay:.05s;
+
+}
+
+
+.profile-dropdown a:nth-child(2){
+
+    animation-delay:.1s;
+
+}
+
+
+.profile-dropdown a:nth-child(3){
+
+    animation-delay:.15s;
+
+}
+
+
+.profile-dropdown a:nth-child(4){
+
+    animation-delay:.2s;
+
+}
+
+
+
+@keyframes dropdownItem{
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:
+
+        translateX(15px);
+
+
+    }
+
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:
+
+        translateX(0);
+
+
+    }
+
+
+}
+
+
+
+/*==================================================
+            REDUCED MOTION
+==================================================*/
+
+
+@media(prefers-reduced-motion:reduce){
+
+
+    *{
+
+
+        animation:none!important;
+
+        transition:none!important;
+
+
+    }
+
+
+}

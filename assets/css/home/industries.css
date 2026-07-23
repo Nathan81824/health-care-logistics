@@ -1,0 +1,328 @@
+/*====================================
+        INDUSTRIES
+=====================================*/
+
+.industries{
+    position:relative;
+    overflow:hidden;
+    padding:120px 8%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #eef6ff,
+            #ffffff
+        );
+}
+
+
+/*====================================
+        BACKGROUND EFFECTS
+=====================================*/
+
+.industries::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(37,99,235,.08),
+            transparent 45%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(14,165,233,.08),
+            transparent 45%
+        );
+
+}
+
+.industries::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    opacity:.08;
+
+    right:-150px;
+    top:-150px;
+
+    filter:blur(120px);
+
+}
+
+
+/*====================================
+        CONTAINER
+=====================================*/
+
+.industries-container{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+
+/*====================================
+        HEADING
+=====================================*/
+
+.industries-heading{
+
+    text-align:center;
+
+    max-width:750px;
+
+    margin:0 auto 70px;
+
+}
+
+.industries-badge{
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    border-radius:50px;
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+.industries-heading h2{
+
+    font-size:clamp(2.5rem,5vw,4rem);
+
+    color:#0f172a;
+
+    margin-bottom:20px;
+
+    line-height:1.2;
+
+}
+
+.industries-heading h2 span{
+
+    color:#2563eb;
+
+}
+
+.industries-heading p{
+
+    color:#64748b;
+
+    line-height:1.9;
+
+    font-size:1.05rem;
+
+}
+
+
+/*====================================
+        GRID
+=====================================*/
+
+.industries-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+
+}
+
+
+/*====================================
+        CARD
+=====================================*/
+
+.industry-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:40px;
+
+    border-radius:28px;
+
+    background:#ffffff;
+
+    border:1px solid #e2e8f0;
+
+    transition:.45s;
+
+    box-shadow:
+        0 15px 35px rgba(15,23,42,.06);
+
+}
+
+.industry-card:hover{
+
+    transform:
+        translateY(-12px);
+
+    border-color:#38bdf8;
+
+    box-shadow:
+        0 25px 60px rgba(37,99,235,.18);
+
+}
+
+.industry-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(37,99,235,.06),
+            transparent
+        );
+
+    opacity:0;
+
+    transition:.4s;
+
+}
+
+.industry-card:hover::before{
+
+    opacity:1;
+
+}
+
+
+/*====================================
+        ICON
+=====================================*/
+
+.industry-icon{
+
+    width:82px;
+    height:82px;
+
+    border-radius:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:2.2rem;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #38bdf8
+        );
+
+    color:#fff;
+
+    margin-bottom:28px;
+
+    transition:.4s;
+
+    box-shadow:
+        0 15px 30px rgba(37,99,235,.25);
+
+}
+
+.industry-card:hover .industry-icon{
+
+    transform:
+        rotate(-10deg)
+        scale(1.08);
+
+}
+
+
+/*====================================
+        TEXT
+=====================================*/
+
+.industry-card h3{
+
+    font-size:1.4rem;
+
+    color:#0f172a;
+
+    margin-bottom:16px;
+
+}
+
+.industry-card p{
+
+    color:#64748b;
+
+    line-height:1.8;
+
+}
+
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:992px){
+
+    .industries{
+
+        padding:100px 6%;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .industries-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .industries-heading h2{
+
+        font-size:2.3rem;
+
+    }
+
+    .industry-card{
+
+        padding:30px;
+
+    }
+
+}

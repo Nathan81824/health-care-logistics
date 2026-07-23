@@ -1,0 +1,456 @@
+/*====================================
+        OPERATIONS SECTION
+=====================================*/
+
+.operations{
+    position:relative;
+    overflow:hidden;
+    padding:120px 8%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #1e3a8a
+    );
+
+    color:#fff;
+}
+
+
+/*====================================
+        BACKGROUND EFFECTS
+=====================================*/
+
+.operations::before{
+
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+    radial-gradient(
+        circle at top right,
+        rgba(14,165,233,.18),
+        transparent 45%
+    ),
+    radial-gradient(
+        circle at bottom left,
+        rgba(37,99,235,.12),
+        transparent 45%
+    );
+
+    z-index:0;
+
+}
+
+.operations::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+    height:550px;
+
+    top:-220px;
+    right:-180px;
+
+    background:#38bdf8;
+
+    opacity:.12;
+
+    border-radius:50%;
+
+    filter:blur(150px);
+
+    pointer-events:none;
+
+}
+
+
+/*====================================
+        CONTAINER
+=====================================*/
+
+.operations-container{
+
+    position:relative;
+
+    z-index:2;
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+
+/*====================================
+        HEADING
+=====================================*/
+
+.operations-heading{
+
+    text-align:center;
+
+    max-width:750px;
+
+    margin:0 auto 70px;
+
+}
+
+.operations-subtitle{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:.7rem;
+
+    padding:10px 22px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    font-size:.9rem;
+
+    color:#38bdf8;
+
+    margin-bottom:25px;
+
+}
+
+.operations-title{
+
+    font-size:clamp(2.4rem,5vw,4rem);
+
+    line-height:1.15;
+
+    margin-bottom:20px;
+
+}
+
+.operations-title span{
+
+    color:#38bdf8;
+
+}
+
+.operations-description{
+
+    font-size:1.1rem;
+
+    line-height:1.9;
+
+    color:#cbd5e1;
+
+}
+
+
+/*====================================
+        STATUS PULSE
+=====================================*/
+
+.status-pulse{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+    0 0 10px #22c55e,
+    0 0 20px #22c55e;
+
+    animation:pulse 1.5s infinite;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(.9);
+
+        opacity:.8;
+
+    }
+
+    50%{
+
+        transform:scale(1.35);
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:scale(.9);
+
+        opacity:.8;
+
+    }
+
+}
+
+
+/*====================================
+        GRID
+=====================================*/
+
+.operations-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:30px;
+
+}
+
+
+/*====================================
+        CARD
+=====================================*/
+
+.operation-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:45px 30px;
+
+    border-radius:28px;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    transition:.4s;
+
+}
+
+.operation-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#38bdf8;
+
+    box-shadow:
+    0 25px 50px rgba(14,165,233,.18);
+
+}
+
+.operation-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(56,189,248,.08),
+        transparent
+    );
+
+    opacity:0;
+
+    transition:.4s;
+
+}
+
+.operation-card:hover::before{
+
+    opacity:1;
+
+}
+
+
+/*====================================
+        ICON
+=====================================*/
+
+.operation-icon{
+
+    width:82px;
+
+    height:82px;
+
+    margin:auto auto 25px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #38bdf8
+    );
+
+    color:#fff;
+
+    box-shadow:
+    0 15px 35px rgba(37,99,235,.35);
+
+}
+
+.operation-card svg{
+
+    width:38px;
+
+    height:38px;
+
+}
+
+
+/*====================================
+        NUMBERS
+=====================================*/
+
+.operation-card h3{
+
+    font-size:2.7rem;
+
+    font-weight:800;
+
+    color:#fff;
+
+    margin-bottom:10px;
+
+}
+
+.operation-card p{
+
+    color:#cbd5e1;
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+}
+
+
+/*====================================
+        STATUS BAR
+=====================================*/
+
+.operations-status{
+
+    margin-top:80px;
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+}
+
+.status-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:16px 24px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.06);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    color:#e2e8f0;
+
+    backdrop-filter:blur(10px);
+
+}
+
+.status-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+    0 0 10px #22c55e,
+    0 0 20px #22c55e;
+
+    animation:pulse 1.5s infinite;
+
+}
+
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media(max-width:768px){
+
+    .operations{
+
+        padding:90px 6%;
+
+    }
+
+    .operations-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .operations-title{
+
+        font-size:2.4rem;
+
+    }
+
+    .operations-status{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .status-item{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
