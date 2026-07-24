@@ -1,0 +1,390 @@
+/* ==========================================
+        DASHBOARD TOPBAR
+========================================== */
+
+.dashboard-topbar{
+
+    position:sticky;
+    top:0;
+
+    width:100%;
+    height:90px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 30px;
+    border-radius: 2rem;
+
+    background:#1b263b;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    color:#ffffff;
+
+    z-index:100;
+
+}
+
+/* ==========================================
+        LEFT
+========================================== */
+
+.topbar-left{
+
+    display:flex;
+    align-items:center;
+
+}
+
+
+.page-title h2{
+
+    font-size:1.8rem;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+    margin-bottom:5px;
+
+}
+
+
+.page-title p{
+
+    font-size:.95rem;
+
+    color:#64748b;
+
+}
+
+
+.page-title span{
+
+    color:#2563eb;
+
+    font-weight:600;
+
+}
+
+
+/* ==========================================
+        RIGHT
+========================================== */
+
+.topbar-right{
+
+    display:flex;
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
+/* ==========================================
+        SEARCH
+========================================== */
+
+.search-box{
+
+    width:300px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 18px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:50px;
+
+    transition:.3s;
+
+}
+
+
+.search-box:focus-within{
+
+    border-color:#20b8ff;
+
+    box-shadow:0 0 0 4px rgba(32,184,255,.15);
+
+}
+
+
+.search-box i{
+
+    color:#94a3b8;
+
+}
+
+
+.search-box input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:.95rem;
+
+    color:#334155;
+
+}
+
+
+.search-box input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+/* ==========================================
+        ICON BUTTONS
+========================================== */
+
+.topbar-icon{
+
+    position:relative;
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f8fafc;
+
+    color:#334155;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.topbar-icon:hover{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ==========================================
+        NOTIFICATION BADGE
+========================================== */
+
+.notification-badge{
+
+    position:absolute;
+
+    top:8px;
+    right:8px;
+
+    width:18px;
+    height:18px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    font-size:.65rem;
+
+    font-weight:700;
+
+}
+
+
+/* ==========================================
+        PROFILE
+========================================== */
+
+.topbar-profile{
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:8px 14px;
+
+    border-radius:16px;
+
+    background:#f8fafc;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.topbar-profile:hover{
+
+    background:#eef6ff;
+
+}
+
+
+.topbar-avatar{
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #20b8ff,
+        #2563eb
+    );
+
+    color:#fff;
+
+    font-size:1.1rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+}
+
+
+.topbar-user{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+.topbar-user h4{
+
+    font-size:.95rem;
+
+    font-weight:600;
+
+    color:#0f172a;
+
+}
+
+
+.topbar-user span{
+
+    font-size:.8rem;
+
+    color:#64748b;
+
+}
+
+
+/* ==========================================
+        RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+    .dashboard-topbar{
+
+        padding:0 20px;
+
+    }
+
+    .search-box{
+
+        width:220px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .dashboard-topbar{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        justify-content:center;
+
+        gap:15px;
+
+        height:auto;
+
+        padding:20px;
+
+    }
+
+    .topbar-right{
+
+        width:100%;
+
+        justify-content:space-between;
+
+        flex-wrap:wrap;
+
+    }
+
+    .search-box{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:500px){
+
+    .topbar-profile .topbar-user{
+
+        display:none;
+
+    }
+
+    .topbar-right{
+
+        gap:10px;
+
+    }
+
+    .topbar-icon{
+
+        width:44px;
+        height:44px;
+
+    }
+
+}
