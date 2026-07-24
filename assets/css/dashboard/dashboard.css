@@ -1,38 +1,31 @@
-@import"sidebar.css";
-@import"topbar.css";
+@import "sidebar.css";
+@import "topbar.css";
 
 /* ==========================================
-        DASHBOARD BACKGROUND
+        DASHBOARD
 ========================================== */
 
+.dashboard{
 
-body{
+    min-height:100vh;
 
     background:
+    radial-gradient(circle at top left,#E0F2FE 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#DBEAFE 0%,transparent 35%),
+    #F8FAFC;
 
-    radial-gradient(
-        circle at top left,
-        rgba(32,184,255,.12),
-        transparent 35%
-    ),
+    font-family:"Poppins",sans-serif;
 
-    radial-gradient(
-        circle at bottom right,
-        rgba(37,99,235,.12),
-        transparent 40%
-    ),
-
-    #f4f8fc;
-
-
-    font-family:"Poppins", sans-serif;
+    color:#ffffff;
 
 }
 
 
 
 
-
+/* ==========================================
+        LAYOUT
+========================================== */
 
 .dashboard-layout{
 
@@ -45,17 +38,74 @@ body{
 
 
 
+/* ==========================================
+        MAIN
+========================================== */
 
 .dashboard-main{
 
+    flex:1;
+
+    margin-left:260px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow-x:hidden;
+
+}
+
+
+
+
+/* ==========================================
+        CONTENT
+========================================== */
+
+.dashboard-content{
 
     flex:1;
 
     padding:30px;
 
+}
+
+
+
+
+/* ==========================================
+        SECTIONS
+========================================== */
+
+#overview-container,
+#analytics-container,
+#shipments-container,
+#activity-container,
+#fleet-container{
+
+    margin-bottom:30px;
 
 }
 
-.dashboard{
-    background:#1a2235;
+.card{
+
+    background:rgba(255,255,255,.7);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.4);
+
+    border-radius:22px;
+
+    box-shadow:var(--shadow);
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
 }

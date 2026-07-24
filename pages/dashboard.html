@@ -2,26 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../assets/css/global.css">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>IDOKO LEGACY Dashboard</title>
+
+    <link rel="stylesheet"
+          href="../assets/css/global.css">
 </head>
+
 <body data-page="dashboard" class="dashboard">
 
 
 <div class="dashboard-layout">
 
 
+    <!-- Sidebar -->
+
     <aside id="sidebar-container"></aside>
 
+
+
+    <!-- Main -->
 
     <main class="dashboard-main">
 
 
+        <!-- Topbar -->
+
         <header id="topbar-container"></header>
 
 
-        <section id="overview-container"></section>
+
+        <!-- Dashboard Content -->
+
+        <div class="dashboard-content">
+
+
+            <!-- Overview Cards -->
+
+            <section id="overview-container"></section>
+
+
+            <!-- Future Sections -->
+
+            <section id="analytics-container"></section>
+
+            <section id="shipments-container"></section>
+
+            <section id="activity-container"></section>
+
+            <section id="fleet-container"></section>
+
+
+        </div>
 
 
     </main>
@@ -29,16 +63,17 @@
 
 </div>
 
+
 <div id="whatsapp-container"></div>
 
 
 
 <script src="../assets/js/core/loader.js"></script>
+<script src="../assets/js/utilities/whatsapp.js"></script>
 
 <script src="../assets/js/dashboard/dashboard.js"></script>
 
 <script src="../assets/js/core/main.js"></script>
-
 
 </body>
 </html>
