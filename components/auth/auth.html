@@ -1,287 +1,302 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IDOKO LEGACY - Authentication</title>
-
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="assets/css/global.css">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-</head>
-
-<body data-page="auth">
+<!-- ==========================================
+        AUTH COMPONENT
+========================================== -->
 
 <section class="auth">
 
-    <!-- LEFT PANEL -->
+<div class="auth-container">
 
-    <div class="auth-left">
 
-        <div class="auth-overlay"></div>
+<!-- ==========================================
+        FORMS
+========================================== -->
 
-        <div class="auth-content">
+<div class="form-container">
 
-            <img
-                src="assets/logo/logo.png"
-                alt="IDOKO LEGACY Logo"
-                class="auth-logo">
 
-            <span class="auth-tag">
+<!-- LOGIN FORM DEFAULT -->
 
-                <i class="fa-solid fa-shield-heart"></i>
+<form 
+class="auth-form login-form active"
+id="loginForm">
 
-                Secure Healthcare Platform
 
-            </span>
+<h2>Welcome Back</h2>
 
-            <h1>
+<p>
+Sign in to your account.
+</p>
 
-                Reliable Healthcare
-                <span>Logistics Starts Here.</span>
 
-            </h1>
+<div class="input-box">
 
-            <p>
+<i class="fa-solid fa-envelope"></i>
 
-                Access secure healthcare logistics, manage deliveries,
-                monitor shipments and collaborate securely with
-                IDOKO LEGACY.
+<input
+type="email"
+id="loginEmail"
+placeholder="Email Address"
+required>
 
-            </p>
+</div>
 
-        </div>
 
-    </div>
 
+<div class="input-box">
 
+<i class="fa-solid fa-lock"></i>
 
-    <!-- RIGHT PANEL -->
+<input
+type="password"
+id="loginPassword"
+placeholder="Password"
+required>
 
-    <div class="auth-right">
 
-        <div class="form-container">
+<span class="toggle-password">
 
+<i class="fa-solid fa-eye"></i>
 
-            <!-- LOGIN -->
+</span>
 
-            <div
-                id="loginFormContainer"
-                class="active">
+</div>
 
-                <form id="loginForm">
 
-                    <h2>Welcome Back</h2>
 
-                    <p>Sign in to continue.</p>
+<a href="#" class="forgot-password">
+Forgot Password?
+</a>
 
-                    <div class="input-group">
 
-                        <label>Email Address</label>
 
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            placeholder="Enter your email"
-                            required>
+<button
+type="submit"
+class="btn-primary">
 
-                    </div>
+Sign In
 
-                    <div class="input-group">
+</button>
 
-                        <label>Password</label>
 
-                        <div class="password-box">
+<span class="or">
+Or continue with
+</span>
 
-                            <input
-                                type="password"
-                                id="loginPassword"
-                                placeholder="Enter your password"
-                                required>
 
-                            <button
-                                type="button"
-                                class="toggle-password"
-                                data-target="loginPassword">
+<div class="social-icons">
 
-                                <i class="fa-solid fa-eye"></i>
+<a href="#"><i class="fab fa-google"></i></a>
 
-                            </button>
+<a href="#"><i class="fab fa-facebook-f"></i></a>
 
-                        </div>
+<a href="#"><i class="fab fa-apple"></i></a>
 
-                    </div>
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
 
-                    <button
-                        type="submit"
-                        class="auth-btn">
+</div>
 
-                        Sign In
 
-                    </button>
+</form>
 
-                    <p class="switch-form">
 
-                        Don't have an account?
 
-                        <span id="showSignup">
 
-                            Create Account
 
-                        </span>
+<!-- REGISTER FORM -->
 
-                    </p>
+<form
+class="auth-form register-form"
+id="registerForm">
 
-                </form>
 
-            </div>
+<h2>Create Account</h2>
 
 
+<p>
+Register to manage your healthcare logistics.
+</p>
 
-            <!-- SIGN UP -->
 
-            <div
-                id="signupFormContainer">
 
-                <form id="signupForm">
+<div class="input-box">
 
-                    <h2>Create Account</h2>
+<i class="fa-solid fa-user"></i>
 
-                    <p>Create your account.</p>
+<input
+type="text"
+id="registerName"
+placeholder="Full Name"
+required>
 
-                    <div class="input-group">
+</div>
 
-                        <label>Full Name</label>
 
-                        <input
-                            type="text"
-                            id="signupName"
-                            placeholder="Full Name"
-                            required>
 
-                    </div>
 
-                    <div class="input-group">
+<div class="input-box">
 
-                        <label>Email Address</label>
+<i class="fa-solid fa-envelope"></i>
 
-                        <input
-                            type="email"
-                            id="signupEmail"
-                            placeholder="Email Address"
-                            required>
+<input
+type="email"
+id="registerEmail"
+placeholder="Email Address"
+required>
 
-                    </div>
+</div>
 
-                    <div class="input-group">
 
-                        <label>Password</label>
 
-                        <div class="password-box">
 
-                            <input
-                                type="password"
-                                id="signupPassword"
-                                placeholder="Password"
-                                required>
+<div class="input-box">
 
-                            <button
-                                type="button"
-                                class="toggle-password"
-                                data-target="signupPassword">
+<i class="fa-solid fa-lock"></i>
 
-                                <i class="fa-solid fa-eye"></i>
+<input
+type="password"
+id="registerPassword"
+placeholder="Password"
+required>
 
-                            </button>
 
-                        </div>
+<span class="toggle-password">
 
-                    </div>
+<i class="fa-solid fa-eye"></i>
 
-                    <div class="input-group">
+</span>
 
-                        <label>Confirm Password</label>
+</div>
 
-                        <div class="password-box">
 
-                            <input
-                                type="password"
-                                id="signupConfirmPassword"
-                                placeholder="Confirm Password"
-                                required>
 
-                            <button
-                                type="button"
-                                class="toggle-password"
-                                data-target="signupConfirmPassword">
+<button
+type="submit"
+class="btn-primary">
 
-                                <i class="fa-solid fa-eye"></i>
+Create Account
 
-                            </button>
+</button>
 
-                        </div>
 
-                    </div>
 
-                    <button
-                        type="submit"
-                        class="auth-btn">
+<span class="or">
+Or continue with
+</span>
 
-                        Create Account
 
-                    </button>
+<div class="social-icons">
 
-                    <p class="switch-form">
+<a href="#"><i class="fab fa-google"></i></a>
 
-                        Already have an account?
+<a href="#"><i class="fab fa-facebook-f"></i></a>
 
-                        <span id="showLogin">
+<a href="#"><i class="fab fa-apple"></i></a>
 
-                            Sign In
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
 
-                        </span>
+</div>
 
-                    </p>
 
-                </form>
+</form>
 
-            </div>
 
-        </div>
+</div>
 
-    </div>
+
+
+
+
+
+
+<!-- ==========================================
+        BLUE SLIDING PANEL
+========================================== -->
+
+
+<div class="auth-panel">
+
+
+
+<!-- THIS SHOWS FIRST -->
+
+<div class="panel login-panel active">
+
+
+<img
+src="assets/logo/WhatsApp_Image_2026-07-14_at_12.22.22_PM-removebg-preview.png"
+alt="IDOKO LEGACY">
+
+
+<h2>
+Welcome Back!
+</h2>
+
+
+<p>
+Sign in to track shipments,
+manage deliveries, and access
+your dashboard.
+</p>
+
+
+
+<button
+id="showRegister"
+class="panel-btn">
+
+Create Account
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- HIDDEN UNTIL CLICKED -->
+
+
+<div class="panel register-panel">
+
+
+<img
+src="assets/logo/WhatsApp_Image_2026-07-14_at_12.22.22_PM-removebg-preview.png"
+alt="IDOKO LEGACY">
+
+
+<h2>
+Join IDOKO LEGACY
+</h2>
+
+
+<p>
+Create an account and experience
+secure healthcare logistics.
+</p>
+
+
+
+<button
+id="showLogin"
+class="panel-btn">
+
+Sign In
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
 
 </section>
-
-<!-- Core -->
-<script src="assets/js/core/helpers.js"></script>
-<script src="assets/js/core/storage.js"></script>
-<script src="assets/js/core/utilities.js"></script>
-<script src="assets/js/core/observer.js"></script>
-<script src="assets/js/core/scroll.js"></script>
-<script src="assets/js/core/scrollReveal.js"></script>
-
-<!-- Loader -->
-<script src="assets/js/core/loader.js"></script>
-
-<!-- Auth -->
-<script src="assets/js/auth/auth.js"></script>
-
-<!-- Main -->
-<script src="assets/js/core/main.js"></script>
-
-</body>
-</html>

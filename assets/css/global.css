@@ -5,8 +5,10 @@
 @import"industries-we-serve/index.css";
 @import url("./hipaa/index.css");
 @import url("./contact/index.css");
-@import url("./auth/auth.css");
+@import url("./auth/index.css");
 
+@import"dashboard/dashboard.css";
+@import"shared/index.css";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");

@@ -1,0 +1,57 @@
+@import"sidebar.css";
+@import"topbar.css";
+
+/* ==========================================
+        DASHBOARD BACKGROUND
+========================================== */
+
+
+body{
+
+    background:
+
+    radial-gradient(
+        circle at top left,
+        rgba(32,184,255,.12),
+        transparent 35%
+    ),
+
+    radial-gradient(
+        circle at bottom right,
+        rgba(37,99,235,.12),
+        transparent 40%
+    ),
+
+    #f4f8fc;
+
+
+    font-family:"Poppins", sans-serif;
+
+}
+
+
+
+
+
+
+.dashboard-layout{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+
+
+
+
+.dashboard-main{
+
+
+    flex:1;
+
+    padding:30px;
+
+
+}

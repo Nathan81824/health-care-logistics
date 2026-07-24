@@ -2,11 +2,15 @@
             MAIN JS
 =====================================*/
 
-document.addEventListener("DOMContentLoaded", () => {
-
+function startApplication() {
     initApplication();
+}
 
-});
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startApplication);
+} else {
+    startApplication();
+}
 
 
 /*=====================================
@@ -15,48 +19,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initApplication() {
 
-    /*==============================
-            LOAD COMPONENTS
-    ==============================*/
+    /*=====================================
+                CORE
+    =====================================*/
 
     if (typeof initLoader === "function") {
-
         initLoader();
-
     }
 
-
-    /*==============================
-            CORE
-    ==============================*/
-
     if (typeof initScroll === "function") {
-
         initScroll();
-
     }
 
     if (typeof initScrollReveal === "function") {
-
         initScrollReveal();
-
     }
 
 
-    /*==============================
-            PAGE
-    ==============================*/
+    /*=====================================
+            PAGE DETECTION
+    =====================================*/
 
     const page = document.body.dataset.page;
+
 
     switch (page) {
 
         case "auth":
 
             if (typeof initAuth === "function") {
-
                 initAuth();
-
             }
 
             break;
@@ -65,9 +57,7 @@ function initApplication() {
         case "home":
 
             if (typeof initHome === "function") {
-
                 initHome();
-
             }
 
             break;
@@ -76,9 +66,7 @@ function initApplication() {
         case "about":
 
             if (typeof initAbout === "function") {
-
                 initAbout();
-
             }
 
             break;
@@ -87,9 +75,7 @@ function initApplication() {
         case "services":
 
             if (typeof initServices === "function") {
-
                 initServices();
-
             }
 
             break;
@@ -98,9 +84,7 @@ function initApplication() {
         case "industries":
 
             if (typeof initIndustries === "function") {
-
                 initIndustries();
-
             }
 
             break;
@@ -109,9 +93,7 @@ function initApplication() {
         case "hipaa":
 
             if (typeof initHipaa === "function") {
-
                 initHipaa();
-
             }
 
             break;
@@ -120,9 +102,7 @@ function initApplication() {
         case "contact":
 
             if (typeof initContact === "function") {
-
                 initContact();
-
             }
 
             break;
@@ -131,38 +111,11 @@ function initApplication() {
         case "dashboard":
 
             if (typeof initDashboard === "function") {
-
                 initDashboard();
-
             }
 
             break;
 
     }
 
-
-    /*==============================
-            GLOBAL
-    ==============================*/
-
-    if (typeof initNavbar === "function") {
-
-        initNavbar();
-
-    }
-
-    if (typeof initProfile === "function") {
-
-        initProfile();
-
-    }
-
-    if (typeof initWhatsApp === "function") {
-
-        initWhatsApp();
-
-    }
-
- loadSection("components/auth.html", "auth-container", initAuth);   
 }
-

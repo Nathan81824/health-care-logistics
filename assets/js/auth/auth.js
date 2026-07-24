@@ -1,246 +1,373 @@
 /*=====================================
-            AUTH
+            AUTH JS
 =====================================*/
 
-document.addEventListener("DOMContentLoaded", () => {
-    initAuth();
-});
 
-function initAuth() {
-    initAuthTabs();
-    initPasswordToggle();
-    initSignUp();
-    initLogin();
-}
+function initAuth(){
 
-/*=====================================
-        SWITCH FORMS
-=====================================*/
 
-function initAuthTabs() {
+    console.log("Auth initialized");
 
-    const loginBtn = document.getElementById("showLogin");
-    const signupBtn = document.getElementById("showSignup");
 
-    const loginContainer = document.getElementById("loginFormContainer");
-    const signupContainer = document.getElementById("signupFormContainer");
 
-    if (!loginBtn || !signupBtn || !loginContainer || !signupContainer) return;
+    const container =
+    document.querySelector(".auth-container");
 
-    loginBtn.addEventListener("click", () => {
 
-        loginContainer.classList.add("active");
-        signupContainer.classList.remove("active");
 
-    });
+    if(!container){
 
-    signupBtn.addEventListener("click", () => {
+        console.log("Auth container not found");
 
-        signupContainer.classList.add("active");
-        loginContainer.classList.remove("active");
+        return;
 
-    });
+    }
 
-}
 
-/*=====================================
-        PASSWORD TOGGLE
-=====================================*/
 
-function initPasswordToggle() {
 
-    const toggles = document.querySelectorAll(".toggle-password");
+    /*=====================================
+            ELEMENTS
+    =====================================*/
 
-    toggles.forEach(toggle => {
 
-        toggle.addEventListener("click", () => {
+    const showRegister =
+    document.getElementById("showRegister");
 
-            const input = document.getElementById(toggle.dataset.target);
 
-            if (!input) return;
+    const showLogin =
+    document.getElementById("showLogin");
 
-            if (input.type === "password") {
 
-                input.type = "text";
+    const registerForm =
+    document.getElementById("registerForm");
+
+
+    const loginForm =
+    document.getElementById("loginForm");
+
+
+
+
+
+    /*=====================================
+            SWITCH TO REGISTER
+    =====================================*/
+
+
+    if(showRegister){
+
+
+        showRegister.onclick = (e)=>{
+
+
+            e.preventDefault();
+
+
+            console.log("Opening register");
+
+
+            container.classList.add(
+                "register-mode"
+            );
+
+
+        };
+
+
+    }
+
+
+
+
+
+
+    /*=====================================
+            SWITCH TO LOGIN
+    =====================================*/
+
+
+    if(showLogin){
+
+
+        showLogin.onclick = (e)=>{
+
+
+            e.preventDefault();
+
+
+            console.log("Opening login");
+
+
+            container.classList.remove(
+                "register-mode"
+            );
+
+
+        };
+
+
+    }
+
+
+
+
+
+
+
+    /*=====================================
+            PASSWORD TOGGLE
+    =====================================*/
+
+
+    const toggles =
+    document.querySelectorAll(
+        ".toggle-password"
+    );
+
+
+
+    toggles.forEach(toggle=>{
+
+
+        toggle.onclick = ()=>{
+
+
+            const input =
+            toggle.parentElement.querySelector(
+                "input"
+            );
+
+
+
+            if(!input) return;
+
+
+
+
+            if(input.type === "password"){
+
+
+                input.type="text";
+
 
                 toggle.innerHTML =
-                    '<i class="fa-solid fa-eye-slash"></i>';
+                `
+                <i class="fa-solid fa-eye-slash"></i>
+                `;
 
-            } else {
-
-                input.type = "password";
-
-                toggle.innerHTML =
-                    '<i class="fa-solid fa-eye"></i>';
 
             }
 
-        });
+            else{
+
+
+                input.type="password";
+
+
+                toggle.innerHTML =
+                `
+                <i class="fa-solid fa-eye"></i>
+                `;
+
+
+            }
+
+
+        };
+
 
     });
 
-}
 
-/*=====================================
-            SIGN UP
-=====================================*/
 
-function initSignUp() {
 
-    const form = document.getElementById("signupForm");
 
-    if (!form) return;
 
-    form.addEventListener("submit", function (e) {
 
-        e.preventDefault();
+    /*=====================================
+            CREATE ACCOUNT
+    =====================================*/
 
-        const fullName =
-            document.getElementById("signupName").value.trim();
 
-        const email =
-            document.getElementById("signupEmail")
-                .value
-                .trim()
-                .toLowerCase();
+    if(registerForm){
 
-        const password =
-            document.getElementById("signupPassword").value;
 
-        const confirmPassword =
-            document.getElementById("signupConfirmPassword").value;
+        registerForm.onsubmit = (e)=>{
 
-        if (
-            !fullName ||
-            !email ||
-            !password ||
-            !confirmPassword
-        ) {
 
-            alert("Please fill in all fields.");
+            e.preventDefault();
 
-            return;
 
-        }
 
-        if (!email.includes("@")) {
 
-            alert("Please enter a valid email address.");
+            const user = {
 
-            return;
 
-        }
+                name:
+                document.getElementById(
+                    "registerName"
+                ).value,
 
-        if (password.length < 6) {
 
-            alert("Password must be at least 6 characters.");
+                email:
+                document.getElementById(
+                    "registerEmail"
+                ).value,
 
-            return;
 
-        }
+                password:
+                document.getElementById(
+                    "registerPassword"
+                ).value
 
-        if (password !== confirmPassword) {
 
-            alert("Passwords do not match.");
 
-            return;
+            };
 
-        }
 
-        let users =
-            JSON.parse(localStorage.getItem("users")) || [];
 
-        const exists = users.some(user =>
-            user.email === email
-        );
 
-        if (exists) {
 
-            alert("An account with this email already exists.");
+            localStorage.setItem(
+                "user",
+                JSON.stringify(user)
+            );
 
-            return;
 
-        }
 
-        users.push({
 
-            fullName,
-            email,
-            password
 
-        });
+            alert(
+                "Account created successfully. Please sign in."
+            );
 
-        localStorage.setItem(
-            "users",
-            JSON.stringify(users)
-        );
 
-        alert("Account created successfully!");
 
-        form.reset();
 
-        document.getElementById("showLogin").click();
 
-    });
+            // return to login
 
-}
+            container.classList.remove(
+                "register-mode"
+            );
 
-/*=====================================
+
+
+
+
+            registerForm.reset();
+
+
+
+        };
+
+
+    }
+
+
+
+
+
+
+
+
+
+    /*=====================================
             LOGIN
-=====================================*/
+    =====================================*/
 
-function initLogin() {
 
-    const form = document.getElementById("loginForm");
+    if(loginForm){
 
-    if (!form) return;
 
-    form.addEventListener("submit", function (e) {
+        loginForm.onsubmit = (e)=>{
 
-        e.preventDefault();
 
-        const email =
-            document.getElementById("loginEmail")
-                .value
-                .trim()
-                .toLowerCase();
+            e.preventDefault();
 
-        const password =
-            document.getElementById("loginPassword").value;
 
-        const users =
-            JSON.parse(localStorage.getItem("users")) || [];
 
-        if (users.length === 0) {
 
-            alert("No account found. Please create an account first.");
 
-            return;
+            const savedUser =
 
-        }
+            JSON.parse(
+                localStorage.getItem("user")
+            );
 
-        const user = users.find(user =>
-            user.email === email &&
-            user.password === password
-        );
 
-        if (!user) {
 
-            alert("Invalid email or password.");
 
-            return;
 
-        }
+            const email =
+            document.getElementById(
+                "loginEmail"
+            ).value;
 
-        localStorage.setItem(
-            "currentUser",
-            JSON.stringify(user)
-        );
 
-        alert(`Welcome back, ${user.fullName}!`);
 
-        window.location.href = "pages/home.html";
 
-    });
+            const password =
+            document.getElementById(
+                "loginPassword"
+            ).value;
+
+
+
+
+
+
+
+            if(
+                savedUser &&
+                email === savedUser.email &&
+                password === savedUser.password
+            ){
+
+
+
+                alert(
+                    "Login successful"
+                );
+
+
+
+                window.location.href =
+                "pages/dashboard.html";
+
+
+
+            }
+
+
+            else{
+
+
+                alert(
+                    "Invalid email or password"
+                );
+
+
+            }
+
+
+
+        };
+
+
+    }
+
+
 
 }
+
+
+
+
+/*=====================================
+        GLOBAL ACCESS
+=====================================*/
+
+
+window.initAuth = initAuth;

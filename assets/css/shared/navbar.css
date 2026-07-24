@@ -81,7 +81,6 @@ backdrop-filter:blur(25px);
 
     align-items:center;
 
-    gap:25px;
 
     flex:1;
 
@@ -97,7 +96,6 @@ backdrop-filter:blur(25px);
 
     align-items:center;
 
-    gap:16px;
 
     text-decoration:none;
 
@@ -121,7 +119,7 @@ backdrop-filter:blur(25px);
 
     position:relative;
 
-    padding-left:18px;
+    padding-left :20px;
 
 }
 
@@ -156,7 +154,6 @@ backdrop-filter:blur(25px);
 
     align-items:center;
 
-    gap:5px;
 
     list-style:none;
 
@@ -178,13 +175,13 @@ backdrop-filter:blur(25px);
 
     height:46px;
 
-    padding:0 18px;
+    padding:0 13px;
 
     text-decoration:none;
 
     color:rgba(255,255,255,.75);
 
-    font-size:.80rem;
+    font-size:.82rem;
 
     font-weight:500;
 
