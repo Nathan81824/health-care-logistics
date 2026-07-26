@@ -78,53 +78,119 @@
         CHAT BOX
 =====================================*/
 
+/*=====================================
+        CHAT BOX
+=====================================*/
+
 .chat-box{
 
     position:absolute;
 
     right:0;
-    bottom:90px;
+    bottom:85px;
 
-    width:390px;
-    max-width:95vw;
 
-    height:620px;
+    width:375px;
+    max-width:90vw;
+
+
+    height:530px;
+
 
     display:flex;
     flex-direction:column;
 
+
     background:#f7f8fa;
 
-    border-radius:22px;
+
+    border-radius:20px;
+
 
     overflow:hidden;
 
+
     box-shadow:
-        0 20px 60px rgba(0,0,0,.25);
+    0 15px 40px rgba(0,0,0,.25);
+
+
 
     opacity:0;
     visibility:hidden;
 
+
     transform:
-        translateY(30px)
-        scale(.95);
+    translateY(25px)
+    scale(.9);
+
 
     transition:.35s ease;
 
 }
 
+
+
 .chat-box.active{
 
     opacity:1;
+
     visibility:visible;
 
+
     transform:
-        translateY(0)
-        scale(1);
+    translateY(0)
+    scale(1);
+
+} 
+
+/*=====================================
+        WHATSAPP CHAT SCROLLBAR
+=====================================*/
+
+
+.chat-body::-webkit-scrollbar{
+
+    width:5px;
 
 }
 
 
+.chat-body,
+.quick-replies::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+.chat-body,
+.quick-replies::-webkit-scrollbar-thumb{
+
+    background:#25D366;
+
+    border-radius:20px;
+
+}
+
+
+.chat-body,
+.quick-replies::-webkit-scrollbar-thumb:hover{
+
+    background:#128C7E;
+
+}
+
+
+/* Firefox */
+
+.chat-body,
+.quick-replies{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#25D366 transparent;
+
+}
 /*=====================================
         HEADER
 =====================================*/
@@ -133,7 +199,7 @@
 
     background:#25D366;
 
-    padding:18px;
+    padding:13px;
 
     display:flex;
     justify-content:space-between;

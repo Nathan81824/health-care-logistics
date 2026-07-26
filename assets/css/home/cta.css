@@ -1,48 +1,34 @@
-/*====================================
+/* ==========================================
             CTA SECTION
-=====================================*/
+========================================== */
 
 .cta{
+
     position:relative;
+
     overflow:hidden;
-    padding:130px 8%;
+
+    padding:120px 8%;
 
     background:
-        linear-gradient(
-            135deg,
-            #020617,
-            #0f172a,
-            #1e3a8a
-        );
 
-    color:#fff;
-}
+    radial-gradient(
+        circle at 20% 30%,
+        rgba(14,165,233,.15),
+        transparent 35%
+    ),
 
+    radial-gradient(
+        circle at 80% 70%,
+        rgba(37,99,235,.12),
+        transparent 40%
+    ),
 
-/*====================================
-        BACKGROUND EFFECTS
-=====================================*/
-
-.cta::before{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at top left,
-            rgba(56,189,248,.15),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(37,99,235,.15),
-            transparent 45%
-        );
-
-    z-index:0;
+    linear-gradient(
+        180deg,
+        #06101b,
+        #020617
+    );
 
 }
 
@@ -52,27 +38,94 @@
 
     position:absolute;
 
-    width:650px;
-    height:650px;
+    width:350px;
 
-    right:-220px;
-    bottom:-220px;
+    height:350px;
 
-    border-radius:50%;
+    left:var(--mouse-x,50%);
 
-    background:#38bdf8;
+    top:var(--mouse-y,50%);
 
-    opacity:.12;
+    transform:translate(-50%,-50%);
 
-    filter:blur(160px);
+    background:
+    radial-gradient(
+        circle,
+        rgba(56,189,248,.18),
+        transparent 70%
+    );
+
+    pointer-events:none;
+
+    transition:.2s ease;
 
 }
 
 
-/*====================================
-            CONTAINER
-=====================================*/
+/* ==========================================
+            GLOW EFFECT
+========================================== */
 
+.cta::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+
+    height:700px;
+
+    top:50%;
+
+    left:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(56,189,248,.18),
+        transparent 70%
+    );
+
+    filter:blur(80px);
+
+    opacity:.8;
+
+}
+
+
+
+/* ==========================================
+            CONTAINER
+========================================== */
+
+.cta-content{
+
+    opacity:0;
+
+    transform:
+    translateY(60px)
+    scale(.95);
+
+    transition:
+    1s ease;
+
+}
+
+
+.cta-content.show{
+
+    opacity:1;
+
+    transform:
+    translateY(0)
+    scale(1);
+
+}
 .cta-container{
 
     position:relative;
@@ -83,307 +136,305 @@
 
     margin:auto;
 
+}
+
+
+
+/* ==========================================
+            CONTENT CARD
+========================================== */
+
+.cta-content{
+
     text-align:center;
+
+    padding:80px 70px;
+
+    border-radius:35px;
+
+
+    background:
+
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,.08),
+        rgba(255,255,255,.03)
+    );
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+    backdrop-filter:blur(20px);
+
+
+    box-shadow:
+
+    0 30px 80px rgba(0,0,0,.45),
+
+    inset 0 1px 0 rgba(255,255,255,.08);
 
 }
 
 
-/*====================================
-            BADGE
-=====================================*/
 
+/* ==========================================
+            BADGE
+========================================== */
 .cta-badge{
 
     display:inline-flex;
 
     align-items:center;
 
-    gap:.7rem;
+    gap:12px;
 
-    padding:12px 24px;
+    padding:12px 26px;
 
     border-radius:50px;
 
-    background:rgba(255,255,255,.08);
+    background:
+    rgba(14,165,233,.12);
 
-    border:1px solid rgba(255,255,255,.12);
-
-    color:#38bdf8;
-
-    font-weight:600;
-
-    margin-bottom:28px;
-
-    backdrop-filter:blur(12px);
-
-}
-
-
-/*====================================
-            TITLE
-=====================================*/
-
-.cta h2{
-
-    font-size:clamp(2.8rem,5vw,4.8rem);
-
-    line-height:1.15;
-
-    margin-bottom:25px;
-
-    font-weight:800;
-
-}
-
-.cta h2 span{
+    border:
+    1px solid rgba(56,189,248,.25);
 
     color:#38bdf8;
 
+    font-size:.95rem;
+
+    font-weight:700;
+
+    margin-bottom:30px;
+
 }
 
 
-/*====================================
-            TEXT
-=====================================*/
-
-.cta p{
-
-    max-width:760px;
-
-    margin:auto;
+.cta-badge i{
 
     font-size:1.1rem;
 
-    line-height:2;
+    color:#38bdf8;
 
-    color:#cbd5e1;
+}
+
+/* ==========================================
+            TITLE
+========================================== */
+
+.cta h2{
+
+    color:white;
+
+    font-size:3.5rem;
+
+    line-height:1.2;
+
+    font-weight:800;
+
+    margin-bottom:25px;
 
 }
 
 
-/*====================================
+.cta h2 span{
+
+    display:block;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #38bdf8,
+        #2563eb
+    );
+
+
+    -webkit-background-clip:text;
+
+    color:transparent;
+
+}
+
+
+
+/* ==========================================
+            DESCRIPTION
+========================================== */
+
+.cta p{
+
+    max-width:750px;
+
+    margin:0 auto 45px;
+
+
+    color:#94a3b8;
+
+
+    font-size:1.1rem;
+
+
+    line-height:1.9;
+
+}
+
+
+
+/* ==========================================
             BUTTONS
-=====================================*/
+========================================== */
 
 .cta-buttons{
-
-    margin-top:55px;
 
     display:flex;
 
     justify-content:center;
 
-    align-items:center;
-
     gap:20px;
 
-    flex-wrap:wrap;
-
 }
+
+
+
+/* PRIMARY */
 
 .cta-primary{
 
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:18px 38px;
+    padding:16px 38px;
 
     border-radius:50px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #38bdf8
-        );
-
-    color:#fff;
-
     text-decoration:none;
+
+    color:white;
 
     font-weight:700;
 
-    transition:.35s;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #0ea5e9,
+        #2563eb
+    );
+
 
     box-shadow:
-        0 18px 40px rgba(37,99,235,.35);
+
+    0 15px 40px rgba(14,165,233,.35);
+
+
+    transition:.4s ease;
 
 }
+
+
 
 .cta-primary:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-5px);
+
 
     box-shadow:
-        0 25px 55px rgba(56,189,248,.35);
+
+    0 25px 60px rgba(14,165,233,.55);
 
 }
 
+
+
+/* SECONDARY */
 
 .cta-secondary{
 
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:18px 38px;
+    padding:16px 38px;
 
     border-radius:50px;
 
-    border:2px solid rgba(255,255,255,.18);
-
-    background:rgba(255,255,255,.05);
-
-    backdrop-filter:blur(12px);
-
-    color:#fff;
-
     text-decoration:none;
+
+    color:#38bdf8;
 
     font-weight:700;
 
-    transition:.35s;
+
+    background:
+
+    rgba(255,255,255,.04);
+
+
+    border:
+
+    1px solid rgba(56,189,248,.35);
+
+
+    transition:.4s ease;
 
 }
+
+
 
 .cta-secondary:hover{
 
-    transform:translateY(-6px);
-
-    border-color:#38bdf8;
-
-    background:rgba(56,189,248,.12);
-
-}
-
-
-/*====================================
-        FLOATING CARD
-=====================================*/
-
-.cta-content{
-
-    position:relative;
-
-    padding:80px 60px;
-
-    border-radius:35px;
-
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(18px);
-
-    overflow:hidden;
-
-}
-
-.cta-content::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.08),
-            transparent
-        );
 
-    pointer-events:none;
+    rgba(56,189,248,.12);
+
+
+    transform:translateY(-5px);
 
 }
 
 
-/*====================================
-        ANIMATION
-=====================================*/
 
-.cta-content{
+/* ==========================================
+            TRUST ITEMS
+========================================== */
 
-    animation:floatCard 6s ease-in-out infinite;
+.cta-trust{
 
-}
+    display:flex;
 
-@keyframes floatCard{
+    justify-content:center;
 
-    0%{
+    gap:70px;
 
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-8px);
-
-    }
-
-    100%{
-
-        transform:translateY(0);
-
-    }
+    margin-top:55px;
 
 }
 
 
-/*====================================
-        RESPONSIVE
-=====================================*/
 
-@media(max-width:992px){
+.cta-trust div{
 
-    .cta{
+    display:flex;
 
-        padding:100px 6%;
+    flex-direction:column;
 
-    }
-
-    .cta-content{
-
-        padding:60px 35px;
-
-    }
+    gap:8px;
 
 }
 
-@media(max-width:768px){
 
-    .cta h2{
 
-        font-size:2.5rem;
+.cta-trust strong{
 
-    }
+    color:white;
 
-    .cta-buttons{
+    font-size:1.5rem;
 
-        flex-direction:column;
+}
 
-    }
 
-    .cta-primary,
-    .cta-secondary{
 
-        width:100%;
+.cta-trust span{
 
-        max-width:320px;
+    color:#94a3b8;
 
-    }
-
-    .cta-content{
-
-        padding:45px 25px;
-
-    }
+    font-size:.95rem;
 
 }

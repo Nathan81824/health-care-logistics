@@ -84,42 +84,84 @@ img {
 /* ==========================================
    CUSTOM SCROLLBAR
 ========================================== */
+/* ==========================================
+        CUSTOM SCROLLBAR
+========================================== */
+
 
 /* Firefox */
+
 html{
-    scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-side-color) var(--scrollbar-track);
+
+    scroll-behavior:smooth;
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#38bdf8 #020617;
+
 }
 
-/* Chrome, Edge & Safari */
+
+
+/* Chrome / Edge / Safari */
+
 ::-webkit-scrollbar{
-    width: 12px;
+
+    width:1px;
+
 }
+
+
 
 ::-webkit-scrollbar-track{
-    background: var(--scrollbar-track);
+
+    background:#02061700;
+
 }
+
+
+
+/* ==========================================
+        DYNAMIC SCROLLBAR COLORS
+========================================== */
+
 
 ::-webkit-scrollbar-thumb{
-    background: linear-gradient(
-        180deg,
-        var(--primary-side-color),
-        var(--secondary-side-color)
-    );
-    border-radius: 20px;
-    border: 3px solid var(--scrollbar-track);
-    transition: .3s;
+
+    border-radius:20px;
+
+    border:3px solid #020617;
+
+    transition:.5s ease;
+
 }
 
-::-webkit-scrollbar-thumb:hover{
-    background: linear-gradient(
-        180deg,
-        var(--secondary-side-color),
-        var(--primary-side-color)
-    );
+
+
+/* TOP */
+
+html.scroll-cyan::-webkit-scrollbar-thumb{
+
+    background:#38bdf8;
+
 }
 
-::-webkit-scrollbar-corner{
-    background: var(--scrollbar-track);
+
+
+/* MIDDLE */
+
+html.scroll-blue::-webkit-scrollbar-thumb{
+
+    background:#0ea5e9;
+
+}
+
+
+
+/* BOTTOM */
+
+html.scroll-purple::-webkit-scrollbar-thumb{
+
+    background:#2563eb;
+
 }

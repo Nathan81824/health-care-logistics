@@ -97,7 +97,23 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 
 
+/*================================
+            AUTH PAGE
+================================*/
 
+loadSection(
+    `${basePath}components/auth/auth.html`,
+    "auth-container",
+    () => {
+
+        if (typeof initAuth === "function") {
+
+            initAuth();
+
+        }
+
+    }
+);
 
 /*====================================
             NAVBAR
@@ -316,50 +332,18 @@ if(typeof initTestimonials==="function"){
 
 
 loadSection(
-
 `${basePath}components/home/cta.html`,
-
 "cta-container",
-
 ()=>{
 
+    if(typeof initCTA === "function"){
 
-const logo1 = document.getElementById("logo1");
+        initCTA();
 
-const logo2 = document.getElementById("logo2");
-
-
-
-if(logo1){
-
-    logo1.textContent="Healthcare Logistics";
+    }
 
 }
-
-
-
-if(logo2){
-
-    logo2.textContent="Healthcare Logistics";
-
-}
-
-
-
-
-if(typeof initCTA==="function"){
-
-    initCTA();
-
-}
-
-
-
-}
-
 );
-
-
 
 
 
