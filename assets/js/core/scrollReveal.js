@@ -1,31 +1,47 @@
-/*====================================
-        SCROLL REVEAL
-=====================================*/
+function initScrollReveal(){
 
-const revealElements = document.querySelectorAll("[data-reveal]");
 
-const revealObserver = new IntersectionObserver((entries) => {
+const revealElements =
+document.querySelectorAll("[data-reveal]");
 
-    entries.forEach((entry) => {
 
-        if (entry.isIntersecting) {
+if(!revealElements.length) return;
 
-            entry.target.classList.add("revealed");
 
-            revealObserver.unobserve(entry.target);
 
-        }
+const observer = new IntersectionObserver(
+(entries)=>{
 
-    });
 
-}, {
+entries.forEach(entry=>{
 
-    threshold: 0.15
+
+if(entry.isIntersecting){
+
+
+entry.target.classList.add("revealed");
+
+
+}
+
+
+});
+
+
+},
+{
+threshold:0.15
+}
+
+);
+
+
+
+revealElements.forEach(element=>{
+
+observer.observe(element);
 
 });
 
-revealElements.forEach((element) => {
 
-    revealObserver.observe(element);
-
-});
+}

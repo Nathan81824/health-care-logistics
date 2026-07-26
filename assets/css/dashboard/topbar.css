@@ -1,5 +1,5 @@
 /* ==========================================
-        DASHBOARD TOPBAR
+            DASHBOARD TOPBAR
 ========================================== */
 
 .dashboard-topbar{
@@ -7,34 +7,102 @@
     position:sticky;
     top:0;
 
-    width:100%;
     height:90px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    padding:0 30px;
-    border-radius: 2rem;
+    padding:0 35px;
 
-    background:#1b263b;
+    background:rgba(255,255,255,.95);
 
-    border-bottom:1px solid rgba(255,255,255,.08);
+    backdrop-filter:blur(20px);
 
-    color:#ffffff;
+    border-bottom:1px solid rgba(0,0,0,.06);
 
-    z-index:100;
+    z-index:999;
 
 }
 
+
+
+
 /* ==========================================
-        LEFT
+            LEFT
 ========================================== */
 
 .topbar-left{
 
     display:flex;
     align-items:center;
+
+    gap:25px;
+
+}
+
+
+
+
+/* ==========================================
+            MENU BUTTON
+========================================== */
+
+.menu-toggle{
+
+    width:48px;
+    height:48px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#edf5fb;
+
+    color:#104b73;
+
+    cursor:pointer;
+
+    font-size:1rem;
+
+    transition:.3s;
+
+    display:none;
+
+}
+
+
+.menu-toggle:hover{
+
+    background:#20b8ff;
+
+    color:white;
+
+}
+
+
+
+
+/* ==========================================
+            PAGE TITLE
+========================================== */
+
+.page-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.breadcrumb{
+
+    font-size:.85rem;
+
+    color:#64748b;
+
+    margin-bottom:4px;
 
 }
 
@@ -45,66 +113,54 @@
 
     font-weight:700;
 
-    color:#0f172a;
-
-    margin-bottom:5px;
+    color:#0d2847;
 
 }
 
 
-.page-title p{
 
-    font-size:.95rem;
-
-    color:#64748b;
-
-}
-
-
-.page-title span{
-
-    color:#2563eb;
-
-    font-weight:600;
-
-}
 
 
 /* ==========================================
-        RIGHT
+            RIGHT
 ========================================== */
 
 .topbar-right{
 
     display:flex;
+
     align-items:center;
 
-    gap:20px;
+    gap:18px;
 
 }
 
 
+
+
+
 /* ==========================================
-        SEARCH
+            SEARCH
 ========================================== */
 
 .search-box{
 
-    width:300px;
-    height:48px;
+    width:320px;
+    height:50px;
 
     display:flex;
+
     align-items:center;
 
     gap:12px;
 
     padding:0 18px;
 
-    background:#f8fafc;
-
-    border:1px solid #e2e8f0;
-
     border-radius:50px;
+
+    background:#edf5fb;
+
+    border:1px solid transparent;
 
     transition:.3s;
 
@@ -115,14 +171,17 @@
 
     border-color:#20b8ff;
 
-    box-shadow:0 0 0 4px rgba(32,184,255,.15);
+    background:white;
+
+    box-shadow:
+    0 8px 25px rgba(32,184,255,.15);
 
 }
 
 
 .search-box i{
 
-    color:#94a3b8;
+    color:#64748b;
 
 }
 
@@ -139,7 +198,7 @@
 
     font-size:.95rem;
 
-    color:#334155;
+    color:#0d2847;
 
 }
 
@@ -151,94 +210,103 @@
 }
 
 
+
+
+
 /* ==========================================
-        ICON BUTTONS
+            ICON BUTTONS
 ========================================== */
 
-.topbar-icon{
+.topbar-btn{
 
     position:relative;
 
     width:48px;
     height:48px;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
     border:none;
 
-    border-radius:50%;
+    border-radius:14px;
 
-    background:#f8fafc;
+    background:#edf5fb;
 
-    color:#334155;
+    color:#104b73;
 
     cursor:pointer;
+
+    font-size:1rem;
 
     transition:.3s;
 
 }
 
 
-.topbar-icon:hover{
+.topbar-btn:hover{
 
-    background:#2563eb;
+    background:#20b8ff;
 
-    color:#fff;
+    color:white;
 
-    transform:translateY(-2px);
+    transform:translateY(-3px);
 
 }
 
 
+
+
+
 /* ==========================================
-        NOTIFICATION BADGE
+            NOTIFICATION
 ========================================== */
 
-.notification-badge{
+.notification-dot{
 
     position:absolute;
 
-    top:8px;
-    right:8px;
+    top:12px;
+    right:12px;
 
-    width:18px;
-    height:18px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    width:9px;
+    height:9px;
 
     border-radius:50%;
 
     background:#ef4444;
 
-    color:#fff;
-
-    font-size:.65rem;
-
-    font-weight:700;
+    border:2px solid white;
 
 }
 
 
+
+
+
 /* ==========================================
-        PROFILE
+            PROFILE
 ========================================== */
 
-.topbar-profile{
+.profile{
+
+    position:relative;
+
+}
+
+
+.profile-card{
 
     display:flex;
+
     align-items:center;
 
-    gap:12px;
+    gap:15px;
 
-    padding:8px 14px;
+    padding:8px 15px;
+
+    border:none;
 
     border-radius:16px;
 
-    background:#f8fafc;
+    background:#edf5fb;
 
     cursor:pointer;
 
@@ -247,61 +315,76 @@
 }
 
 
-.topbar-profile:hover{
+.profile-card:hover{
 
-    background:#eef6ff;
+    background:#dceffc;
 
 }
 
 
-.topbar-avatar{
+
+
+
+/* ==========================================
+            AVATAR
+========================================== */
+
+.profile-avatar{
 
     width:48px;
     height:48px;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     border-radius:50%;
 
-    background:linear-gradient(
+    background:
+
+    linear-gradient(
         135deg,
         #20b8ff,
         #2563eb
     );
 
-    color:#fff;
+    color:white;
 
     font-size:1.1rem;
 
     font-weight:700;
 
-    text-transform:uppercase;
-
 }
 
 
-.topbar-user{
+
+
+
+/* ==========================================
+            USER INFO
+========================================== */
+
+.profile-info{
 
     display:flex;
+
     flex-direction:column;
 
 }
 
 
-.topbar-user h4{
+.profile-info h4{
 
     font-size:.95rem;
 
-    font-weight:600;
-
-    color:#0f172a;
+    color:#0d2847;
 
 }
 
 
-.topbar-user span{
+.profile-info span{
 
     font-size:.8rem;
 
@@ -310,17 +393,96 @@
 }
 
 
+
+
+
 /* ==========================================
-        RESPONSIVE
+            DROPDOWN
 ========================================== */
 
-@media(max-width:992px){
+.profile-dropdown{
 
-    .dashboard-topbar{
+    position:absolute;
 
-        padding:0 20px;
+    top:110%;
+    right:0;
 
-    }
+    width:240px;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateY(15px);
+
+    transition:.3s;
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.12);
+
+}
+
+
+.profile.active .profile-dropdown{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateY(0);
+
+}
+
+
+.profile-dropdown a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:16px 22px;
+
+    color:#334155;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+}
+
+
+.profile-dropdown a:hover{
+
+    background:#edf5fb;
+
+    color:#2563eb;
+
+}
+
+
+.profile-dropdown i{
+
+    width:20px;
+
+}
+
+
+
+
+
+/* ==========================================
+            RESPONSIVE
+========================================== */
+
+@media(max-width:1100px){
 
     .search-box{
 
@@ -330,60 +492,62 @@
 
 }
 
-@media(max-width:768px){
 
-    .dashboard-topbar{
 
-        flex-direction:column;
 
-        align-items:flex-start;
+@media(max-width:900px){
 
-        justify-content:center;
-
-        gap:15px;
-
-        height:auto;
-
-        padding:20px;
-
-    }
-
-    .topbar-right{
-
-        width:100%;
-
-        justify-content:space-between;
-
-        flex-wrap:wrap;
-
-    }
-
-    .search-box{
-
-        width:100%;
-
-    }
-
-}
-
-@media(max-width:500px){
-
-    .topbar-profile .topbar-user{
+    .profile-info{
 
         display:none;
 
     }
 
-    .topbar-right{
+}
 
-        gap:10px;
+
+
+
+@media(max-width:768px){
+
+    .dashboard-topbar{
+
+        padding:20px;
 
     }
 
-    .topbar-icon{
+    .menu-toggle{
 
-        width:44px;
-        height:44px;
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+    }
+
+    .search-box{
+
+        display:none;
+
+    }
+
+}
+
+
+
+
+@media(max-width:500px){
+
+    .dashboard-topbar{
+
+        padding:15px;
+
+    }
+
+    .page-title h2{
+
+        font-size:1.35rem;
 
     }
 

@@ -1,8 +1,10 @@
-// ==========================================
-// HOW WE WORK
-// ==========================================
+/*=====================================
+        HOW IT WORKS
+=====================================*/
 
-function initHowWeWork() {
+function initHowItWorks() {
+
+    console.log("How It Works initialized.");
 
     const section = document.querySelector(".how-work");
 
@@ -24,7 +26,7 @@ function initHowWeWork() {
 
             }
 
-            // Reveal cards
+            // Reveal cards one by one
             cards.forEach((card, index) => {
 
                 setTimeout(() => {
@@ -46,5 +48,3 @@ function initHowWeWork() {
     observer.observe(section);
 
 }
-
-document.addEventListener("DOMContentLoaded", initHowWeWork);console.log("How We Work initialized");

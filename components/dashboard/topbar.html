@@ -1,35 +1,43 @@
 <!-- ==========================================
-                TOPBAR
+                DASHBOARD TOPBAR
 ========================================== -->
 
 <header class="dashboard-topbar">
 
 
-    <!-- ==========================
-            LEFT
-    =========================== -->
+    <!-- ==========================================
+                    LEFT
+    ========================================== -->
 
     <div class="topbar-left">
 
 
+        <!-- Mobile Menu -->
+
+        <button
+            class="menu-toggle"
+            id="menuToggle">
+
+            <i class="fa-solid fa-bars"></i>
+
+        </button>
+
+
+        <!-- Page Title -->
+
         <div class="page-title">
 
-            <h2>
+            <span class="breadcrumb">
 
                 Dashboard
 
+            </span>
+
+            <h2>
+
+                Healthcare Logistics Dashboard
+
             </h2>
-
-
-            <p>
-
-                Welcome back,
-                <span id="topbarUsername">
-                    User
-                </span>
-                👋
-
-            </p>
 
         </div>
 
@@ -42,9 +50,9 @@
 
 
 
-    <!-- ==========================
-            RIGHT
-    =========================== -->
+    <!-- ==========================================
+                    RIGHT
+    ========================================== -->
 
     <div class="topbar-right">
 
@@ -52,21 +60,15 @@
 
         <!-- SEARCH -->
 
-
         <div class="search-box">
 
-
             <i class="fa-solid fa-magnifying-glass"></i>
-
 
             <input
                 type="text"
                 placeholder="Search shipments...">
 
-
         </div>
-
-
 
 
 
@@ -74,24 +76,13 @@
 
         <!-- NOTIFICATIONS -->
 
-
-        <button class="topbar-icon">
-
+        <button class="topbar-btn">
 
             <i class="fa-regular fa-bell"></i>
 
-
-            <span class="notification-badge">
-
-                3
-
-            </span>
-
+            <span class="notification-dot"></span>
 
         </button>
-
-
-
 
 
 
@@ -99,14 +90,11 @@
 
         <!-- DARK MODE -->
 
-
         <button
-            class="topbar-icon"
-            id="dashboardTheme">
-
+            class="topbar-btn"
+            id="themeToggle">
 
             <i class="fa-solid fa-moon"></i>
-
 
         </button>
 
@@ -114,53 +102,121 @@
 
 
 
-
-
-
         <!-- PROFILE -->
 
-
-        <div class="topbar-profile">
-
+        <div class="profile">
 
 
-            <div
-                class="topbar-avatar"
-                id="topbarInitial">
 
-                U
+            <button class="profile-card">
+
+
+
+                <div
+                    class="profile-avatar"
+                    id="topbarInitial">
+
+                    U
+
+                </div>
+
+
+
+                <div class="profile-info">
+
+                    <h4 id="topbarUsername">
+
+                        User
+
+                    </h4>
+
+                    <span>
+
+                        Administrator
+
+                    </span>
+
+                </div>
+
+
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+
+
+            </button>
+
+
+
+
+
+            <!-- DROPDOWN -->
+
+            <div class="profile-dropdown">
+
+
+
+                <a href="#">
+
+
+                    <i class="fa-regular fa-user"></i>
+
+                    My Profile
+
+
+                </a>
+
+
+
+
+
+                <a href="#">
+
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+
+                </a>
+
+
+
+
+
+                <a href="../pages/home.html">
+
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Home
+
+
+                </a>
+
+
+
+
+
+                <a
+                    href="#"
+                    id="logoutTopbar">
+
+
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                    Logout
+
+
+                </a>
+
+
 
             </div>
-
-
-
-
-
-            <div class="topbar-user">
-
-
-                <h4 id="topbarName">
-
-                    User
-
-                </h4>
-
-
-                <span>
-
-                    Administrator
-
-                </span>
-
-
-            </div>
-
-
 
 
 
         </div>
-
 
 
 

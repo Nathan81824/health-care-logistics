@@ -5,6 +5,10 @@
 
 function initHero(){
 
+
+    console.log("Hero initialized");
+
+
     initHeroSlider();
 
     initHeroButtons();
@@ -13,7 +17,10 @@ function initHero(){
 
     initHeroAnimations();
 
+
 }
+
+
 
 
 
@@ -36,6 +43,7 @@ function initHeroSlider(){
     const hero = document.querySelector(".hero");
 
 
+
     if(
         !slides.length ||
         !dotsContainer ||
@@ -43,6 +51,8 @@ function initHeroSlider(){
         !prevBtn ||
         !hero
     ){
+
+        console.log("Hero slider elements missing");
 
         return;
 
@@ -60,6 +70,11 @@ function initHeroSlider(){
 
 
 
+    /*=========================
+            CREATE DOTS
+    =========================*/
+
+
     slides.forEach((slide,index)=>{
 
 
@@ -67,6 +82,7 @@ function initHeroSlider(){
 
 
         dot.classList.add("dot");
+
 
 
         if(index === 0){
@@ -100,94 +116,171 @@ function initHeroSlider(){
 
 
 
+
+
+    /*=========================
+            SHOW SLIDE
+    =========================*/
+
+
     function showSlide(index){
 
 
         slides.forEach(slide=>{
 
+
             slide.classList.remove("active");
 
+
         });
+
 
 
         dots.forEach(dot=>{
 
+
             dot.classList.remove("active");
 
+
         });
+
+
 
 
 
         if(index >= slides.length){
 
+
             currentSlide = 0;
 
+
         }
+
 
         else if(index < 0){
 
+
             currentSlide = slides.length - 1;
 
+
         }
+
 
         else{
 
+
             currentSlide = index;
 
+
         }
+
+
 
 
 
         slides[currentSlide].classList.add("active");
 
+
         dots[currentSlide].classList.add("active");
+
 
 
     }
 
+
+
+
+
+    /*=========================
+            NEXT SLIDE
+    =========================*/
 
 
     function nextSlide(){
 
+
         showSlide(currentSlide + 1);
+
 
     }
 
+
+
+
+
+    /*=========================
+            PREVIOUS SLIDE
+    =========================*/
 
 
     function prevSlide(){
 
+
         showSlide(currentSlide - 1);
+
 
     }
 
+
+
+
+
+    /*=========================
+            AUTO PLAY
+    =========================*/
 
 
     function startAutoPlay(){
 
+
         stopAutoPlay();
 
-        autoPlay = setInterval(nextSlide,5000);
+
+
+        autoPlay = setInterval(()=>{
+
+
+            nextSlide();
+
+
+
+        },5000);
+
+
 
     }
+
+
 
 
 
     function stopAutoPlay(){
 
+
         clearInterval(autoPlay);
 
+
     }
+
+
 
 
 
     function restartAutoPlay(){
 
+
         startAutoPlay();
+
 
     }
 
 
+
+
+
+    /*=========================
+            BUTTONS
+    =========================*/
 
 
     nextBtn.addEventListener("click",()=>{
@@ -195,10 +288,14 @@ function initHeroSlider(){
 
         nextSlide();
 
+
         restartAutoPlay();
 
 
+
     });
+
+
 
 
 
@@ -207,35 +304,70 @@ function initHeroSlider(){
 
         prevSlide();
 
+
         restartAutoPlay();
+
 
 
     });
 
+
+
+
+
+
+
+    /*=========================
+            HOVER PAUSE
+    =========================*/
 
 
     hero.addEventListener("mouseenter",()=>{
 
+
         stopAutoPlay();
 
+
+
     });
+
 
 
 
     hero.addEventListener("mouseleave",()=>{
 
+
         startAutoPlay();
+
+
 
     });
 
 
 
+
+
+
+
+    /*=========================
+            START SLIDER
+    =========================*/
+
+
     showSlide(0);
+
 
     startAutoPlay();
 
 
+
+    console.log("Hero slider started");
+
+
 }
+
+
+
 
 
 
@@ -252,7 +384,10 @@ function initHeroButtons(){
     const buttons = document.querySelectorAll(".hero .btn");
 
 
+
     if(!buttons.length) return;
+
+
 
 
 
@@ -265,22 +400,31 @@ function initHeroButtons(){
             button.classList.add("clicked");
 
 
+
             setTimeout(()=>{
 
 
                 button.classList.remove("clicked");
 
 
+
             },300);
+
 
 
         });
 
 
+
     });
 
 
+
 }
+
+
+
+
 
 
 
@@ -297,17 +441,34 @@ function initHeroTyping(){
     const text = document.querySelector(".hero-typing");
 
 
+
     if(!text) return;
+
+
+
+
+
+    if(window.heroTypingInterval){
+
+        clearInterval(window.heroTypingInterval);
+
+    }
+
+
 
 
 
     const words = [
 
+
         "Healthcare Logistics",
+
 
         "Medical Transportation",
 
+
         "Reliable Delivery"
+
 
     ];
 
@@ -317,21 +478,29 @@ function initHeroTyping(){
 
 
 
-    setInterval(()=>{
+
+
+    window.heroTypingInterval = setInterval(()=>{
 
 
         index++;
 
 
+
         if(index >= words.length){
 
+
             index = 0;
+
 
         }
 
 
 
+
+
         text.textContent = words[index];
+
 
 
     },3000);
@@ -339,6 +508,10 @@ function initHeroTyping(){
 
 
 }
+
+
+
+
 
 
 
@@ -355,27 +528,14 @@ function initHeroAnimations(){
     const hero = document.querySelector(".hero");
 
 
+
     if(!hero) return;
+
 
 
 
     hero.classList.add("loaded");
 
 
-}
-
-function createDots(){
-
-    dotsContainer.innerHTML = "";
-
-    slides.forEach((slide,index)=>{
-
-        const dot=document.createElement("button");
-
-        dot.className="dot";
-
-        dotsContainer.appendChild(dot);
-
-    });
 
 }

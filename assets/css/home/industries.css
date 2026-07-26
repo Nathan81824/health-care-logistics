@@ -1,46 +1,61 @@
-/*====================================
-        INDUSTRIES
-=====================================*/
+/* ==========================================
+            INDUSTRIES SECTION
+========================================== */
 
 .industries{
+
     position:relative;
+
     overflow:hidden;
-    padding:120px 8%;
+
+    padding:140px 8%;
 
     background:
         linear-gradient(
-            135deg,
-            #f8fbff,
-            #eef6ff,
-            #ffffff
+            180deg,
+            #07111f 0%,
+            #081726 45%,
+            #040b14 100%
         );
+
 }
 
-
-/*====================================
-        BACKGROUND EFFECTS
-=====================================*/
+/* ==========================================
+            GRID PATTERN
+========================================== */
 
 .industries::before{
 
     content:"";
 
     position:absolute;
+
     inset:0;
 
-    background:
-        radial-gradient(
-            circle at top left,
-            rgba(37,99,235,.08),
-            transparent 45%
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.03) 1px,
+            transparent 1px
         ),
-        radial-gradient(
-            circle at bottom right,
-            rgba(14,165,233,.08),
-            transparent 45%
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.03) 1px,
+            transparent 1px
         );
 
+    background-size:70px 70px;
+
+    opacity:.35;
+
+    pointer-events:none;
+
 }
+
+/* ==========================================
+            BLUE GLOW
+========================================== */
 
 .industries::after{
 
@@ -48,26 +63,41 @@
 
     position:absolute;
 
-    width:450px;
-    height:450px;
+    width:900px;
+
+    height:900px;
 
     border-radius:50%;
 
-    background:#38bdf8;
+    left:50%;
 
-    opacity:.08;
+    top:50%;
 
-    right:-150px;
-    top:-150px;
+    transform:translate(-50%,-50%);
 
-    filter:blur(120px);
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(14,165,233,.10),
+
+            transparent 70%
+
+        );
+
+    filter:blur(90px);
+
+    opacity:.8;
+
+    pointer-events:none;
 
 }
 
-
-/*====================================
-        CONTAINER
-=====================================*/
+/* ==========================================
+            CONTAINER
+========================================== */
 
 .industries-container{
 
@@ -81,87 +111,184 @@
 
 }
 
-
-/*====================================
-        HEADING
-=====================================*/
+/* ==========================================
+            HEADING
+========================================== */
 
 .industries-heading{
 
+    position:relative;
+
+    max-width:850px;
+
+    margin:0 auto 90px;
+
     text-align:center;
 
-    max-width:750px;
-
-    margin:0 auto 70px;
-
 }
+
+/* ==========================================
+            BADGE
+========================================== */
 
 .industries-badge{
 
-    display:inline-block;
+    display:inline-flex;
 
-    padding:10px 22px;
+    align-items:center;
 
-    border-radius:50px;
+    justify-content:center;
 
-    background:#dbeafe;
+    gap:10px;
 
-    color:#2563eb;
+    padding:12px 24px;
 
-    font-weight:600;
+    margin-bottom:30px;
 
-    margin-bottom:20px;
+    border-radius:999px;
+
+    background:rgba(14,165,233,.10);
+
+    border:1px solid rgba(56,189,248,.20);
+
+    color:#38bdf8;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    backdrop-filter:blur(10px);
 
 }
 
+/* ==========================================
+            BADGE DOT
+========================================== */
+
+.badge-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#38bdf8;
+
+    box-shadow:
+
+        0 0 18px rgba(56,189,248,.8);
+
+}
+
+/* ==========================================
+            TITLE
+========================================== */
+
 .industries-heading h2{
 
-    font-size:clamp(2.5rem,5vw,4rem);
+    font-size:3.7rem;
 
-    color:#0f172a;
+    line-height:1.15;
 
-    margin-bottom:20px;
+    font-weight:800;
 
-    line-height:1.2;
+    color:#ffffff;
+
+    margin-bottom:28px;
+
+    letter-spacing:-1px;
 
 }
 
 .industries-heading h2 span{
 
-    color:#2563eb;
+    background:
+
+        linear-gradient(
+            90deg,
+            #38bdf8,
+            #60a5fa,
+            #0ea5e9
+        );
+
+    -webkit-background-clip:text;
+
+    background-clip:text;
+
+    color:transparent;
 
 }
+
+/* ==========================================
+            DESCRIPTION
+========================================== */
 
 .industries-heading p{
 
-    color:#64748b;
+    max-width:720px;
 
-    line-height:1.9;
+    margin:auto;
 
-    font-size:1.05rem;
+    font-size:1.08rem;
+
+    line-height:2;
+
+    color:#94a3b8;
 
 }
 
+/* ==========================================
+            DECORATIVE LINE
+========================================== */
 
-/*====================================
-        GRID
-=====================================*/
+.industries-heading::after{
+
+    content:"";
+
+    display:block;
+
+    width:90px;
+
+    height:4px;
+
+    margin:40px auto 0;
+
+    border-radius:999px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #38bdf8,
+            transparent
+        );
+
+}
+
+/* ==========================================
+            GRID
+========================================== */
 
 .industries-grid{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(auto-fit,minmax(320px,1fr));
+    grid-template-columns:repeat(3,1fr);
 
-    gap:30px;
+    gap:35px;
 
 }
 
 
-/*====================================
-        CARD
-=====================================*/
+
+
+/* ==========================================
+            CARD
+========================================== */
 
 .industry-card{
 
@@ -169,32 +296,36 @@
 
     overflow:hidden;
 
-    padding:40px;
+    padding:45px 38px;
 
     border-radius:28px;
 
-    background:#ffffff;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(18,28,45,.95),
+            rgba(10,17,30,.98)
+        );
 
-    border:1px solid #e2e8f0;
-
-    transition:.45s;
+    border:1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 15px 35px rgba(15,23,42,.06);
+
+        0 20px 45px rgba(0,0,0,.35),
+
+        inset 0 1px 0 rgba(255,255,255,.04);
+
+    transition:
+        .45s ease;
 
 }
 
-.industry-card:hover{
 
-    transform:
-        translateY(-12px);
 
-    border-color:#38bdf8;
 
-    box-shadow:
-        0 25px 60px rgba(37,99,235,.18);
-
-}
+/* ==========================================
+        TOP GLOW
+========================================== */
 
 .industry-card::before{
 
@@ -202,127 +333,394 @@
 
     position:absolute;
 
-    inset:0;
+    top:0;
+    left:0;
+
+    width:100%;
+
+    height:1px;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(37,99,235,.06),
+            90deg,
+            transparent,
+            rgba(255,255,255,.35),
             transparent
         );
 
-    opacity:0;
-
-    transition:.4s;
-
-}
-
-.industry-card:hover::before{
-
-    opacity:1;
-
 }
 
 
-/*====================================
-        ICON
-=====================================*/
+
+
+/* ==========================================
+        CORNER LIGHT
+========================================== */
+
+.industry-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+    height:260px;
+
+    right:-140px;
+    top:-140px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(56,189,248,.10),
+            transparent 70%
+        );
+
+    opacity:.6;
+
+}
+
+
+
+
+/* ==========================================
+        CONTENT
+========================================== */
+
+.industry-card>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* ==========================================
+            ICON
+========================================== */
 
 .industry-icon{
 
-    width:82px;
-    height:82px;
+    width:90px;
 
-    border-radius:22px;
+    height:90px;
 
     display:flex;
-    align-items:center;
+
     justify-content:center;
 
-    font-size:2.2rem;
+    align-items:center;
+
+    margin-bottom:30px;
+
+    border-radius:24px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(56,189,248,.12),
+            rgba(37,99,235,.18)
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    font-size:2.4rem;
+
+    color:#38bdf8;
+
+    box-shadow:
+
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+}
+
+/* ==========================================
+            TITLE
+========================================== */
+
+.industry-card h3{
+
+    color:#ffffff;
+
+    font-size:1.5rem;
+
+    font-weight:700;
+
+    margin-bottom:18px;
+
+}
+
+/* ==========================================
+            DESCRIPTION
+========================================== */
+
+.industry-card p{
+
+    color:#94a3b8;
+
+    line-height:1.9;
+
+    font-size:1rem;
+
+}
+/* ==========================================
+            CARD HOVER
+========================================== */
+
+.industry-card:hover{
+
+    transform:
+        translateY(-14px);
+
+    border-color:
+        rgba(56,189,248,.35);
+
+    box-shadow:
+
+        0 35px 70px rgba(0,0,0,.45),
+
+        0 20px 40px rgba(14,165,233,.12);
+
+}
+
+/* ==========================================
+            TOP ACCENT
+========================================== */
+
+.industry-card .accent{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:4px;
 
     background:
         linear-gradient(
-            135deg,
-            #2563eb,
-            #38bdf8
+            90deg,
+            #38bdf8,
+            #2563eb
         );
 
-    color:#fff;
+    transform:scaleX(0);
 
-    margin-bottom:28px;
+    transform-origin:left;
 
-    transition:.4s;
+    transition:.45s ease;
 
-    box-shadow:
-        0 15px 30px rgba(37,99,235,.25);
+}
+
+.industry-card:hover .accent{
+
+    transform:scaleX(1);
+
+}
+
+/* ==========================================
+            LIGHT SWEEP
+========================================== */
+
+.industry-card .shine{
+
+    position:absolute;
+
+    top:-180%;
+
+    left:-70%;
+
+    width:60%;
+
+    height:350%;
+
+    background:
+
+        linear-gradient(
+
+            rgba(255,255,255,0),
+
+            rgba(255,255,255,.18),
+
+            rgba(255,255,255,0)
+
+        );
+
+    transform:rotate(25deg);
+
+    transition:1s;
+
+}
+
+.industry-card:hover .shine{
+
+    left:140%;
+
+}
+
+/* ==========================================
+            ICON HOVER
+========================================== */
+
+.industry-icon{
+
+    transition:
+
+        transform .45s ease,
+
+        background .45s ease,
+
+        color .45s ease,
+
+        box-shadow .45s ease;
 
 }
 
 .industry-card:hover .industry-icon{
 
     transform:
-        rotate(-10deg)
-        scale(1.08);
+
+        rotate(-8deg)
+
+        scale(1.1);
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #38bdf8,
+
+            #2563eb
+
+        );
+
+    color:#ffffff;
+
+    box-shadow:
+
+        0 0 35px rgba(56,189,248,.35);
 
 }
 
-
-/*====================================
-        TEXT
-=====================================*/
+/* ==========================================
+            TITLE HOVER
+========================================== */
 
 .industry-card h3{
 
-    font-size:1.4rem;
-
-    color:#0f172a;
-
-    margin-bottom:16px;
+    transition:.35s;
 
 }
+
+.industry-card:hover h3{
+
+    color:#38bdf8;
+
+}
+
+/* ==========================================
+            TEXT HOVER
+========================================== */
 
 .industry-card p{
 
-    color:#64748b;
+    transition:.35s;
 
-    line-height:1.8;
+}
+
+.industry-card:hover p{
+
+    color:#cbd5e1;
+
+}
+
+/* ==========================================
+            ENTRANCE STATE
+========================================== */
+
+.industry-card{
+
+    opacity:0;
+
+    transform:translateY(70px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+
+}
+
+.industry-card.show{
+
+    opacity:1;
+
+    transform:translateY(0);
 
 }
 
 
-/*====================================
-        RESPONSIVE
-=====================================*/
+/* ==========================================
+            STAGGER
+========================================== */
 
-@media(max-width:992px){
+.industry-card:nth-child(1){
 
-    .industries{
-
-        padding:100px 6%;
-
-    }
+    transition-delay:.1s;
 
 }
 
-@media(max-width:768px){
+.industry-card:nth-child(2){
 
-    .industries-grid{
+    transition-delay:.2s;
 
-        grid-template-columns:1fr;
+}
 
-    }
+.industry-card:nth-child(3){
 
-    .industries-heading h2{
+    transition-delay:.3s;
 
-        font-size:2.3rem;
+}
 
-    }
+.industry-card:nth-child(4){
 
-    .industry-card{
+    transition-delay:.4s;
 
-        padding:30px;
+}
 
-    }
+.industry-card:nth-child(5){
+
+    transition-delay:.5s;
+
+}
+
+.industry-card:nth-child(6){
+
+    transition-delay:.6s;
+
+}
+
+.industry-card.show{
+
+    opacity:1;
+
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+}
+.industry-card.show.finished{
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    transition:
+        transform .25s ease;
 
 }

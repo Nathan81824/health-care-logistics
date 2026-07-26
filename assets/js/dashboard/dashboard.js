@@ -1,66 +1,88 @@
 /* ==========================================
-        DASHBOARD JS
+            DASHBOARD JS
 ========================================== */
 
+function initDashboard() {
 
+    console.log("Dashboard Started");
 
-function initDashboard(){
-
-
-    console.log("Dashboard started");
-
-
-
-    /* ===============================
-            LOAD COMPONENTS
-    =============================== */
-
+    /* ==========================================
+            LOAD SIDEBAR
+    ========================================== */
 
     loadSection(
         "../components/dashboard/sidebar.html",
         "sidebar-container",
-        ()=>{
+        () => {
 
+            if (typeof initSidebar === "function") {
+                initSidebar();
+            }
 
             initSidebarActive();
-
-
             loadUserProfile();
-
-
             initLogout();
-
 
         }
     );
 
 
 
-
-
+    /* ==========================================
+            LOAD TOPBAR
+    ========================================== */
 
     loadSection(
         "../components/dashboard/topbar.html",
-        "topbar-container"
+        "topbar-container",
+        () => {
+
+            if (typeof initTopbar === "function") {
+                initTopbar();
+            }
+
+            loadTopbarUser();
+
+        }
     );
 
 
 
+    /* ==========================================
+            LOAD WELCOME
+    ========================================== */
+
+    loadSection(
+        "../components/dashboard/welcome.html",
+        "welcome-container",
+        () => {
+
+            if (typeof initWelcome === "function") {
+                initWelcome();
+            }
+
+        }
+    );
 
 
+
+    /* ==========================================
+            LOAD OVERVIEW
+    ========================================== */
 
     loadSection(
         "../components/dashboard/overview.html",
-        "overview-container"
+        "overview-container",
+        () => {
+
+            if (typeof initOverview === "function") {
+                initOverview();
+            }
+
+        }
     );
 
-
-
 }
-
-
-
-
 
 
 
@@ -70,165 +92,81 @@ function initDashboard(){
         SIDEBAR ACTIVE LINK
 ========================================== */
 
+function initSidebarActive() {
 
-function initSidebarActive(){
+    const links = document.querySelectorAll(".nav-link");
 
+    links.forEach(link => {
 
+        link.addEventListener("click", () => {
 
-    const links =
-
-    document.querySelectorAll(
-        ".nav-link"
-    );
-
-
-
-
-    links.forEach(link=>{
-
-
-
-        link.addEventListener(
-        "click",
-        (e)=>{
-
-
-            e.preventDefault();
-
-
-
-            links.forEach(item=>{
-
-
-                item.classList.remove(
-                    "active"
-                );
-
-
+            links.forEach(item => {
+                item.classList.remove("active");
             });
 
-
-
-
-
-            link.classList.add(
-                "active"
-            );
-
-
+            link.classList.add("active");
 
         });
 
-
-
     });
 
-
-
 }
-
-
-
-
 
 
 
 
 
 /* ==========================================
-        LOAD USER PROFILE
+        LOAD SIDEBAR USER
 ========================================== */
 
+function loadUserProfile() {
 
-function loadUserProfile(){
+    const user = JSON.parse(localStorage.getItem("user"));
 
+    if (!user) return;
 
+    const username = document.getElementById("sidebarUsername");
+    const initial = document.getElementById("sidebarInitial");
 
-    const user =
-
-    JSON.parse(
-        localStorage.getItem("user")
-    );
-
-
-
-
-
-    const username =
-
-    document.getElementById(
-        "sidebarUsername"
-    );
-
-
-
-
-    const userInitial =
-
-    document.getElementById(
-        "userInitial"
-    );
-
-
-
-
-
-
-    if(user){
-
-
-
-        // DISPLAY NAME
-
-        if(username){
-
-
-            username.textContent =
-            user.name;
-
-
-        }
-
-
-
-
-
-        // DISPLAY FIRST LETTER
-
-
-        if(userInitial){
-
-
-            userInitial.textContent =
-
-            user.name
-            .charAt(0)
-            .toUpperCase();
-
-
-
-        }
-
-
-
-    }
-    else{
-
-
-        console.log(
-            "No user found"
-        );
-
-
+    if (username) {
+        username.textContent = user.name;
     }
 
-
+    if (initial) {
+        initial.textContent =
+            user.name.charAt(0).toUpperCase();
+    }
 
 }
 
 
 
 
+
+/* ==========================================
+        LOAD TOPBAR USER
+========================================== */
+
+function loadTopbarUser() {
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) return;
+
+    const username = document.getElementById("topbarUsername");
+    const initial = document.getElementById("topbarInitial");
+
+    if (username) {
+        username.textContent = user.name;
+    }
+
+    if (initial) {
+        initial.textContent =
+            user.name.charAt(0).toUpperCase();
+    }
+
+}
 
 
 
@@ -238,75 +176,31 @@ function loadUserProfile(){
         LOGOUT
 ========================================== */
 
+function initLogout() {
 
-function initLogout(){
-
-
-
-    const logoutBtn =
-
-    document.getElementById(
-        "logoutBtn"
+    const logoutButtons = document.querySelectorAll(
+        "#logoutBtn, #logoutTopbar"
     );
 
+    logoutButtons.forEach(button => {
 
+        button.addEventListener("click", () => {
 
-
-
-    if(logoutBtn){
-
-
-
-        logoutBtn.addEventListener(
-        "click",
-        ()=>{
-
-
-
-            const confirmLogout =
-
-            confirm(
+            const confirmLogout = confirm(
                 "Are you sure you want to logout?"
             );
 
+            if (!confirmLogout) return;
 
+            localStorage.removeItem("user");
 
-
-
-            if(confirmLogout){
-
-
-
-                localStorage.removeItem(
-                    "user"
-                );
-
-
-
-
-
-                window.location.href =
-                "../index.html";
-
-
-
-            }
-
-
+            window.location.href = "../index.html";
 
         });
 
-
-
-    }
-
-
+    });
 
 }
-
-
-
-
 
 
 
@@ -316,6 +210,4 @@ function initLogout(){
         EXPORT
 ========================================== */
 
-
-window.initDashboard =
-initDashboard;
+window.initDashboard = initDashboard;
