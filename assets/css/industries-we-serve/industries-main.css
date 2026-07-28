@@ -2,7 +2,10 @@
         HOSPITALS SECTION
 =====================================*/
 
+
+
 .industry-details{
+
     position:relative;
     overflow:hidden;
 
@@ -19,9 +22,11 @@
     background:
         linear-gradient(
             180deg,
-            #ffffff,
-            #f8fbff
+            #020817 0%,
+            #07111f 45%,
+            #0b1727 100%
         );
+
 }
 
 
@@ -43,11 +48,11 @@
 
     border-radius:50%;
 
-    background:#38bdf8;
+    background:#0ea5e9;
 
-    opacity:.08;
+    opacity:.10;
 
-    filter:blur(130px);
+    filter:blur(150px);
 
 }
 
@@ -65,13 +70,14 @@
 
     border-radius:50%;
 
-    background:#0ea5e9;
+    background:#2563eb;
 
-    opacity:.08;
+    opacity:.10;
 
-    filter:blur(120px);
+    filter:blur(140px);
 
 }
+
 
 
 /*====================================
@@ -90,10 +96,12 @@
 
     width:100%;
 
+    display:block;
+
     border-radius:30px;
 
     box-shadow:
-        0 30px 70px rgba(15,23,42,.12);
+        0 30px 70px rgba(0,0,0,.45);
 
     transition:.45s;
 
@@ -124,7 +132,7 @@
 
     font-size:3rem;
 
-    color:#0f172a;
+    color:#ffffff;
 
     margin:20px 0;
 
@@ -134,17 +142,19 @@
 
 .industry-details__content h2 span{
 
-    color:#0ea5e9;
+    color:#38bdf8;
 
 }
 
-.industry-details__content>p{
+.industry-details__content > p{
 
-    color:#64748b;
+    color:#cbd5e1;
 
     line-height:1.9;
 
     margin-bottom:40px;
+
+    font-size:1.05rem;
 
 }
 
@@ -173,16 +183,21 @@
 
     gap:15px;
 
-    padding:18px 20px;
-
-    background:#fff;
+    padding:20px;
 
     border-radius:18px;
 
-    border:1px solid rgba(14,165,233,.08);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(15,23,42,.95),
+            rgba(7,17,31,.98)
+        );
+
+    border:1px solid rgba(56,189,248,.12);
 
     box-shadow:
-        0 15px 35px rgba(15,23,42,.05);
+        0 20px 40px rgba(0,0,0,.30);
 
     transition:.35s;
 
@@ -190,31 +205,32 @@
 
 .benefit:hover{
 
-    transform:
-        translateY(-6px);
+    transform:translateY(-6px);
 
     border-color:#38bdf8;
 
     box-shadow:
-        0 20px 45px rgba(14,165,233,.15);
+        0 25px 50px rgba(14,165,233,.18);
 
 }
 
 .benefit i{
 
-    color:#0ea5e9;
+    color:#38bdf8;
 
-    font-size:1.1rem;
+    font-size:1.15rem;
+
+    flex-shrink:0;
 
 }
 
 .benefit span{
 
-    color:#334155;
+    color:#e2e8f0;
 
     font-weight:600;
 
-    line-height:1.5;
+    line-height:1.6;
 
 }
 
@@ -239,13 +255,13 @@
 
     font-weight:700;
 
-    color:#fff;
+    color:#ffffff;
 
     background:
         linear-gradient(
             135deg,
             #0ea5e9,
-            #38bdf8
+            #2563eb
         );
 
     box-shadow:
@@ -257,8 +273,7 @@
 
 .industry-btn:hover{
 
-    transform:
-        translateY(-6px);
+    transform:translateY(-6px);
 
     box-shadow:
         0 25px 50px rgba(14,165,233,.35);
@@ -277,83 +292,15 @@
 
 }
 
-
 /*====================================
-        RESPONSIVE
+        REVERSE LAYOUT
 =====================================*/
 
-@media(max-width:992px){
-
-    .industry-details{
-
-        grid-template-columns:1fr;
-
-        gap:60px;
-
-    }
-
-    .industry-details__image{
-
-        order:1;
-
-    }
-
-    .industry-details__content{
-
-        order:2;
-
-    }
-
+.industry-details.reverse .industry-details__image{
+    order:2;
 }
 
-@media(max-width:768px){
-
-    .industry-details{
-
-        padding:90px 6%;
-
-    }
-
-    .industry-details__content h2{
-
-        font-size:2.4rem;
-
-    }
-
-    .industry-benefits{
-
-        grid-template-columns:1fr;
-
-    }
-
+.industry-details.reverse .industry-details__content{
+    order:1;
 }
 
-@media(max-width:480px){
-
-    .industry-details{
-
-        padding:80px 5%;
-
-    }
-
-    .industry-details__content h2{
-
-        font-size:2rem;
-
-    }
-
-    .benefit{
-
-        padding:16px 18px;
-
-    }
-
-    .industry-btn{
-
-        width:100%;
-
-        justify-content:center;
-
-    }
-
-}

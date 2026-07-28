@@ -1,0 +1,46 @@
+@media(max-width:992px){
+
+    .industry-details{
+
+        grid-template-columns:1fr;
+
+        gap:60px;
+
+    }
+
+    .industry-details__image{
+
+        order:1;
+
+    }
+
+    .industry-details__content{
+
+        order:2;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .industry-details{
+
+        padding:90px 6%;
+
+    }
+
+    .industry-details__content h2{
+
+        font-size:2.4rem;
+
+    }
+
+    .industry-benefits{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+

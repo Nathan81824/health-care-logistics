@@ -1,0 +1,29 @@
+@media(max-width:480px){
+
+    .industry-details{
+
+        padding:80px 5%;
+
+    }
+
+    .industry-details__content h2{
+
+        font-size:2rem;
+
+    }
+
+    .benefit{
+
+        padding:16px 18px;
+
+    }
+
+    .industry-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
