@@ -334,7 +334,7 @@ function initAuth(){
 
 
                 window.location.href =
-                "pages/dashboard.html";
+                "pages/home.html";
 
 
 
