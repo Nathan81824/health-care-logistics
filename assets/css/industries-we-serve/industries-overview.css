@@ -5,413 +5,177 @@
 .industries-overview{
     position:relative;
     overflow:hidden;
-
     padding:120px 8%;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #f8fbff
-        );
+    background:linear-gradient(180deg,#040b14 0%,#07111f 45%,#081726 100%);
 }
 
-
-/*====================================
-        BACKGROUND EFFECTS
-=====================================*/
-
 .industries-overview::before{
-
     content:"";
-
     position:absolute;
-
-    width:450px;
-    height:450px;
-
-    top:-180px;
-    left:-180px;
-
+    width:520px;
+    height:520px;
+    top:-220px;
+    left:-220px;
     border-radius:50%;
-
-    background:#38bdf8;
-
+    background:#0ea5e9;
     opacity:.08;
-
-    filter:blur(130px);
-
+    filter:blur(170px);
 }
 
 .industries-overview::after{
-
     content:"";
-
     position:absolute;
-
-    width:400px;
-    height:400px;
-
-    right:-180px;
-    bottom:-180px;
-
+    width:480px;
+    height:480px;
+    right:-220px;
+    bottom:-220px;
     border-radius:50%;
-
-    background:#0ea5e9;
-
+    background:#2563eb;
     opacity:.08;
-
-    filter:blur(120px);
-
+    filter:blur(170px);
 }
-
-
-/*====================================
-        LAYOUT
-=====================================*/
 
 .overview-content{
-
     position:relative;
     z-index:2;
-
+    max-width:1400px;
+    margin:auto;
     display:grid;
-
     grid-template-columns:1.2fr .8fr;
-
     gap:70px;
-
     align-items:center;
-
 }
 
+.overview-left{max-width:650px;}
 
-/*====================================
-        LEFT CONTENT
-=====================================*/
+.section-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 24px;
+    border-radius:50px;
+    background:rgba(56,189,248,.1);
+    border:1px solid rgba(56,189,248,.18);
+    color:#38bdf8;
+    font-weight:700;
+    backdrop-filter:blur(12px);
+}
 
 .overview-left h2{
-
-    font-size:3rem;
-
-    line-height:1.2;
-
-    color:#0f172a;
-
-    margin:20px 0;
-
+    margin:30px 0 22px;
+    font-size:clamp(2rem,5vw,3.8rem);
+    line-height:1.15;
+    color:#fff;
+    font-weight:700;
 }
 
 .overview-left h2 span{
-
-    color:#0ea5e9;
-
+    display:block;
+    color:#38bdf8;
 }
 
 .overview-left p{
-
-    color:#64748b;
-
+    color:#94a3b8;
     line-height:1.9;
-
-    margin-bottom:40px;
-
+    font-size:1.05rem;
+    margin-bottom:45px;
 }
 
-
-/*====================================
-        FEATURES
-=====================================*/
-
 .overview-features{
-
     display:grid;
-
     grid-template-columns:repeat(2,1fr);
-
-    gap:20px;
-
+    gap:18px;
 }
 
 .feature{
-
     display:flex;
-
     align-items:center;
-
-    gap:15px;
-
-    padding:18px 22px;
-
-    background:#fff;
-
-    border-radius:16px;
-
-    border:1px solid rgba(14,165,233,.08);
-
-    box-shadow:
-        0 15px 35px rgba(15,23,42,.05);
-
+    gap:14px;
+    padding:18px 20px;
+    border-radius:18px;
+    background:rgba(15,23,42,.75);
+    border:1px solid rgba(255,255,255,.05);
     transition:.35s;
-
 }
 
 .feature:hover{
-
     transform:translateY(-6px);
-
     border-color:#38bdf8;
-
-    box-shadow:
-        0 20px 40px rgba(14,165,233,.15);
-
+    box-shadow:0 20px 40px rgba(14,165,233,.15);
 }
 
-.feature i{
-
-    color:#0ea5e9;
-
-    font-size:1.2rem;
-
-}
-
-.feature span{
-
-    font-weight:600;
-
-    color:#334155;
-
-}
-
-
-/*====================================
-        RIGHT GRID
-=====================================*/
+.feature i{color:#38bdf8;font-size:1.1rem;}
+.feature span{color:#e2e8f0;font-weight:600;}
 
 .overview-right{
-
     display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
+    grid-template-columns:repeat(2,minmax(220px,1fr));
     gap:25px;
-
 }
 
-
-/*====================================
-        CARD
-=====================================*/
-
 .overview-card{
-
-    background:#fff;
-
-    border-radius:24px;
-
-    padding:35px 25px;
-
+    position:relative;
+    overflow:hidden;
+    min-height:260px;
+    padding:40px 30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
-
-    border:1px solid rgba(14,165,233,.08);
-
-    box-shadow:
-        0 20px 45px rgba(15,23,42,.06);
-
-    transition:.35s;
-
+    border-radius:26px;
+    background:linear-gradient(180deg,rgba(15,23,42,.95),rgba(7,17,31,.98));
+    border:1px solid rgba(255,255,255,.06);
+    transition:.4s;
 }
 
 .overview-card:hover{
-
-    transform:
-        translateY(-10px);
-
+    transform:translateY(-10px);
     border-color:#38bdf8;
-
-    box-shadow:
-        0 25px 50px rgba(14,165,233,.18);
-
+    box-shadow:0 25px 50px rgba(14,165,233,.18);
 }
 
-
-/*====================================
-        ICON
-=====================================*/
+.overview-card::before{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    top:-110px;
+    right:-110px;
+    border-radius:50%;
+    background:#38bdf8;
+    opacity:.08;
+    filter:blur(80px);
+}
 
 .overview-icon{
-
-    width:75px;
-    height:75px;
-
-    margin:0 auto 25px;
-
+    width:80px;
+    height:80px;
+    margin:0 auto 24px;
     display:flex;
     justify-content:center;
     align-items:center;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0ea5e9,
-            #38bdf8
-        );
-
+    border-radius:22px;
+    background:linear-gradient(135deg,#0ea5e9,#2563eb);
     color:#fff;
-
-    font-size:1.8rem;
-
-    box-shadow:
-        0 15px 35px rgba(56,189,248,.30);
-
+    font-size:2rem;
+    box-shadow:0 18px 35px rgba(56,189,248,.28);
     transition:.35s;
-
 }
 
 .overview-card:hover .overview-icon{
-
-    transform:
-        rotate(-10deg)
-        scale(1.08);
-
+    transform:rotate(-8deg) scale(1.08);
 }
 
-
-/*====================================
-        TEXT
-=====================================*/
-
 .overview-card h3{
-
-    font-size:2.4rem;
-
-    color:#0ea5e9;
-
+    color:#fff;
+    font-size:1.9rem;
     margin-bottom:12px;
-
+    font-weight:700;
 }
 
 .overview-card p{
-
-    color:#64748b;
-
+    color:#94a3b8;
     line-height:1.7;
-
     font-weight:600;
-
-}
-
-
-/*====================================
-        HOVER GLOW
-=====================================*/
-
-.overview-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(14,165,233,.05),
-            transparent
-        );
-
-    opacity:0;
-
-    transition:.35s;
-
-}
-
-.overview-card{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.overview-card:hover::before{
-
-    opacity:1;
-
-}
-
-
-/*====================================
-        RESPONSIVE
-=====================================*/
-
-@media(max-width:992px){
-
-    .overview-content{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .overview-right{
-
-        margin-top:20px;
-
-    }
-
-}
-
-@media(max-width:768px){
-
-    .industries-overview{
-
-        padding:90px 6%;
-
-    }
-
-    .overview-left h2{
-
-        font-size:2.4rem;
-
-    }
-
-    .overview-features{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-@media(max-width:576px){
-
-    .industries-overview{
-
-        padding:80px 5%;
-
-    }
-
-    .overview-left h2{
-
-        font-size:2rem;
-
-    }
-
-    .overview-right{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .overview-card{
-
-        padding:30px 20px;
-
-    }
-
 }

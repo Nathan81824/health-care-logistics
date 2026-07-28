@@ -13,15 +13,16 @@
     background:
         linear-gradient(
             180deg,
-            #07111f 0%,
-            #081726 45%,
-            #040b14 100%
+            #050b16 0%,
+            #08111f 45%,
+            #0b1728 100%
         );
 
 }
 
+
 /* ==========================================
-            GRID PATTERN
+            BACKGROUND GRID
 ========================================== */
 
 .industries::before{
@@ -35,13 +36,13 @@
     background-image:
 
         linear-gradient(
-            rgba(255,255,255,.03) 1px,
+            rgba(255,255,255,.025) 1px,
             transparent 1px
         ),
 
         linear-gradient(
             90deg,
-            rgba(255,255,255,.03) 1px,
+            rgba(255,255,255,.025) 1px,
             transparent 1px
         );
 
@@ -52,6 +53,7 @@
     pointer-events:none;
 
 }
+
 
 /* ==========================================
             BLUE GLOW
@@ -64,16 +66,14 @@
     position:absolute;
 
     width:900px;
-
     height:900px;
 
-    border-radius:50%;
-
     left:50%;
-
     top:50%;
 
     transform:translate(-50%,-50%);
+
+    border-radius:50%;
 
     background:
 
@@ -81,19 +81,18 @@
 
             circle,
 
-            rgba(14,165,233,.10),
+            rgba(14,165,233,.12),
 
             transparent 70%
 
         );
 
-    filter:blur(90px);
-
-    opacity:.8;
+    filter:blur(120px);
 
     pointer-events:none;
 
 }
+
 
 /* ==========================================
             CONTAINER
@@ -111,21 +110,21 @@
 
 }
 
+
 /* ==========================================
-            HEADING
+            HEADER
 ========================================== */
 
 .industries-heading{
 
-    position:relative;
-
-    max-width:850px;
+    max-width:820px;
 
     margin:0 auto 90px;
 
     text-align:center;
 
 }
+
 
 /* ==========================================
             BADGE
@@ -137,19 +136,17 @@
 
     align-items:center;
 
-    justify-content:center;
-
-    gap:10px;
+    gap:12px;
 
     padding:12px 24px;
-
-    margin-bottom:30px;
 
     border-radius:999px;
 
     background:rgba(14,165,233,.10);
 
-    border:1px solid rgba(56,189,248,.20);
+    border:1px solid rgba(56,189,248,.18);
+
+    backdrop-filter:blur(12px);
 
     color:#38bdf8;
 
@@ -159,15 +156,14 @@
 
     letter-spacing:.5px;
 
-    backdrop-filter:blur(10px);
-
 }
+
 
 /* ==========================================
             BADGE DOT
 ========================================== */
 
-.badge-dot{
+.industries-badge-dot{
 
     width:10px;
 
@@ -179,9 +175,10 @@
 
     box-shadow:
 
-        0 0 18px rgba(56,189,248,.8);
+        0 0 15px rgba(56,189,248,.8);
 
 }
+
 
 /* ==========================================
             TITLE
@@ -189,15 +186,15 @@
 
 .industries-heading h2{
 
-    font-size:3.7rem;
+    margin:28px 0;
+
+    font-size:clamp(2.8rem,5vw,4rem);
 
     line-height:1.15;
 
     font-weight:800;
 
     color:#ffffff;
-
-    margin-bottom:28px;
 
     letter-spacing:-1px;
 
@@ -208,10 +205,15 @@
     background:
 
         linear-gradient(
+
             90deg,
+
             #38bdf8,
+
             #60a5fa,
+
             #0ea5e9
+
         );
 
     -webkit-background-clip:text;
@@ -221,6 +223,7 @@
     color:transparent;
 
 }
+
 
 /* ==========================================
             DESCRIPTION
@@ -240,8 +243,9 @@
 
 }
 
+
 /* ==========================================
-            DECORATIVE LINE
+            DIVIDER
 ========================================== */
 
 .industries-heading::after{
@@ -254,20 +258,26 @@
 
     height:4px;
 
-    margin:40px auto 0;
+    margin:45px auto 0;
 
     border-radius:999px;
 
     background:
 
         linear-gradient(
+
             90deg,
+
             transparent,
+
             #38bdf8,
+
             transparent
+
         );
 
 }
+
 
 /* ==========================================
             GRID
@@ -283,51 +293,47 @@
 
 }
 
-
-
-
 /* ==========================================
-            CARD
+            INDUSTRIES CARD
 ========================================== */
 
-.industry-card{
+.industries-card{
 
     position:relative;
 
     overflow:hidden;
 
-    padding:45px 38px;
+    padding:42px 34px;
 
     border-radius:28px;
 
     background:
         linear-gradient(
             180deg,
-            rgba(18,28,45,.95),
-            rgba(10,17,30,.98)
+            rgba(18,28,45,.96),
+            rgba(8,15,28,.98)
         );
 
     border:1px solid rgba(255,255,255,.08);
 
     box-shadow:
-
-        0 20px 45px rgba(0,0,0,.35),
-
+        0 25px 55px rgba(0,0,0,.40),
         inset 0 1px 0 rgba(255,255,255,.04);
 
     transition:
-        .45s ease;
+        transform .45s ease,
+        border-color .45s ease,
+        box-shadow .45s ease,
+        background .45s ease;
 
 }
 
 
-
-
 /* ==========================================
-        TOP GLOW
+            TOP BORDER
 ========================================== */
 
-.industry-card::before{
+.industries-card::before{
 
     content:"";
 
@@ -337,27 +343,24 @@
     left:0;
 
     width:100%;
-
-    height:1px;
+    height:2px;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.35),
+            rgba(56,189,248,.75),
             transparent
         );
 
 }
 
 
-
-
 /* ==========================================
-        CORNER LIGHT
+            CORNER GLOW
 ========================================== */
 
-.industry-card::after{
+.industries-card::after{
 
     content:"";
 
@@ -366,31 +369,26 @@
     width:260px;
     height:260px;
 
-    right:-140px;
     top:-140px;
+    right:-140px;
 
     border-radius:50%;
 
     background:
-
         radial-gradient(
             circle,
             rgba(56,189,248,.10),
             transparent 70%
         );
 
-    opacity:.6;
-
 }
 
 
-
-
 /* ==========================================
-        CONTENT
+            KEEP CONTENT ABOVE EFFECTS
 ========================================== */
 
-.industry-card>*{
+.industries-card>*{
 
     position:relative;
 
@@ -398,14 +396,14 @@
 
 }
 
+
 /* ==========================================
             ICON
 ========================================== */
 
-.industry-icon{
+.industries-card-icon{
 
     width:90px;
-
     height:90px;
 
     display:flex;
@@ -414,12 +412,11 @@
 
     align-items:center;
 
-    margin-bottom:30px;
+    margin-bottom:28px;
 
-    border-radius:24px;
+    border-radius:22px;
 
     background:
-
         linear-gradient(
             135deg,
             rgba(56,189,248,.12),
@@ -428,37 +425,46 @@
 
     border:1px solid rgba(255,255,255,.08);
 
-    font-size:2.4rem;
-
     color:#38bdf8;
 
-    box-shadow:
+    font-size:2.2rem;
 
-        inset 0 1px 0 rgba(255,255,255,.08);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05);
+
+    transition:
+        transform .45s ease,
+        background .45s ease,
+        color .45s ease,
+        box-shadow .45s ease;
 
 }
+
 
 /* ==========================================
             TITLE
 ========================================== */
 
-.industry-card h3{
+.industries-card h3{
 
     color:#ffffff;
 
-    font-size:1.5rem;
+    font-size:1.45rem;
 
     font-weight:700;
 
     margin-bottom:18px;
 
+    transition:.35s;
+
 }
+
 
 /* ==========================================
             DESCRIPTION
 ========================================== */
 
-.industry-card p{
+.industries-card p{
 
     color:#94a3b8;
 
@@ -466,32 +472,77 @@
 
     font-size:1rem;
 
+    transition:.35s;
+
 }
+
+
 /* ==========================================
-            CARD HOVER
+            HOVER
 ========================================== */
 
-.industry-card:hover{
+.industries-card:hover{
 
     transform:
-        translateY(-14px);
+        translateY(-12px);
 
     border-color:
         rgba(56,189,248,.35);
 
+    background:
+        linear-gradient(
+            180deg,
+            rgba(22,35,55,.98),
+            rgba(12,20,36,.99)
+        );
+
     box-shadow:
-
-        0 35px 70px rgba(0,0,0,.45),
-
-        0 20px 40px rgba(14,165,233,.12);
+        0 35px 75px rgba(0,0,0,.45),
+        0 20px 45px rgba(14,165,233,.15);
 
 }
 
+
+.industries-card:hover h3{
+
+    color:#38bdf8;
+
+}
+
+
+.industries-card:hover p{
+
+    color:#cbd5e1;
+
+}
+
+
+.industries-card:hover .industries-card-icon{
+
+    transform:
+        rotate(-8deg)
+        scale(1.08);
+
+    background:
+        linear-gradient(
+            135deg,
+            #38bdf8,
+            #2563eb
+        );
+
+    color:#ffffff;
+
+    box-shadow:
+        0 0 35px rgba(56,189,248,.35);
+
+}
+
+
 /* ==========================================
-            TOP ACCENT
+            ACCENT BAR
 ========================================== */
 
-.industry-card .accent{
+.industries-accent{
 
     position:absolute;
 
@@ -516,17 +567,19 @@
 
 }
 
-.industry-card:hover .accent{
+
+.industries-card:hover .industries-accent{
 
     transform:scaleX(1);
 
 }
 
+
 /* ==========================================
-            LIGHT SWEEP
+            SHINE EFFECT
 ========================================== */
 
-.industry-card .shine{
+.industries-shine{
 
     position:absolute;
 
@@ -539,15 +592,10 @@
     height:350%;
 
     background:
-
         linear-gradient(
-
             rgba(255,255,255,0),
-
             rgba(255,255,255,.18),
-
             rgba(255,255,255,0)
-
         );
 
     transform:rotate(25deg);
@@ -556,95 +604,18 @@
 
 }
 
-.industry-card:hover .shine{
+
+.industries-card:hover .industries-shine{
 
     left:140%;
 
 }
 
 /* ==========================================
-            ICON HOVER
+            ENTRANCE ANIMATION
 ========================================== */
 
-.industry-icon{
-
-    transition:
-
-        transform .45s ease,
-
-        background .45s ease,
-
-        color .45s ease,
-
-        box-shadow .45s ease;
-
-}
-
-.industry-card:hover .industry-icon{
-
-    transform:
-
-        rotate(-8deg)
-
-        scale(1.1);
-
-    background:
-
-        linear-gradient(
-
-            135deg,
-
-            #38bdf8,
-
-            #2563eb
-
-        );
-
-    color:#ffffff;
-
-    box-shadow:
-
-        0 0 35px rgba(56,189,248,.35);
-
-}
-
-/* ==========================================
-            TITLE HOVER
-========================================== */
-
-.industry-card h3{
-
-    transition:.35s;
-
-}
-
-.industry-card:hover h3{
-
-    color:#38bdf8;
-
-}
-
-/* ==========================================
-            TEXT HOVER
-========================================== */
-
-.industry-card p{
-
-    transition:.35s;
-
-}
-
-.industry-card:hover p{
-
-    color:#cbd5e1;
-
-}
-
-/* ==========================================
-            ENTRANCE STATE
-========================================== */
-
-.industry-card{
+.industries-card{
 
     opacity:0;
 
@@ -652,11 +623,14 @@
 
     transition:
         opacity .7s ease,
-        transform .7s ease;
+        transform .7s ease,
+        box-shadow .35s ease,
+        border-color .35s ease,
+        background .35s ease;
 
 }
 
-.industry-card.show{
+.industries-card.show{
 
     opacity:1;
 
@@ -666,61 +640,190 @@
 
 
 /* ==========================================
-            STAGGER
+            STAGGER DELAY
 ========================================== */
 
-.industry-card:nth-child(1){
+.industries-card:nth-child(1){
 
     transition-delay:.1s;
 
 }
 
-.industry-card:nth-child(2){
+.industries-card:nth-child(2){
 
     transition-delay:.2s;
 
 }
 
-.industry-card:nth-child(3){
+.industries-card:nth-child(3){
 
     transition-delay:.3s;
 
 }
 
-.industry-card:nth-child(4){
+.industries-card:nth-child(4){
 
     transition-delay:.4s;
 
 }
 
-.industry-card:nth-child(5){
+.industries-card:nth-child(5){
 
     transition-delay:.5s;
 
 }
 
-.industry-card:nth-child(6){
+.industries-card:nth-child(6){
 
     transition-delay:.6s;
 
 }
 
-.industry-card.show{
 
-    opacity:1;
+/* ==========================================
+            FINAL POP
+========================================== */
 
-    transform:
-        translateY(-8px)
-        scale(1.02);
+.industries-card.show.finished{
+
+    transform:translateY(0);
 
 }
-.industry-card.show.finished{
 
-    transform:
-        translateY(0)
-        scale(1);
 
-    transition:
-        transform .25s ease;
+/* ==========================================
+            RESPONSIVE
+========================================== */
+
+@media (max-width:1200px){
+
+    .industries-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+
+@media (max-width:992px){
+
+    .industries{
+
+        padding:110px 6%;
+
+    }
+
+    .industries-heading{
+
+        margin-bottom:70px;
+
+    }
+
+    .industries-heading h2{
+
+        font-size:3rem;
+
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .industries{
+
+        padding:90px 5%;
+
+    }
+
+    .industries-heading h2{
+
+        font-size:2.4rem;
+
+    }
+
+    .industries-heading p{
+
+        font-size:1rem;
+
+    }
+
+    .industries-grid{
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+
+    }
+
+    .industries-card{
+
+        padding:35px 28px;
+
+    }
+
+    .industries-card-icon{
+
+        width:80px;
+        height:80px;
+
+        font-size:2rem;
+
+    }
+
+}
+
+
+@media (max-width:480px){
+
+    .industries{
+
+        padding:80px 5%;
+
+    }
+
+    .industries-heading{
+
+        margin-bottom:55px;
+
+    }
+
+    .industries-heading h2{
+
+        font-size:2rem;
+
+    }
+
+    .industries-heading p{
+
+        line-height:1.8;
+
+    }
+
+    .industries-card{
+
+        padding:28px 22px;
+
+        border-radius:22px;
+
+    }
+
+    .industries-card-icon{
+
+        width:70px;
+        height:70px;
+
+        font-size:1.8rem;
+
+        border-radius:18px;
+
+    }
+
+    .industries-card h3{
+
+        font-size:1.3rem;
+
+    }
 
 }

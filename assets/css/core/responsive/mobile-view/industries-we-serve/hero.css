@@ -1,0 +1,71 @@
+
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+@media (max-width:992px){
+
+    .industries-hero{
+        text-align:center;
+        background-attachment:scroll;
+    }
+
+    .industries-hero__content{
+        margin:auto;
+    }
+
+    .hero-buttons{
+        justify-content:center;
+    }
+
+    .hero-stats{
+        justify-content:center;
+    }
+
+}
+
+@media (max-width:768px){
+
+    .industries-hero{
+        padding:120px 6% 90px;
+    }
+
+    .industries-hero__content h1{
+        font-size:3rem;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .btn-primary,
+    .btn-secondary{
+        width:100%;
+    }
+
+}
+
+@media (max-width:480px){
+
+    .industries-hero{
+        padding:110px 20px 70px;
+    }
+
+    .industries-hero__content h1{
+        font-size:2.4rem;
+    }
+
+    .industries-hero__content p{
+        font-size:1rem;
+    }
+
+    .hero-badge{
+        padding:12px 18px;
+        font-size:.9rem;
+    }
+
+    .stat{
+        width:100%;
+    }
+
+}

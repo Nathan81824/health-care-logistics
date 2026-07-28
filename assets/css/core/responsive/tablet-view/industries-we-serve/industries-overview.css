@@ -1,0 +1,73 @@
+/*====================================
+        TABLETS
+=====================================*/
+
+@media (min-width:769px) and (max-width:1024px){
+
+    .overview-content{
+
+        display:grid;
+
+        grid-template-columns:1fr;
+
+        gap:60px;
+
+        justify-items:center;
+
+    }
+
+    .overview-left{
+
+        width:100%;
+
+        max-width:900px;
+
+        text-align:center;
+
+    }
+
+    .overview-left p{
+
+        max-width:720px;
+
+        margin:0 auto 40px;
+
+    }
+
+    .overview-features{
+
+        display:grid;
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:18px;
+
+        max-width:700px;
+
+        width:100%;
+
+        margin:0 auto;
+
+    }
+
+.overview-right{
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+}
+
+    .overview-card{
+
+        width:100%;
+
+        min-height:230px;
+
+        padding:35px 25px;
+
+    }
+
+}

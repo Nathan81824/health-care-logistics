@@ -627,14 +627,89 @@ initFAQ();
 
 );
 
+/*====================================
+        INDUSTRIES PAGE
+=====================================*/
 
+loadSection(
+`${basePath}components/industries-we-serve/hero.html`,
+"industries-hero-container",
+()=>{
+    if(typeof initIndustriesHero==="function"){
+        initIndustriesHero();
+    }
+}
+);
 
+loadSection(
+`${basePath}components/industries-we-serve/industries-overview.html`,
+"industries-overview-container",
+()=>{
+    if(typeof initIndustriesOverview==="function"){
+        initIndustriesOverview();
+    }
+}
+);
 
+loadSection(
+`${basePath}components/industries-we-serve/hospital.html`,
+"hospital-container",
+()=>{
+    if(typeof initHospital==="function"){
+        initHospital();
+    }
+}
+);
 
+loadSection(
+`${basePath}components/industries-we-serve/labotories.html`,
+"labotories-container",
+()=>{
+    if(typeof initLabotories==="function"){
+        initLabotories();
+    }
+}
+);
 
+loadSection(
+`${basePath}components/industries-we-serve/pharmacies.html`,
+"pharmacies-container",
+()=>{
+    if(typeof initPharmacies==="function"){
+        initPharmacies();
+    }
+}
+);
 
+loadSection(
+`${basePath}components/industries-we-serve/pharmaceutical-companies.html`,
+"pharmaceutical-companies-container",
+()=>{
+    if(typeof initPharmaceuticalCompanies==="function"){
+        initPharmaceuticalCompanies();
+    }
+}
+);
 
+loadSection(
+`${basePath}components/industries-we-serve/blood-bank.html`,
+"blood-bank-container",
+()=>{
+    if(typeof initBloodBank==="function"){
+        initBloodBank();
+    }
+}
+);
 
+loadSection(
+`${basePath}components/industries-we-serve/medical-suppliers.html`,
+"medical-suppliers-container",
+()=>{
+    if(typeof initMedicalSuppliers==="function"){
+        initMedicalSuppliers();
+    }
+}
+);
 
 /*====================================
             FOOTER

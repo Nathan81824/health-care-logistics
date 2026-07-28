@@ -3,73 +3,72 @@
 =====================================*/
 
 .industries-hero{
-    position:relative;
-    overflow:hidden;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
 
-    min-height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    padding:140px 8% 100px;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:5rem;
+    padding: 140px 8% 100px;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(248,251,255,.98),
-            rgba(239,248,255,.96)
-        );
+            rgba(2,6,23,.82),
+            rgba(2,6,23,.86)
+        ),
+        url("/assets/images/ChatGPT Image Jul 27, 2026, 10_20_52 PM.png")
+        center center/cover no-repeat;
+
+    background-attachment: fixed;
 }
 
 
 /*====================================
-        BACKGROUND EFFECTS
+        ANIMATED OVERLAY
 =====================================*/
 
-.industries-hero::before{
+.hero-overlay{
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 
-    content:"";
+    background:
+        radial-gradient(circle at top right,
+            rgba(56,189,248,.18),
+            transparent 45%),
+        radial-gradient(circle at bottom left,
+            rgba(37,99,235,.18),
+            transparent 45%);
 
-    position:absolute;
+    animation: heroGlow 10s ease-in-out infinite alternate;
+}
 
-    width:520px;
-    height:520px;
+@keyframes heroGlow{
 
-    top:-220px;
-    left:-220px;
+    from{
+        opacity:.7;
+        transform:scale(1);
+    }
 
-    border-radius:50%;
-
-    background:#38bdf8;
-
-    opacity:.08;
-
-    filter:blur(120px);
+    to{
+        opacity:1;
+        transform:scale(1.05);
+    }
 
 }
 
-.industries-hero::after{
 
-    content:"";
+/*====================================
+        CONTAINER
+=====================================*/
 
-    position:absolute;
-
-    width:420px;
-    height:420px;
-
-    right:-180px;
-    bottom:-180px;
-
-    border-radius:50%;
-
-    background:#0ea5e9;
-
-    opacity:.08;
-
-    filter:blur(120px);
-
+.industries-hero__container{
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1300px;
 }
 
 
@@ -78,14 +77,7 @@
 =====================================*/
 
 .industries-hero__content{
-
-    position:relative;
-    z-index:2;
-
-    flex:1;
-
-    max-width:620px;
-
+    max-width: 720px;
 }
 
 
@@ -99,24 +91,28 @@
     align-items:center;
     gap:12px;
 
-    padding:12px 22px;
+    padding:14px 24px;
 
     border-radius:50px;
 
-    background:#e0f2fe;
+    background:rgba(15,23,42,.65);
 
-    color:#0284c7;
+    border:1px solid rgba(56,189,248,.3);
+
+    backdrop-filter:blur(18px);
+
+    color:#38bdf8;
 
     font-weight:700;
 
     margin-bottom:30px;
 
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+
 }
 
 .hero-badge i{
-
     font-size:1rem;
-
 }
 
 
@@ -126,13 +122,17 @@
 
 .industries-hero__content h1{
 
-    font-size:4rem;
+    font-size:clamp(2.8rem,6vw,2rem);
 
-    line-height:1.15;
+    line-height:1.08;
 
-    color:#0f172a;
+    color:#fff;
 
-    margin-bottom:25px;
+    margin-bottom:28px;
+
+    font-weight:800;
+
+    letter-spacing:-2px;
 
 }
 
@@ -140,24 +140,26 @@
 
     display:block;
 
-    color:#0ea5e9;
+    color:#38bdf8;
 
 }
 
 
 /*====================================
-        TEXT
+        PARAGRAPH
 =====================================*/
 
 .industries-hero__content p{
 
-    font-size:1.1rem;
+    font-size:1.15rem;
 
-    line-height:2;
+    line-height:1.9;
 
-    color:#64748b;
+    color:#cbd5e1;
 
-    margin-bottom:40px;
+    max-width:650px;
+
+    margin-bottom:50px;
 
 }
 
@@ -166,232 +168,106 @@
         BUTTONS
 =====================================*/
 
-.hero-buttons{
-
-    display:flex;
-
-    gap:20px;
-
-    flex-wrap:wrap;
-
-}
-
-.btn{
-
+.hero-btn{
     display:inline-flex;
-
-    justify-content:center;
     align-items:center;
+    justify-content:center;
 
-    text-decoration:none;
-
-    padding:16px 34px;
+    padding:18px 36px;
 
     border-radius:50px;
 
     font-weight:700;
 
-    transition:.35s;
-
+    transition:.35s ease;
 }
 
-.btn--primary{
-
-    background:
-        linear-gradient(
-            135deg,
-            #0ea5e9,
-            #38bdf8
-        );
-
+.industries-btn-primary{
+    background:linear-gradient(135deg,#0ea5e9,#2563eb);
     color:#fff;
-
-    box-shadow:
-        0 18px 35px rgba(56,189,248,.25);
-
+    box-shadow:0 20px 40px rgba(14,165,233,.28);
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem 3rem;
+    justify-content: center;
 }
 
-.btn--primary:hover{
-
-    transform:
-        translateY(-6px);
-
-    box-shadow:
-        0 25px 45px rgba(56,189,248,.35);
-
+.hero-btn-primary:hover{
+    transform:translateY(-6px);
+    box-shadow:0 30px 60px rgba(14,165,233,.45);
 }
 
-.btn--secondary{
+.industries-hero-btn-secondary{
+    border:2px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(15px);
+    color:#fff;
+}
 
-    border:2px solid #0ea5e9;
-
-    color:#0284c7;
-
+.hero-btn-secondary:hover{
     background:#fff;
-
+    color:#0f172a;
+    transform:translateY(-6px);
 }
-
-.btn--secondary:hover{
-
-    background:#0ea5e9;
-
-    color:#fff;
-
-    transform:
-        translateY(-6px);
-
-}
-
 
 /*====================================
-        IMAGE
+        STATS
 =====================================*/
 
-.industries-hero__image{
-
-    position:relative;
-
-    z-index:2;
-
-    flex:1;
+.hero-stats{
 
     display:flex;
-    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:24px;
 
 }
 
-.industries-hero__image img{
+.stat{
 
-    width:100%;
-    max-width:650px;
+    min-width:180px;
 
-    animation:floatImage 5s ease-in-out infinite;
+    padding:24px 30px;
 
-    filter:
-        drop-shadow(
-            0 30px 60px rgba(2,132,199,.18)
-        );
+    border-radius:24px;
 
-}
+    background:rgba(15,23,42,.72);
 
+    border:1px solid rgba(255,255,255,.08);
 
-/*====================================
-        FLOAT ANIMATION
-=====================================*/
+    backdrop-filter:blur(18px);
 
-@keyframes floatImage{
-
-    0%,100%{
-
-        transform:translateY(0);
-
-    }
-
-    50%{
-
-        transform:translateY(-18px);
-
-    }
+    transition:.35s ease;
 
 }
 
+.stat:hover{
 
-/*====================================
-        RESPONSIVE
-=====================================*/
+    transform:translateY(-8px);
 
-@media(max-width:992px){
+    border-color:#38bdf8;
 
-    .industries-hero{
-
-        flex-direction:column;
-
-        text-align:center;
-
-        padding:120px 6% 80px;
-
-    }
-
-    .industries-hero__content{
-
-        max-width:100%;
-
-    }
-
-    .hero-buttons{
-
-        justify-content:center;
-
-    }
-
-    .industries-hero__content h1{
-
-        font-size:3rem;
-
-    }
+    box-shadow:0 20px 45px rgba(0,0,0,.3);
 
 }
 
-@media(max-width:768px){
+.stat h3{
 
-    .industries-hero{
+    color:#38bdf8;
 
-        min-height:auto;
+    font-size:2rem;
 
-        gap:3rem;
-
-    }
-
-    .industries-hero__content h1{
-
-        font-size:2.5rem;
-
-    }
-
-    .industries-hero__content p{
-
-        font-size:1rem;
-
-    }
-
-    .industries-hero__image img{
-
-        max-width:500px;
-
-    }
+    margin-bottom:8px;
 
 }
 
-@media(max-width:480px){
+.stat span{
 
-    .industries-hero{
+    color:#cbd5e1;
 
-        padding:100px 5% 70px;
-
-    }
-
-    .industries-hero__content h1{
-
-        font-size:2rem;
-
-    }
-
-    .hero-buttons{
-
-        flex-direction:column;
-
-    }
-
-    .btn{
-
-        width:100%;
-
-    }
-
-    .industries-hero__image img{
-
-        max-width:100%;
-
-    }
+    font-size:.95rem;
 
 }
+
