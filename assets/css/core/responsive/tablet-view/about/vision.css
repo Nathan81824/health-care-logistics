@@ -1,0 +1,83 @@
+
+/*====================================
+        RESPONSIVE 1024px
+=====================================*/
+
+
+@media(max-width:1024px){
+
+
+    .mission-vision{
+
+        padding:100px 6%;
+
+    }
+
+
+
+    .mission-grid{
+
+        gap:25px;
+
+    }
+
+
+
+    .mission-card{
+
+        padding:35px;
+
+    }
+
+
+
+    .mission-vision .section-heading h2{
+
+        font-size:2.5rem;
+
+    }
+
+}
+
+
+
+/*====================================
+        TABLETS 768px
+=====================================*/
+
+
+@media(max-width:768px){
+
+
+    .mission-vision{
+
+        padding:90px 6%;
+
+    }
+
+
+
+    .mission-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .mission-card{
+
+        padding:35px 30px;
+
+    }
+
+
+
+    .mission-vision .section-heading h2{
+
+        font-size:2.2rem;
+
+    }
+
+}
+

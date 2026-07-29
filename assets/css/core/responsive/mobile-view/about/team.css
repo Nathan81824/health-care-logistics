@@ -1,0 +1,177 @@
+/*====================================
+        BIG PHONES
+=====================================*/
+
+@media(max-width:600px){
+
+    .team{
+
+        padding:80px 5%;
+
+    }
+
+    .team-image{
+
+        height:280px;
+
+    }
+
+    .team-content{
+
+        padding:28px 22px;
+
+    }
+
+    .team-content h3{
+
+        font-size:1.3rem;
+
+    }
+
+    .team-content span{
+
+        font-size:.95rem;
+
+    }
+
+    .team-content p{
+
+        font-size:.9rem;
+
+        line-height:1.7;
+
+    }
+
+    .team-social{
+
+        gap:12px;
+
+    }
+
+    .team-social a{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+}
+
+
+/*====================================
+        SMALL PHONES
+=====================================*/
+
+@media(max-width:480px){
+
+    .team{
+
+        padding:70px 5%;
+
+    }
+
+    .team-image{
+
+        height:250px;
+
+    }
+
+    .team-content{
+
+        padding:24px 18px;
+
+    }
+
+    .team-content h3{
+
+        font-size:1.2rem;
+
+    }
+
+    .team-content span{
+
+        font-size:.9rem;
+
+    }
+
+    .team-content p{
+
+        font-size:.88rem;
+
+    }
+
+    .team-social a{
+
+        width:40px;
+
+        height:40px;
+
+        font-size:.9rem;
+
+    }
+
+}
+
+
+/*====================================
+        EXTRA SMALL PHONES
+=====================================*/
+
+@media(max-width:380px){
+
+    .team{
+
+        padding:60px 4%;
+
+    }
+
+    .team-image{
+
+        height:220px;
+
+    }
+
+    .team-content{
+
+        padding:20px 15px;
+
+    }
+
+    .team-content h3{
+
+        font-size:1.1rem;
+
+    }
+
+    .team-content span{
+
+        font-size:.85rem;
+
+    }
+
+    .team-content p{
+
+        font-size:.85rem;
+
+        line-height:1.6;
+
+    }
+
+    .team-social{
+
+        gap:10px;
+
+    }
+
+    .team-social a{
+
+        width:36px;
+
+        height:36px;
+
+        font-size:.85rem;
+
+    }
+
+}

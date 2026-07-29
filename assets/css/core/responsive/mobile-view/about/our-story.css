@@ -1,0 +1,81 @@
+@media(max-width:480px){
+
+    .our-story__content h2{
+
+        font-size:2rem;
+
+    }
+
+    .story-btn{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+}
+
+/* ==========================================
+        EXTRA SMALL PHONES
+========================================== */
+
+@media(max-width:380px){
+
+
+    .hipaa-process{
+
+        padding:65px 4%;
+
+    }
+
+
+    .hipaa-process h2{
+
+        font-size:1.65rem;
+
+    }
+
+
+    .process-card{
+
+        padding:1.6rem 1.1rem;
+
+        border-radius:18px;
+
+    }
+
+
+    .process-card i{
+
+        width:55px;
+
+        height:55px;
+
+        font-size:1.25rem;
+
+    }
+
+
+    .step-number{
+
+        font-size:1.6rem;
+
+    }
+
+
+    .process-card h3{
+
+        font-size:1rem;
+
+    }
+
+
+    .process-card p{
+
+        font-size:.82rem;
+
+    }
+
+
+}

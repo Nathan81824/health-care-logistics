@@ -1,0 +1,141 @@
+/* Mobile */
+@media(max-width:576px){
+
+    .what-is-hipaa{
+
+        padding:70px 5%;
+
+        gap:3rem;
+
+    }
+
+
+    .section-tag{
+
+        padding:.6rem 1rem;
+
+        font-size:.85rem;
+
+    }
+
+
+    .section-tag i{
+
+        font-size:14px;
+
+    }
+
+
+    .hipaa-content h2{
+
+        font-size:1.8rem;
+
+        line-height:1.3;
+
+    }
+
+
+    .hipaa-content p{
+
+        font-size:.9rem;
+
+    }
+
+
+    .hipaa-image img{
+
+        border-radius:22px;
+
+    }
+
+
+    .highlight{
+
+        padding:1rem;
+
+        border-radius:16px;
+
+    }
+
+
+    .highlight i{
+
+        width:46px;
+
+        height:46px;
+
+        border-radius:12px;
+
+        font-size:1rem;
+
+    }
+
+
+    .highlight span{
+
+        font-size:.9rem;
+
+    }
+
+}
+
+
+
+/* Small Phones */
+@media(max-width:380px){
+
+    .what-is-hipaa{
+
+        padding:60px 5%;
+
+    }
+
+
+    .hipaa-content h2{
+
+        font-size:1.6rem;
+
+    }
+
+
+    .hipaa-content p{
+
+        font-size:.85rem;
+
+    }
+
+
+    .section-tag{
+
+        font-size:.8rem;
+
+    }
+
+
+    .highlight{
+
+        padding:.9rem;
+
+        gap:.8rem;
+
+    }
+
+
+    .highlight i{
+
+        width:42px;
+
+        height:42px;
+
+        font-size:.95rem;
+
+    }
+
+
+    .highlight span{
+
+        font-size:.85rem;
+
+    }
+
+}

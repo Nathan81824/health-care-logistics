@@ -1,0 +1,67 @@
+/* ==========================================
+        HIPAA PROCESS RESPONSIVE
+========================================== */
+
+/* Large Tablets */
+@media (max-width:992px){
+
+    .hipaa-process{
+        padding:100px 6%;
+    }
+
+    .process-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:1.8rem;
+    }
+
+    .hipaa-process h2{
+        font-size:2.5rem;
+    }
+
+    .process-card{
+        padding:2.3rem 1.8rem;
+    }
+
+}
+
+/* Tablets */
+@media (max-width:768px){
+
+    .hipaa-process{
+        padding:90px 6%;
+    }
+
+    .hipaa-process .section-heading{
+        margin-bottom:3.5rem;
+    }
+
+    .hipaa-process h2{
+        font-size:2.2rem;
+        line-height:1.3;
+    }
+
+    .hipaa-process .section-heading p{
+        font-size:.95rem;
+        line-height:1.7;
+    }
+
+    .process-grid{
+        grid-template-columns:1fr;
+        gap:1.5rem;
+    }
+
+    .process-card{
+        padding:2rem 1.6rem;
+    }
+
+    .process-card i{
+        width:70px;
+        height:70px;
+        font-size:1.6rem;
+    }
+
+    .step-number{
+        font-size:2.2rem;
+    }
+
+}

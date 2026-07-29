@@ -539,3 +539,15 @@
     }
 
 }
+@keyframes ripple{
+
+    to{
+
+        transform:
+            translate(-50%,-50%) scale(18);
+
+        opacity:0;
+
+    }
+
+}

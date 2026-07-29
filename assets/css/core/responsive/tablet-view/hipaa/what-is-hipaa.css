@@ -1,0 +1,193 @@
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+
+/* Large Tablets */
+@media(max-width:1200px){
+
+    .what-is-hipaa{
+
+        gap:3.5rem;
+
+        padding:100px 6%;
+
+    }
+
+
+    .hipaa-content h2{
+
+        font-size:2.6rem;
+
+    }
+
+
+    .hipaa-image img{
+
+        max-width:520px;
+
+    }
+
+}
+
+
+
+/* Tablets */
+@media(max-width:992px){
+
+    .what-is-hipaa{
+
+        grid-template-columns:1fr;
+
+        gap:4rem;
+
+        text-align:center;
+
+        padding:90px 6%;
+
+    }
+
+
+    .hipaa-image{
+
+        order:1;
+
+    }
+
+
+    .hipaa-content{
+
+        order:2;
+
+    }
+
+
+    .hipaa-image img{
+
+        max-width:600px;
+
+    }
+
+
+    .section-tag{
+
+        justify-content:center;
+
+    }
+
+
+    .hipaa-content h2{
+
+        font-size:2.4rem;
+
+    }
+
+
+    .hipaa-content p{
+
+        max-width:700px;
+
+        margin:0 auto 1.8rem;
+
+    }
+
+
+    .hipaa-highlights{
+
+        max-width:700px;
+
+        margin:2rem auto 0;
+
+    }
+
+
+    .what-is-hipaa::before{
+
+        width:320px;
+        height:320px;
+
+        top:-120px;
+        right:-120px;
+
+    }
+
+
+    .what-is-hipaa::after{
+
+        width:280px;
+        height:280px;
+
+        left:-120px;
+        bottom:-120px;
+
+    }
+
+}
+
+
+
+/* Large Phones */
+@media(max-width:768px){
+
+    .what-is-hipaa{
+
+        padding:80px 6%;
+
+    }
+
+
+    .hipaa-content h2{
+
+        font-size:2rem;
+
+    }
+
+
+    .hipaa-content p{
+
+        font-size:.95rem;
+
+        line-height:1.8;
+
+    }
+
+
+    .hipaa-highlights{
+
+        grid-template-columns:1fr;
+
+        gap:1rem;
+
+    }
+
+
+    .highlight{
+
+        padding:1.1rem;
+
+        justify-content:flex-start;
+
+        text-align:left;
+
+    }
+
+
+    .highlight i{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:1.1rem;
+
+    }
+
+
+    .highlight span{
+
+        font-size:.95rem;
+
+    }
+
+}
+

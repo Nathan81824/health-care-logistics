@@ -1,0 +1,178 @@
+/* Mobile */
+@media(max-width:576px){
+
+    .contact-faq{
+
+        padding:70px 5%;
+
+    }
+
+
+    .faq-left .section-tag{
+
+        padding:.65rem 1rem;
+
+        font-size:.85rem;
+
+    }
+
+
+    .faq-left h2{
+
+        font-size:1.9rem;
+
+        line-height:1.3;
+
+    }
+
+
+    .faq-left > p{
+
+        font-size:.9rem;
+
+    }
+
+
+    .faq-contact-card{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        text-align:center;
+
+        padding:1.4rem;
+
+    }
+
+
+    .faq-contact-card i{
+
+        width:55px;
+
+        height:55px;
+
+        font-size:1.2rem;
+
+    }
+
+
+    .faq-contact-card h3{
+
+        font-size:1.2rem;
+
+    }
+
+
+    .faq-contact-card p{
+
+        font-size:.9rem;
+
+    }
+
+
+    .faq-question{
+
+        padding:1.1rem;
+
+        font-size:.95rem;
+
+    }
+
+
+    .faq-question i{
+
+        width:34px;
+
+        height:34px;
+
+        font-size:.9rem;
+
+    }
+
+
+    .faq-answer p{
+
+        padding:0 1.1rem 1.1rem;
+
+        font-size:.9rem;
+
+        line-height:1.7;
+
+    }
+
+}
+
+
+/* Small Phones */
+@media(max-width:380px){
+
+    .contact-faq{
+
+        padding:60px 5%;
+
+    }
+
+
+    .faq-left h2{
+
+        font-size:1.6rem;
+
+    }
+
+
+    .faq-left > p{
+
+        font-size:.85rem;
+
+    }
+
+
+    .faq-contact-card{
+
+        padding:1.2rem;
+
+    }
+
+
+    .faq-contact-card i{
+
+        width:48px;
+
+        height:48px;
+
+        font-size:1rem;
+
+    }
+
+
+    .faq-contact-card h3{
+
+        font-size:1.05rem;
+
+    }
+
+
+    .faq-contact-card p{
+
+        font-size:.85rem;
+
+    }
+
+
+    .faq-question{
+
+        font-size:.9rem;
+
+        padding:1rem;
+
+    }
+
+
+    .faq-answer p{
+
+        font-size:.85rem;
+
+    }
+
+}

@@ -1,0 +1,40 @@
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+/* Large Tablets */
+
+@media(max-width:1024px){
+
+    .about-stats{
+
+        padding:100px 6%;
+
+    }
+
+    .impact-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+
+/* Tablets */
+
+@media(max-width:768px){
+
+    .about-stats{
+
+        padding:90px 6%;
+
+    }
+
+    .impact-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

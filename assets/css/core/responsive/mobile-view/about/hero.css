@@ -1,0 +1,46 @@
+
+
+@media(max-width:768px){
+
+    .about-hero__content h1{
+
+        font-size:2.8rem;
+
+    }
+
+    .hero-stats{
+
+        gap:30px;
+
+    }
+
+    .about-hero__image img{
+
+        max-width:100%;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .about-hero__content h1{
+
+        font-size:2.2rem;
+
+    }
+
+    .about-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .about-buttons .btn{
+
+        width:100%;
+        text-align:center;
+
+    }
+
+}

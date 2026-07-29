@@ -1,0 +1,169 @@
+
+
+/* Mobile */
+@media(max-width:576px){
+
+    .hipaa-commitment{
+
+        padding:70px 5%;
+
+    }
+
+
+    .section-heading .section-tag{
+
+        padding:.6rem 1rem;
+
+        font-size:.85rem;
+
+    }
+
+
+    .section-heading h2{
+
+        font-size:1.8rem;
+
+        line-height:1.3;
+
+    }
+
+
+    .section-heading p{
+
+        font-size:.9rem;
+
+    }
+
+
+    .commitment-timeline::before{
+
+        left:24px;
+
+    }
+
+
+    .timeline-item{
+
+        gap:1rem;
+
+    }
+
+
+    .timeline-icon{
+
+        width:48px;
+
+        height:48px;
+
+        font-size:1rem;
+
+        box-shadow:0 0 18px rgba(56,189,248,.35);
+
+    }
+
+
+    .timeline-content{
+
+        padding:1.25rem;
+
+        border-radius:18px;
+
+    }
+
+
+    .timeline-content h3{
+
+        font-size:1.1rem;
+
+    }
+
+
+    .timeline-content p{
+
+        font-size:.9rem;
+
+    }
+
+}
+
+
+
+/* Small Phones */
+@media(max-width:380px){
+
+    .hipaa-commitment{
+
+        padding:60px 5%;
+
+    }
+
+
+    .section-heading h2{
+
+        font-size:1.6rem;
+
+    }
+
+
+    .section-heading p{
+
+        font-size:.85rem;
+
+    }
+
+
+    .section-heading .section-tag{
+
+        font-size:.8rem;
+
+    }
+
+
+    .commitment-timeline{
+
+        gap:1.5rem;
+
+    }
+
+
+    .commitment-timeline::before{
+
+        left:21px;
+
+    }
+
+
+    .timeline-icon{
+
+        width:42px;
+
+        height:42px;
+
+        font-size:.9rem;
+
+    }
+
+
+    .timeline-content{
+
+        padding:1rem;
+
+    }
+
+
+    .timeline-content h3{
+
+        font-size:1rem;
+
+    }
+
+
+    .timeline-content p{
+
+        font-size:.85rem;
+
+        line-height:1.6;
+
+    }
+
+}

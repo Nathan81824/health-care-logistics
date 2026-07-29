@@ -1,0 +1,195 @@
+
+/*====================================
+        BIG PHONES 600px
+=====================================*/
+
+
+@media(max-width:600px){
+
+
+    .mission-vision{
+
+        padding:80px 5%;
+
+    }
+
+
+
+    .mission-vision .section-heading{
+
+        margin-bottom:50px;
+
+    }
+
+
+
+    .mission-vision .section-heading h2{
+
+        font-size:2rem;
+
+    }
+
+
+
+    .mission-vision .section-heading p{
+
+        font-size:.95rem;
+
+    }
+
+
+
+    .mission-card{
+
+        padding:30px 22px;
+
+        border-radius:22px;
+
+    }
+
+
+
+    .mission-icon{
+
+        width:65px;
+
+        height:65px;
+
+
+        font-size:1.5rem;
+
+    }
+
+
+
+    .mission-card h3{
+
+        font-size:1.4rem;
+
+    }
+
+
+
+    .mission-card p{
+
+        font-size:.9rem;
+
+    }
+
+}
+
+
+
+/*====================================
+        SMALL PHONES 480px
+=====================================*/
+
+
+@media(max-width:480px){
+
+
+    .mission-vision{
+
+        padding:70px 5%;
+
+    }
+
+
+
+    .mission-vision .section-heading h2{
+
+        font-size:1.8rem;
+
+    }
+
+
+
+    .mission-card{
+
+        padding:25px 18px;
+
+    }
+
+
+
+    .mission-card li{
+
+        font-size:.9rem;
+
+    }
+
+
+
+    .mission-card li i{
+
+        width:32px;
+
+        height:32px;
+
+    }
+
+}
+
+
+
+/*====================================
+        EXTRA SMALL 380px
+=====================================*/
+
+
+@media(max-width:380px){
+
+
+    .mission-vision{
+
+        padding:60px 4%;
+
+    }
+
+
+
+    .mission-vision .section-heading h2{
+
+        font-size:1.6rem;
+
+    }
+
+
+
+    .mission-card{
+
+        padding:22px 15px;
+
+    }
+
+
+
+    .mission-icon{
+
+        width:55px;
+
+        height:55px;
+
+        font-size:1.2rem;
+
+    }
+
+
+
+    .mission-card h3{
+
+        font-size:1.2rem;
+
+    }
+
+
+
+    .mission-card p{
+
+        font-size:.85rem;
+
+        line-height:1.7;
+
+    }
+
+}

@@ -14,17 +14,19 @@
     background:
     linear-gradient(
         135deg,
-        #f8fbff,
-        #eef7ff,
-        #ffffff
+        #06111f,
+        #0b2038,
+        #102d4a
     );
 
     overflow:hidden;
 }
 
+
 .what-is-hipaa::before{
     content:"";
     position:absolute;
+
     width:450px;
     height:450px;
 
@@ -33,13 +35,16 @@
 
     border-radius:50%;
 
-    background:rgba(56,189,248,.08);
-    filter:blur(70px);
+    background:rgba(14,165,233,.18);
+
+    filter:blur(90px);
 }
+
 
 .what-is-hipaa::after{
     content:"";
     position:absolute;
+
     width:380px;
     height:380px;
 
@@ -48,9 +53,11 @@
 
     border-radius:50%;
 
-    background:rgba(2,132,199,.08);
-    filter:blur(70px);
+    background:rgba(37,99,235,.15);
+
+    filter:blur(90px);
 }
+
 
 
 /*====================================
@@ -61,6 +68,7 @@
     position:relative;
     z-index:2;
 }
+
 
 .hipaa-image img{
     width:100%;
@@ -73,14 +81,16 @@
     border-radius:30px;
 
     box-shadow:
-    0 25px 60px rgba(15,23,42,.18);
+    0 30px 80px rgba(0,0,0,.45);
 
     transition:.5s;
 }
 
+
 .hipaa-image:hover img{
     transform:translateY(-8px);
 }
+
 
 
 /*====================================
@@ -92,7 +102,9 @@
     z-index:2;
 }
 
+
 .section-tag{
+
     display:inline-flex;
     align-items:center;
     gap:.7rem;
@@ -101,159 +113,169 @@
 
     border-radius:50px;
 
-    background:#e0f2fe;
+    background:rgba(14,165,233,.15);
 
-    color:#0284c7;
+    color:#38bdf8;
+
+    border:1px solid rgba(56,189,248,.25);
 
     font-weight:600;
 
     margin-bottom:1.5rem;
 }
 
+
 .section-tag i{
     font-size:15px;
 }
 
+
 .hipaa-content h2{
+
     font-size:3rem;
+
     line-height:1.2;
+
     margin-bottom:1.5rem;
 
-    color:#0f172a;
+    color:#ffffff;
 }
+
 
 .hipaa-content h2 span{
-    color:#0284c7;
+
+    color:#38bdf8;
+
 }
 
+
 .hipaa-content p{
+
     font-size:1.05rem;
+
     line-height:1.9;
 
-    color:#475569;
+    color:rgba(255,255,255,.72);
 
     margin-bottom:1.6rem;
 }
+
 
 
 /*====================================
         HIGHLIGHTS
 =====================================*/
 
+
 .hipaa-highlights{
+
     display:grid;
+
     grid-template-columns:repeat(2,1fr);
+
     gap:1.2rem;
 
     margin-top:2.5rem;
 }
 
+
+
 .highlight{
+
     display:flex;
+
     align-items:center;
+
     gap:1rem;
+
 
     padding:1.2rem 1.3rem;
 
-    background:white;
+
+    background:
+    rgba(255,255,255,.06);
+
+
+    backdrop-filter:blur(12px);
+
 
     border-radius:18px;
 
-    border:1px solid rgba(2,132,199,.12);
+
+    border:
+    1px solid rgba(255,255,255,.12);
+
 
     box-shadow:
-    0 15px 35px rgba(15,23,42,.08);
+    0 20px 45px rgba(0,0,0,.25);
+
 
     transition:.35s;
 }
 
+
+
 .highlight:hover{
+
     transform:translateY(-6px);
 
-    box-shadow:
-    0 20px 45px rgba(2,132,199,.18);
+
+    background:
+    rgba(14,165,233,.12);
+
+
+    border-color:
+    rgba(56,189,248,.35);
+
+
 }
 
+
+
 .highlight i{
+
     width:55px;
+
     height:55px;
 
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
 
     border-radius:15px;
 
-    background:linear-gradient(
+
+    background:
+    linear-gradient(
         135deg,
         #0284c7,
         #38bdf8
     );
 
+
     color:white;
+
 
     font-size:1.2rem;
 
+
     flex-shrink:0;
+
 }
+
+
 
 .highlight span{
+
     font-size:1rem;
+
     font-weight:600;
 
-    color:#0f172a;
-}
 
-
-/*====================================
-        RESPONSIVE
-=====================================*/
-
-@media(max-width:1000px){
-
-    .what-is-hipaa{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .hipaa-image{
-        order:1;
-    }
-
-    .hipaa-content{
-        order:2;
-    }
-
-    .section-tag{
-        justify-content:center;
-    }
-
-    .hipaa-content h2{
-        font-size:2.4rem;
-    }
-
-    .hipaa-highlights{
-        grid-template-columns:1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .what-is-hipaa{
-        padding:90px 7%;
-    }
-
-    .hipaa-content h2{
-        font-size:2rem;
-    }
-
-    .hipaa-content p{
-        font-size:.95rem;
-    }
-
-    .highlight{
-        padding:1rem;
-    }
+    color:#ffffff;
 
 }

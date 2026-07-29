@@ -1,0 +1,114 @@
+
+
+
+/* Big Phones */
+
+@media(max-width:600px){
+
+    .about-stats{
+
+        padding:80px 5%;
+
+    }
+
+    .impact-card{
+
+        padding:30px 22px;
+
+    }
+
+    .impact-icon{
+
+        width:70px;
+        height:70px;
+
+        font-size:1.7rem;
+
+    }
+
+    .impact-card h3{
+
+        font-size:2.5rem;
+
+    }
+
+    .impact-label{
+
+        font-size:.9rem;
+
+    }
+
+}
+
+
+/* Small Phones */
+
+@media(max-width:480px){
+
+    .about-stats{
+
+        padding:70px 5%;
+
+    }
+
+    .impact-card{
+
+        padding:25px 18px;
+
+    }
+
+    .impact-icon{
+
+        width:65px;
+        height:65px;
+
+        font-size:1.5rem;
+
+    }
+
+    .impact-card h3{
+
+        font-size:2.2rem;
+
+    }
+
+}
+
+
+/* Extra Small Phones */
+
+@media(max-width:380px){
+
+    .about-stats{
+
+        padding:60px 4%;
+
+    }
+
+    .impact-card{
+
+        padding:22px 15px;
+
+    }
+
+    .impact-icon{
+
+        width:55px;
+        height:55px;
+
+        font-size:1.3rem;
+
+    }
+
+    .impact-card h3{
+
+        font-size:2rem;
+
+    }
+
+    .impact-label{
+
+        font-size:.85rem;
+
+    }
+}

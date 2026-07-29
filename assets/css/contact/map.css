@@ -11,17 +11,42 @@
     background:
     linear-gradient(
         135deg,
-        #ffffff,
-        #f8fbff,
-        #eef7ff
+        #020817,
+        #032047,
+        #021229,
+        #020817
     );
 }
 
+
 /*====================================
-        BACKGROUND
+        BACKGROUND GLOW
 =====================================*/
 
 .contact-map::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    top:-220px;
+    right:-220px;
+
+    border-radius:50%;
+
+    background:#0ea5e9;
+
+    opacity:.15;
+
+    filter:blur(140px);
+
+}
+
+.contact-map::after{
+
     content:"";
 
     position:absolute;
@@ -29,119 +54,137 @@
     width:420px;
     height:420px;
 
-    top:-180px;
-    right:-180px;
+    bottom:-200px;
+    left:-200px;
 
     border-radius:50%;
 
-    background:rgba(56,189,248,.08);
+    background:#38bdf8;
 
-    filter:blur(90px);
+    opacity:.12;
+
+    filter:blur(140px);
+
 }
 
-.contact-map::after{
-    content:"";
-
-    position:absolute;
-
-    width:320px;
-    height:320px;
-
-    bottom:-150px;
-    left:-150px;
-
-    border-radius:50%;
-
-    background:rgba(2,132,199,.08);
-
-    filter:blur(80px);
-}
 
 /*====================================
         HEADER
 =====================================*/
 
 .map-header{
+
     position:relative;
     z-index:2;
 
-    max-width:720px;
+    max-width:760px;
 
-    margin:0 auto 4rem;
+    margin:0 auto 4.5rem;
 
     text-align:center;
+
 }
 
 .map-header .section-tag{
+
     display:inline-flex;
+
     align-items:center;
-    gap:.7rem;
 
-    padding:.8rem 1.5rem;
+    gap:.8rem;
 
-    border-radius:40px;
+    padding:.8rem 1.6rem;
 
-    background:#dff5ff;
+    border-radius:50px;
 
-    color:#0284c7;
+    background:
+    rgba(56,189,248,.12);
 
-    font-weight:600;
+    border:
+    1px solid rgba(56,189,248,.25);
 
-    margin-bottom:1.5rem;
+    color:#38bdf8;
+
+    font-weight:700;
+
+    margin-bottom:1.8rem;
+
 }
 
 .map-header h2{
+
+    color:#fff;
+
     font-size:3rem;
+
     line-height:1.2;
 
-    color:#0f172a;
-
     margin-bottom:1.5rem;
+
 }
 
 .map-header h2 span{
-    color:#0284c7;
+
+    color:#38bdf8;
+
 }
 
 .map-header p{
-    color:#64748b;
+
+    color:#94a3b8;
 
     line-height:1.9;
+
+    font-size:1.05rem;
+
 }
+
 
 /*====================================
         MAP
 =====================================*/
 
 .map-wrapper{
-    position:relative;
-    z-index:2;
 
-    border-radius:28px;
+    position:relative;
+
+    z-index:2;
 
     overflow:hidden;
 
+    border-radius:30px;
+
+    border:
+    1px solid rgba(255,255,255,.08);
+
     box-shadow:
-        0 30px 70px rgba(15,23,42,.12);
+    0 30px 80px rgba(0,0,0,.45);
+
 }
 
 .map-wrapper iframe{
+
     width:100%;
-    height:600px;
+
+    height:620px;
 
     border:none;
 
     display:block;
+
 }
+
 
 /*====================================
         OFFICE CARD
 =====================================*/
 
 .office-card{
+
     position:absolute;
 
     top:50%;
+
     right:40px;
 
     transform:translateY(-50%);
@@ -150,141 +193,226 @@
 
     padding:2rem;
 
-    border-radius:24px;
+    border-radius:25px;
 
-    background:rgba(255,255,255,.95);
+    background:
+    linear-gradient(
+        145deg,
+        rgba(10,20,40,.96),
+        rgba(18,38,65,.94)
+    );
 
-    backdrop-filter:blur(18px);
+    border:
+    1px solid rgba(255,255,255,.08);
 
-    border:1px solid rgba(2,132,199,.08);
+    backdrop-filter:blur(20px);
 
     box-shadow:
-        0 20px 50px rgba(15,23,42,.15);
+    0 25px 60px rgba(0,0,0,.45);
+
 }
 
+
+/*====================================
+        OFFICE ITEMS
+=====================================*/
+
 .office-item{
+
     display:flex;
+
     align-items:flex-start;
+
     gap:1rem;
 
-    margin-bottom:1.8rem;
+    margin-bottom:1.7rem;
+
 }
 
 .office-item:last-of-type{
+
     margin-bottom:2rem;
+
 }
 
 .office-item i{
+
     width:55px;
+
     height:55px;
 
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     flex-shrink:0;
 
-    border-radius:15px;
+    border-radius:16px;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         135deg,
-        #0284c7,
-        #38bdf8
+        #0ea5e9,
+        #2563eb
     );
 
     color:#fff;
 
-    font-size:1.2rem;
+    font-size:1.15rem;
+
+    box-shadow:
+    0 15px 35px rgba(14,165,233,.3);
+
 }
 
 .office-item h3{
-    color:#0f172a;
+
+    color:#fff;
+
+    font-size:1.05rem;
 
     margin-bottom:.35rem;
 
-    font-size:1.05rem;
 }
 
 .office-item p{
-    color:#64748b;
+
+    color:#cbd5e1;
 
     line-height:1.7;
+
+    font-size:.95rem;
+
 }
+
 
 /*====================================
         BUTTON
 =====================================*/
 
 .map-btn{
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     gap:.8rem;
 
     width:100%;
 
     padding:1rem;
 
-    border-radius:14px;
+    border-radius:15px;
 
     text-decoration:none;
 
+    font-weight:700;
+
     color:#fff;
 
-    font-weight:600;
-
-    background:linear-gradient(
+    background:
+    linear-gradient(
         135deg,
-        #0284c7,
-        #38bdf8
+        #0ea5e9,
+        #2563eb
     );
 
     box-shadow:
-        0 15px 35px rgba(2,132,199,.25);
+    0 15px 40px rgba(14,165,233,.3);
 
     transition:.35s;
+
 }
 
 .map-btn:hover{
-    transform:translateY(-5px);
+
+    transform:translateY(-6px);
 
     box-shadow:
-        0 20px 45px rgba(2,132,199,.35);
+    0 25px 60px rgba(14,165,233,.45);
+
 }
 
+.map-wrapper iframe{
+
+    width:100%;
+    height:620px;
+    border:none;
+    display:block;
+
+    filter:
+        grayscale(100%)
+        invert(90%)
+        hue-rotate(180deg)
+        brightness(100%)
+        contrast(95%);
+    
+
+}
+
+
 /*====================================
-        RESPONSIVE
+        EXTRA LARGE TABLETS
 =====================================*/
 
-@media(max-width:1100px){
+@media(max-width:1024px){
+
+    .contact-map{
+
+        padding:100px 6%;
+
+    }
 
     .office-card{
 
         position:relative;
 
         top:auto;
+
         right:auto;
 
         transform:none;
 
         width:100%;
 
-        border-radius:0 0 28px 28px;
+        border-radius:0 0 30px 30px;
+
     }
 
 }
+
+
+/*====================================
+        TABLETS
+=====================================*/
 
 @media(max-width:768px){
 
     .contact-map{
 
-        padding:90px 7%;
+        padding:90px 6%;
+
+    }
+
+    .map-header{
+
+        margin-bottom:3rem;
 
     }
 
     .map-header h2{
 
-        font-size:2.3rem;
+        font-size:2.4rem;
+
+    }
+
+    .map-header p{
+
+        font-size:1rem;
 
     }
 
@@ -296,7 +424,26 @@
 
 }
 
-@media(max-width:550px){
+
+/*====================================
+        LARGE PHONES
+=====================================*/
+
+@media(max-width:600px){
+
+    .contact-map{
+
+        padding:80px 5%;
+
+    }
+
+    .map-header .section-tag{
+
+        font-size:.85rem;
+
+        padding:.7rem 1.2rem;
+
+    }
 
     .map-header h2{
 
@@ -306,7 +453,7 @@
 
     .office-card{
 
-        padding:1.5rem;
+        padding:1.8rem;
 
     }
 
@@ -314,12 +461,109 @@
 
         flex-direction:column;
 
-        align-items:flex-start;
+        gap:.9rem;
+
+    }
+
+}
+
+
+/*====================================
+        SMALL PHONES
+=====================================*/
+
+@media(max-width:480px){
+
+    .contact-map{
+
+        padding:70px 5%;
+
+    }
+
+    .map-header h2{
+
+        font-size:1.8rem;
+
+    }
+
+    .map-header p{
+
+        font-size:.95rem;
+
+    }
+
+    .office-card{
+
+        padding:1.5rem;
+
+    }
+
+    .office-item i{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:1rem;
+
+    }
+
+    .office-item h3{
+
+        font-size:1rem;
+
+    }
+
+    .office-item p{
+
+        font-size:.9rem;
+
     }
 
     .map-wrapper iframe{
 
-        height:350px;
+        height:340px;
+
+    }
+
+}
+
+
+/*====================================
+        EXTRA SMALL PHONES
+=====================================*/
+
+@media(max-width:380px){
+
+    .contact-map{
+
+        padding:60px 4%;
+
+    }
+
+    .map-header h2{
+
+        font-size:1.6rem;
+
+    }
+
+    .map-header p{
+
+        font-size:.9rem;
+
+    }
+
+    .office-card{
+
+        padding:1.2rem;
+
+    }
+
+    .map-btn{
+
+        padding:.9rem;
+
+        font-size:.9rem;
 
     }
 

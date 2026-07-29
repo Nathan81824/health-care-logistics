@@ -1,0 +1,170 @@
+/*====================================
+        BIG PHONES
+=====================================*/
+
+@media(max-width:600px){
+
+    .core-values{
+
+        padding:80px 5%;
+
+    }
+
+    .core-values .section-heading{
+
+        margin-bottom:45px;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:2rem;
+
+    }
+
+    .core-values .section-heading p{
+
+        font-size:.9rem;
+
+    }
+
+    .value-card{
+
+        padding:30px 22px;
+
+        border-radius:20px;
+
+    }
+
+    .value-icon{
+
+        width:65px;
+        height:65px;
+
+        font-size:1.6rem;
+
+        margin-bottom:20px;
+
+    }
+
+    .value-card h3{
+
+        font-size:1.3rem;
+
+    }
+
+    .value-card p{
+
+        font-size:.9rem;
+
+        line-height:1.7;
+
+    }
+
+}
+
+
+/*====================================
+        SMALL PHONES
+=====================================*/
+
+@media(max-width:480px){
+
+    .core-values{
+
+        padding:70px 5%;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:1.8rem;
+
+    }
+
+    .value-card{
+
+        padding:25px 18px;
+
+    }
+
+    .value-icon{
+
+        width:60px;
+        height:60px;
+
+        font-size:1.4rem;
+
+    }
+
+    .value-card h3{
+
+        font-size:1.2rem;
+
+    }
+
+    .value-card p{
+
+        font-size:.88rem;
+
+    }
+
+}
+
+
+/*====================================
+        EXTRA SMALL PHONES
+=====================================*/
+
+@media(max-width:380px){
+
+    .core-values{
+
+        padding:60px 4%;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:1.6rem;
+
+    }
+
+    .core-values .section-heading p{
+
+        font-size:.85rem;
+
+    }
+
+    .value-card{
+
+        padding:22px 15px;
+
+        border-radius:18px;
+
+    }
+
+    .value-icon{
+
+        width:55px;
+        height:55px;
+
+        font-size:1.25rem;
+
+    }
+
+    .value-card h3{
+
+        font-size:1.1rem;
+
+    }
+
+    .value-card p{
+
+        font-size:.85rem;
+
+        line-height:1.6;
+
+    }
+
+}

@@ -1,0 +1,100 @@
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+
+/*====================================
+        LARGE TABLETS
+=====================================*/
+
+@media(max-width:1024px){
+
+    .core-values{
+
+        padding:100px 6%;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:2.6rem;
+
+    }
+
+    .core-values .section-heading p{
+
+        font-size:1rem;
+
+    }
+
+    .values-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:25px;
+
+    }
+
+    .value-card{
+
+        padding:35px 30px;
+
+    }
+
+    .value-icon{
+
+        width:70px;
+        height:70px;
+
+        font-size:1.8rem;
+
+    }
+
+}
+
+
+/*====================================
+        TABLETS
+=====================================*/
+
+@media(max-width:768px){
+
+    .core-values{
+
+        padding:90px 6%;
+
+    }
+
+    .core-values .section-heading{
+
+        margin-bottom:55px;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:2.3rem;
+
+    }
+
+    .core-values .section-heading p{
+
+        font-size:.95rem;
+
+    }
+
+    .values-grid{
+
+        grid-template-columns:1fr;
+
+        gap:22px;
+
+    }
+
+    .value-card{
+
+        padding:32px 28px;
+
+    }
+
+}

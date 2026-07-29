@@ -712,6 +712,51 @@ loadSection(
 );
 
 /*====================================
+            HIPAA PAGE
+=====================================*/
+
+
+    loadSection(
+        `${basePath}components/hipaa/what-is-hipaa.html`,
+        "what-is-hipaa-container"
+    );
+
+
+    loadSection(
+        `${basePath}components/hipaa/our-commitments.html`,
+        "hipaa-commitment-container"
+    );
+
+
+    loadSection(
+        `${basePath}components/hipaa/hipaa-process.html`,
+        "hipaa-process-container"
+    );
+
+/* ==========================================
+        CONTACT PAGE
+========================================== */
+
+    loadSection(
+        `${basePath}components/contact/contactHero.html`,
+        "contact-hero-container"
+    );
+
+    
+    loadSection(
+        `${basePath}components/contact/contactForm.html`,
+        "contact-form-container"
+    );
+
+    loadSection(
+        `${basePath}components/contact/map.html`,
+        "map-container"
+    );
+
+
+
+
+/*====================================
             FOOTER
 =====================================*/
 

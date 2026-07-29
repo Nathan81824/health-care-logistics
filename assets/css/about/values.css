@@ -3,17 +3,20 @@
 =====================================*/
 
 .core-values{
+
     position:relative;
     overflow:hidden;
 
     padding:120px 8%;
 
     background:
-        linear-gradient(
-            180deg,
-            #f8fbff,
-            #eef7ff
-        );
+    linear-gradient(
+        135deg,
+        #010817,
+        #021b35,
+        #010817
+    );
+
 }
 
 
@@ -35,9 +38,9 @@
 
     border-radius:50%;
 
-    background:#38bdf8;
+    background:#008cff;
 
-    opacity:.08;
+    opacity:.14;
 
     filter:blur(120px);
 
@@ -57,9 +60,9 @@
 
     border-radius:50%;
 
-    background:#0ea5e9;
+    background:#00c8ff;
 
-    opacity:.08;
+    opacity:.14;
 
     filter:blur(120px);
 
@@ -71,6 +74,10 @@
 =====================================*/
 
 .core-values .section-heading{
+
+    position:relative;
+
+    z-index:2;
 
     max-width:760px;
 
@@ -84,23 +91,27 @@
 
     font-size:3rem;
 
-    color:#0f172a;
+    color:#ffffff;
 
     margin:20px 0;
+
+    line-height:1.2;
 
 }
 
 .core-values .section-heading h2 span{
 
-    color:#0ea5e9;
+    color:#00b7ff;
 
 }
 
 .core-values .section-heading p{
 
-    color:#64748b;
+    color:rgba(255,255,255,.72);
 
     line-height:1.9;
+
+    font-size:1.05rem;
 
 }
 
@@ -112,6 +123,7 @@
 .values-grid{
 
     position:relative;
+
     z-index:2;
 
     display:grid;
@@ -132,32 +144,45 @@
 
     position:relative;
 
-    padding:40px 35px;
+    overflow:hidden;
 
-    background:#fff;
+    padding:40px 35px;
 
     border-radius:24px;
 
-    border:1px solid rgba(14,165,233,.08);
+    background:
+    linear-gradient(
+        145deg,
+        rgba(8,18,35,.95),
+        rgba(15,34,60,.88)
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(16px);
 
     box-shadow:
-        0 20px 50px rgba(15,23,42,.06);
+        0 20px 55px rgba(0,0,0,.45);
 
-    transition:.4s;
-
-    overflow:hidden;
+    transition:.4s ease;
 
 }
 
 .value-card:hover{
 
-    transform:
-        translateY(-12px);
+    transform:translateY(-12px);
 
-    border-color:#38bdf8;
+    background:
+    linear-gradient(
+        145deg,
+        rgba(15,36,70,.98),
+        rgba(24,55,95,.95)
+    );
+
+    border-color:#00b7ff;
 
     box-shadow:
-        0 25px 60px rgba(14,165,233,.18);
+        0 30px 70px rgba(0,170,255,.22);
 
 }
 
@@ -179,11 +204,11 @@
     height:5px;
 
     background:
-        linear-gradient(
-            90deg,
-            #0ea5e9,
-            #38bdf8
-        );
+    linear-gradient(
+        90deg,
+        #0077ff,
+        #00b7ff
+    );
 
 }
 
@@ -206,18 +231,18 @@
     border-radius:20px;
 
     background:
-        linear-gradient(
-            135deg,
-            #0ea5e9,
-            #38bdf8
-        );
+    linear-gradient(
+        135deg,
+        #0066cc,
+        #00b7ff
+    );
 
-    color:#fff;
+    color:#ffffff;
 
     font-size:1.9rem;
 
     box-shadow:
-        0 15px 35px rgba(56,189,248,.30);
+        0 18px 40px rgba(0,170,255,.35);
 
     transition:.4s;
 
@@ -238,7 +263,7 @@
 
 .value-card h3{
 
-    color:#0f172a;
+    color:#ffffff;
 
     font-size:1.5rem;
 
@@ -253,7 +278,7 @@
 
 .value-card p{
 
-    color:#64748b;
+    color:rgba(255,255,255,.72);
 
     line-height:1.8;
 
@@ -278,7 +303,7 @@
 
     border-radius:50%;
 
-    background:#38bdf8;
+    background:#00b7ff;
 
     opacity:0;
 
@@ -299,16 +324,55 @@
         RESPONSIVE
 =====================================*/
 
-@media(max-width:992px){
+/* Large Tablets */
+
+@media(max-width:1024px){
+
+    .core-values{
+
+        padding:100px 6%;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:2.6rem;
+
+    }
+
+    .core-values .section-heading p{
+
+        font-size:1rem;
+
+    }
 
     .values-grid{
 
-        grid-template-columns:
-            repeat(2,1fr);
+        grid-template-columns:repeat(2,1fr);
+
+        gap:25px;
+
+    }
+
+    .value-card{
+
+        padding:35px 30px;
+
+    }
+
+    .value-icon{
+
+        width:70px;
+        height:70px;
+
+        font-size:1.8rem;
 
     }
 
 }
+
+
+/* Tablets */
 
 @media(max-width:768px){
 
@@ -318,9 +382,21 @@
 
     }
 
+    .core-values .section-heading{
+
+        margin-bottom:55px;
+
+    }
+
     .core-values .section-heading h2{
 
-        font-size:2.4rem;
+        font-size:2.3rem;
+
+    }
+
+    .core-values .section-heading p{
+
+        font-size:.95rem;
 
     }
 
@@ -328,11 +404,34 @@
 
         grid-template-columns:1fr;
 
+        gap:22px;
+
+    }
+
+    .value-card{
+
+        padding:32px 28px;
+
     }
 
 }
 
-@media(max-width:480px){
+
+/* Big Phones */
+
+@media(max-width:600px){
+
+    .core-values{
+
+        padding:80px 5%;
+
+    }
+
+    .core-values .section-heading{
+
+        margin-bottom:45px;
+
+    }
 
     .core-values .section-heading h2{
 
@@ -340,9 +439,17 @@
 
     }
 
+    .core-values .section-heading p{
+
+        font-size:.9rem;
+
+    }
+
     .value-card{
 
-        padding:30px 25px;
+        padding:30px 22px;
+
+        border-radius:20px;
 
     }
 
@@ -352,6 +459,124 @@
         height:65px;
 
         font-size:1.6rem;
+
+        margin-bottom:20px;
+
+    }
+
+    .value-card h3{
+
+        font-size:1.3rem;
+
+    }
+
+    .value-card p{
+
+        font-size:.9rem;
+
+        line-height:1.7;
+
+    }
+
+}
+
+
+/* Small Phones */
+
+@media(max-width:480px){
+
+    .core-values{
+
+        padding:70px 5%;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:1.8rem;
+
+    }
+
+    .value-card{
+
+        padding:25px 18px;
+
+    }
+
+    .value-icon{
+
+        width:60px;
+        height:60px;
+
+        font-size:1.4rem;
+
+    }
+
+    .value-card h3{
+
+        font-size:1.2rem;
+
+    }
+
+    .value-card p{
+
+        font-size:.88rem;
+
+    }
+
+}
+
+
+/* Extra Small Phones */
+
+@media(max-width:380px){
+
+    .core-values{
+
+        padding:60px 4%;
+
+    }
+
+    .core-values .section-heading h2{
+
+        font-size:1.6rem;
+
+    }
+
+    .core-values .section-heading p{
+
+        font-size:.85rem;
+
+    }
+
+    .value-card{
+
+        padding:22px 15px;
+
+        border-radius:18px;
+
+    }
+
+    .value-icon{
+
+        width:55px;
+        height:55px;
+
+        font-size:1.25rem;
+
+    }
+
+    .value-card h3{
+
+        font-size:1.1rem;
+
+    }
+
+    .value-card p{
+
+        font-size:.85rem;
+
+        line-height:1.6;
 
     }
 

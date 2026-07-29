@@ -1,0 +1,91 @@
+/*====================================
+        RESPONSIVE
+=====================================*/
+
+
+/*====================================
+        LARGE TABLETS
+=====================================*/
+
+@media(max-width:1024px){
+
+    .team{
+
+        padding:100px 6%;
+
+    }
+
+    .team-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:30px;
+
+    }
+
+    .team-image{
+
+        height:300px;
+
+    }
+
+    .team-content{
+
+        padding:30px 25px;
+
+    }
+
+    .team-content h3{
+
+        font-size:1.4rem;
+
+    }
+
+}
+
+
+/*====================================
+        TABLETS
+=====================================*/
+
+@media(max-width:768px){
+
+    .team{
+
+        padding:90px 6%;
+
+    }
+
+    .team-grid{
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+
+    }
+
+    .team-image{
+
+        height:320px;
+
+    }
+
+    .team-content{
+
+        padding:30px 24px;
+
+    }
+
+    .team-content h3{
+
+        font-size:1.35rem;
+
+    }
+
+    .team-content p{
+
+        font-size:.95rem;
+
+    }
+
+}
