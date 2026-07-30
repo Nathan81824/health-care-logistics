@@ -1,10 +1,9 @@
-@import"animations.css";
-@import"responsive/responsive.css";
-@import"utilities.css";
+@import"../core/animations.css";
+@import"../core/utilities.css";
 @import"variable.css";
 
-@import"loader.css";
-@import "sign.css";
+@import"../core/loader.css";
+@import "../core/sign.css";
 
 
-@import"responsive/responsive.css";
+@import"../core/responsive/responsive.css";
