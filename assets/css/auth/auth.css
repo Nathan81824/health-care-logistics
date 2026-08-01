@@ -831,3 +831,37 @@
     margin:15px 0;
 
 }
+
+/*=====================================
+        1024px
+=====================================*/
+
+@media (max-width:1024px){
+
+    .auth{
+        padding:40px 20px;
+    }
+
+    .auth-container{
+        width:95%;
+        max-width:950px;
+        height:600px;
+    }
+
+    .auth-form{
+        padding:40px;
+    }
+
+    .panel{
+        padding:40px;
+    }
+
+    .panel h2{
+        font-size:2rem;
+    }
+
+    .panel p{
+        font-size:.95rem;
+    }
+
+}
