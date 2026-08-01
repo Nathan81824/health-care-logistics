@@ -1,29 +1,83 @@
+/*=====================================
+        MOBILE RESPONSIVE
+=====================================*/
 
-  @media (max-width: 768px) {
-    .content { gap: 16px; }
-    .slide { padding: 20px 20px 100px; }
-    .hero-buttons { gap: 10px; }
-    .btn { padding: 12px 22px; flex: 1 1 auto; text-align: center; }
-    .slider-controls { padding: 0 8px; }
-  }
- 
-  @media (max-width: 480px) {
-    .hero-buttons { flex-direction: column; width: 100%; }
-    .btn { width: 100%; }
-    .hero-subtitle { font-size: 0.7rem; padding: 5px 12px; }
-    #dots { bottom: 16px; }
-    .slider-controls button { width: 36px; height: 36px; }
-  }
- 
-  @media (max-height: 500px) and (orientation: landscape) {
-    .slide { padding: 16px 60px; }
-    .content { gap: 10px; }
-    h1 { font-size: clamp(1.4rem, 4vw, 2rem); }
-    .slide p { font-size: 0.85rem; }
-  }
- 
-  @media (prefers-reduced-motion: reduce) {
-    .slide, .btn, .dot, .slider-controls button {
-      transition: none !important;
+@media (max-width:576px){
+
+    .hero{
+        padding:120px 20px 80px;
+        text-align:center;
+    }
+
+    .slide{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .content{
+        width:100%;
+        max-width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        text-align:center;
+    }
+
+    .hero-subtitle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding:10px 22px;
+        font-size:.8rem;
+        border-radius:30px;
+        margin-bottom:25px;
+    }
+
+    .content h1{
+        font-size: .2rem;
+        line-height:1.1;
+        margin-bottom:20px;
+        align-items: flex-start;
+    }
+
+    .content h1 span{
+        font-size:2.9rem;
+        color: cyan;
+    }
+
+    .content p{
+        width:100%;
+        max-width:320px;
+        font-size:1rem;
+        line-height:1.8;
+        margin:0 auto 35px;
+    }
+
+    .hero-buttons{
+        width:100%;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+    }
+
+    .hero-buttons .btn{
+        width:270px;
+        height:58px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border-radius:16px;
+        font-size:1rem;
+        font-weight:600;
+    }
+
+    .slider-controls{
+        display:none;
+    }
+
+    #dots{
+        bottom:25px;
     }
 }
