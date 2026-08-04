@@ -7,6 +7,19 @@
         BASIC ANIMATIONS
 =====================================*/
 
+@keyframes ripple{
+
+    to{
+
+        transform:
+            translate(-50%,-50%) scale(20);
+
+        opacity:0;
+
+    }
+
+}
+
 
 @keyframes spin{
 

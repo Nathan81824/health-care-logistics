@@ -1,84 +1,75 @@
-
-
 /*====================================
-        1024px
+        LARGE MOBILE
 =====================================*/
 
-@media(max-width:1024px){
+@media (max-width:768px){
 
-    .contact-section{
+    .contact-us-section{
 
         grid-template-columns:1fr;
 
         gap:4rem;
 
-        padding:100px 6%;
-
-    }
-
-    .contact-info h2{
-
-        font-size:2.7rem;
-
-    }
-
-    .contact-form-card{
-
-        padding:2.5rem;
-
-    }
-
-}
-
-
-/*====================================
-        TABLET
-=====================================*/
-
-@media(max-width:768px){
-
-    .contact-section{
-
         padding:90px 6%;
 
-        gap:3rem;
+    }
+
+    .contact-us-info{
+
+        text-align:center;
 
     }
 
-    .contact-info h2{
+    .contact-us-info h2{
 
-        font-size:2.3rem;
-
-    }
-
-    .input-row{
-
-        grid-template-columns:1fr;
+        font-size:2.5rem;
 
     }
 
-    .contact-form-card{
+    .contact-info-list{
+
+        gap:1.2rem;
+
+    }
+
+    .contact-info-card{
+
+        padding:1.3rem;
+
+    }
+
+    .contact-message-card{
 
         padding:2rem;
 
     }
 
+    .contact-input-row{
+
+        grid-template-columns:1fr;
+
+        gap:1.5rem;
+
+    }
+
 }
 
 
 /*====================================
-        MOBILE
+        SMALL MOBILE
 =====================================*/
 
-@media(max-width:600px){
+@media (max-width:480px){
 
-    .contact-section{
+    .contact-us-section{
 
-        padding:80px 6%;
+        padding:70px 5%;
+
+        gap:3rem;
 
     }
 
-    .contact-info h2{
+    .contact-us-info h2{
 
         font-size:2rem;
 
@@ -86,93 +77,40 @@
 
     }
 
-    .contact-info>p{
+    .contact-us-info > p{
 
         font-size:.95rem;
 
     }
 
-    .section-tag{
+    .contact-badge{
 
         font-size:.85rem;
 
-    }
-
-    .info-card{
-
-        padding:1.3rem;
-
-        gap:1rem;
+        padding:.7rem 1.2rem;
 
     }
 
-    .info-icon{
+    .contact-info-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+        padding:1.5rem;
+
+    }
+
+    .contact-info-icon{
 
         width:60px;
         height:60px;
 
         font-size:1.2rem;
 
-        border-radius:16px;
-
     }
 
-    .info-card h3{
-
-        font-size:1.05rem;
-
-    }
-
-    .info-card p{
-
-        font-size:.9rem;
-
-    }
-
-    .contact-form-card{
-
-        padding:1.8rem;
-
-    }
-
-    .contact-form-card h3{
-
-        font-size:1.6rem;
-
-    }
-
-    .input-group input,
-    .input-group select,
-    .input-group textarea{
-
-        padding:.95rem 1rem;
-
-        font-size:.95rem;
-
-    }
-
-}
-
-
-/*====================================
-        SMALL PHONES
-=====================================*/
-
-@media(max-width:480px){
-
-    .contact-section{
-
-        padding:70px 5%;
-
-    }
-
-    .contact-info h2{
-
-        font-size:1.8rem;
-
-    }
-
-    .contact-form-card{
+    .contact-message-card{
 
         padding:1.5rem;
 
@@ -180,74 +118,30 @@
 
     }
 
-    .contact-btn{
+    .contact-message-card h3{
 
-        padding:.95rem;
+        font-size:1.6rem;
+
+        text-align:center;
+
+    }
+
+    .contact-input-group input,
+    .contact-input-group select,
+    .contact-input-group textarea{
+
+        padding:.95rem 1rem;
+
+        font-size:.95rem;
+
+    }
+
+    .contact-submit-btn{
+
+        padding:1rem;
+
+        font-size:.95rem;
 
     }
 
 }
-
-
-/*====================================
-        EXTRA SMALL
-=====================================*/
-
-@media(max-width:380px){
-
-    .contact-section{
-
-        padding:65px 5%;
-
-    }
-
-    .contact-info h2{
-
-        font-size:1.65rem;
-
-    }
-
-    .info-card{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-    }
-
-    .info-icon{
-
-        width:55px;
-        height:55px;
-
-        font-size:1.1rem;
-
-    }
-
-    .contact-form-card{
-
-        padding:1.3rem;
-
-    }
-
-    .contact-form-card h3{
-
-        font-size:1.4rem;
-
-    }
-
-    .input-group label{
-
-        font-size:.9rem;
-
-    }
-
-    .input-group input,
-    .input-group select,
-    .input-group textarea{
-
-        font-size:.9rem;
-
-    }
-
-} 

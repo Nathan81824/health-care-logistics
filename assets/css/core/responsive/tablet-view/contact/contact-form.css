@@ -1,12 +1,10 @@
-
-
 /*====================================
-        1024px
+        TABLET
 =====================================*/
 
-@media(max-width:1024px){
+@media (min-width:769px) and (max-width:1024px){
 
-    .contact-section{
+    .contact-us-section{
 
         grid-template-columns:1fr;
 
@@ -16,50 +14,65 @@
 
     }
 
-    .contact-info h2{
+    .contact-us-info{
 
-        font-size:2.7rem;
+        max-width:800px;
+
+        margin:0 auto;
+
+        text-align:center;
 
     }
 
-    .contact-form-card{
+    .contact-us-info h2{
+
+        font-size:2.8rem;
+
+    }
+
+    .contact-us-info > p{
+
+        max-width:700px;
+
+        margin:0 auto 2.8rem;
+
+    }
+
+    .contact-info-list{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:1.5rem;
+
+    }
+
+    .contact-info-card{
+
+        padding:1.4rem;
+
+    }
+
+    .contact-message-card{
+
+        max-width:800px;
+
+        margin:0 auto;
 
         padding:2.5rem;
 
     }
 
-}
+    .contact-input-row{
 
+        grid-template-columns:repeat(2,1fr);
 
-/*====================================
-        TABLET
-=====================================*/
-
-@media(max-width:768px){
-
-    .contact-section{
-
-        padding:90px 6%;
-
-        gap:3rem;
+        gap:1.3rem;
 
     }
 
-    .contact-info h2{
+    .contact-message-card h3{
 
-        font-size:2.3rem;
-
-    }
-
-    .input-row{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .contact-form-card{
-
-        padding:2rem;
+        font-size:1.9rem;
 
     }
 
