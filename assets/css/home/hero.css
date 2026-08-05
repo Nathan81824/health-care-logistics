@@ -199,11 +199,11 @@
    HEADING
 ========================================== */
 
-.content h1{
+.content h2{
 
     margin-bottom:25px;
 
-    font-size:222rem;
+    font-size:2rem;
 
     font-weight:800;
 
@@ -215,7 +215,7 @@
 
 }
 
-.content h1 span{
+.content h2 span{
 
     color:#38bdf8;
 
