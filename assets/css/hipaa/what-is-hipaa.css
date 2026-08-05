@@ -73,6 +73,7 @@
 .hipaa-image img{
     width:100%;
     max-width:620px;
+    height: 25rem;
 
     display:block;
 
@@ -82,7 +83,6 @@
 
     box-shadow:
     0 30px 80px rgba(0,0,0,.45);
-
     transition:.5s;
 }
 
