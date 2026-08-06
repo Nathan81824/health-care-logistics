@@ -1,27 +1,32 @@
 /*=====================================
-            AUTH JS
+            AUTH CONTROLLER
 =====================================*/
 
 
 function initAuth(){
 
 
-    console.log("Auth initialized");
+    console.log("Auth system started");
 
 
 
-    const container =
-    document.querySelector(".auth-container");
+    /*=====================================
+            AUTO LOGIN CHECK
+    =====================================*/
 
 
+    if(
+        isLoggedIn()
+    ){
 
-    if(!container){
+        window.location.href =
+        "pages/home.html";
 
-        console.log("Auth container not found");
 
         return;
 
     }
+
 
 
 
@@ -31,20 +36,40 @@ function initAuth(){
     =====================================*/
 
 
-    const showRegister =
-    document.getElementById("showRegister");
-
-
-    const showLogin =
-    document.getElementById("showLogin");
+    const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
 
 
     const registerForm =
-    document.getElementById("registerForm");
+    document.getElementById(
+        "registerForm"
+    );
 
 
-    const loginForm =
-    document.getElementById("loginForm");
+    const loginPanel =
+    document.querySelector(
+        ".login-panel"
+    );
+
+
+    const registerPanel =
+    document.querySelector(
+        ".register-panel"
+    );
+
+
+    const showRegister =
+    document.getElementById(
+        "showRegister"
+    );
+
+
+    const showLogin =
+    document.getElementById(
+        "showLogin"
+    );
 
 
 
@@ -58,24 +83,38 @@ function initAuth(){
     if(showRegister){
 
 
-        showRegister.onclick = (e)=>{
+        showRegister.addEventListener(
+            "click",
+            ()=>{
 
 
-            e.preventDefault();
+                loginForm.classList.remove(
+                    "active"
+                );
 
 
-            console.log("Opening register");
+                registerForm.classList.add(
+                    "active"
+                );
 
 
-            container.classList.add(
-                "register-mode"
-            );
+
+                loginPanel.classList.add(
+                    "hide"
+                );
 
 
-        };
+                registerPanel.classList.add(
+                    "active"
+                );
+
+
+            }
+        );
 
 
     }
+
 
 
 
@@ -90,274 +129,55 @@ function initAuth(){
     if(showLogin){
 
 
-        showLogin.onclick = (e)=>{
+        showLogin.addEventListener(
+            "click",
+            ()=>{
 
 
-            e.preventDefault();
+                registerForm.classList.remove(
+                    "active"
+                );
 
 
-            console.log("Opening login");
-
-
-            container.classList.remove(
-                "register-mode"
-            );
-
-
-        };
-
-
-    }
-
-
-
-
-
-
-
-    /*=====================================
-            PASSWORD TOGGLE
-    =====================================*/
-
-
-    const toggles =
-    document.querySelectorAll(
-        ".toggle-password"
-    );
-
-
-
-    toggles.forEach(toggle=>{
-
-
-        toggle.onclick = ()=>{
-
-
-            const input =
-            toggle.parentElement.querySelector(
-                "input"
-            );
-
-
-
-            if(!input) return;
-
-
-
-
-            if(input.type === "password"){
-
-
-                input.type="text";
-
-
-                toggle.innerHTML =
-                `
-                <i class="fa-solid fa-eye-slash"></i>
-                `;
-
-
-            }
-
-            else{
-
-
-                input.type="password";
-
-
-                toggle.innerHTML =
-                `
-                <i class="fa-solid fa-eye"></i>
-                `;
-
-
-            }
-
-
-        };
-
-
-    });
-
-
-
-
-
-
-
-    /*=====================================
-            CREATE ACCOUNT
-    =====================================*/
-
-
-    if(registerForm){
-
-
-        registerForm.onsubmit = (e)=>{
-
-
-            e.preventDefault();
-
-
-
-
-            const user = {
-
-
-                name:
-                document.getElementById(
-                    "registerName"
-                ).value,
-
-
-                email:
-                document.getElementById(
-                    "registerEmail"
-                ).value,
-
-
-                password:
-                document.getElementById(
-                    "registerPassword"
-                ).value
-
-
-
-            };
-
-
-
-
-
-            localStorage.setItem(
-                "user",
-                JSON.stringify(user)
-            );
-
-
-
-
-
-            alert(
-                "Account created successfully. Please sign in."
-            );
-
-
-
-
-
-            // return to login
-
-            container.classList.remove(
-                "register-mode"
-            );
-
-
-
-
-
-            registerForm.reset();
-
-
-
-        };
-
-
-    }
-
-
-
-
-
-
-
-
-
-    /*=====================================
-            LOGIN
-    =====================================*/
-
-
-    if(loginForm){
-
-
-        loginForm.onsubmit = (e)=>{
-
-
-            e.preventDefault();
-
-
-
-
-
-            const savedUser =
-
-            JSON.parse(
-                localStorage.getItem("user")
-            );
-
-
-
-
-
-            const email =
-            document.getElementById(
-                "loginEmail"
-            ).value;
-
-
-
-
-            const password =
-            document.getElementById(
-                "loginPassword"
-            ).value;
-
-
-
-
-
-
-
-            if(
-                savedUser &&
-                email === savedUser.email &&
-                password === savedUser.password
-            ){
-
-
-
-                alert(
-                    "Login successful"
+                loginForm.classList.add(
+                    "active"
                 );
 
 
 
-                window.location.href =
-                "pages/home.html";
+                registerPanel.classList.remove(
+                    "active"
+                );
 
 
-
-            }
-
-
-            else{
-
-
-                alert(
-                    "Invalid email or password"
+                loginPanel.classList.remove(
+                    "hide"
                 );
 
 
             }
-
-
-
-        };
+        );
 
 
     }
 
+
+
+
+
+
+    /*=====================================
+            START MODULES
+    =====================================*/
+
+
+    setupPasswordToggle();
+
+
+    setupLogin();
+
+
+    setupRegister();
 
 
 }
@@ -365,9 +185,21 @@ function initAuth(){
 
 
 
+
+
+
 /*=====================================
-        GLOBAL ACCESS
+        START WHEN PAGE LOADS
 =====================================*/
 
 
-window.initAuth = initAuth;
+document.addEventListener(
+    "DOMContentLoaded",
+    ()=>{
+
+
+        initAuth();
+
+
+    }
+);
