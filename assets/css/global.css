@@ -52,6 +52,12 @@ body{
 
 }
 
+.logo-up{
+    width:52px;
+    height:52px;
+    object-fit:contain;
+}
+
 
 /*==========================================
             TYPOGRAPHY
