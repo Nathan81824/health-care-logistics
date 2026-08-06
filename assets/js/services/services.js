@@ -45,9 +45,7 @@ function initOverview() {
 
 function initCoreServices() {
 
-    // Service Cards
 
-    // Hover Effects
 
 }
 

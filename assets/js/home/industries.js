@@ -20,46 +20,55 @@ function initIndustries() {
 function updateIndustryText() {
 
     const texts = [
-
         document.getElementById("industry1-text"),
         document.getElementById("industry2-text"),
         document.getElementById("industry3-text"),
         document.getElementById("industry4-text"),
         document.getElementById("industry5-text"),
         document.getElementById("industry6-text")
-
     ];
 
-    if (texts.some(text => !text)) return;
-
+    // Update each text only if it exists
     if (window.innerWidth > 430) {
 
-        texts[0].textContent =
-            "Reliable logistics solutions for hospitals, clinics and healthcare providers.";
+        if (texts[0]) {
+            texts[0].textContent =
+                "Reliable logistics solutions for hospitals, clinics, and healthcare providers.";
+        }
 
-        texts[1].textContent =
-            "Safe transportation of laboratory samples and diagnostic specimens.";
+        if (texts[1]) {
+            texts[1].textContent =
+                "Safe transportation of laboratory samples and diagnostic specimens.";
+        }
 
-        texts[2].textContent =
-            "Secure pharmaceutical distribution with real-time tracking.";
+        if (texts[2]) {
+            texts[2].textContent =
+                "Secure pharmaceutical distribution with real-time tracking.";
+        }
 
-        texts[3].textContent =
-            "Dependable logistics for medical manufacturers and suppliers.";
+        if (texts[3]) {
+            texts[3].textContent =
+                "Dependable logistics for medical manufacturers and suppliers.";
+        }
 
-        texts[4].textContent =
-            "Temperature-controlled delivery for vaccines and biologics.";
+        if (texts[4]) {
+            texts[4].textContent =
+                "Temperature-controlled delivery for vaccines and biologics.";
+        }
 
-        texts[5].textContent =
-            "Rapid emergency medical logistics whenever every second counts.";
+        if (texts[5]) {
+            texts[5].textContent =
+                "Rapid emergency medical logistics whenever every second counts.";
+        }
 
     } else {
 
-        texts[0].textContent = "Hospital logistics.";
-        texts[1].textContent = "Laboratory transport.";
-        texts[2].textContent = "Pharmacy delivery.";
-        texts[3].textContent = "Medical suppliers.";
-        texts[4].textContent = "Cold chain.";
-        texts[5].textContent = "Emergency response.";
+        if (texts[0]) texts[0].textContent = "Hospital logistics.";
+        if (texts[1]) texts[1].textContent = "Laboratory transport.";
+        if (texts[2]) texts[2].textContent = "Pharmacy delivery.";
+        if (texts[3]) texts[3].textContent = "Medical suppliers.";
+        if (texts[4]) texts[4].textContent = "Cold chain.";
+        if (texts[5]) texts[5].textContent = "Emergency response.";
 
     }
 
@@ -72,9 +81,11 @@ function updateIndustryText() {
 
 function initIndustryAnimation() {
 
-    const cards = document.querySelectorAll(".industry-card");
+    const cards = document.querySelectorAll(".industries-card");
 
-    if (cards.length === 0) return;
+    console.log("Industry cards found:", cards.length);
+
+    if (!cards.length) return;
 
     const observer = new IntersectionObserver((entries) => {
 
@@ -84,25 +95,24 @@ function initIndustryAnimation() {
 
                 entry.target.classList.add("show");
 
+                setTimeout(() => {
+                    entry.target.classList.add("finished");
+                }, 700);
+
             } else {
 
                 entry.target.classList.remove("show");
+                entry.target.classList.remove("finished");
 
             }
 
         });
 
     }, {
-
         threshold: 0.2
-
     });
 
-    cards.forEach((card) => {
-
-        observer.observe(card);
-
-    });
+    cards.forEach((card) => observer.observe(card));
 
 }
 
