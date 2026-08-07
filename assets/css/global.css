@@ -58,6 +58,25 @@ body{
     object-fit:contain;
 }
 
+/*================================
+   FIX CHROME AUTOFILL COLORS
+================================*/
+
+.input-box input:-webkit-autofill,
+.input-box input:-webkit-autofill:hover,
+.input-box input:-webkit-autofill:focus,
+.input-box input:-webkit-autofill:active {
+
+    -webkit-text-fill-color:#ffffff;
+
+    -webkit-box-shadow:
+        0 0 0px 1000px #162033 inset;
+
+    transition:
+        background-color 5000s ease-in-out 0s;
+
+}
+
 
 /*==========================================
             TYPOGRAPHY

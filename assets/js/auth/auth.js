@@ -1,29 +1,124 @@
-/*=====================================
-            AUTH CONTROLLER
-=====================================*/
+/*=========================================
+        AUTH JS
+        Controller
+=========================================*/
 
 
 function initAuth(){
 
 
-    console.log("Auth system started");
+    console.log(
+        "✅ Auth initialized"
+    );
 
 
 
-    /*=====================================
-            AUTO LOGIN CHECK
-    =====================================*/
+    setupAuthPanels();
+
+
+
+    // Start other auth systems
+
+    if(typeof setupLogin === "function"){
+
+        setupLogin();
+
+    }
+
+
+
+    if(typeof setupRegister === "function"){
+
+        setupRegister();
+
+    }
+
+
+
+    if(typeof setupPasswordToggle === "function"){
+
+        setupPasswordToggle();
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/*=========================================
+        LOGIN REGISTER SWITCH
+=========================================*/
+
+
+function setupAuthPanels(){
+
+
+
+    const showRegister =
+        document.querySelectorAll(
+            "#showRegister"
+        );
+
+
+
+    const showLogin =
+        document.querySelectorAll(
+            "#showLogin"
+        );
+
+
+
+    const loginForm =
+        document.querySelector(
+            ".login-form"
+        );
+
+
+
+    const registerForm =
+        document.querySelector(
+            ".register-form"
+        );
+
+
+
+    const loginPanel =
+        document.querySelector(
+            ".login-panel"
+        );
+
+
+
+    const registerPanel =
+        document.querySelector(
+            ".register-panel"
+        );
+
+
+
+
+
 
 
     if(
-        isLoggedIn()
+        !loginForm ||
+        !registerForm
     ){
 
-        window.location.href =
-        "pages/home.html";
+
+        console.log(
+            "Auth forms not found"
+        );
 
 
         return;
+
 
     }
 
@@ -31,61 +126,22 @@ function initAuth(){
 
 
 
-    /*=====================================
-            ELEMENTS
-    =====================================*/
-
-
-    const loginForm =
-    document.getElementById(
-        "loginForm"
-    );
-
-
-    const registerForm =
-    document.getElementById(
-        "registerForm"
-    );
-
-
-    const loginPanel =
-    document.querySelector(
-        ".login-panel"
-    );
-
-
-    const registerPanel =
-    document.querySelector(
-        ".register-panel"
-    );
-
-
-    const showRegister =
-    document.getElementById(
-        "showRegister"
-    );
-
-
-    const showLogin =
-    document.getElementById(
-        "showLogin"
-    );
 
 
 
 
-
-    /*=====================================
-            SWITCH TO REGISTER
-    =====================================*/
+    showRegister.forEach(button=>{
 
 
-    if(showRegister){
-
-
-        showRegister.addEventListener(
+        button.addEventListener(
             "click",
-            ()=>{
+            function(e){
+
+
+                e.preventDefault();
+
+
+
 
 
                 loginForm.classList.remove(
@@ -99,21 +155,24 @@ function initAuth(){
 
 
 
-                loginPanel.classList.add(
+
+
+                loginPanel?.classList.add(
                     "hide"
                 );
 
 
-                registerPanel.classList.add(
+                registerPanel?.classList.add(
                     "active"
                 );
+
 
 
             }
         );
 
 
-    }
+    });
 
 
 
@@ -121,22 +180,27 @@ function initAuth(){
 
 
 
-    /*=====================================
-            SWITCH TO LOGIN
-    =====================================*/
 
 
-    if(showLogin){
+    showLogin.forEach(button=>{
 
 
-        showLogin.addEventListener(
+        button.addEventListener(
             "click",
-            ()=>{
+            function(e){
+
+
+                e.preventDefault();
+
+
+
+
 
 
                 registerForm.classList.remove(
                     "active"
                 );
+
 
 
                 loginForm.classList.add(
@@ -145,39 +209,29 @@ function initAuth(){
 
 
 
-                registerPanel.classList.remove(
+
+
+
+
+
+                registerPanel?.classList.remove(
                     "active"
                 );
 
 
-                loginPanel.classList.remove(
+
+                loginPanel?.classList.remove(
                     "hide"
                 );
+
 
 
             }
         );
 
 
-    }
+    });
 
-
-
-
-
-
-    /*=====================================
-            START MODULES
-    =====================================*/
-
-
-    setupPasswordToggle();
-
-
-    setupLogin();
-
-
-    setupRegister();
 
 
 }
@@ -188,18 +242,21 @@ function initAuth(){
 
 
 
+
 /*=====================================
-        START WHEN PAGE LOADS
+        START AUTH
 =====================================*/
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    ()=>{
 
 
-        initAuth();
 
 
-    }
-);
+
+/*=====================================
+            EXPORT
+=====================================*/
+
+
+window.initAuth =
+initAuth;

@@ -1,19 +1,25 @@
 /*=====================================
-            LOGIN JS
+        LOGIN JS
 =====================================*/
 
 
 function setupLogin(){
 
 
-    const loginForm =
-    document.getElementById(
-        "loginForm"
+    console.log(
+        "✅ Login initialized"
     );
 
 
 
-    if(!loginForm){
+    const form =
+        document.getElementById(
+            "loginForm"
+        );
+
+
+
+    if(!form){
 
         console.log(
             "Login form not found"
@@ -27,9 +33,9 @@ function setupLogin(){
 
 
 
-    loginForm.addEventListener(
+    form.addEventListener(
         "submit",
-        (e)=>{
+        function(e){
 
 
             e.preventDefault();
@@ -39,30 +45,73 @@ function setupLogin(){
 
 
             const email =
-            document.getElementById(
-                "loginEmail"
-            ).value.trim();
+                document
+                .getElementById(
+                    "loginEmail"
+                )
+                .value
+                .trim();
+
 
 
 
 
             const password =
-            document.getElementById(
-                "loginPassword"
-            ).value;
+                document
+                .getElementById(
+                    "loginPassword"
+                )
+                .value;
 
 
 
 
 
 
-            /*==============================
-                GET SAVED USER
-            ==============================*/
+
+            const result =
+                validateLogin({
+
+                    email:email,
+
+                    password:password
+
+                });
+
+
+
+
+
+
+
+            if(!result.valid){
+
+
+                showPopup(
+
+                    "Error",
+
+                    result.message,
+
+                    "error"
+
+                );
+
+
+                return;
+
+            }
+
+
+
+
+
+
 
 
             const user =
-            getUser();
+                getUser();
+
 
 
 
@@ -74,14 +123,18 @@ function setupLogin(){
 
 
                 showPopup(
-                    "No account found. Please register first.",
+
+                    "Error",
+
+                    "No account found. Please create an account first.",
+
                     "error"
+
                 );
 
 
                 return;
 
-
             }
 
 
@@ -89,60 +142,91 @@ function setupLogin(){
 
 
 
-
-
-            /*==============================
-                CHECK DETAILS
-            ==============================*/
 
 
             if(
-                email === user.email &&
-                password === user.password
+                user.email !== email ||
+                user.password !== password
             ){
 
 
-
-                setLoginStatus();
-
-
-
-
-
                 showPopup(
-                    "Login successful."
-                );
 
+                    "Login Failed",
 
+                    "Incorrect email or password.",
 
-
-
-                setTimeout(()=>{
-
-
-                    window.location.href =
-                    "pages/home.html";
-
-
-
-                },1200);
-
-
-
-            }
-
-
-
-            else{
-
-
-                showPopup(
-                    "Invalid email or password.",
                     "error"
+
                 );
 
 
+                return;
+
             }
+
+
+
+
+
+
+
+
+            setLoginStatus();
+
+
+
+
+
+
+
+
+            showPopup(
+
+                "Welcome Back",
+
+                `Welcome back ${user.name}`,
+
+                "success"
+
+            );
+
+
+
+
+
+
+
+            form.reset();
+
+
+
+
+
+
+
+
+            setTimeout(()=>{
+
+
+
+                const insidePages =
+                    window.location.pathname.includes(
+                        "/pages/"
+                    );
+
+
+
+                window.location.href =
+                    insidePages
+                    ? "dashboard.html"
+                    : "pages/dashboard.html";
+
+
+
+            },1500);
+
+
 
 
 
@@ -154,3 +238,15 @@ function setupLogin(){
 
 
 }
+
+
+
+
+
+/*=====================================
+            EXPORT
+=====================================*/
+
+
+window.setupLogin =
+setupLogin;

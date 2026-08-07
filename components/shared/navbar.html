@@ -1,350 +1,279 @@
-
 <!--=========================================
                 HEADER
 ==========================================-->
 
-
 <header class="header" data-reveal>
 
+    <nav class="navbar">
 
-<nav class="navbar">
+        <!--====================================
+                    LEFT SIDE
+        =====================================-->
+
+        <div class="nav-left">
+
+            <!-- LOGO -->
+            <a href="../pages/home.html" class="logo">
+                <img
+                    src="/assets/logo/download.webp"
+                    alt="IDOKO LEGACY">
+            </a>
+
+            <!-- NAVIGATION -->
+            <ul class="nav-links">
+
+                <li>
+                    <a href="../pages/services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/industries-we-serve.html">
+                        Industries
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/hipaa.html">
+                        HIPAA
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../pages/contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
 
 
 
+        <!--====================================
+                    RIGHT SIDE
+        =====================================-->
 
+        <div class="nav-right">
+
+            <!-- DARK MODE -->
+
+            <button
+                class="icon-btn theme-toggle"
+                title="Toggle Theme">
+
+                <i class="fa-solid fa-moon"></i>
+
+            </button>
+
+
+
+            <!-- NOTIFICATIONS -->
+
+            <button
+                class="icon-btn notification-btn"
+                title="Notifications">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </button>
+
+
+
+            <!--====================================
+                        PROFILE
+            =====================================-->
+
+            <div class="profile">
 
 <!--====================================
-                LEFT SIDE
+            PROFILE CARD
 =====================================-->
 
+<button
+    class="profile-card"
+    id="profileCard"
+    type="button">
 
-<div class="nav-left">
+    <!-- Avatar -->
 
-    <!-- LOGO -->
-    <a href="../pages/home.html" class="logo">
-        <img
-            src="/assets/logo/download.webp"
-            alt="IDOKO LEGACY">
-    </a>
+    <div class="profile-avatar">
 
-    <!-- LINKS -->
-    <ul class="nav-links">
+        <span id="navUserInitial">
+            
+        </span>
 
-        <li>
-            <a href="../pages/dashboard.html">
-                Dashboard
-            </a>
-        </li>
+        <span class="online-status"></span>
 
-        <li>
-            <a href="../pages/services.html">
-                Services
-            </a>
-        </li>
+    </div>
 
-        <li>
-            <a href="../pages/industries-we-serve.html">
-                Industries
-            </a>
-        </li>
+    <!-- User Information -->
 
-        <li>
-            <a href="../pages/hipaa.html">
-                HIPAA
-            </a>
-        </li>
-
-        <li>
-            <a href="../pages/about.html">
-                About
-            </a>
-        </li>
-
-        <li>
-            <a href="../pages/contact.html">
-                Contact
-            </a>
-        </li>
-
-    </ul>
-
-</div>
+    <div class="profile-info">
 
 
+        <h4 id="navUsername">
 
+            Guest
 
+        </h4>
 
+    </div>
 
+    <!-- Arrow -->
 
+    <div class="profile-arrow">
 
-<!--====================================
-                RIGHT SIDE
-=====================================-->
+        <i
+            id="profileChevron"
+            class="fa-solid fa-chevron-down">
+        </i>
 
-
-<div class="nav-right">
-
-
-
-
-
-
-<!-- SEARCH -->
-
-
-<button class="icon-btn search-btn">
-
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
+    </div>
 
 </button>
 
 
 
-
-
-
-
-<!-- DARK MODE -->
-
-
-<button class="icon-btn theme-toggle">
-
-
-<i class="fa-solid fa-moon"></i>
-
-
-</button>
-
-
-
-
-
-
-
-<!-- NOTIFICATION -->
-
-
-<button class="icon-btn notification-btn">
-
-
-<i class="fa-regular fa-bell"></i>
-
-
-
-<span class="notification-dot"></span>
-
-
-
-</button>
-
-
-
-
-
-
-
-
-
-<!-- PROFILE -->
-
-
-<div class="profile">
-
-
-
-
-
-<button class="profile-card">
-
-
-
-
-
-
-<div class="profile-avatar">
-
-
-
-<span id="navUserInitial">
-
-N
-
-</span>
-
-
-
-<span class="online-status"></span>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="profile-info">
-
-
-<h4 id="navUsername">
-
-User
-
-</h4>
-
-
-
-<span>
-
-Administrator
-
-</span>
-
-
-
-</div>
-
-
-
-
-
-
-<i class="fa-solid fa-chevron-down"></i>
-
-
-
-</button>
-
-
-
-
-
-
-
-
-
-<!-- DROPDOWN -->
-
-
+                <!--====================================
+                        PROFILE DROPDOWN
+                =====================================-->
 <div class="profile-dropdown">
 
+    <a href="#">
 
+        <i class="fa-regular fa-user"></i>
 
-<a href="#">
+        Profile
 
+    </a>
 
-<i class="fa-regular fa-user"></i>
+    <a href="../pages/dashboard.html">
 
+        <i class="fa-solid fa-table-columns"></i>
 
-My Profile
+        Dashboard
 
+    </a>
 
-</a>
+    <a href="../index.html" id="createAccountLink">
 
+        <i class="fa-solid fa-user-plus"></i>
 
+        Create Account
 
+    </a>
 
+    <a href="#">
 
-<a href="#">
+        <i class="fa-solid fa-box"></i>
 
+        My Shipments
 
-<i class="fa-solid fa-gear"></i>
+    </a>
 
+    <a href="#">
 
-Settings
+        <i class="fa-solid fa-clock-rotate-left"></i>
 
+        Order History
 
-</a>
+    </a>
 
+    <a href="#">
 
+        <i class="fa-regular fa-bell"></i>
 
+        Notifications
 
+        <span class="menu-badge">
+            3 New
+        </span>
 
+    </a>
 
-<a href="../pages/dashboard.html">
+    <a href="#">
 
+        <i class="fa-solid fa-gear"></i>
 
-<i class="fa-solid fa-shield-heart"></i>
+        Settings
 
+    </a>
 
-Dashboard
+    <a href="#">
 
+        <i class="fa-solid fa-circle-question"></i>
 
-</a>
+        Help Center
 
+    </a>
 
+    <div class="dropdown-divider"></div>
 
+    <a
+        href="#"
+        id="navLogout"
+        class="logout-link">
 
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
 
+        Logout
 
-
-<a href="#" id="navLogout">
-
-
-<i class="fa-solid fa-arrow-right-from-bracket"></i>
-
-
-Logout
-
-
-</a>
-
-
-
-
-
+    </a>
 
 </div>
 
+            </div>
 
 
 
+            <!-- MOBILE MENU -->
 
+            <button
+                class="menu-btn">
 
-</div>
+                <span></span>
+                <span></span>
+                <span></span>
 
+            </button>
 
+        </div>
 
-
-
-
-
-
-<!-- MOBILE MENU -->
-
-
-<button class="menu-btn">
-
-
-<span></span>
-
-<span></span>
-
-<span></span>
-
-
-</button>
-
-
-
-
-
-</div>
-
-
-
-
-
-</nav>
-
-
+    </nav>
 
 </header>
 
+<div
+    id="welcomeToast"
+    class="welcome-toast">
 
+    <i class="fa-solid fa-hand-sparkles"></i>
+
+    <div>
+
+        <h4 id="welcomeTitle">
+
+            Welcome Back!
+
+        </h4>
+
+        <p id="welcomeText">
+
+            Welcome back.
+
+        </p>
+
+    </div>
+
+</div>

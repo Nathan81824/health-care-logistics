@@ -1,19 +1,18 @@
 /*=====================================
-            VALIDATION JS
+        AUTH VALIDATION JS
 =====================================*/
 
 
 /*=====================================
-            EMAIL VALIDATION
+        EMAIL VALIDATION
 =====================================*/
 
 
-function isValidEmail(email){
+function validateEmail(email){
 
 
     const emailPattern =
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
     return emailPattern.test(email);
@@ -25,14 +24,12 @@ function isValidEmail(email){
 
 
 
-
-
 /*=====================================
-            PASSWORD VALIDATION
+        PASSWORD VALIDATION
 =====================================*/
 
 
-function isValidPassword(password){
+function validatePassword(password){
 
 
     return password.length >= 6;
@@ -44,17 +41,15 @@ function isValidPassword(password){
 
 
 
-
-
 /*=====================================
-            REQUIRED FIELD CHECK
+        REQUIRED FIELD
 =====================================*/
 
 
-function hasValue(value){
+function validateRequired(value){
 
 
-    return value.trim().length > 0;
+    return value.trim() !== "";
 
 
 }
@@ -63,26 +58,16 @@ function hasValue(value){
 
 
 
-
-
 /*=====================================
-            REGISTER VALIDATION
+        REGISTER VALIDATION
 =====================================*/
 
 
-function validateRegister(
-    name,
-    email,
-    password
-){
+function validateRegister(data){
 
 
 
-    if(
-        !hasValue(name) ||
-        !hasValue(email) ||
-        !hasValue(password)
-    ){
+    if(!validateRequired(data.name)){
 
 
         return {
@@ -90,7 +75,7 @@ function validateRegister(
             valid:false,
 
             message:
-            "Please complete all fields."
+            "Please enter your full name."
 
         };
 
@@ -101,9 +86,7 @@ function validateRegister(
 
 
 
-    if(
-        !isValidEmail(email)
-    ){
+    if(!validateEmail(data.email)){
 
 
         return {
@@ -122,9 +105,7 @@ function validateRegister(
 
 
 
-    if(
-        !isValidPassword(password)
-    ){
+    if(!validatePassword(data.password)){
 
 
         return {
@@ -143,42 +124,54 @@ function validateRegister(
 
 
 
-    return {
+    if(
+        data.password !==
+        data.confirmPassword
+    ){
 
+
+        return {
+
+            valid:false,
+
+            message:
+            "Passwords do not match."
+
+        };
+
+
+    }
+
+
+
+
+
+    return {
 
         valid:true,
 
         message:
-        "Valid"
+        "Validation successful."
 
     };
 
 
-
 }
-
-
 
 
 
 
 
 /*=====================================
-            LOGIN VALIDATION
+        LOGIN VALIDATION
 =====================================*/
 
 
-function validateLogin(
-    email,
-    password
-){
+function validateLogin(data){
 
 
 
-    if(
-        !hasValue(email) ||
-        !hasValue(password)
-    ){
+    if(!validateEmail(data.email)){
 
 
         return {
@@ -186,7 +179,7 @@ function validateLogin(
             valid:false,
 
             message:
-            "Please enter email and password."
+            "Invalid email address."
 
         };
 
@@ -197,9 +190,7 @@ function validateLogin(
 
 
 
-    if(
-        !isValidEmail(email)
-    ){
+    if(!validateRequired(data.password)){
 
 
         return {
@@ -207,7 +198,7 @@ function validateLogin(
             valid:false,
 
             message:
-            "Invalid email format."
+            "Please enter your password."
 
         };
 
@@ -224,11 +215,38 @@ function validateLogin(
         valid:true,
 
         message:
-        "Valid"
+        "Validation successful."
 
 
     };
 
 
-
 }
+
+
+
+
+
+/*=====================================
+            EXPORT
+=====================================*/
+
+
+window.validateEmail =
+validateEmail;
+
+
+window.validatePassword =
+validatePassword;
+
+
+window.validateRequired =
+validateRequired;
+
+
+window.validateRegister =
+validateRegister;
+
+
+window.validateLogin =
+validateLogin;

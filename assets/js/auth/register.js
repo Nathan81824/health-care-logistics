@@ -1,29 +1,31 @@
 /*=====================================
-            REGISTER JS
+        REGISTER JS
 =====================================*/
 
 
 function setupRegister(){
 
 
-    const registerForm =
-    document.getElementById(
-        "registerForm"
+    console.log(
+        "✅ Register initialized"
     );
 
 
 
+    const form =
+        document.getElementById(
+            "registerForm"
+        );
 
-    if(!registerForm){
 
+
+    if(!form){
 
         console.log(
             "Register form not found"
         );
 
-
         return;
-
 
     }
 
@@ -31,11 +33,9 @@ function setupRegister(){
 
 
 
-
-
-    registerForm.addEventListener(
+    form.addEventListener(
         "submit",
-        (e)=>{
+        function(e){
 
 
             e.preventDefault();
@@ -43,32 +43,45 @@ function setupRegister(){
 
 
 
-
-            /*==============================
-                GET VALUES
-            ==============================*/
-
-
             const name =
-            document.getElementById(
-                "registerName"
-            ).value.trim();
+                document
+                .getElementById(
+                    "registerName"
+                )
+                .value
+                .trim();
 
 
 
 
             const email =
-            document.getElementById(
-                "registerEmail"
-            ).value.trim();
+                document
+                .getElementById(
+                    "registerEmail"
+                )
+                .value
+                .trim();
 
 
 
 
             const password =
-            document.getElementById(
-                "registerPassword"
-            ).value;
+                document
+                .getElementById(
+                    "registerPassword"
+                )
+                .value;
+
+
+
+
+
+            const confirmPassword =
+                document
+                .getElementById(
+                    "confirmPassword"
+                )
+                ?.value;
 
 
 
@@ -76,86 +89,46 @@ function setupRegister(){
 
 
 
+            const result =
+                validateRegister({
+
+                    name:name,
+
+                    email:email,
+
+                    password:password,
+
+                    confirmPassword:
+                    confirmPassword
 
 
-            /*==============================
-                VALIDATE INPUT
-            ==============================*/
-
-
-            const validation =
-            validateRegister(
-                name,
-                email,
-                password
-            );
+                });
 
 
 
 
 
-            if(!validation.valid){
+
+            if(!result.valid){
 
 
                 showPopup(
-                    validation.message,
+
+                    "Error",
+
+                    result.message,
+
                     "error"
+
                 );
 
 
                 return;
 
-
             }
 
 
 
-
-
-
-
-
-
-            /*==============================
-                CHECK EXISTING USER
-            ==============================*/
-
-
-            const existingUser =
-            getUser();
-
-
-
-
-
-            if(
-                existingUser &&
-                existingUser.email === email
-            ){
-
-
-                showPopup(
-                    "Account already exists.",
-                    "error"
-                );
-
-
-                return;
-
-
-            }
-
-
-
-
-
-
-
-
-
-            /*==============================
-                SAVE ACCOUNT
-            ==============================*/
 
 
             const user = {
@@ -163,16 +136,12 @@ function setupRegister(){
 
                 name:name,
 
-
                 email:email,
-
 
                 password:password
 
 
-
             };
-
 
 
 
@@ -183,13 +152,19 @@ function setupRegister(){
 
 
 
+            setLoginStatus();
+
 
 
 
 
 
             showPopup(
+
+                "Success",
+
                 "Account created successfully."
+
             );
 
 
@@ -197,11 +172,7 @@ function setupRegister(){
 
 
 
-
-
-
-            registerForm.reset();
-
+            form.reset();
 
 
 
@@ -209,68 +180,48 @@ function setupRegister(){
 
 
 
-            /*==============================
-                RETURN TO LOGIN
-            ==============================*/
-
+            /* SWITCH TO LOGIN */
 
             setTimeout(()=>{
 
 
-                const loginForm =
-                document.getElementById(
-                    "loginForm"
-                );
 
-
-                const loginPanel =
-                document.querySelector(
-                    ".login-panel"
-                );
-
-
-                const registerPanel =
-                document.querySelector(
-                    ".register-panel"
-                );
+                const showLogin =
+                    document.getElementById(
+                        "showLogin"
+                    );
 
 
 
+                if(showLogin){
 
-                registerForm.classList.remove(
-                    "active"
-                );
+                    showLogin.click();
 
-
-
-                loginForm.classList.add(
-                    "active"
-                );
+                }
 
 
 
+            },1500);
 
-                registerPanel.classList.remove(
-                    "active"
-                );
-
-
-
-                loginPanel.classList.remove(
-                    "hide"
-                );
-
-
-
-            },1000);
 
 
 
 
         }
-
     );
 
 
 
 }
+
+
+
+
+
+/*=====================================
+            EXPORT
+=====================================*/
+
+
+window.setupRegister =
+setupRegister;

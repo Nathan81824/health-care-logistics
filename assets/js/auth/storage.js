@@ -7,24 +7,14 @@
             SAVE USER
 =====================================*/
 
-
 function saveUser(user){
 
-
     localStorage.setItem(
-
         "user",
-
         JSON.stringify(user)
-
     );
 
-
 }
-
-
-
-
 
 
 
@@ -32,24 +22,17 @@ function saveUser(user){
             GET USER
 =====================================*/
 
-
 function getUser(){
 
+    const user =
+        localStorage.getItem("user");
 
-    return JSON.parse(
 
-        localStorage.getItem(
-            "user"
-        )
-
-    );
-
+    return user
+        ? JSON.parse(user)
+        : null;
 
 }
-
-
-
-
 
 
 
@@ -57,24 +40,14 @@ function getUser(){
             LOGIN STATUS
 =====================================*/
 
-
 function setLoginStatus(){
 
-
     localStorage.setItem(
-
         "isLoggedIn",
-
         "true"
-
     );
 
-
 }
-
-
-
-
 
 
 
@@ -82,26 +55,15 @@ function setLoginStatus(){
             CHECK LOGIN
 =====================================*/
 
-
 function isLoggedIn(){
 
-
     return (
-
-        localStorage.getItem(
-            "isLoggedIn"
-        )
+        localStorage.getItem("isLoggedIn")
         ===
         "true"
-
     );
 
-
 }
-
-
-
-
 
 
 
@@ -109,36 +71,32 @@ function isLoggedIn(){
             LOGOUT
 =====================================*/
 
-
 function logout(){
 
+    localStorage.removeItem("user");
 
-    localStorage.removeItem(
-        "isLoggedIn"
-    );
+    localStorage.removeItem("isLoggedIn");
+
+
+    const insidePages =
+        window.location.pathname.includes("/pages/");
 
 
     window.location.href =
-    "../index.html";
-
+        insidePages
+        ? "../index.html"
+        : "index.html";
 
 }
 
 
 
-
-
-
-
 /*=====================================
-            CLEAR ALL DATA
+            CLEAR STORAGE
 =====================================*/
-
 
 function clearStorage(){
 
-
     localStorage.clear();
-
 
 }

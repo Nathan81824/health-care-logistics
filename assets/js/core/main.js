@@ -119,20 +119,3 @@ function initApplication() {
     }
 
 }
-
-const page =
-document.body.dataset.page;
-
-
-if(page === "home"){
-
-    initHome();
-
-}
-
-
-if(page === "about"){
-
-    initAbout();
-
-}

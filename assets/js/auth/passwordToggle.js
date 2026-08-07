@@ -6,19 +6,21 @@
 function setupPasswordToggle(){
 
 
-    const toggleButtons =
-    document.querySelectorAll(
-        ".toggle-password"
-    );
+    console.log("✅ Password toggle initialized");
 
 
 
+    const buttons =
+        document.querySelectorAll(
+            ".toggle-password"
+        );
 
 
-    if(toggleButtons.length === 0){
+
+    if(!buttons.length){
 
         console.log(
-            "Password toggle buttons not found"
+            "No password buttons found"
         );
 
         return;
@@ -29,45 +31,38 @@ function setupPasswordToggle(){
 
 
 
+    buttons.forEach(button => {
 
-
-    toggleButtons.forEach(button=>{
 
 
         button.addEventListener(
             "click",
-            ()=>{
+            function(){
 
 
 
                 const input =
-                button.parentElement.querySelector(
-                    "input"
-                );
+                    this.parentElement.querySelector(
+                        "input"
+                    );
 
 
 
                 const icon =
-                button.querySelector(
-                    "i"
-                );
+                    this.querySelector("i");
+
+
+
+                if(!input || !icon){
+
+                    return;
+
+                }
 
 
 
 
-
-
-                if(!input) return;
-
-
-
-
-
-
-
-                if(
-                    input.type === "password"
-                ){
+                if(input.type === "password"){
 
 
                     input.type = "text";
@@ -84,16 +79,13 @@ function setupPasswordToggle(){
                     );
 
 
-
-                    button.setAttribute(
+                    this.setAttribute(
                         "aria-label",
                         "Hide password"
                     );
 
 
-
                 }
-
 
 
                 else{
@@ -113,16 +105,13 @@ function setupPasswordToggle(){
                     );
 
 
-
-                    button.setAttribute(
+                    this.setAttribute(
                         "aria-label",
                         "Show password"
                     );
 
 
-
                 }
-
 
 
 
@@ -136,3 +125,10 @@ function setupPasswordToggle(){
 
 
 }
+
+
+
+
+
+window.setupPasswordToggle =
+setupPasswordToggle;

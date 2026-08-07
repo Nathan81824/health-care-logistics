@@ -115,6 +115,8 @@ loadSection(
     }
 );
 
+
+
 /*====================================
             NAVBAR
 =====================================*/
@@ -129,11 +131,19 @@ loadSection(
 ()=>{
 
 
-if(typeof initNavbar==="function"){
+    if(typeof initNavbar==="function"){
 
-    initNavbar();
+        initNavbar();
 
-}
+    }
+
+
+
+    if(typeof initNavbarScroll==="function"){
+
+        initNavbarScroll();
+
+    }
 
 
 }
@@ -779,6 +789,22 @@ initFooter();
 
 }
 
+);
+
+
+
+loadSection(
+    `${basePath}components/shared/logout-popup.html`,
+    "logout-popup-container",
+    ()=>{
+
+        if(typeof initLogoutPopup === "function"){
+
+            initLogoutPopup();
+
+        }
+
+    }
 );
 
 

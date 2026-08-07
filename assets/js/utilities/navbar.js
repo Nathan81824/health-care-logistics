@@ -1,67 +1,220 @@
-/* ==========================================
-        NAVBAR JS
-========================================== */
+/*=====================================
+            NAVBAR
+=====================================*/
 
-function initNavbar() {
+function initNavbar(){
 
-    console.log("Navbar initialized");
+    console.log("✅ Navbar initialized");
+
 
     loadNavbarUser();
-    initProfileDropdown();
-    initNavbarLogout();
-    initMobileMenu();
-    initThemeToggle();
-    initNotifications();
-    activeNavLink();
+
+
+    setupProfileDropdown();
+
+
+    setupMobileMenu();
+
+
+    setupThemeToggle();
+
+
+    setupNotifications();
+
+
+    setupLogout();
+
+
+    setActiveLink();
+
+
+    showWelcomeToast();
+
 
 }
 
-/* ==========================================
-        LOAD USER DATA
-========================================== */
+/*=====================================
+        LOAD NAVBAR USER
+=====================================*/
 
-function loadNavbarUser() {
+function loadNavbarUser(){
 
-    const user = JSON.parse(localStorage.getItem("user"));
 
-    const username = document.getElementById("navUsername");
-    const initial = document.getElementById("navUserInitial");
+    const user = getUser();
 
-    if (!user) {
 
-        if (username) username.textContent = "Guest";
-        if (initial) initial.textContent = "G";
+
+    const username =
+        document.getElementById(
+            "navUsername"
+        );
+
+
+    const avatar =
+        document.getElementById(
+            "navUserInitial"
+        );
+
+
+
+    if(!user){
+
+
+        if(username){
+
+            username.textContent =
+            "Guest";
+
+        }
+
+
+        if(avatar){
+
+            avatar.textContent =
+            "G";
+
+        }
+
 
         return;
+
     }
 
-    const name = user.name || "Guest";
 
-    if (username) {
-        username.textContent = name;
+
+
+
+    if(username){
+
+        username.textContent =
+        user.name;
+
     }
 
-    if (initial) {
-        initial.textContent = name.charAt(0).toUpperCase();
+
+
+
+
+    if(avatar){
+
+        avatar.textContent =
+        user.name
+        .charAt(0)
+        .toUpperCase();
+
     }
+
 
 }
 
-/* ==========================================
+/*=====================================
+        WELCOME POPUP
+=====================================*/
+
+
+function showWelcomeToast(){
+
+
+    const user =
+        getUser();
+
+
+
+    const toast =
+        document.getElementById(
+            "welcomeToast"
+        );
+
+
+    const title =
+        document.getElementById(
+            "welcomeTitle"
+        );
+
+
+    const text =
+        document.getElementById(
+            "welcomeText"
+        );
+
+
+
+    if(!toast || !user){
+
+        return;
+
+    }
+
+
+
+
+
+    title.textContent =
+    "Welcome Back 👋";
+
+
+
+    text.textContent =
+    `Good to see you, ${user.name}`;
+
+
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+
+
+    setTimeout(()=>{
+
+
+        toast.classList.remove(
+            "show"
+        );
+
+
+    },4000);
+
+
+
+}
+
+/*=====================================
         PROFILE DROPDOWN
-========================================== */
+=====================================*/
 
-function initProfileDropdown() {
+function setupProfileDropdown() {
 
-    const profileCard = document.querySelector(".profile-card");
+    const profile = document.querySelector(".profile");
+    const profileCard = document.getElementById("profileCard");
     const dropdown = document.querySelector(".profile-dropdown");
+    const chevron = document.getElementById("profileChevron");
 
-    if (!profileCard || !dropdown) return;
+    if (!profile || !profileCard || !dropdown) return;
 
     profileCard.addEventListener("click", function (e) {
 
         e.stopPropagation();
-        dropdown.classList.toggle("show");
+
+        const opened = profile.classList.toggle("active");
+
+        if (chevron) {
+
+            chevron.style.transition = ".3s";
+
+            chevron.style.transform =
+                opened
+                    ? "rotate(180deg)"
+                    : "rotate(0deg)";
+
+            chevron.style.color =
+                opened
+                    ? "#20b8ff"
+                    : "#ffffff";
+
+        }
 
     });
 
@@ -73,52 +226,42 @@ function initProfileDropdown() {
 
     document.addEventListener("click", function () {
 
-        dropdown.classList.remove("show");
+        profile.classList.remove("active");
+
+        if (chevron) {
+
+            chevron.style.transform = "rotate(0deg)";
+            chevron.style.color = "#ffffff";
+
+        }
+
+    });
+
+    document.addEventListener("keydown", function (e) {
+
+        if (e.key === "Escape") {
+
+            profile.classList.remove("active");
+
+            if (chevron) {
+
+                chevron.style.transform = "rotate(0deg)";
+                chevron.style.color = "#ffffff";
+
+            }
+
+        }
 
     });
 
 }
 
-/* ==========================================
-        LOGOUT
-========================================== */
 
-function initNavbarLogout() {
-
-    const logout = document.getElementById("navLogout");
-
-    if (!logout) return;
-
-    logout.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const confirmLogout = confirm(
-            "Are you sure you want to log out?"
-        );
-
-        if (!confirmLogout) return;
-
-        localStorage.removeItem("user");
-
-        // Remove any saved settings if needed
-        // localStorage.removeItem("theme");
-
-        const isInsidePages = window.location.pathname.includes("/pages/");
-
-        window.location.href = isInsidePages
-            ? "../index.html"
-            : "index.html";
-
-    });
-
-}
-
-/* ==========================================
+/*=====================================
         MOBILE MENU
-========================================== */
+=====================================*/
 
-function initMobileMenu() {
+function setupMobileMenu() {
 
     const menuBtn = document.querySelector(".menu-btn");
     const navLinks = document.querySelector(".nav-links");
@@ -127,7 +270,7 @@ function initMobileMenu() {
 
     menuBtn.addEventListener("click", function () {
 
-        menuBtn.classList.toggle("open");
+        menuBtn.classList.toggle("active");
         navLinks.classList.toggle("active");
 
     });
@@ -136,8 +279,8 @@ function initMobileMenu() {
 
         link.addEventListener("click", function () {
 
+            menuBtn.classList.remove("active");
             navLinks.classList.remove("active");
-            menuBtn.classList.remove("open");
 
         });
 
@@ -145,103 +288,89 @@ function initMobileMenu() {
 
 }
 
-/* ==========================================
-        DARK MODE
-========================================== */
 
-function initThemeToggle() {
+/*=====================================
+        THEME
+=====================================*/
 
-    const themeBtn = document.querySelector(".theme-toggle");
+function setupThemeToggle() {
 
-    if (!themeBtn) return;
+    const button = document.querySelector(".theme-toggle");
 
-    const icon = themeBtn.querySelector("i");
+    if (!button) return;
 
-    // Load saved theme
-    const savedTheme = localStorage.getItem("theme");
+    const icon = button.querySelector("i");
 
-    if (savedTheme === "dark") {
+    if (localStorage.getItem("theme") === "dark") {
 
         document.body.classList.add("dark-mode");
-
-        if (icon) {
-            icon.className = "fa-solid fa-sun";
-        }
-
-    } else {
-
-        document.body.classList.remove("dark-mode");
-
-        if (icon) {
-            icon.className = "fa-solid fa-moon";
-        }
+        icon.className = "fa-solid fa-sun";
 
     }
 
-    themeBtn.addEventListener("click", function () {
+    button.addEventListener("click", function () {
 
         document.body.classList.toggle("dark-mode");
 
-        const dark = document.body.classList.contains("dark-mode");
+        const dark =
+            document.body.classList.contains("dark-mode");
 
         localStorage.setItem(
             "theme",
             dark ? "dark" : "light"
         );
 
-        if (icon) {
-
-            icon.className = dark
+        icon.className =
+            dark
                 ? "fa-solid fa-sun"
                 : "fa-solid fa-moon";
-
-        }
 
     });
 
 }
 
-/* ==========================================
+
+/*=====================================
         NOTIFICATIONS
-========================================== */
+=====================================*/
 
-function initNotifications() {
+function setupNotifications() {
 
-    const btn = document.querySelector(".notification-btn");
+    const btn =
+        document.querySelector(".notification-btn");
 
     if (!btn) return;
 
     btn.addEventListener("click", function () {
 
-        console.log("Notification button clicked");
-
-        alert("You have no new notifications.");
+        alert("No new notifications.");
 
     });
 
 }
 
-/* ==========================================
-        ACTIVE NAV LINK
-========================================== */
 
-function activeNavLink() {
+/*=====================================
+            LOGOUT
+=====================================*/
 
-    const currentPage = window.location.pathname.split("/").pop();
+function setupLogout() {
 
-    const links = document.querySelectorAll(".nav-links a");
+    const logoutBtn =
+        document.getElementById("navLogout");
 
-    links.forEach(link => {
+    if (!logoutBtn) return;
 
-        const linkPage = link.getAttribute("href").split("/").pop();
+    logoutBtn.addEventListener("click", function (e) {
 
-        if (currentPage === linkPage) {
+        e.preventDefault();
 
-            link.classList.add("active");
+        const popup =
+            document.getElementById("logoutPopup");
 
-        } else {
+        if (popup) {
 
-            link.classList.remove("active");
+            popup.classList.add("show");
 
         }
 
@@ -249,8 +378,42 @@ function activeNavLink() {
 
 }
 
-/* ==========================================
-        EXPORT
-========================================== */
+/*=====================================
+        ACTIVE LINK
+=====================================*/
+
+function setActiveLink() {
+
+    const current =
+        window.location.pathname
+            .split("/")
+            .pop();
+
+    document.querySelectorAll(".nav-links a")
+        .forEach(link => {
+
+            const page =
+                link.getAttribute("href")
+                    .split("/")
+                    .pop();
+
+            if (page === current) {
+
+                link.classList.add("active");
+
+            } else {
+
+                link.classList.remove("active");
+
+            }
+
+        });
+
+}
+
+
+/*=====================================
+            EXPORT
+=====================================*/
 
 window.initNavbar = initNavbar;

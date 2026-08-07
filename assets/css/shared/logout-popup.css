@@ -1,0 +1,303 @@
+/*=====================================
+        LOGOUT POPUP
+=====================================*/
+
+.logout-popup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:99999;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+
+}
+
+
+
+/*=====================================
+            SHOW
+=====================================*/
+
+.logout-popup.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    pointer-events:auto;
+
+}
+
+
+
+/*=====================================
+            OVERLAY
+=====================================*/
+
+.logout-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(15,23,42,.55);
+
+    backdrop-filter:blur(8px);
+
+    -webkit-backdrop-filter:blur(8px);
+
+}
+
+
+
+/*=====================================
+            CARD
+=====================================*/
+
+.logout-card{
+
+    position:relative;
+
+    width:min(92%,430px);
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:28px;
+
+    padding:40px 32px;
+
+    text-align:center;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.45);
+
+    transform:scale(.9) translateY(20px);
+
+    transition:
+        transform .35s ease;
+
+}
+
+
+
+.logout-popup.show .logout-card{
+
+    transform:scale(1) translateY(0);
+
+}
+
+
+
+/*=====================================
+            ICON
+=====================================*/
+
+.logout-icon{
+
+    width:78px;
+
+    height:78px;
+
+    margin:0 auto 22px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #dc2626
+        );
+
+    color:#ffffff;
+
+    font-size:30px;
+
+    box-shadow:
+        0 18px 40px rgba(220,38,38,.35);
+
+}
+
+
+
+/*=====================================
+            TITLE
+=====================================*/
+
+.logout-card h3{
+
+    color:#ffffff;
+
+    font-size:1.7rem;
+
+    font-weight:800;
+
+    margin-bottom:12px;
+
+}
+
+
+
+/*=====================================
+            TEXT
+=====================================*/
+
+.logout-card p{
+
+    color:#94a3b8;
+
+    font-size:1rem;
+
+    line-height:1.8;
+
+    margin-bottom:34px;
+
+}
+
+
+
+/*=====================================
+            BUTTONS
+=====================================*/
+
+.logout-actions{
+
+    display:flex;
+
+    gap:14px;
+
+}
+
+
+
+/*=====================================
+        BUTTON BASE
+=====================================*/
+
+.logout-actions button{
+
+    flex:1;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+
+}
+
+
+
+/*=====================================
+            CANCEL
+=====================================*/
+
+.btn-cancel{
+
+    background:#1f2937;
+
+    color:#ffffff;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+
+
+.btn-cancel:hover{
+
+    background:#2b3647;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+/*=====================================
+            LOGOUT
+=====================================*/
+
+.btn-logout{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ef4444,
+            #dc2626
+        );
+
+    color:#ffffff;
+
+    box-shadow:
+        0 14px 30px rgba(220,38,38,.35);
+
+}
+
+
+
+.btn-logout:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 18px 35px rgba(220,38,38,.45);
+
+}
+
+
+
+/*=====================================
+            MOBILE
+=====================================*/
+
+@media(max-width:576px){
+
+    .logout-card{
+
+        padding:32px 24px;
+
+    }
+
+    .logout-actions{
+
+        flex-direction:column;
+
+    }
+
+}

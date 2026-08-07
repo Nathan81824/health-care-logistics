@@ -1,484 +1,317 @@
-<!-- ==========================================
+<!--=========================================
         AUTH COMPONENT
-========================================== -->
-
-<section class="auth" data-reveal>
-
-    <div class="auth-container">
+=========================================-->
 
 
-        <!-- =========================
-                LEFT SIDE
-        ========================== -->
-
-        <div class="form-container">
+<div class="auth-container">
 
 
-            <!-- =========================
-                    LOGIN FORM
-            ========================== -->
+    <!--=====================================
+            LEFT FORM SIDE
+    ======================================-->
 
-            <form
-                class="auth-form login-form active"
-                id="loginForm"
-                novalidate>
+    <div class="form-container">
 
 
-                <div class="form-header">
+        <!-- LOGIN FORM -->
 
-                    <h2>
-                        Welcome Back
-                    </h2>
+        <form 
+            id="loginForm"
+            class="auth-form login-form active">
 
-                    <p>
-                        Sign in to your account.
-                    </p>
 
-                </div>
+            <div class="form-header">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Login to continue your account.
+                </p>
+
+            </div>
 
 
 
-                <div class="input-box">
+            <!-- EMAIL -->
 
-                    <label
-                        for="loginEmail"
-                        class="sr-only">
+            <div class="input-box">
 
-                        Email Address
-
-                    </label>
+                <i class="fa-solid fa-envelope"></i>
 
 
-                    <i class="fa-solid fa-envelope"></i>
+                <input
 
+                    type="email"
 
-                    <input
-                        type="email"
-                        id="loginEmail"
-                        autocomplete="email"
-                        placeholder="Email Address"
-                        required>
+                    id="loginEmail"
 
+                    placeholder="Email address"
 
-                </div>
+                    autocomplete="email"
+
+                >
+
+            </div>
 
 
 
 
-                <div class="input-box">
+            <!-- PASSWORD -->
+
+            <div class="input-box">
 
 
-                    <label
-                        for="loginPassword"
-                        class="sr-only">
-
-                        Password
-
-                    </label>
-
-
-                    <i class="fa-solid fa-lock"></i>
-
-
-                    <input
-                        type="password"
-                        id="loginPassword"
-                        autocomplete="current-password"
-                        placeholder="Password"
-                        required>
+                <i class="fa-solid fa-lock"></i>
 
 
 
-                    <button
-                        type="button"
-                        class="toggle-password"
-                        aria-label="Show password">
+                <input
 
+                    type="password"
 
-                        <i class="fa-solid fa-eye"></i>
+                    id="loginPassword"
 
+                    placeholder="Password"
 
-                    </button>
+                    autocomplete="current-password"
 
-
-                </div>
+                >
 
 
 
-                <a
-                    href="#"
-                    class="forgot-password">
+                <button
 
-                    Forgot Password?
+                    type="button"
+
+                    class="toggle-password"
+
+                    aria-label="Show password"
+
+                >
+
+                    <i class="fa-solid fa-eye"></i>
+
+
+                </button>
+
+
+            </div>
+
+
+
+
+            <a 
+                href="#"
+                class="forgot-password">
+
+                Forgot password?
+
+            </a>
+
+
+
+
+            <button
+
+                type="submit"
+
+                class="btn-primary">
+
+                Login
+
+            </button>
+
+
+
+
+            <div class="or">
+
+                <span>
+                    OR
+                </span>
+
+            </div>
+
+
+
+
+            <div class="social-icons">
+
+
+                <a href="#">
+
+                    <i class="fa-brands fa-google"></i>
 
                 </a>
 
 
+                <a href="#">
 
-                <button
-                    type="submit"
-                    class="btn-primary">
+                    <i class="fa-brands fa-facebook"></i>
 
+                </a>
 
-                    Sign In
 
+                <a href="#">
 
-                </button>
+                    <i class="fa-brands fa-github"></i>
 
+                </a>
 
 
+            </div>
 
-                <span class="or">
 
-                    Or continue with
 
-                </span>
 
+            <p class="switch-text">
 
+                Don't have an account?
 
-
-                <div class="social-icons">
-
-
-                    <a href="#" aria-label="Google">
-
-                        <i class="fab fa-google"></i>
-
-                    </a>
-
-
-                    <a href="#" aria-label="Facebook">
-
-                        <i class="fab fa-facebook-f"></i>
-
-                    </a>
-
-
-
-                    <a href="#" aria-label="Apple">
-
-                        <i class="fab fa-apple"></i>
-
-                    </a>
-
-
-
-                    <a href="#" aria-label="LinkedIn">
-
-                        <i class="fab fa-linkedin-in"></i>
-
-                    </a>
-
-
-                </div>
-
-
-
-            </form>
-
-
-
-
-
-            <!-- =========================
-                    REGISTER FORM
-            ========================== -->
-
-
-            <form
-                class="auth-form register-form"
-                id="registerForm"
-                novalidate>
-
-
-
-                <div class="form-header">
-
-
-                    <h2>
-
-                        Create Account
-
-                    </h2>
-
-
-                    <p>
-
-                        Register to manage your healthcare logistics.
-
-                    </p>
-
-
-                </div>
-
-
-
-
-
-                <div class="input-box">
-
-
-                    <label
-                        for="registerName"
-                        class="sr-only">
-
-                        Full Name
-
-                    </label>
-
-
-                    <i class="fa-solid fa-user"></i>
-
-
-
-                    <input
-                        type="text"
-                        id="registerName"
-                        autocomplete="name"
-                        placeholder="Full Name"
-                        required>
-
-
-
-                </div>
-
-
-
-
-
-                <div class="input-box">
-
-
-                    <label
-                        for="registerEmail"
-                        class="sr-only">
-
-                        Email Address
-
-                    </label>
-
-
-
-                    <i class="fa-solid fa-envelope"></i>
-
-
-
-
-                    <input
-                        type="email"
-                        id="registerEmail"
-                        autocomplete="email"
-                        placeholder="Email Address"
-                        required>
-
-
-
-
-                </div>
-
-
-
-
-
-                <div class="input-box">
-
-
-                    <label
-                        for="registerPassword"
-                        class="sr-only">
-
-                        Password
-
-                    </label>
-
-
-
-                    <i class="fa-solid fa-lock"></i>
-
-
-
-
-                    <input
-                        type="password"
-                        id="registerPassword"
-                        autocomplete="new-password"
-                        placeholder="Password"
-                        required>
-
-
-
-
-                    <button
-                        type="button"
-                        class="toggle-password"
-                        aria-label="Show password">
-
-
-                        <i class="fa-solid fa-eye"></i>
-
-
-                    </button>
-
-
-
-                </div>
-
-
-
-
-
-                <button
-                    type="submit"
-                    class="btn-primary">
-
+                <a 
+                    href="#"
+                    id="showRegister">
 
                     Create Account
 
+                </a>
 
-                </button>
+            </p>
 
 
 
+        </form>
 
 
-                <span class="or">
 
-                    Or continue with
 
-                </span>
 
 
 
 
-                <div class="social-icons">
 
+        <!-- REGISTER FORM -->
 
-                    <a href="#" aria-label="Google">
+        <form
 
-                        <i class="fab fa-google"></i>
+            id="registerForm"
 
-                    </a>
+            class="auth-form register-form">
 
 
 
-                    <a href="#" aria-label="Facebook">
-
-                        <i class="fab fa-facebook-f"></i>
-
-                    </a>
-
-
-
-
-                    <a href="#" aria-label="Apple">
-
-                        <i class="fab fa-apple"></i>
-
-                    </a>
-
-
-
-
-                    <a href="#" aria-label="LinkedIn">
-
-                        <i class="fab fa-linkedin-in"></i>
-
-                    </a>
-
-
-
-                </div>
-
-
-
-            </form>
-
-
-
-        </div>
-
-
-
-
-
-        <!-- =========================
-                RIGHT PANEL
-        ========================== -->
-
-
-
-        <div class="auth-panel">
-
-
-
-            <!-- Decorative Circles -->
-
-            <div class="circle-1"></div>
-
-            <div class="circle-2"></div>
-
-            <div class="circle-3"></div>
-
-
-            <div class="wave"></div>
-
-
-
-
-
-            <!-- LOGIN PANEL -->
-
-
-            <div class="panel login-panel active">
-
-
-
-                <div class="panel-logo">
-
-
-                    <img
-                        src="/assets/logo/download.webp"
-                        alt="IDOKO LEGACY Logo">
-
-
-
-                </div>
-
-
-
+            <div class="form-header">
 
 
                 <h2>
 
-                    Welcome Back!
+                    Create Account
 
                 </h2>
 
 
-
-
                 <p>
 
-                    Sign in to track shipments,
-                    manage deliveries,
-                    and access your dashboard.
+                    Join IDOKO LEGACY today.
 
                 </p>
 
 
+            </div>
+
+
+
+
+
+            <!-- NAME -->
+
+            <div class="input-box">
+
+
+                <i class="fa-solid fa-user"></i>
+
+
+
+                <input
+
+                    type="text"
+
+                    id="registerName"
+
+                    placeholder="Full name"
+
+                >
+
+
+            </div>
+
+
+
+
+
+            <!-- EMAIL -->
+
+            <div class="input-box">
+
+
+                <i class="fa-solid fa-envelope"></i>
+
+
+
+                <input
+
+                    type="email"
+
+                    id="registerEmail"
+
+                    placeholder="Email address"
+
+                >
+
+
+            </div>
+
+
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-box">
+
+
+                <i class="fa-solid fa-lock"></i>
+
+
+
+                <input
+
+                    type="password"
+
+                    id="registerPassword"
+
+                    placeholder="Password"
+
+                >
+
 
 
                 <button
-                    id="showRegister"
-                    class="panel-btn"
-                    type="button">
 
+                    type="button"
 
-                    Create Account
+                    class="toggle-password"
+
+                    aria-label="Show password"
+
+                >
+
+                    <i class="fa-solid fa-eye"></i>
 
 
                 </button>
-
 
 
             </div>
@@ -488,69 +321,90 @@
 
 
 
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="input-box">
 
 
-            <!-- REGISTER PANEL -->
-
-
-            <div class="panel register-panel">
-
-
-
-                <div class="panel-logo">
-
-
-                    <img
-                        src="../"
-                        alt="IDOKO LEGACY Logo">
-
-
-                </div>
+                <i class="fa-solid fa-lock"></i>
 
 
 
+                <input
 
+                    type="password"
 
+                    id="confirmPassword"
 
-                <h2>
+                    placeholder="Confirm password"
 
-                    Join IDOKO LEGACY
-
-                </h2>
-
-
-
-
-
-                <p>
-
-                    Create an account and experience
-                    secure healthcare logistics.
-
-                </p>
-
-
+                >
 
 
 
                 <button
-                    id="showLogin"
-                    class="panel-btn"
-                    type="button">
 
+                    type="button"
 
-                    Sign In
+                    class="toggle-password"
+
+                    aria-label="Show password"
+
+                >
+
+                    <i class="fa-solid fa-eye"></i>
 
 
                 </button>
-
 
 
             </div>
 
 
 
-        </div>
+
+
+
+            <button
+
+                type="submit"
+
+                class="btn-primary">
+
+
+                Create Account
+
+
+            </button>
+
+
+
+
+
+            <p class="switch-text">
+
+
+                Already have an account?
+
+
+                <a
+
+                    href="#"
+
+                    id="showLogin">
+
+
+                    Login
+
+
+                </a>
+
+
+            </p>
+
+
+
+        </form>
 
 
 
@@ -559,18 +413,165 @@
 
 
 
-</section>
 
 
 
 
 
-<!-- ==========================================
-        AUTH POPUP
-========================================== -->
+    <!--=====================================
+            RIGHT PANEL
+    ======================================-->
+
+    <div class="auth-panel">
 
 
-<div
+
+        <!-- LOGIN PANEL -->
+
+
+        <div class="panel login-panel">
+
+
+
+            <div class="panel-logo">
+
+
+                <img
+
+                    src="/assets/logo/download.webp"
+
+                    alt="IDOKO LEGACY">
+
+
+            </div>
+
+
+
+
+            <h2>
+
+                Welcome Back
+
+            </h2>
+
+
+
+            <p>
+
+                Manage healthcare logistics
+                with confidence and reliability.
+
+            </p>
+
+
+
+
+            <button
+
+                class="panel-btn"
+
+                id="showRegister">
+
+
+                Create Account
+
+
+            </button>
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <!-- REGISTER PANEL -->
+
+
+        <div class="panel register-panel">
+
+
+
+            <div class="panel-logo">
+
+
+                <img
+
+                    src="/assets/logo/download.webp"
+
+                    alt="IDOKO LEGACY">
+
+
+            </div>
+
+
+
+
+            <h2>
+
+                Join Us
+
+            </h2>
+
+
+
+            <p>
+
+                Create your account and start
+                managing your logistics.
+
+            </p>
+
+
+
+
+            <button
+
+                class="panel-btn"
+
+                id="showLogin">
+
+
+                Login
+
+
+            </button>
+
+
+
+        </div>
+
+
+
+
+        <div class="circle-1"></div>
+
+        <div class="circle-2"></div>
+
+        <div class="circle-3"></div>
+
+
+
+    </div>
+
+
+
+</div>
+
+
+
+
+
+<!--=====================================
+            POPUP
+======================================-->
+
+
+<div 
     class="auth-popup"
     id="authPopup">
 
@@ -596,13 +597,12 @@
 
         <p id="popupMessage">
 
-            Account created successfully.
+            Message
 
         </p>
 
 
     </div>
-
 
 
 </div>
