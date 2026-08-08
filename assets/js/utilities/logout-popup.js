@@ -121,20 +121,31 @@ function initLogoutPopup(){
             CONFIRM LOGOUT
     =====================================*/
 
-    confirmButton.addEventListener(
-        "click",
-        function(){
+confirmButton.addEventListener(
+    "click",
+    function(){
 
 
-            localStorage.removeItem(
-                "user"
-            );
+        addNotification(
+
+            "info",
+
+            "Logged Out",
+
+            "You signed out successfully."
+
+        );
 
 
-            localStorage.removeItem(
-                "isLoggedIn"
-            );
 
+        localStorage.removeItem(
+            "user"
+        );
+
+
+        localStorage.removeItem(
+            "isLoggedIn"
+        );
 
             closePopup();
 

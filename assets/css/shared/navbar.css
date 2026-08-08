@@ -401,67 +401,592 @@ backdrop-filter:blur(25px);
 
 }
 
-
 /*==================================================
-                NOTIFICATION
+                NOTIFICATION WRAPPER
 ==================================================*/
 
-
-.notification-btn{
-
-    overflow:visible;
-
+.notification-wrapper{
+    position:relative;
 }
 
+/*==================================================
+                NOTIFICATION BUTTON
+==================================================*/
+
+.notification-btn{
+    position:relative;
+}
+
+/*==================================================
+                NOTIFICATION DOT
+==================================================*/
 
 .notification-dot{
+    position:absolute;
+    top:8px;
+    right:9px;
+
+    width:10px;
+    height:10px;
+
+    background:#ff4d4f;
+
+    border:2px solid #17365d;
+    border-radius:50%;
+
+    display:none;
+    z-index:5;
+}
+
+.notification-dot.show{
+    display:block;
+}
+
+/*==================================================*
+* NOTIFICATION COUNT
+*==================================================*/
+
+/* Default (hidden) */
+.notification-count{
+    display:none;
+}
+
+/* Show when there are notifications */
+.notification-count.show{
+    display:flex;
+}
+
+/*==================================================*
+* BELL BADGE
+*==================================================*/
+
+.notification-btn .notification-count{
 
     position:absolute;
 
-    top:10px;
+    top:4px;
+    right:4px;
 
-    right:11px;
+    min-width:18px;
+    height:18px;
 
-    width:9px;
+    padding:0 5px;
 
-    height:9px;
+    align-items:center;
+    justify-content:center;
 
-    background:#22c55e;
+    background:#20b8ff;
+    color:#ffffff;
+
+    border:2px solid #17365d;
+    border-radius:999px;
+
+    box-shadow:0 4px 12px rgba(32,184,255,.35);
+
+    font-size:.68rem;
+    font-weight:700;
+    line-height:1;
+
+    z-index:10;
+
+}
+
+/*==================================================*
+* PROFILE DROPDOWN BADGE
+*==================================================*/
+
+.menu-badge.notification-count{
+
+    position:static;
+
+    margin-left:auto;
+
+    min-width:22px;
+    height:22px;
+
+    padding:0 8px;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#20b8ff;
+    color:#ffffff;
+
+    border:none;
+    border-radius:999px;
+
+    box-shadow:0 4px 12px rgba(32,184,255,.25);
+
+    font-size:.72rem;
+    font-weight:700;
+
+    line-height:1;
+
+}
+
+/*==================================================*
+* NOTIFICATION PANEL HEADER BADGE
+*==================================================*/
+
+.notification-header .notification-count{
+
+    position:static;
+
+    min-width:22px;
+    height:22px;
+
+    padding:0 8px;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#20b8ff;
+    color:#ffffff;
+
+    border:none;
+    border-radius:999px;
+
+    box-shadow:none;
+
+    font-size:.72rem;
+    font-weight:700;
+
+}
+/*==================================================
+                NOTIFICATION DROPDOWN
+==================================================*/
+
+.notification-dropdown{
+    position:absolute;
+
+    top:72px;
+    right:0;
+
+    width:340px;
+    max-height:500px;
+
+    background:#071423;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.45);
+
+    overflow:hidden;
+
+    opacity:0;
+    visibility:hidden;
+
+    transform:translateY(12px);
+
+    transition:
+        opacity .3s ease,
+        transform .3s ease,
+        visibility .3s ease;
+
+    z-index:2000;
+}
+
+.notification-dropdown.active{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+/*==================================================
+                HEADER
+==================================================*/
+
+.notification-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:16px 18px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.notification-header h4{
+    margin:0;
+
+    color:#fff;
+
+    font-size:1rem;
+    font-weight:600;
+}
+
+/*==================================================
+                LIST
+==================================================*/
+
+.notification-list{
+    max-height:360px;
+    overflow-y:auto;
+}
+
+.notification-list::-webkit-scrollbar{
+    width:6px;
+}
+
+.notification-list::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.18);
+    border-radius:20px;
+}
+
+.notification-list::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+/*==================================================
+                ITEM
+==================================================*/
+
+.notification-item{
+    padding:16px 18px;
+
+    border-left:3px solid #20b8ff;
+    border-bottom:1px solid rgba(255,255,255,.05);
+
+    cursor:pointer;
+
+    transition:
+        background .25s ease,
+        opacity .25s ease;
+
+    animation:fadeIn .25s ease;
+}
+
+.notification-item:hover{
+    background:#10263d;
+}
+
+.notification-item:last-child{
+    border-bottom:none;
+}
+
+/*==================================================
+                TITLE
+==================================================*/
+
+.notification-item h4{
+    margin:0 0 6px;
+
+    color:#fff;
+
+    font-size:.9rem;
+    font-weight:600;
+}
+
+/*==================================================
+                MESSAGE
+==================================================*/
+
+.notification-item p{
+    margin:0 0 8px;
+
+    color:#9fb3c8;
+
+    font-size:.82rem;
+    line-height:1.5;
+}
+
+/*==================================================
+                TIME
+==================================================*/
+
+.notification-item small{
+    display:block;
+
+    color:#7e96ad;
+
+    font-size:.72rem;
+}
+
+/*==================================================
+                READ STATE
+==================================================*/
+
+.notification-item.read{
+    opacity:.65;
+    border-left-color:transparent;
+}
+
+/*==================================================
+                EMPTY STATE
+==================================================*/
+
+.empty-notification{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    padding:45px 20px;
+
+    color:#8fa3b8;
+    text-align:center;
+}
+
+.empty-notification i{
+    font-size:2.2rem;
+    color:#20b8ff;
+}
+
+.empty-notification p{
+    margin:0;
+    font-size:.9rem;
+}
+
+/*=====================================
+        NOTIFICATION ACTIONS
+=====================================*/
+
+.notification-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+
+/*=====================================
+        COUNT
+=====================================*/
+
+.notification-header .notification-count{
+
+    position:static;
+
+    min-width:22px;
+
+    height:22px;
+
+    padding:0 8px;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    background:#20b8ff;
+
+    color:#fff;
+
+
+    border-radius:999px;
+
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+}
+
+
+.notification-header .notification-count.show{
+
+    display:flex;
+
+}
+
+
+
+/*=====================================
+        CLOSE BUTTON
+=====================================*/
+
+.close-notification{
+
+    width:28px;
+
+    height:28px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    border:none;
 
     border-radius:50%;
 
-    border:2px solid #06142a;
 
-    animation:pulse 2s infinite;
+    background:rgba(255,255,255,.08);
 
-}
-
-
-@keyframes pulse{
-
-    0%{
-
-        transform:scale(1);
-
-    }
+    color:#fff;
 
 
-    50%{
-
-        transform:scale(1.35);
-
-    }
+    cursor:pointer;
 
 
-    100%{
-
-        transform:scale(1);
-
-    }
+    transition:.25s ease;
 
 }
 
 
+.close-notification:hover{
+
+    background:#20b8ff;
+
+    transform:rotate(90deg);
+
+}
+
+
+.close-notification i{
+
+    font-size:.85rem;
+
+}
+
+/*==================================
+        QUICK ACCESS
+==================================*/
+
+.quick-access{
+
+    position:relative;
+
+}
+
+
+
+.quick-access-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+
+
+.quick-access-btn i:last-child{
+
+    margin-left:auto;
+
+    font-size:.75rem;
+
+}
+
+
+
+/*==================================
+        QUICK MENU
+==================================*/
+
+
+.quick-menu{
+
+    position:absolute;
+
+    right:100%;
+
+    top:0;
+
+    width:230px;
+
+    padding:10px;
+
+    background:#071423;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:18px;
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,.4);
+
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:
+    translateX(10px);
+
+
+    transition:.3s ease;
+
+}
+
+
+
+.quick-access:hover .quick-menu{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:
+    translateX(0);
+
+}
+
+
+
+.quick-menu a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px;
+
+    border-radius:12px;
+
+}
+
+
+
+.quick-menu a:hover{
+
+    background:
+    rgba(32,184,255,.12);
+
+    transform:translateX(4px);
+
+}
+
+
+
+.quick-menu i{
+
+    color:#20b8ff;
+
+}
+/*==================================================
+                ANIMATION
+==================================================*/
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
 
 /*==================================================
                 PROFILE CARD
@@ -639,7 +1164,6 @@ backdrop-filter:blur(25px);
 
     justify-content:center;
 
-    border-radius:8px;
 
     transition:background .3s ease;
 
@@ -657,18 +1181,13 @@ backdrop-filter:blur(25px);
 
 }
 
-.profile-card:hover .profile-arrow{
 
-    background:rgba(255,255,255,.08);
-
-}
 
 .profile-card:hover .profile-arrow i{
 
     color:#20b8ff !important;
 
 }
-
 
 /*==================================================
                 PROFILE DROPDOWN
@@ -682,18 +1201,17 @@ backdrop-filter:blur(25px);
 
     right:0;
 
-    width:260px;
+    width:280px;
 
-    padding:10px;
+    padding:12px;
 
     background:#071423;
 
     border:1px solid rgba(255,255,255,.08);
 
-    border-radius:18px;
+    border-radius:20px;
 
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.45);
+    box-shadow:0 25px 60px rgba(0,0,0,.45);
 
     backdrop-filter:blur(20px);
 
@@ -701,9 +1219,7 @@ backdrop-filter:blur(25px);
 
     visibility:hidden;
 
-    transform:
-        translateY(12px)
-        scale(.97);
+    transform:translateY(12px) scale(.97);
 
     transition:
         opacity .3s ease,
@@ -720,14 +1236,12 @@ backdrop-filter:blur(25px);
 
     visibility:visible;
 
-    transform:
-        translateY(0)
-        scale(1);
+    transform:translateY(0) scale(1);
 
 }
 
 /*==================================================
-                LINKS
+                    LINKS
 ==================================================*/
 
 .profile-dropdown a{
@@ -736,31 +1250,29 @@ backdrop-filter:blur(25px);
 
     align-items:center;
 
+    justify-content:flex-start;
+
     gap:14px;
 
     width:100%;
 
-    height:48px;
+    min-height:50px;
 
-    padding:0 14px;
+    padding:12px 16px;
 
     color:#edf6ff;
 
-    font-size:.92rem;
+    text-decoration:none;
+
+    font-size:.95rem;
 
     font-weight:500;
 
-    text-decoration:none;
-
-    border-radius:12px;
+    border-radius:14px;
 
     transition:.25s ease;
 
 }
-
-/*==================================================
-                PROFILE LINK
-==================================================*/
 
 .profile-dropdown a:first-child{
 
@@ -768,45 +1280,259 @@ backdrop-filter:blur(25px);
 
     border:1px solid rgba(32,184,255,.15);
 
-    color:#fff;
-
-    margin-bottom:4px;
+    margin-bottom:6px;
 
 }
 
 .profile-dropdown a:first-child:hover{
 
-    background:rgba(32,184,255,.18);
+    background:rgba(32,184,255,.16);
 
 }
-
-/*==================================================
-                HOVER
-==================================================*/
 
 .profile-dropdown a:hover{
 
     background:#10263d;
 
-    color:#fff;
-
     transform:translateX(4px);
 
 }
 
-/*==================================================
-                ICONS
-==================================================*/
-
 .profile-dropdown a i{
 
-    width:20px;
+    width:22px;
+
+    min-width:22px;
 
     text-align:center;
 
+    font-size:15px;
+
     color:#20b8ff;
 
-    font-size:.95rem;
+    flex-shrink:0;
+
+}
+
+.profile-dropdown a span{
+
+    flex:1;
+
+    white-space:nowrap;
+
+}
+
+.dropdown-divider{
+
+    width:100%;
+
+    height:1px;
+
+    margin:10px 0;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+/*=====================================
+        USER HEADER
+=====================================*/
+
+.dropdown-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:18px 18px 20px;
+
+    margin-bottom:8px;
+
+}
+
+/*=====================================
+        AVATAR
+=====================================*/
+
+.dropdown-avatar{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:linear-gradient(
+        135deg,
+        #27b7ff,
+        #0b79ff
+    );
+
+    color:#fff;
+
+    font-size:1.3rem;
+
+    font-weight:700;
+
+    flex-shrink:0;
+
+}
+
+/*=====================================
+        USER DETAILS
+=====================================*/
+
+.dropdown-user-details{
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+    flex:1;
+
+}
+
+.dropdown-user-details h4{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+}
+
+.dropdown-user-details p{
+
+    margin-top:5px;
+
+    color:#9fb0c2;
+
+    font-size:.85rem;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.menu-badge{
+
+    margin-left:auto;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    background:#20b8ff;
+
+    color:#fff;
+
+    font-size:.7rem;
+
+    font-weight:600;
+
+}
+
+.logout-link{
+
+    color:#ff8a8a;
+
+}
+
+.logout-link i{
+
+    color:#ff5d5d;
+
+}
+
+.logout-link:hover{
+
+    background:rgba(255,93,93,.12);
+
+    color:#fff;
+
+}
+
+/*==================================================
+                MENU BADGE
+==================================================*/
+
+.menu-badge{
+
+    margin-left:auto;
+
+    padding:4px 10px;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        135deg,
+        #20b8ff,
+        #2858e8
+    );
+
+    color:#fff;
+
+    font-size:.7rem;
+
+    font-weight:700;
+
+}
+
+/*==================================================
+                DIVIDER
+==================================================*/
+
+.dropdown-divider{
+
+    width:100%;
+
+    height:1px;
+
+    margin:10px 0;
+
+    background:rgba(255,255,255,.08);
+
+}
+
+/*==================================================
+                LOGOUT
+==================================================*/
+
+.logout-link{
+
+    color:#ff7b7b !important;
+
+}
+
+.logout-link i{
+
+    color:#ff4d4d !important;
+
+}
+
+.logout-link:hover{
+
+    background:rgba(255,77,77,.12);
+
+    color:#ff9a9a !important;
 
 }
 

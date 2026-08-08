@@ -1,6 +1,6 @@
-/*=====================================
-            NAVBAR
-=====================================*/
+/*=====================================*
+        NAVBAR
+*=====================================*/
 
 function initNavbar(){
 
@@ -9,71 +9,85 @@ function initNavbar(){
 
     loadNavbarUser();
 
-
     setupProfileDropdown();
-
 
     setupMobileMenu();
 
-
     setupThemeToggle();
-
 
     setupNotifications();
 
+    if(typeof setupNotificationUI === "function"){
+
+        setupNotificationUI();
+
+    }
 
     setupLogout();
 
+    updateNavbarAuth();
 
     setActiveLink();
 
-
     showWelcomeToast();
-
 
 }
 
-/*=====================================
+
+
+/*=====================================*
         LOAD NAVBAR USER
-=====================================*/
+*=====================================*/
 
 function loadNavbarUser(){
 
-
-    const user = getUser();
-
+    const user = 
+    typeof getUser === "function"
+    ? getUser()
+    : null;
 
 
     const username =
-        document.getElementById(
-            "navUsername"
-        );
+    document.getElementById("navUsername");
 
 
     const avatar =
-        document.getElementById(
-            "navUserInitial"
-        );
+    document.getElementById("navUserInitial");
+
+
+    const dropdownUsername =
+    document.getElementById("dropdownUsername");
+
+
+    const dropdownEmail =
+    document.getElementById("dropdownEmail");
+
+
+    const dropdownAvatar =
+    document.getElementById("dropdownUserInitial");
 
 
 
     if(!user){
 
-
-        if(username){
-
-            username.textContent =
-            "Guest";
-
-        }
+        if(username)
+        username.textContent="Guest";
 
 
-        if(avatar){
+        if(avatar)
+        avatar.textContent="G";
 
-            avatar.textContent =
-            "G";
 
-        }
+        if(dropdownUsername)
+        dropdownUsername.textContent="Guest";
+
+
+        if(dropdownEmail)
+        dropdownEmail.textContent="Please sign in";
+
+
+        if(dropdownAvatar)
+        dropdownAvatar.textContent="G";
 
 
         return;
@@ -82,338 +96,529 @@ function loadNavbarUser(){
 
 
 
-
-
-    if(username){
-
-        username.textContent =
-        user.name;
-
-    }
+    if(username)
+    username.textContent =
+    user.name.length > 9
+    ? user.name.slice(0,9)+"..."
+    : user.name;
 
 
 
+    if(avatar)
+    avatar.textContent =
+    user.name.charAt(0).toUpperCase();
 
 
-    if(avatar){
 
-        avatar.textContent =
-        user.name
-        .charAt(0)
-        .toUpperCase();
+    if(dropdownUsername)
+    dropdownUsername.textContent =
+    user.name;
 
-    }
 
+
+    if(dropdownEmail)
+    dropdownEmail.textContent =
+    user.email;
+
+
+
+    if(dropdownAvatar)
+    dropdownAvatar.textContent =
+    user.name.charAt(0).toUpperCase();
 
 }
 
-/*=====================================
-        WELCOME POPUP
-=====================================*/
 
+
+/*=====================================*
+        WELCOME TOAST
+*=====================================*/
 
 function showWelcomeToast(){
 
-
     const user =
-        getUser();
-
+    typeof getUser === "function"
+    ? getUser()
+    : null;
 
 
     const toast =
-        document.getElementById(
-            "welcomeToast"
-        );
+    document.getElementById("welcomeToast");
 
 
     const title =
-        document.getElementById(
-            "welcomeTitle"
-        );
+    document.getElementById("welcomeTitle");
 
 
     const text =
-        document.getElementById(
-            "welcomeText"
-        );
+    document.getElementById("welcomeText");
 
 
 
-    if(!toast || !user){
-
-        return;
-
-    }
+    if(!toast || !user)
+    return;
 
 
 
+    if(title)
+    title.textContent="Welcome Back 👋";
 
 
-    title.textContent =
-    "Welcome Back 👋";
-
-
-
-    text.textContent =
+    if(text)
+    text.textContent=
     `Good to see you, ${user.name}`;
 
 
 
-
-    toast.classList.add(
-        "show"
-    );
-
+    toast.classList.add("show");
 
 
 
     setTimeout(()=>{
 
-
-        toast.classList.remove(
-            "show"
-        );
-
+        toast.classList.remove("show");
 
     },4000);
 
-
-
 }
 
-/*=====================================
+
+
+/*=====================================*
         PROFILE DROPDOWN
-=====================================*/
+*=====================================*/
 
-function setupProfileDropdown() {
+function setupProfileDropdown(){
 
-    const profile = document.querySelector(".profile");
-    const profileCard = document.getElementById("profileCard");
-    const dropdown = document.querySelector(".profile-dropdown");
-    const chevron = document.getElementById("profileChevron");
+    const profile =
+    document.querySelector(".profile");
 
-    if (!profile || !profileCard || !dropdown) return;
 
-    profileCard.addEventListener("click", function (e) {
+    const profileCard =
+    document.getElementById("profileCard");
 
-        e.stopPropagation();
 
-        const opened = profile.classList.toggle("active");
+    const dropdown =
+    document.querySelector(".profile-dropdown");
 
-        if (chevron) {
 
-            chevron.style.transition = ".3s";
+    const chevron =
+    document.getElementById("profileChevron");
 
-            chevron.style.transform =
+
+
+    if(!profile || !profileCard || !dropdown)
+    return;
+
+
+
+    profileCard.addEventListener(
+        "click",
+        function(e){
+
+            e.stopPropagation();
+
+
+            const opened =
+            profile.classList.toggle("active");
+
+
+
+            if(chevron){
+
+                chevron.style.transform =
                 opened
-                    ? "rotate(180deg)"
-                    : "rotate(0deg)";
+                ? "rotate(180deg)"
+                : "rotate(0deg)";
 
-            chevron.style.color =
+
+                chevron.style.color =
                 opened
-                    ? "#20b8ff"
-                    : "#ffffff";
+                ? "#20b8ff"
+                : "#fff";
+
+            }
 
         }
+    );
 
-    });
 
-    dropdown.addEventListener("click", function (e) {
 
-        e.stopPropagation();
+    dropdown.addEventListener(
+        "click",
+        e=>e.stopPropagation()
+    );
 
-    });
 
-    document.addEventListener("click", function () {
 
-        profile.classList.remove("active");
-
-        if (chevron) {
-
-            chevron.style.transform = "rotate(0deg)";
-            chevron.style.color = "#ffffff";
-
-        }
-
-    });
-
-    document.addEventListener("keydown", function (e) {
-
-        if (e.key === "Escape") {
+    document.addEventListener(
+        "click",
+        ()=>{
 
             profile.classList.remove("active");
 
-            if (chevron) {
 
-                chevron.style.transform = "rotate(0deg)";
-                chevron.style.color = "#ffffff";
+            if(chevron){
+
+                chevron.style.transform=
+                "rotate(0deg)";
+
+                chevron.style.color=
+                "#fff";
 
             }
 
         }
+    );
 
-    });
 
 }
 
 
-/*=====================================
+
+/*=====================================*
         MOBILE MENU
-=====================================*/
+*=====================================*/
 
-function setupMobileMenu() {
+function setupMobileMenu(){
 
-    const menuBtn = document.querySelector(".menu-btn");
-    const navLinks = document.querySelector(".nav-links");
+    const menuBtn =
+    document.querySelector(".menu-btn");
 
-    if (!menuBtn || !navLinks) return;
 
-    menuBtn.addEventListener("click", function () {
+    const navLinks =
+    document.querySelector(".nav-links");
 
-        menuBtn.classList.toggle("active");
-        navLinks.classList.toggle("active");
 
-    });
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
+    if(!menuBtn || !navLinks)
+    return;
 
-        link.addEventListener("click", function () {
 
-            menuBtn.classList.remove("active");
-            navLinks.classList.remove("active");
 
-        });
+    menuBtn.addEventListener(
+        "click",
+        ()=>{
+
+            menuBtn.classList.toggle("active");
+
+            navLinks.classList.toggle("active");
+
+        }
+    );
+
+
+
+    document
+    .querySelectorAll(".nav-links a")
+    .forEach(link=>{
+
+        link.addEventListener(
+            "click",
+            ()=>{
+
+                menuBtn.classList.remove("active");
+
+                navLinks.classList.remove("active");
+
+            }
+        );
 
     });
 
 }
 
 
-/*=====================================
+
+/*=====================================*
         THEME
-=====================================*/
+*=====================================*/
 
-function setupThemeToggle() {
+function setupThemeToggle(){
 
-    const button = document.querySelector(".theme-toggle");
+    const button =
+    document.querySelector(".theme-toggle");
 
-    if (!button) return;
 
-    const icon = button.querySelector("i");
+    if(!button)
+    return;
 
-    if (localStorage.getItem("theme") === "dark") {
 
-        document.body.classList.add("dark-mode");
-        icon.className = "fa-solid fa-sun";
+    const icon =
+    button.querySelector("i");
+
+
+
+    if(localStorage.getItem("theme")==="light"){
+
+        document.body.classList.add("light-mode");
+
+        if(icon)
+        icon.className="fa-solid fa-sun";
 
     }
 
-    button.addEventListener("click", function () {
 
-        document.body.classList.toggle("dark-mode");
 
-        const dark =
-            document.body.classList.contains("dark-mode");
+    button.addEventListener(
+        "click",
+        ()=>{
 
-        localStorage.setItem(
-            "theme",
-            dark ? "dark" : "light"
-        );
 
-        icon.className =
-            dark
+            document.body.classList.toggle(
+                "light-mode"
+            );
+
+
+
+            const light =
+            document.body.classList.contains(
+                "light-mode"
+            );
+
+
+
+            localStorage.setItem(
+                "theme",
+                light
+                ? "light"
+                : "dark"
+            );
+
+
+
+            if(icon){
+
+                icon.className =
+                light
                 ? "fa-solid fa-sun"
                 : "fa-solid fa-moon";
 
-    });
-
-}
-
-
-/*=====================================
-        NOTIFICATIONS
-=====================================*/
-
-function setupNotifications() {
-
-    const btn =
-        document.querySelector(".notification-btn");
-
-    if (!btn) return;
-
-    btn.addEventListener("click", function () {
-
-        alert("No new notifications.");
-
-    });
-
-}
-
-
-/*=====================================
-            LOGOUT
-=====================================*/
-
-function setupLogout() {
-
-    const logoutBtn =
-        document.getElementById("navLogout");
-
-    if (!logoutBtn) return;
-
-    logoutBtn.addEventListener("click", function (e) {
-
-        e.preventDefault();
-
-        const popup =
-            document.getElementById("logoutPopup");
-
-        if (popup) {
-
-            popup.classList.add("show");
-
-        }
-
-    });
-
-}
-
-/*=====================================
-        ACTIVE LINK
-=====================================*/
-
-function setActiveLink() {
-
-    const current =
-        window.location.pathname
-            .split("/")
-            .pop();
-
-    document.querySelectorAll(".nav-links a")
-        .forEach(link => {
-
-            const page =
-                link.getAttribute("href")
-                    .split("/")
-                    .pop();
-
-            if (page === current) {
-
-                link.classList.add("active");
-
-            } else {
-
-                link.classList.remove("active");
-
             }
 
-        });
+
+        }
+    );
 
 }
 
 
-/*=====================================
-            EXPORT
-=====================================*/
 
-window.initNavbar = initNavbar;
+/*=====================================*
+        NOTIFICATION DROPDOWN
+*=====================================*/
+
+function setupNotifications(){
+
+    const button =
+    document.querySelector(
+        ".notification-btn"
+    );
+
+
+    const dropdown =
+    document.querySelector(
+        ".notification-dropdown"
+    );
+
+
+
+    if(!button || !dropdown)
+    return;
+
+
+
+    button.addEventListener(
+        "click",
+        e=>{
+
+            e.stopPropagation();
+
+
+            dropdown.classList.toggle(
+                "active"
+            );
+
+        }
+    );
+
+
+
+    dropdown.addEventListener(
+        "click",
+        e=>{
+
+            e.stopPropagation();
+
+        }
+    );
+
+
+
+    document.addEventListener(
+        "click",
+        ()=>{
+
+            dropdown.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+}
+
+
+
+/*=====================================*
+        LOGOUT
+*=====================================*/
+
+function setupLogout(){
+
+    const logoutBtn =
+    document.getElementById("navLogout");
+
+
+    if(!logoutBtn)
+    return;
+
+
+
+    logoutBtn.addEventListener(
+        "click",
+        e=>{
+
+            e.preventDefault();
+
+
+            document
+            .getElementById("logoutPopup")
+            ?.classList.add("show");
+
+
+        }
+    );
+
+}
+
+
+
+/*=====================================*
+        AUTH DISPLAY
+*=====================================*/
+
+function updateNavbarAuth(){
+
+    const loggedIn =
+    localStorage.getItem("isLoggedIn")==="true";
+
+
+    document
+    .getElementById("loginLink")
+    ?.classList.toggle(
+        "hidden",
+        loggedIn
+    );
+
+
+    document
+    .getElementById("createAccountLink")
+    ?.classList.toggle(
+        "hidden",
+        loggedIn
+    );
+
+
+    document
+    .getElementById("dashboardLink")
+    ?.classList.toggle(
+        "hidden",
+        !loggedIn
+    );
+
+
+    document
+    .getElementById("shipmentsLink")
+    ?.classList.toggle(
+        "hidden",
+        !loggedIn
+    );
+
+
+    document
+    .getElementById("historyLink")
+    ?.classList.toggle(
+        "hidden",
+        !loggedIn
+    );
+
+
+    document
+    .getElementById("navLogout")
+    ?.classList.toggle(
+        "hidden",
+        !loggedIn
+    );
+
+}
+
+
+
+/*=====================================*
+        ACTIVE LINK
+*=====================================*/
+
+function setActiveLink(){
+
+    const current =
+    window.location.pathname
+    .split("/")
+    .pop();
+
+
+
+    document
+    .querySelectorAll(".nav-links a")
+    .forEach(link=>{
+
+
+        const href =
+        link.getAttribute("href");
+
+
+        if(!href)
+        return;
+
+
+
+        const page =
+        href.split("/").pop();
+
+
+
+        link.classList.toggle(
+            "active",
+            page===current
+        );
+
+
+    });
+
+}
+
+
+
+/*=====================================*
+        START
+*=====================================*/
+
+document.addEventListener(
+    "DOMContentLoaded",
+    initNavbar
+);
+
+
+
+window.initNavbar =
+initNavbar;

@@ -148,24 +148,35 @@ function setupRegister(){
 
 
 
-            saveUser(user);
+saveUser(user);
 
 
 
-            setLoginStatus();
+setLoginStatus();
+
+
+
+addNotification(
+
+    "success",
+
+    "Account Created",
+
+    "Welcome to IDOKO LEGACY!"
+
+);
 
 
 
 
 
+showPopup(
 
-            showPopup(
+    "Success",
 
-                "Success",
+    "Account created successfully."
 
-                "Account created successfully."
-
-            );
+);
 
 
 

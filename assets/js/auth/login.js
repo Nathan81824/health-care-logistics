@@ -172,24 +172,30 @@ function setupLogin(){
 
 
 
-            setLoginStatus();
+setLoginStatus();
 
 
 
+addNotification(
+
+    "success",
+
+    "Login Successful",
+
+    `Welcome back, ${user.name}!`
+
+);
 
 
+showPopup(
 
+    "Welcome Back",
 
+    `Welcome back ${user.name}`,
 
-            showPopup(
+    "success"
 
-                "Welcome Back",
-
-                `Welcome back ${user.name}`,
-
-                "success"
-
-            );
+);
 
 
 
