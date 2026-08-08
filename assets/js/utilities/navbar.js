@@ -2,10 +2,9 @@
         NAVBAR
 *=====================================*/
 
-function initNavbar(){
+function initNavbar() {
 
     console.log("✅ Navbar initialized");
-
 
     loadNavbarUser();
 
@@ -15,13 +14,7 @@ function initNavbar(){
 
     setupThemeToggle();
 
-    setupNotifications();
-
-    if(typeof setupNotificationUI === "function"){
-
-        setupNotificationUI();
-
-    }
+    setupNotificationUI();
 
     setupLogout();
 
@@ -34,237 +27,316 @@ function initNavbar(){
 }
 
 
-
 /*=====================================*
         LOAD NAVBAR USER
 *=====================================*/
 
-function loadNavbarUser(){
+function loadNavbarUser() {
 
-    const user = 
-    typeof getUser === "function"
-    ? getUser()
-    : null;
+    const user = getUser();
 
 
     const username =
-    document.getElementById("navUsername");
-
+        document.getElementById("navUsername");
 
     const avatar =
-    document.getElementById("navUserInitial");
-
+        document.getElementById("navUserInitial");
 
     const dropdownUsername =
-    document.getElementById("dropdownUsername");
-
+        document.getElementById("dropdownUsername");
 
     const dropdownEmail =
-    document.getElementById("dropdownEmail");
-
+        document.getElementById("dropdownEmail");
 
     const dropdownAvatar =
-    document.getElementById("dropdownUserInitial");
+        document.getElementById("dropdownUserInitial");
 
 
+    /*=================================
+            GUEST
+    =================================*/
 
-    if(!user){
+    if (!user) {
 
-        if(username)
-        username.textContent="Guest";
+        if (username) {
+            username.textContent = "Guest";
+        }
 
+        if (avatar) {
+            avatar.textContent = "G";
+        }
 
-        if(avatar)
-        avatar.textContent="G";
+        if (dropdownUsername) {
+            dropdownUsername.textContent = "Guest";
+        }
 
+        if (dropdownEmail) {
+            dropdownEmail.textContent =
+                "Please sign in";
+        }
 
-        if(dropdownUsername)
-        dropdownUsername.textContent="Guest";
-
-
-        if(dropdownEmail)
-        dropdownEmail.textContent="Please sign in";
-
-
-        if(dropdownAvatar)
-        dropdownAvatar.textContent="G";
-
+        if (dropdownAvatar) {
+            dropdownAvatar.textContent = "G";
+        }
 
         return;
+    }
+
+
+    /*=================================
+            LOGGED IN USER
+    =================================*/
+
+    if (username) {
+
+        username.textContent =
+            user.name.length > 9
+                ? user.name.slice(0, 9) + "..."
+                : user.name;
 
     }
 
 
+    if (avatar) {
 
-    if(username)
-    username.textContent =
-    user.name.length > 9
-    ? user.name.slice(0,9)+"..."
-    : user.name;
+        avatar.textContent =
+            user.name
+                .charAt(0)
+                .toUpperCase();
 
-
-
-    if(avatar)
-    avatar.textContent =
-    user.name.charAt(0).toUpperCase();
+    }
 
 
+    if (dropdownUsername) {
 
-    if(dropdownUsername)
-    dropdownUsername.textContent =
-    user.name;
+        dropdownUsername.textContent =
+            user.name;
 
-
-
-    if(dropdownEmail)
-    dropdownEmail.textContent =
-    user.email;
+    }
 
 
+    if (dropdownEmail) {
 
-    if(dropdownAvatar)
-    dropdownAvatar.textContent =
-    user.name.charAt(0).toUpperCase();
+        dropdownEmail.textContent =
+            user.email;
+
+    }
+
+
+    if (dropdownAvatar) {
+
+        dropdownAvatar.textContent =
+            user.name
+                .charAt(0)
+                .toUpperCase();
+
+    }
 
 }
-
 
 
 /*=====================================*
         WELCOME TOAST
 *=====================================*/
 
-function showWelcomeToast(){
+function showWelcomeToast() {
 
-    const user =
-    typeof getUser === "function"
-    ? getUser()
-    : null;
+    const user = getUser();
 
 
     const toast =
-    document.getElementById("welcomeToast");
-
+        document.getElementById(
+            "welcomeToast"
+        );
 
     const title =
-    document.getElementById("welcomeTitle");
-
+        document.getElementById(
+            "welcomeTitle"
+        );
 
     const text =
-    document.getElementById("welcomeText");
+        document.getElementById(
+            "welcomeText"
+        );
 
 
+    if (
+        !toast ||
+        !user ||
+        !title ||
+        !text
+    ) {
 
-    if(!toast || !user)
-    return;
+        return;
+
+    }
 
 
+    title.textContent =
+        "Welcome Back 👋";
 
-    if(title)
-    title.textContent="Welcome Back 👋";
 
-
-    if(text)
-    text.textContent=
-    `Good to see you, ${user.name}`;
-
+    text.textContent =
+        `Good to see you, ${user.name}`;
 
 
     toast.classList.add("show");
 
 
-
-    setTimeout(()=>{
+    setTimeout(function () {
 
         toast.classList.remove("show");
 
-    },4000);
+    }, 4000);
 
 }
-
-
 
 /*=====================================*
         PROFILE DROPDOWN
 *=====================================*/
 
-function setupProfileDropdown(){
-
-    const profile =
-    document.querySelector(".profile");
-
+function setupProfileDropdown() {
 
     const profileCard =
-    document.getElementById("profileCard");
+        document.getElementById("profileCard");
 
-
-    const dropdown =
-    document.querySelector(".profile-dropdown");
-
+    const profileDropdown =
+        document.getElementById("profileDropdown");
 
     const chevron =
-    document.getElementById("profileChevron");
+        document.getElementById("profileChevron");
 
 
+    /*=================================
+            CHECK ELEMENTS
+    =================================*/
 
-    if(!profile || !profileCard || !dropdown)
-    return;
+    if (!profileCard || !profileDropdown) {
+
+        console.warn(
+            "⚠️ Profile elements not found"
+        );
+
+        return;
+
+    }
 
 
+    /*
+        GET THE PROFILE WRAPPER
+
+        This is the parent containing
+        both the button and dropdown.
+    */
+
+    const profile =
+        profileCard.closest(".profile");
+
+
+    if (!profile) {
+
+        console.warn(
+            "⚠️ .profile wrapper not found"
+        );
+
+        return;
+
+    }
+
+
+    /*=================================
+            OPEN / CLOSE
+    =================================*/
 
     profileCard.addEventListener(
         "click",
-        function(e){
+        function (event) {
 
-            e.stopPropagation();
+            event.preventDefault();
 
-
-            const opened =
-            profile.classList.toggle("active");
+            event.stopPropagation();
 
 
+            const isOpen =
+                profile.classList.toggle(
+                    "active"
+                );
 
-            if(chevron){
+
+            /*=========================
+                    CHEVRON
+            =========================*/
+
+            if (chevron) {
 
                 chevron.style.transform =
-                opened
-                ? "rotate(180deg)"
-                : "rotate(0deg)";
-
-
-                chevron.style.color =
-                opened
-                ? "#20b8ff"
-                : "#fff";
+                    isOpen
+                        ? "rotate(180deg)"
+                        : "rotate(0deg)";
 
             }
+
+
+            /*=========================
+                    ACCESSIBILITY
+            =========================*/
+
+            profileCard.setAttribute(
+                "aria-expanded",
+                isOpen
+                    ? "true"
+                    : "false"
+            );
 
         }
     );
 
 
+    /*=================================
+        DON'T CLOSE INSIDE DROPDOWN
+    =================================*/
 
-    dropdown.addEventListener(
+    profileDropdown.addEventListener(
         "click",
-        e=>e.stopPropagation()
+        function (event) {
+
+            event.stopPropagation();
+
+        }
     );
 
 
+    /*=================================
+            CLOSE OUTSIDE
+    =================================*/
 
     document.addEventListener(
         "click",
-        ()=>{
+        function (event) {
 
-            profile.classList.remove("active");
+            if (
+                !profile.contains(
+                    event.target
+                )
+            ) {
+
+                profile.classList.remove(
+                    "active"
+                );
 
 
-            if(chevron){
+                profileCard.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
 
-                chevron.style.transform=
-                "rotate(0deg)";
 
-                chevron.style.color=
-                "#fff";
+                if (chevron) {
+
+                    chevron.style.transform =
+                        "rotate(0deg)";
+
+                }
 
             }
 
@@ -272,230 +344,567 @@ function setupProfileDropdown(){
     );
 
 
+    /*=================================
+            CLOSE WITH ESC
+    =================================*/
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                profile.classList.remove(
+                    "active"
+                );
+
+
+                profileCard.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                if (chevron) {
+
+                    chevron.style.transform =
+                        "rotate(0deg)";
+
+                }
+
+            }
+
+        }
+    );
+
+
+    console.log(
+        "✅ Profile dropdown initialized"
+    );
+
 }
 
+/*=====================================*
+        NOTIFICATION DROPDOWNS
+*=====================================*/
+
+function setupNotificationDropdowns() {
+
+    /*=================================
+            TOP NAVBAR BELL
+    =================================*/
+
+    const notificationButton =
+        document.querySelector(
+            ".notification-btn"
+        );
+
+
+    const topDropdown =
+        document.querySelector(
+            ".notification-wrapper .notification-dropdown"
+        );
+
+
+    const topCloseButton =
+        topDropdown
+            ?.querySelector(
+                ".close-notification"
+            );
+
+
+    /*=================================
+            PROFILE NOTIFICATION
+    =================================*/
+
+    const profileNotificationLink =
+        document.getElementById(
+            "profileNotificationLink"
+        );
+
+
+    const profileDropdown =
+        document.getElementById(
+            "notificationDropdown"
+        );
+
+
+    const profileCloseButton =
+        profileDropdown
+            ?.querySelector(
+                ".close-notification"
+            );
+
+
+    /*=================================
+            TOP BELL CLICK
+    =================================*/
+
+    if (
+        notificationButton &&
+        topDropdown
+    ) {
+
+        notificationButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                /* Close profile notification */
+
+                if (profileDropdown) {
+
+                    profileDropdown.classList.remove(
+                        "active"
+                    );
+
+                }
+
+
+                /* Open top notification */
+
+                topDropdown.classList.toggle(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /*=================================
+                TOP X BUTTON
+        =================================*/
+
+        if (topCloseButton) {
+
+            topCloseButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    topDropdown.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /*=================================
+                KEEP TOP OPEN
+        =================================*/
+
+        topDropdown.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+    }
+
+
+    /*=================================
+        PROFILE NOTIFICATION CLICK
+    =================================*/
+
+    if (
+        profileNotificationLink &&
+        profileDropdown
+    ) {
+
+        profileNotificationLink.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                /* Close top notification */
+
+                if (topDropdown) {
+
+                    topDropdown.classList.remove(
+                        "active"
+                    );
+
+                }
+
+
+                /* Open profile notification */
+
+                profileDropdown.classList.toggle(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /*=================================
+                PROFILE X BUTTON
+        =================================*/
+
+        if (profileCloseButton) {
+
+            profileCloseButton.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    profileDropdown.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /*=================================
+                KEEP PROFILE OPEN
+        =================================*/
+
+        profileDropdown.addEventListener(
+            "click",
+            function (event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+    }
+
+
+    /*=================================
+            CLOSE OUTSIDE
+    =================================*/
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            /* TOP */
+
+            if (
+                topDropdown &&
+                notificationButton &&
+                !topDropdown.contains(
+                    event.target
+                ) &&
+                !notificationButton.contains(
+                    event.target
+                )
+            ) {
+
+                topDropdown.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            /* PROFILE */
+
+            if (
+                profileDropdown &&
+                profileNotificationLink &&
+                !profileDropdown.contains(
+                    event.target
+                ) &&
+                !profileNotificationLink.contains(
+                    event.target
+                )
+            ) {
+
+                profileDropdown.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    /*=================================
+            ESCAPE
+    =================================*/
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key !== "Escape") {
+                return;
+            }
+
+
+            if (topDropdown) {
+
+                topDropdown.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+            if (profileDropdown) {
+
+                profileDropdown.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
 /*=====================================*
         MOBILE MENU
 *=====================================*/
 
-function setupMobileMenu(){
+function setupMobileMenu() {
 
     const menuBtn =
-    document.querySelector(".menu-btn");
+        document.querySelector(
+            ".menu-btn"
+        );
 
 
     const navLinks =
-    document.querySelector(".nav-links");
-
-
-
-    if(!menuBtn || !navLinks)
-    return;
-
-
-
-    menuBtn.addEventListener(
-        "click",
-        ()=>{
-
-            menuBtn.classList.toggle("active");
-
-            navLinks.classList.toggle("active");
-
-        }
-    );
-
-
-
-    document
-    .querySelectorAll(".nav-links a")
-    .forEach(link=>{
-
-        link.addEventListener(
-            "click",
-            ()=>{
-
-                menuBtn.classList.remove("active");
-
-                navLinks.classList.remove("active");
-
-            }
+        document.querySelector(
+            ".nav-links"
         );
 
-    });
 
-}
+    if (
+        !menuBtn ||
+        !navLinks
+    ) {
 
-
-
-/*=====================================*
-        THEME
-*=====================================*/
-
-function setupThemeToggle(){
-
-    const button =
-    document.querySelector(".theme-toggle");
-
-
-    if(!button)
-    return;
-
-
-    const icon =
-    button.querySelector("i");
-
-
-
-    if(localStorage.getItem("theme")==="light"){
-
-        document.body.classList.add("light-mode");
-
-        if(icon)
-        icon.className="fa-solid fa-sun";
+        return;
 
     }
 
 
+    menuBtn.addEventListener(
+        "click",
+        function () {
+
+            menuBtn.classList.toggle(
+                "active"
+            );
+
+            navLinks.classList.toggle(
+                "active"
+            );
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".nav-links a"
+        )
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    menuBtn.classList.remove(
+                        "active"
+                    );
+
+                    navLinks.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+/*=====================================*
+        THEME TOGGLE
+*=====================================*/
+
+function setupThemeToggle() {
+
+    const button =
+        document.querySelector(
+            ".theme-toggle"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    const icon =
+        button.querySelector("i");
+
+
+    /*=================================
+            LOAD SAVED THEME
+    =================================*/
+
+    if (
+        localStorage.getItem(
+            "theme"
+        ) === "dark"
+    ) {
+
+        document.body.classList.add(
+            "dark-mode"
+        );
+
+
+        if (icon) {
+
+            icon.className =
+                "fa-solid fa-sun";
+
+        }
+
+    }
+
+
+    /*=================================
+            TOGGLE
+    =================================*/
 
     button.addEventListener(
         "click",
-        ()=>{
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
 
 
             document.body.classList.toggle(
-                "light-mode"
+                "dark-mode"
             );
 
 
-
-            const light =
-            document.body.classList.contains(
-                "light-mode"
-            );
-
+            const dark =
+                document.body.classList.contains(
+                    "dark-mode"
+                );
 
 
             localStorage.setItem(
                 "theme",
-                light
-                ? "light"
-                : "dark"
+                dark
+                    ? "dark"
+                    : "light"
             );
 
 
-
-            if(icon){
+            if (icon) {
 
                 icon.className =
-                light
-                ? "fa-solid fa-sun"
-                : "fa-solid fa-moon";
+                    dark
+                        ? "fa-solid fa-sun"
+                        : "fa-solid fa-moon";
 
             }
 
-
         }
     );
 
 }
-
-
-
-/*=====================================*
-        NOTIFICATION DROPDOWN
-*=====================================*/
-
-function setupNotifications(){
-
-    const button =
-    document.querySelector(
-        ".notification-btn"
-    );
-
-
-    const dropdown =
-    document.querySelector(
-        ".notification-dropdown"
-    );
-
-
-
-    if(!button || !dropdown)
-    return;
-
-
-
-    button.addEventListener(
-        "click",
-        e=>{
-
-            e.stopPropagation();
-
-
-            dropdown.classList.toggle(
-                "active"
-            );
-
-        }
-    );
-
-
-
-    dropdown.addEventListener(
-        "click",
-        e=>{
-
-            e.stopPropagation();
-
-        }
-    );
-
-
-
-    document.addEventListener(
-        "click",
-        ()=>{
-
-            dropdown.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-}
-
 
 
 /*=====================================*
         LOGOUT
 *=====================================*/
 
-function setupLogout(){
+function setupLogout() {
 
     const logoutBtn =
-    document.getElementById("navLogout");
+        document.getElementById(
+            "navLogout"
+        );
 
 
-    if(!logoutBtn)
-    return;
-
+    if (!logoutBtn) {
+        return;
+    }
 
 
     logoutBtn.addEventListener(
         "click",
-        e=>{
+        function (event) {
 
-            e.preventDefault();
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            const loggedIn =
+                localStorage.getItem(
+                    "isLoggedIn"
+                ) === "true";
+
+
+            if (!loggedIn) {
+
+                if (
+                    typeof showError ===
+                    "function"
+                ) {
+
+                    showError(
+                        "You're not logged in."
+                    );
+
+                }
+
+                return;
+
+            }
 
 
             document
-            .getElementById("logoutPopup")
-            ?.classList.add("show");
-
+                .getElementById(
+                    "logoutPopup"
+                )
+                ?.classList.add(
+                    "show"
+                );
 
         }
     );
@@ -503,122 +912,145 @@ function setupLogout(){
 }
 
 
-
 /*=====================================*
-        AUTH DISPLAY
+        UPDATE NAVBAR AUTH
 *=====================================*/
 
-function updateNavbarAuth(){
+function updateNavbarAuth() {
 
     const loggedIn =
-    localStorage.getItem("isLoggedIn")==="true";
+        localStorage.getItem(
+            "isLoggedIn"
+        ) === "true";
 
 
-    document
-    .getElementById("loginLink")
-    ?.classList.toggle(
-        "hidden",
-        loggedIn
-    );
-
+    /*=================================
+            GUEST LINKS
+    =================================*/
 
     document
-    .getElementById("createAccountLink")
-    ?.classList.toggle(
-        "hidden",
-        loggedIn
-    );
-
-
-    document
-    .getElementById("dashboardLink")
-    ?.classList.toggle(
-        "hidden",
-        !loggedIn
-    );
-
-
-    document
-    .getElementById("shipmentsLink")
-    ?.classList.toggle(
-        "hidden",
-        !loggedIn
-    );
-
-
-    document
-    .getElementById("historyLink")
-    ?.classList.toggle(
-        "hidden",
-        !loggedIn
-    );
-
-
-    document
-    .getElementById("navLogout")
-    ?.classList.toggle(
-        "hidden",
-        !loggedIn
-    );
-
-}
-
-
-
-/*=====================================*
-        ACTIVE LINK
-*=====================================*/
-
-function setActiveLink(){
-
-    const current =
-    window.location.pathname
-    .split("/")
-    .pop();
-
-
-
-    document
-    .querySelectorAll(".nav-links a")
-    .forEach(link=>{
-
-
-        const href =
-        link.getAttribute("href");
-
-
-        if(!href)
-        return;
-
-
-
-        const page =
-        href.split("/").pop();
-
-
-
-        link.classList.toggle(
-            "active",
-            page===current
+        .getElementById(
+            "loginLink"
+        )
+        ?.classList.toggle(
+            "hidden",
+            loggedIn
         );
 
 
-    });
+    document
+        .getElementById(
+            "createAccountLink"
+        )
+        ?.classList.toggle(
+            "hidden",
+            loggedIn
+        );
+
+
+    /*=================================
+            USER LINKS
+    =================================*/
+
+    document
+        .getElementById(
+            "dashboardLink"
+        )
+        ?.classList.toggle(
+            "hidden",
+            !loggedIn
+        );
+
+
+    document
+        .getElementById(
+            "shipmentsLink"
+        )
+        ?.classList.toggle(
+            "hidden",
+            !loggedIn
+        );
+
+
+    document
+        .getElementById(
+            "historyLink"
+        )
+        ?.classList.toggle(
+            "hidden",
+            !loggedIn
+        );
+
+
+    document
+        .getElementById(
+            "navLogout"
+        )
+        ?.classList.toggle(
+            "hidden",
+            !loggedIn
+        );
 
 }
 
 
-
 /*=====================================*
-        START
+        ACTIVE NAV LINK
 *=====================================*/
 
-document.addEventListener(
-    "DOMContentLoaded",
-    initNavbar
-);
+function setActiveLink() {
+
+    const current =
+        window.location.pathname
+            .split("/")
+            .pop();
 
 
+    document
+        .querySelectorAll(
+            ".nav-links a"
+        )
+        .forEach(link => {
+
+            const href =
+                link.getAttribute(
+                    "href"
+                );
+
+
+            if (!href) {
+                return;
+            }
+
+
+            const page =
+                href
+                    .split("/")
+                    .pop();
+
+
+            if (page === current) {
+
+                link.classList.add(
+                    "active"
+                );
+
+            } else {
+
+                link.classList.remove(
+                    "active"
+                );
+
+            }
+
+        });
+
+}
+
+
+/*=====================================*
+        EXPORT
+*=====================================*/
 
 window.initNavbar =
-initNavbar;
+    initNavbar;
