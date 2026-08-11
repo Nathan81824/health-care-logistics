@@ -1,24 +1,23 @@
-/*=====================================
-        WHATSAPP WIDGET
-=====================================*/
+/*==========================================================
+    WHATSAPP WIDGET
+==========================================================*/
 
-.whatsapp-widget{
+.whatsapp-widget {
+
     position:fixed;
+
     right:25px;
     bottom:25px;
+
     z-index:9999;
+
 }
 
+/*==========================================================
+    WHATSAPP BUTTON
+==========================================================*/
 
-/*=====================================
-        FLOATING BUTTON
-=====================================*/
-
-/*=====================================
-        WHATSAPP BUTTON
-=====================================*/
-
-.whatsapp-toggle{
+.whatsapp-toggle {
 
     position:fixed;
 
@@ -32,139 +31,263 @@
     align-items:center;
     justify-content:center;
 
+    padding:0;
+
     border:none;
     outline:none;
 
     border-radius:50%;
 
-    background:linear-gradient(
-        135deg,
-        #25D366,
-        #128C7E
-    );
+    background:#18b957;
+
+    color:#ffffff;
 
     cursor:pointer;
 
     z-index:999;
 
     box-shadow:
-        0 15px 35px rgba(37,211,102,.35);
+        0 10px 25px rgba(0,0,0,.22);
 
-    transition:.35s ease;
-    animation: .6s whatsappBounce ease-in-out infinite;
+    transition:
+        background .2s ease,
+        box-shadow .2s ease,
+        transform .15s ease;
 
+    animation:
+        whatsappBounce 3.5s ease-in-out infinite;
 
 }
 
-.whatsapp-toggle svg{
+
+/*==========================================================
+    ICON
+==========================================================*/
+
+.whatsapp-toggle svg {
 
     width:34px;
     height:34px;
 
-    fill:#fff;
+    display:block;
 
-    transition:.35s ease;
+    fill:#ffffff;
 
-}
-
-.whatsapp-toggle{
-
-    animation:whatsappFloat 4s ease-in-out infinite;
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
 
 }
 
 
-/*=====================================
-        CHAT BOX
-=====================================*/
+/*==========================================================
+    HOVER
+==========================================================*/
 
-/*=====================================
-        CHAT BOX
-=====================================*/
+.whatsapp-toggle:hover {
 
-.chat-box{
+    background:#16a84f;
+
+    box-shadow:
+        0 10px 24px rgba(0,0,0,.25);
+
+}
+
+
+.whatsapp-toggle:hover svg {
+
+    transform:scale(1.05);
+
+}
+
+
+/*==========================================================
+    CLICKED / ACTIVE
+==========================================================*/
+
+.whatsapp-toggle:active {
+
+    background:#0d6b38;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.35);
+
+    transform:scale(.90);
+
+}
+
+
+.whatsapp-toggle:active svg {
+
+    transform:scale(.94);
+
+    opacity:.9;
+
+}
+
+
+/*==========================================================
+    FOCUS
+==========================================================*/
+
+.whatsapp-toggle:focus {
+
+    outline:none;
+
+}
+
+
+.whatsapp-toggle:focus-visible {
+
+    box-shadow:
+        0 0 0 3px rgba(255,255,255,.12),
+        0 8px 20px rgba(0,0,0,.25);
+
+}
+
+
+/*==========================================================
+    WHATSAPP BOUNCE ANIMATION
+==========================================================*/
+
+@keyframes whatsappBounce {
+
+    0% {
+
+        transform:translateY(0);
+
+    }
+
+    8% {
+
+        transform:translateY(-4px);
+
+    }
+
+    16% {
+
+        transform:translateY(0);
+
+    }
+
+    24% {
+
+        transform:translateY(-7px);
+
+    }
+
+    34% {
+
+        transform:translateY(0);
+
+    }
+
+    42% {
+
+        transform:translateY(-4px);
+
+    }
+
+    50% {
+
+        transform:translateY(0);
+
+    }
+
+    100% {
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==========================================================
+    CHAT BOX
+==========================================================*/
+
+.chat-box {
 
     position:absolute;
 
     right:0;
     bottom:85px;
 
-
     width:375px;
     max-width:90vw;
 
-
     height:530px;
-
 
     display:flex;
     flex-direction:column;
 
-
     background:#f7f8fa;
-
 
     border-radius:20px;
 
-
     overflow:hidden;
 
-
     box-shadow:
-    0 15px 40px rgba(0,0,0,.25);
-
-
+        0 15px 40px rgba(0,0,0,.25);
 
     opacity:0;
     visibility:hidden;
 
+    pointer-events:none;
 
     transform:
-    translateY(25px)
-    scale(.9);
+        translateY(25px)
+        scale(.9);
 
+    transform-origin:bottom right;
 
-    transition:.35s ease;
+    transition:
+        opacity .35s ease,
+        visibility .35s ease,
+        transform .35s ease;
 
 }
 
 
+/*==========================================================
+    ACTIVE CHAT BOX
+==========================================================*/
 
-.chat-box.active{
+.chat-box.active {
 
     opacity:1;
 
     visibility:visible;
 
+    pointer-events:auto;
 
     transform:
-    translateY(0)
-    scale(1);
+        translateY(0)
+        scale(1);
 
-} 
-
-/*=====================================
-        WHATSAPP CHAT SCROLLBAR
-=====================================*/
+}
 
 
-.chat-body::-webkit-scrollbar{
+/*==========================================================
+    CHAT BODY SCROLLBAR
+==========================================================*/
+
+.chat-body::-webkit-scrollbar {
 
     width:5px;
 
 }
 
 
-.chat-body,
-.quick-replies::-webkit-scrollbar-track{
+.chat-body::-webkit-scrollbar-track {
 
     background:transparent;
 
 }
 
 
-.chat-body,
-.quick-replies::-webkit-scrollbar-thumb{
+.chat-body::-webkit-scrollbar-thumb {
 
     background:#25D366;
 
@@ -173,51 +296,110 @@
 }
 
 
-.chat-body,
-.quick-replies::-webkit-scrollbar-thumb:hover{
+.chat-body::-webkit-scrollbar-thumb:hover {
 
     background:#128C7E;
 
 }
 
 
-/* Firefox */
+/*==========================================================
+    QUICK REPLIES SCROLLBAR
+==========================================================*/
 
-.chat-body,
-.quick-replies{
+.quick-replies::-webkit-scrollbar {
+
+    height:6px;
+
+}
+
+
+.quick-replies::-webkit-scrollbar-track {
+
+    background:transparent;
+
+}
+
+
+.quick-replies::-webkit-scrollbar-thumb {
+
+    background:#ddd;
+
+    border-radius:20px;
+
+}
+
+
+.quick-replies::-webkit-scrollbar-thumb:hover {
+
+    background:#bbb;
+
+}
+
+
+/*==========================================================
+    FIREFOX SCROLLBAR
+==========================================================*/
+
+.chat-body {
 
     scrollbar-width:thin;
 
-    scrollbar-color:#25D366 transparent;
+    scrollbar-color:
+        #25D366
+        transparent;
 
 }
-/*=====================================
-        HEADER
-=====================================*/
 
-.chat-header{
+
+.quick-replies {
+
+    scrollbar-width:thin;
+
+    scrollbar-color:
+        #ddd
+        transparent;
+
+}
+
+
+/*==========================================================
+    CHAT HEADER
+==========================================================*/
+
+.chat-header {
 
     background:#25D366;
 
     padding:13px;
 
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
-    color:#fff;
+    color:#ffffff;
 
 }
 
-.chat-user{
+
+/*==========================================================
+    CHAT USER
+==========================================================*/
+
+.chat-user {
 
     display:flex;
+
     align-items:center;
+
     gap:15px;
 
 }
 
-.chat-avatar{
+
+.chat-avatar {
 
     width:55px;
     height:55px;
@@ -227,28 +409,40 @@
     background:rgba(255,255,255,.2);
 
     display:flex;
-    justify-content:center;
+
     align-items:center;
+    justify-content:center;
 
     font-size:1.5rem;
 
 }
 
-.chat-user h3{
+
+.chat-user h3 {
+
+    margin:0 0 5px;
+
+    color:#ffffff;
 
     font-size:1.1rem;
 
-    margin-bottom:5px;
-
 }
 
-.chat-user span{
+
+.chat-user span {
 
     font-size:.9rem;
 
+    color:#ffffff;
+
 }
 
-.online{
+
+/*==========================================================
+    ONLINE INDICATOR
+==========================================================*/
+
+.online {
 
     width:8px;
     height:8px;
@@ -263,26 +457,56 @@
 
 }
 
-.close-chat{
+
+/*==========================================================
+    CLOSE CHAT
+==========================================================*/
+
+.close-chat {
+
+    width:36px;
+    height:36px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:0;
 
     border:none;
 
-    background:none;
+    background:transparent;
 
-    color:#fff;
+    color:#ffffff;
 
     cursor:pointer;
 
     font-size:1.4rem;
 
+    border-radius:50%;
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+
 }
 
 
-/*=====================================
-        BODY
-=====================================*/
+.close-chat:hover {
 
-.chat-body{
+    background:rgba(0,0,0,.12);
+
+    transform:rotate(90deg);
+
+}
+
+
+/*==========================================================
+    CHAT BODY
+==========================================================*/
+
+.chat-body {
 
     flex:1;
 
@@ -293,36 +517,46 @@
     background:#efeae2;
 
     background-image:
-    radial-gradient(circle,#ffffff55 1px,transparent 1px);
+        radial-gradient(
+            circle,
+            #ffffff55 1px,
+            transparent 1px
+        );
 
     background-size:22px 22px;
 
 }
 
-.message{
+
+/*==========================================================
+    MESSAGE
+==========================================================*/
+
+.message {
 
     width:82%;
 
-    background:#fff;
+    background:#ffffff;
 
     padding:18px;
 
     border-radius:18px;
 
-    color:#333;
+    color:#333333;
 
     line-height:1.7;
 
-    box-shadow:0 6px 15px rgba(0,0,0,.08);
+    box-shadow:
+        0 6px 15px rgba(0,0,0,.08);
 
 }
 
 
-/*=====================================
-        QUICK REPLIES
-=====================================*/
+/*==========================================================
+    QUICK REPLIES
+==========================================================*/
 
-.quick-replies{
+.quick-replies {
 
     display:flex;
 
@@ -332,25 +566,12 @@
 
     padding:15px;
 
-    background:#fff;
+    background:#ffffff;
 
 }
 
-.quick-replies::-webkit-scrollbar{
 
-    height:6px;
-
-}
-
-.quick-replies::-webkit-scrollbar-thumb{
-
-    background:#ddd;
-
-    border-radius:20px;
-
-}
-
-.quick-replies button{
+.quick-replies button {
 
     white-space:nowrap;
 
@@ -364,24 +585,32 @@
 
     background:#f2f2f2;
 
-    transition:.3s;
+    color:#333333;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
 
 }
 
-.quick-replies button:hover{
+
+.quick-replies button:hover {
 
     background:#25D366;
 
-    color:#fff;
+    color:#ffffff;
+
+    transform:translateY(-2px);
 
 }
 
 
-/*=====================================
-        INPUT
-=====================================*/
+/*==========================================================
+    CHAT INPUT
+==========================================================*/
 
-.chat-input{
+.chat-input {
 
     display:flex;
 
@@ -389,13 +618,16 @@
 
     padding:18px;
 
-    background:#fff;
+    background:#ffffff;
 
 }
 
-.chat-input input{
+
+.chat-input input {
 
     flex:1;
+
+    min-width:0;
 
     border:1px solid #ddd;
 
@@ -407,12 +639,38 @@
 
     font-size:.95rem;
 
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease;
+
 }
 
-.chat-input button{
+
+.chat-input input:focus {
+
+    border-color:#25D366;
+
+    box-shadow:
+        0 0 0 3px rgba(37,211,102,.1);
+
+}
+
+
+/*==========================================================
+    SEND BUTTON
+==========================================================*/
+
+.chat-input button {
 
     width:55px;
     height:55px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
 
     border:none;
 
@@ -420,28 +678,46 @@
 
     background:#25D366;
 
-    color:#fff;
+    color:#ffffff;
 
     cursor:pointer;
 
     font-size:1.2rem;
 
-    transition:.3s;
+    transition:
+        background .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
 
 }
 
-.chat-input button:hover{
+
+.chat-input button:hover {
+
+    background:#1fb957;
 
     transform:scale(1.08);
 
+    box-shadow:
+        0 6px 15px rgba(37,211,102,.2);
+
 }
 
 
-/*=====================================
-        CONTINUE BUTTON
-=====================================*/
+.chat-input button:active {
 
-.continue-btn{
+    background:#168c43;
+
+    transform:scale(.94);
+
+}
+
+
+/*==========================================================
+    CONTINUE BUTTON
+==========================================================*/
+
+.continue-btn {
 
     margin:0 18px 18px;
 
@@ -451,35 +727,69 @@
 
     background:#25D366;
 
-    color:#fff;
+    color:#ffffff;
 
     text-decoration:none;
 
     font-weight:700;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
+
     gap:10px;
 
-    transition:.3s;
+    transition:
+        background .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
 
 }
 
-.continue-btn:hover{
+
+.continue-btn:hover {
 
     background:#1ea952;
 
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(37,211,102,.2);
+
 }
 
 
-/*=====================================
-        MOBILE
-=====================================*/
+/*==========================================================
+    MOBILE
+==========================================================*/
 
-@media(max-width:500px){
+@media (max-width:500px) {
 
-    .chat-box{
+    .whatsapp-toggle {
+
+        right:20px;
+
+        bottom:20px;
+
+        width:60px;
+
+        height:60px;
+
+    }
+
+
+    .whatsapp-toggle svg {
+
+        width:31px;
+
+        height:31px;
+
+    }
+
+
+    .chat-box {
 
         width:calc(100vw - 20px);
 
@@ -489,14 +799,52 @@
 
         bottom:80px;
 
+        border-radius:18px;
+
     }
 
-    .whatsapp-toggle{
+}
 
-        width:60px;
-        height:60px;
 
-        font-size:1.8rem;
+/*==========================================================
+    VERY SMALL SCREENS
+==========================================================*/
+
+@media (max-width:380px) {
+
+    .whatsapp-toggle {
+
+        right:16px;
+
+        bottom:16px;
+
+        width:57px;
+
+        height:57px;
+
+    }
+
+
+    .whatsapp-toggle svg {
+
+        width:29px;
+
+        height:29px;
+
+    }
+
+}
+
+
+/*==========================================================
+    REDUCED MOTION
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce) {
+
+    .whatsapp-toggle {
+
+        animation:none;
 
     }
 

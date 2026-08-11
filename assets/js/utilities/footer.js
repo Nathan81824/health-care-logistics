@@ -1,155 +1,30 @@
-/*=====================================*
- * FOOTER
- *=====================================*/
+/*==========================================================
+    FOOTER
+==========================================================*/
 
 function initFooter() {
 
-    console.log(
-        "✅ Footer initialized."
-    );
-
-
-    initFooterReveal();
+    console.log("✅ Footer initialized.");
 
     initFooterYear();
 
-    initBackToTop();
+    initNewsletter();
 
-    initFooterNewsletter();
+    initFooterBackTop();
 
-}
-
-
-/*=====================================*
- * FOOTER REVEAL
- *=====================================*/
-
-function initFooterReveal() {
-
-    const footer =
-        document.querySelector(
-            ".site-footer"
-        );
-
-
-    /*=====================================
-            NO FOOTER
-    =====================================*/
-
-    if (!footer) {
-
-        return;
-
-    }
-
-
-    /*=====================================
-            PREVENT DUPLICATE OBSERVER
-    =====================================*/
-
-    if (
-        footer.dataset.revealInitialized ===
-        "true"
-    ) {
-
-        return;
-
-    }
-
-
-    footer.dataset.revealInitialized =
-        "true";
-
-
-    /*=====================================
-            CHECK OBSERVER SUPPORT
-    =====================================*/
-
-    if (
-        typeof IntersectionObserver ===
-        "undefined"
-    ) {
-
-        footer.classList.add(
-            "show"
-        );
-
-        return;
-
-    }
-
-
-    /*=====================================
-            CREATE OBSERVER
-    =====================================*/
-
-    const observer =
-        new IntersectionObserver(
-
-            function (entries) {
-
-                entries.forEach(
-                    function (entry) {
-
-                        if (
-                            entry.isIntersecting
-                        ) {
-
-                            entry.target.classList.add(
-                                "show"
-                            );
-
-                        }
-                        else {
-
-                            entry.target.classList.remove(
-                                "show"
-                            );
-
-                        }
-
-                    }
-                );
-
-            },
-
-            {
-                threshold: 0.15
-            }
-
-        );
-
-
-    /*=====================================
-            OBSERVE FOOTER
-    =====================================*/
-
-    observer.observe(
-        footer
-    );
-
-
-    window.footerRevealObserver =
-        observer;
+    initFooterNavigation();
 
 }
 
 
-/*=====================================*
- * FOOTER YEAR
- *=====================================*/
+/*==========================================================
+    FOOTER YEAR
+==========================================================*/
 
 function initFooterYear() {
 
     const yearElement =
-        document.getElementById(
-            "footer-year"
-        );
-
-
-    /*=====================================
-            NO YEAR ELEMENT
-    =====================================*/
+        document.getElementById("footerYear");
 
     if (!yearElement) {
 
@@ -157,165 +32,137 @@ function initFooterYear() {
 
     }
 
-
     yearElement.textContent =
         new Date().getFullYear();
 
 }
 
 
-/*=====================================*
- * BACK TO TOP
- *=====================================*/
+/*==========================================================
+    AUTH CHECK
+==========================================================*/
 
-function initBackToTop() {
+function footerUserIsLoggedIn() {
 
-    const backToTop =
-        document.getElementById(
-            "footer-back-to-top"
-        );
-
-
-    /*=====================================
-            NO BUTTON
-    =====================================*/
-
-    if (!backToTop) {
-
-        return;
-
-    }
-
-
-    /*=====================================
-            PREVENT DUPLICATE EVENTS
-    =====================================*/
+    /*
+        Use the existing authentication
+        system from the project.
+    */
 
     if (
-        backToTop.dataset.initialized ===
-        "true"
+        typeof window.isUserLoggedIn ===
+        "function"
     ) {
 
-        return;
+        return window.isUserLoggedIn();
 
     }
 
+    /*
+        Fallback to your existing AUTH_KEY.
+    */
 
-    backToTop.dataset.initialized =
-        "true";
-
-
-    /*=====================================
-            SCROLL HANDLER
-    =====================================*/
-
-    function handleScroll() {
-
-        if (
-            window.scrollY >
-            450
-        ) {
-
-            backToTop.classList.add(
-                "show"
-            );
-
-        }
-        else {
-
-            backToTop.classList.remove(
-                "show"
-            );
-
-        }
-
-    }
-
-
-    /*=====================================
-            INITIAL CHECK
-    =====================================*/
-
-    handleScroll();
-
-
-    /*=====================================
-            LISTEN FOR SCROLL
-    =====================================*/
-
-    window.addEventListener(
-        "scroll",
-        handleScroll,
-        {
-            passive: true
-        }
-    );
-
-
-    /*=====================================
-            CLICK
-    =====================================*/
-
-    backToTop.addEventListener(
-        "click",
-        function () {
-
-            window.scrollTo({
-
-                top: 0,
-
-                behavior: "smooth"
-
-            });
-
-        }
+    return (
+        localStorage.getItem("isLoggedIn") ===
+        "true"
     );
 
 }
 
 
-/*=====================================*
- * NEWSLETTER
- *=====================================*/
+/*==========================================================
+    GUEST NOTIFICATION
+==========================================================*/
 
-function initFooterNewsletter() {
+function showFooterGuestMessage() {
 
-    const form =
-        document.getElementById(
-            "footer-newsletter-form"
-        );
-
-
-    const emailInput =
-        document.getElementById(
-            "footer-email"
-        );
-
+    const title =
+        "Sign in required";
 
     const message =
-        document.getElementById(
-            "footer-form-message"
-        );
+        "Please sign in to continue.";
 
-
-    /*=====================================
-            CHECK ELEMENTS
-    =====================================*/
+    /*
+        Existing notification system.
+    */
 
     if (
-        !form ||
-        !emailInput ||
-        !message
+        typeof window.showNotification ===
+        "function"
     ) {
+
+        window.showNotification(
+            title,
+            message
+        );
 
         return;
 
     }
 
 
-    /*=====================================
-            PREVENT DUPLICATE EVENTS
-    =====================================*/
+    /*
+        Custom event fallback.
+    */
+
+    window.dispatchEvent(
+        new CustomEvent(
+            "footer:guest",
+            {
+                detail: {
+                    title:title,
+                    message:message
+                }
+            }
+        )
+    );
+
+}
+
+
+/*==========================================================
+    NEWSLETTER
+==========================================================*/
+
+function initNewsletter() {
+
+    const form =
+        document.getElementById(
+            "newsletterForm"
+        );
+
+    const emailInput =
+        document.getElementById(
+            "newsletterEmail"
+        );
+
+    const subscribed =
+        document.getElementById(
+            "newsletterSubscribed"
+        );
+
+    const unsubscribeBtn =
+        document.getElementById(
+            "unsubscribeBtn"
+        );
+
+    const bell =
+        document.getElementById(
+            "newsletterBell"
+        );
+
+
+    if (
+        !form ||
+        !emailInput ||
+        !subscribed ||
+        !unsubscribeBtn
+    ) {
+
+        return;
+
+    }
+
 
     if (
         form.dataset.initialized ===
@@ -331,13 +178,31 @@ function initFooterNewsletter() {
         "true";
 
 
-    /*=====================================
-            SUBMIT
-    =====================================*/
+    const savedEmail =
+        localStorage.getItem(
+            "idokoNewsletterEmail"
+        );
+
+
+    if (savedEmail) {
+
+        showSubscribedState(
+            form,
+            subscribed,
+            savedEmail,
+            bell
+        );
+
+    }
+
+
+    /*======================================================
+        SUBSCRIBE
+    ======================================================*/
 
     form.addEventListener(
         "submit",
-        function (event) {
+        function(event) {
 
             event.preventDefault();
 
@@ -346,83 +211,73 @@ function initFooterNewsletter() {
                 emailInput.value.trim();
 
 
-            /*=================================
-                    EMPTY EMAIL
-            =================================*/
-
             if (!email) {
-
-                message.textContent =
-                    "Please enter your email address.";
-
-                message.style.color =
-                    "#f87171";
 
                 emailInput.focus();
 
                 return;
 
             }
-
-
-            /*=================================
-                    EMAIL VALIDATION
-            =================================*/
-
-            const emailPattern =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
             if (
-                !emailPattern.test(
-                    email
-                )
+                !emailInput.checkValidity()
             ) {
 
-                message.textContent =
-                    "Please enter a valid email address.";
-
-                message.style.color =
-                    "#f87171";
-
-                emailInput.focus();
+                emailInput.reportValidity();
 
                 return;
 
             }
 
 
-            /*=================================
-                    SUCCESS
-            =================================*/
-
-            message.textContent =
-                "Thanks! You're subscribed.";
-
-            message.style.color =
-                "#20aeea";
+            localStorage.setItem(
+                "idokoNewsletterEmail",
+                email
+            );
 
 
-            /*=================================
-                    CLEAR INPUT
-            =================================*/
+            showSubscribedState(
+                form,
+                subscribed,
+                email,
+                bell
+            );
 
-            emailInput.value = "";
+
+            sendFooterNotification(
+                "Subscription successful",
+                "You are now subscribed to IDOKO LEGACY updates."
+            );
+
+        }
+    );
 
 
-            /*=================================
-                    CLEAR MESSAGE
-                    AFTER DELAY
-            =================================*/
+    /*======================================================
+        UNSUBSCRIBE
+    ======================================================*/
 
-            setTimeout(
-                function () {
+    unsubscribeBtn.addEventListener(
+        "click",
+        function() {
 
-                    message.textContent =
-                        "";
+            localStorage.removeItem(
+                "idokoNewsletterEmail"
+            );
 
-                },
-                4000
+
+            showSubscribeState(
+                form,
+                subscribed,
+                emailInput,
+                bell
+            );
+
+
+            sendFooterNotification(
+                "Unsubscribed",
+                "You have been removed from our newsletter."
             );
 
         }
@@ -431,52 +286,912 @@ function initFooterNewsletter() {
 }
 
 
-/*=====================================*
- * RESIZE
- *=====================================*/
+/*==========================================================
+    SHOW SUBSCRIBED
+==========================================================*/
 
-if (
-    !window.footerResizeBound
+function showSubscribedState(
+    form,
+    subscribed,
+    email,
+    bell
 ) {
 
+    if (
+        !form ||
+        !subscribed
+    ) {
+
+        return;
+
+    }
+
+
+    form.style.display =
+        "none";
+
+
+    subscribed.classList.add(
+        "show"
+    );
+
+
+    subscribed.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    if (bell) {
+
+        bell.classList.add(
+            "show"
+        );
+
+        bell.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+    }
+
+
+    const emailInput =
+        document.getElementById(
+            "newsletterEmail"
+        );
+
+
+    if (
+        emailInput &&
+        email
+    ) {
+
+        emailInput.value =
+            email;
+
+    }
+
+}
+
+
+/*==========================================================
+    SHOW SUBSCRIBE
+==========================================================*/
+
+function showSubscribeState(
+    form,
+    subscribed,
+    emailInput,
+    bell
+) {
+
+    if (
+        !form ||
+        !subscribed
+    ) {
+
+        return;
+
+    }
+
+
+    subscribed.classList.remove(
+        "show"
+    );
+
+
+    subscribed.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    if (bell) {
+
+        bell.classList.remove(
+            "show"
+        );
+
+        bell.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    form.style.display =
+        "flex";
+
+
+    if (emailInput) {
+
+        emailInput.value =
+            "";
+
+    }
+
+}
+
+
+/*==========================================================
+    FOOTER NOTIFICATION
+==========================================================*/
+
+function sendFooterNotification(
+    title,
+    message
+) {
+
+    window.dispatchEvent(
+        new CustomEvent(
+            "footer:notification",
+            {
+                detail: {
+                    title:title,
+                    message:message
+                }
+            }
+        )
+    );
+
+
+    if (
+        typeof window.showNotification ===
+        "function"
+    ) {
+
+        window.showNotification(
+            title,
+            message
+        );
+
+    }
+
+}
+
+
+/*==========================================================
+    BACK TO TOP
+==========================================================*/
+
+function initFooterBackTop() {
+
+    const backTop =
+        document.getElementById(
+            "footerBackTop"
+        );
+
+    const panel =
+        document.getElementById(
+            "footerNavigationPanel"
+        );
+
+
+    if (!backTop) {
+
+        return;
+
+    }
+
+
+    if (
+        backTop.dataset.initialized ===
+        "true"
+    ) {
+
+        updateBackTopVisibility(
+            backTop
+        );
+
+        return;
+
+    }
+
+
+    backTop.dataset.initialized =
+        "true";
+
+
+    /*======================================================
+        INITIAL STATE
+    ======================================================*/
+
+    updateBackTopVisibility(
+        backTop
+    );
+
+
+    /*======================================================
+        SCROLL
+    ======================================================*/
+
     window.addEventListener(
-        "resize",
-        function () {
+        "scroll",
+        function() {
+
+            updateBackTopVisibility(
+                backTop
+            );
+
+        },
+        {
+            passive:true
+        }
+    );
+
+
+    /*======================================================
+        HOVER BUTTON
+    ======================================================*/
+
+    backTop.addEventListener(
+        "mouseenter",
+        function() {
 
             /*
-                Footer does not require
-                a new observer on resize.
-
-                IntersectionObserver and
-                CSS handle responsiveness.
+                NEVER show the panel when
+                the button itself isn't visible.
             */
+
+            if (
+                !backTop.classList.contains(
+                    "show"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            openFooterNavigation();
 
         }
     );
 
 
-    window.footerResizeBound =
-        true;
+    /*======================================================
+        LEAVE BUTTON
+    ======================================================*/
+
+    backTop.addEventListener(
+        "mouseleave",
+        function() {
+
+            /*
+                Give the user a small amount
+                of time to move into the panel.
+            */
+
+            setTimeout(
+                function() {
+
+                    if (
+                        panel &&
+                        !panel.matches(":hover")
+                    ) {
+
+                        closeFooterNavigation();
+
+                    }
+
+                },
+                120
+            );
+
+        }
+    );
+
+
+    /*======================================================
+        CLICK
+    ======================================================*/
+
+    backTop.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+
+            /*
+                If panel is already open,
+                clicking the button takes
+                the user directly to the top.
+            */
+
+            closeFooterNavigation();
+
+            footerScrollToTop();
+
+        }
+    );
 
 }
 
 
-/*=====================================*
- * EXPORT
- *=====================================*/
+/*==========================================================
+    UPDATE BACK TO TOP VISIBILITY
+==========================================================*/
+
+function updateBackTopVisibility(
+    backTop
+) {
+
+    if (!backTop) {
+
+        return;
+
+    }
+
+
+    const scrollPosition =
+        window.scrollY ||
+        window.pageYOffset ||
+        0;
+
+
+    /*
+        Only show after scrolling down.
+    */
+
+    if (
+        scrollPosition > 350
+    ) {
+
+        backTop.classList.add(
+            "show"
+        );
+
+    }
+    else {
+
+        backTop.classList.remove(
+            "show"
+        );
+
+        closeFooterNavigation();
+
+    }
+
+}
+
+
+/*==========================================================
+    FOOTER NAVIGATION
+==========================================================*/
+
+function initFooterNavigation() {
+
+    const panel =
+        document.getElementById(
+            "footerNavigationPanel"
+        );
+
+    const closeButton =
+        document.getElementById(
+            "footerNavigationClose"
+        );
+
+
+    if (!panel) {
+
+        return;
+
+    }
+
+
+    if (
+        panel.dataset.initialized ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    panel.dataset.initialized =
+        "true";
+
+
+    /*======================================================
+        CLOSE BUTTON
+    ======================================================*/
+
+    if (closeButton) {
+
+        closeButton.addEventListener(
+            "click",
+            function() {
+
+                closeFooterNavigation();
+
+            }
+        );
+
+    }
+
+
+    /*======================================================
+        PANEL HOVER
+    ======================================================*/
+
+    panel.addEventListener(
+        "mouseleave",
+        function() {
+
+            closeFooterNavigation();
+
+        }
+    );
+
+
+    /*======================================================
+        NAVIGATION LINKS
+    ======================================================*/
+
+    const links =
+        panel.querySelectorAll(
+            ".footer-navigation-link"
+        );
+
+
+    links.forEach(
+        function(link) {
+
+            link.addEventListener(
+                "click",
+                function(event) {
+
+                    const href =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        !href ||
+                        href === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    if (
+                        !href.startsWith("#")
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    const target =
+                        document.querySelector(
+                            href
+                        );
+
+
+                    if (!target) {
+
+                        console.warn(
+                            "Footer target not found:",
+                            href
+                        );
+
+                        return;
+
+                    }
+
+
+                    closeFooterNavigation();
+
+
+                    /*
+                        Wait for the panel to
+                        begin closing before
+                        scrolling.
+                    */
+
+                    setTimeout(
+                        function() {
+
+                            scrollToFooterSection(
+                                target
+                            );
+
+                        },
+                        150
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/*==========================================================
+    OPEN NAVIGATION
+==========================================================*/
+
+function openFooterNavigation() {
+
+    const panel =
+        document.getElementById(
+            "footerNavigationPanel"
+        );
+
+    const backTop =
+        document.getElementById(
+            "footerBackTop"
+        );
+
+
+    /*
+        NEVER open the panel when
+        the back-top button isn't visible.
+    */
+
+    if (
+        !panel ||
+        !backTop ||
+        !backTop.classList.contains(
+            "show"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    panel.classList.add(
+        "show"
+    );
+
+
+    panel.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    backTop.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+}
+
+
+/*==========================================================
+    CLOSE NAVIGATION
+==========================================================*/
+
+function closeFooterNavigation() {
+
+    const panel =
+        document.getElementById(
+            "footerNavigationPanel"
+        );
+
+    const backTop =
+        document.getElementById(
+            "footerBackTop"
+        );
+
+
+    if (panel) {
+
+        panel.classList.remove(
+            "show"
+        );
+
+        panel.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    if (backTop) {
+
+        backTop.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+}
+
+
+/*==========================================================
+    SCROLL TO TOP
+==========================================================*/
+
+function footerScrollToTop() {
+
+    closeFooterNavigation();
+
+
+    window.scrollTo({
+
+        top:0,
+
+        left:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/*==========================================================
+    SCROLL TO FOOTER SECTION
+==========================================================*/
+
+function scrollToFooterSection(
+    target
+) {
+
+    if (!target) {
+
+        return;
+
+    }
+
+
+    const navbar =
+        document.querySelector(
+            ".navbar"
+        );
+
+
+    let offset = 0;
+
+
+    /*
+        Account for your fixed navbar.
+    */
+
+    if (navbar) {
+
+        offset =
+            navbar.offsetHeight + 15;
+
+    }
+
+
+    const targetPosition =
+        target.getBoundingClientRect().top +
+        window.scrollY -
+        offset;
+
+
+    window.scrollTo({
+
+        top:Math.max(
+            0,
+            targetPosition
+        ),
+
+        left:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+/*==========================================================
+    FOOTER INTERNAL LINKS
+==========================================================*/
+
+function initFooterInternalLinks() {
+
+    const footer =
+        document.querySelector(
+            ".site-footer"
+        );
+
+
+    if (!footer) {
+
+        return;
+
+    }
+
+
+    const links =
+        footer.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    links.forEach(
+        function(link) {
+
+            /*
+                Don't initialize the same
+                link twice.
+            */
+
+            if (
+                link.dataset.footerScrollInitialized ===
+                "true"
+            ) {
+
+                return;
+
+            }
+
+
+            link.dataset.footerScrollInitialized =
+                "true";
+
+
+            link.addEventListener(
+                "click",
+                function(event) {
+
+                    const href =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        !href ||
+                        href === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            href
+                        );
+
+
+                    if (!target) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    closeFooterNavigation();
+
+
+                    scrollToFooterSection(
+                        target
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/*==========================================================
+    ESCAPE KEY
+==========================================================*/
+
+function initFooterEscape() {
+
+    if (
+        document.body.dataset.footerEscapeInitialized ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    document.body.dataset.footerEscapeInitialized =
+        "true";
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Escape"
+            ) {
+
+                closeFooterNavigation();
+
+            }
+
+        }
+    );
+
+}
+
+
+/*==========================================================
+    INITIALIZE FOOTER
+==========================================================*/
+
+function startFooter() {
+
+    initFooter();
+
+    initFooterInternalLinks();
+
+    initFooterEscape();
+
+}
+
+
+/*
+    If your component loader calls
+    initFooter(), this remains safe.
+*/
 
 window.initFooter =
     initFooter;
 
-window.initFooterReveal =
-    initFooterReveal;
+window.initNewsletter =
+    initNewsletter;
 
-window.initFooterYear =
-    initFooterYear;
+window.initFooterBackTop =
+    initFooterBackTop;
 
-window.initBackToTop =
-    initBackToTop;
+window.initFooterNavigation =
+    initFooterNavigation;
 
-window.initFooterNewsletter =
-    initFooterNewsletter;
+window.openFooterNavigation =
+    openFooterNavigation;
 
+window.closeFooterNavigation =
+    closeFooterNavigation;
+
+window.footerScrollToTop =
+    footerScrollToTop;
+
+window.scrollToFooterSection =
+    scrollToFooterSection;
+
+
+/*
+    Start immediately if the footer
+    already exists on the page.
+*/
+
+if (
+    document.querySelector(
+        ".site-footer"
+    )
+) {
+
+    startFooter();
+
+}
