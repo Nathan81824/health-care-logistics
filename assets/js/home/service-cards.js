@@ -1,11 +1,13 @@
-/*=====================================
-            SERVICES
-=====================================*/
-
+/*=====================================*
+        SERVICES
+*=====================================*/
 
 function initHomeServices() {
 
-    console.log("Services initialized.");
+    console.log(
+        "✅ Home services initialized."
+    );
+
 
     updateServiceText();
 
@@ -14,30 +16,63 @@ function initHomeServices() {
 }
 
 
-/*=====================================
+/*=====================================*
         SERVICE CARD TEXT
-=====================================*/
+*=====================================*/
 
 function updateServiceText() {
 
     const texts = [
 
-        document.getElementById("service1-text"),
-        document.getElementById("service2-text"),
-        document.getElementById("service3-text"),
-        document.getElementById("service4-text"),
-        document.getElementById("service5-text"),
-        document.getElementById("service6-text")
+        document.getElementById(
+            "service1-text"
+        ),
+
+        document.getElementById(
+            "service2-text"
+        ),
+
+        document.getElementById(
+            "service3-text"
+        ),
+
+        document.getElementById(
+            "service4-text"
+        ),
+
+        document.getElementById(
+            "service5-text"
+        ),
+
+        document.getElementById(
+            "service6-text"
+        )
 
     ];
 
 
-    if (texts.some(text => !text)) return;
+    /*=====================================
+            SAFETY CHECK
+    =====================================*/
+
+    if (
+        texts.some(
+            text => !text
+        )
+    ) {
+
+        return;
+
+    }
 
 
+    /*=====================================
+            DESKTOP / TABLET
+    =====================================*/
 
-    if (window.innerWidth > 430) {
-
+    if (
+        window.innerWidth > 430
+    ) {
 
         texts[0].textContent =
             "Reliable transportation of medical equipment, pharmaceuticals, and essential healthcare supplies with speed and care.";
@@ -64,8 +99,12 @@ function updateServiceText() {
 
     }
 
-    else {
 
+    /*=====================================
+            SMALL MOBILE
+    =====================================*/
+
+    else {
 
         texts[0].textContent =
             "Safe medical transport.";
@@ -95,77 +134,134 @@ function updateServiceText() {
 }
 
 
-
-/*=====================================
+/*=====================================*
         SERVICE CARD ANIMATION
-=====================================*/
+*=====================================*/
 
 function initServiceAnimation() {
 
+    const cards =
+        document.querySelectorAll(
+            ".service__card, .service__card-first, .service__card-last"
+        );
 
-    const cards = document.querySelectorAll(
 
-        ".service__card, .service__card-first, .service__card-last"
+    /*=====================================
+            NO CARDS
+    =====================================*/
 
+    if (
+        cards.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    /*=====================================
+            CHECK OBSERVER SUPPORT
+    =====================================*/
+
+    if (
+        typeof IntersectionObserver ===
+        "undefined"
+    ) {
+
+        cards.forEach(
+            card => {
+
+                card.classList.add(
+                    "show"
+                );
+
+            }
+        );
+
+        return;
+
+    }
+
+
+    /*=====================================
+            PREVENT DUPLICATE OBSERVER
+    =====================================*/
+
+    if (
+        window.homeServicesObserver
+    ) {
+
+        return;
+
+    }
+
+
+    /*=====================================
+            CREATE OBSERVER
+    =====================================*/
+
+    const observer =
+        new IntersectionObserver(
+            function (entries) {
+
+                entries.forEach(
+                    function (entry) {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "show"
+                            );
+
+                        }
+                        else {
+
+                            entry.target.classList.remove(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.2
+            }
+        );
+
+
+    /*=====================================
+            OBSERVE CARDS
+    =====================================*/
+
+    cards.forEach(
+        function (card) {
+
+            observer.observe(
+                card
+            );
+
+        }
     );
 
 
-    if (cards.length === 0) return;
-
-
-
-    const observer = new IntersectionObserver((entries) => {
-
-
-        entries.forEach(entry => {
-
-
-            if (entry.isIntersecting) {
-
-
-                entry.target.classList.add("show");
-
-
-            }
-
-            else {
-
-
-                entry.target.classList.remove("show");
-
-
-            }
-
-
-        });
-
-
-    }, {
-
-        threshold:0.2
-
-    });
-
-
-
-    cards.forEach(card => {
-
-        observer.observe(card);
-
-    });
-
+    window.homeServicesObserver =
+        observer;
 
 }
 
 
-
-/*=====================================
+/*=====================================*
         RESIZE
-=====================================*/
+*=====================================*/
 
-
-if (!window.serviceResizeBound) {
-
+if (
+    !window.serviceResizeBound
+) {
 
     window.addEventListener(
         "resize",
@@ -173,7 +269,21 @@ if (!window.serviceResizeBound) {
     );
 
 
-    window.serviceResizeBound = true;
-
+    window.serviceResizeBound =
+        true;
 
 }
+
+
+/*=====================================*
+        EXPORT
+*=====================================*/
+
+window.initHomeServices =
+    initHomeServices;
+
+window.updateServiceText =
+    updateServiceText;
+
+window.initServiceAnimation =
+    initServiceAnimation;

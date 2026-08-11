@@ -1,30 +1,45 @@
-/*====================================
-            CONTACT FAQ
-=====================================*/
+/*=====================================*
+* CONTACT FAQ
+*=====================================*/
 
-function initFAQ(){
+function initFAQ() {
 
-    const faqItems = document.querySelectorAll(".faq-item");
+    const faqItems =
+        document.querySelectorAll(".faq-item");
 
-    if(!faqItems.length) return;
+    if (!faqItems.length) return;
 
-    faqItems.forEach(item=>{
 
-        const button = item.querySelector(".faq-question");
+    faqItems.forEach(item => {
 
-        button.addEventListener("click",()=>{
+        const button =
+            item.querySelector(".faq-question");
 
-            const isActive = item.classList.contains("active");
+        if (!button) return;
 
-            // Close every FAQ
-            faqItems.forEach(faq=>{
+
+        button.addEventListener("click", () => {
+
+            const isActive =
+                item.classList.contains("active");
+
+
+            /*=====================================
+            CLOSE ALL FAQS
+            =====================================*/
+
+            faqItems.forEach(faq => {
 
                 faq.classList.remove("active");
 
             });
 
-            // Open the clicked one
-            if(!isActive){
+
+            /*=====================================
+            OPEN CLICKED FAQ
+            =====================================*/
+
+            if (!isActive) {
 
                 item.classList.add("active");
 
@@ -37,41 +52,65 @@ function initFAQ(){
 }
 
 
-/*====================================
-        FAQ ANIMATION
-=====================================*/
+/*=====================================*
+* FAQ ANIMATION
+*=====================================*/
 
-function animateFAQ(){
+function animateFAQ() {
 
-    const faqItems = document.querySelectorAll(".faq-item");
+    const faqItems =
+        document.querySelectorAll(".faq-item");
 
-    faqItems.forEach((item,index)=>{
+    if (!faqItems.length) return;
+
+
+    faqItems.forEach((item, index) => {
 
         item.style.opacity = "0";
-        item.style.transform = "translateY(40px)";
 
-        setTimeout(()=>{
+        item.style.transform =
+            "translateY(40px)";
 
-            item.style.transition = ".5s ease";
+
+        setTimeout(() => {
+
+            item.style.transition =
+                "opacity .5s ease, transform .5s ease";
 
             item.style.opacity = "1";
-            item.style.transform = "translateY(0)";
 
-        },index * 120);
+            item.style.transform =
+                "translateY(0)";
+
+        }, index * 120);
 
     });
 
 }
 
 
-/*====================================
-        INITIALIZE
-=====================================*/
+/*=====================================*
+* INITIALIZE FAQ
+*=====================================*/
 
-function initContactFAQ(){
+function initContactFAQ() {
 
     initFAQ();
 
     animateFAQ();
 
 }
+
+
+/*=====================================*
+* EXPORT
+*=====================================*/
+
+window.initFAQ =
+    initFAQ;
+
+window.animateFAQ =
+    animateFAQ;
+
+window.initContactFAQ =
+    initContactFAQ;

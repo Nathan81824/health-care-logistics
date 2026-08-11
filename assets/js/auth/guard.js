@@ -1,16 +1,22 @@
-/*=====================================
-            AUTH GUARD JS
-=====================================*/
+/*=====================================*
+* AUTH GUARD JS
+*=====================================*/
 
 
-function authGuard(){
+/*=====================================*
+* AUTH GUARD
+*=====================================*/
 
+function authGuard() {
 
     console.log(
         "🔐 Auth guard running"
     );
 
 
+    /*=====================================
+    PROTECTED PAGES
+    =====================================*/
 
     const protectedPages = [
 
@@ -19,107 +25,131 @@ function authGuard(){
     ];
 
 
-
-
+    /*=====================================
+    GET CURRENT PAGE
+    =====================================*/
 
     const currentPage =
         window.location.pathname
-        .split("/")
-        .pop();
+            .split("/")
+            .pop()
+            .toLowerCase();
 
 
+    /*=====================================
+    CHECK IF PAGE IS PROTECTED
+    =====================================*/
+
+    if (
+        !protectedPages.includes(
+            currentPage
+        )
+    ) {
+
+        return true;
+
+    }
 
 
+    /*=====================================
+    CHECK LOGIN STATUS
+    =====================================*/
+
+    const loggedIn =
+        localStorage.getItem(
+            "isLoggedIn"
+        );
 
 
-    // Check if page is protected
+    /*=====================================
+    REDIRECT IF NOT LOGGED IN
+    =====================================*/
 
-    if(
-        protectedPages.includes(currentPage)
-    ){
+    if (
+        loggedIn !== "true"
+    ) {
 
-
-
-        const loggedIn =
-            localStorage.getItem(
-                "isLoggedIn"
-            );
-
-
+        const insidePages =
+            window.location.pathname
+                .toLowerCase()
+                .includes("/pages/");
 
 
-
-        if(loggedIn !== "true"){
-
-
-
-            const insidePages =
-                window.location.pathname.includes(
-                    "/pages/"
-                );
-
-
-
-
-
-            window.location.href =
-                insidePages
+        const loginPage =
+            insidePages
                 ? "../index.html"
                 : "index.html";
 
 
+        console.log(
+            "🔒 Access denied. Redirecting to login."
+        );
 
 
-            return false;
+        window.location.href =
+            loginPage;
 
 
-        }
-
-
+        return false;
 
     }
 
 
+    /*=====================================
+    ACCESS GRANTED
+    =====================================*/
 
+    console.log(
+        "✅ Authentication verified"
+    );
 
 
     return true;
 
+}
+
+
+/*=====================================*
+* START AUTH GUARD
+*=====================================*/
+
+function startAuthGuard() {
+
+    authGuard();
 
 }
 
 
+/*=====================================*
+* DOM READY
+*=====================================*/
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        startAuthGuard,
+        {
+            once: true
+        }
+    );
+
+} else {
+
+    startAuthGuard();
+
+}
 
 
-
-
-
-/*=====================================
-            START GUARD
-=====================================*/
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-
-        authGuard();
-
-
-    }
-);
-
-
-
-
-
-
-
-/*=====================================
-            EXPORT
-=====================================*/
-
+/*=====================================*
+* EXPORT
+*=====================================*/
 
 window.authGuard =
-authGuard;
+    authGuard;
+
+window.startAuthGuard =
+    startAuthGuard;

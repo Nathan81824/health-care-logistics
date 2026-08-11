@@ -1,18 +1,24 @@
-/*=====================================
-            POPUP JS
-=====================================*/
+/*=====================================*
+* POPUP JS
+*=====================================*/
 
 
-/*=====================================
-        SHOW POPUP
-=====================================*/
+/*=====================================*
+* POPUP TIMER
+*=====================================*/
+
+let popupTimer = null;
+
+
+/*=====================================*
+* SHOW POPUP
+*=====================================*/
 
 function showPopup(
     title,
     message,
     type = "success"
-){
-
+) {
 
     const popup =
         document.getElementById(
@@ -38,12 +44,15 @@ function showPopup(
         );
 
 
+    /*=================================
+            CHECK ELEMENTS
+    =================================*/
 
-    if(
+    if (
         !popup ||
         !popupTitle ||
         !popupMessage
-    ){
+    ) {
 
         console.log(
             "Popup elements missing"
@@ -54,92 +63,116 @@ function showPopup(
     }
 
 
+    /*=================================
+            SET CONTENT
+    =================================*/
 
     popupTitle.textContent =
-        title;
+        title || "Notification";
 
 
     popupMessage.textContent =
-        message;
+        message || "";
 
 
-
+    /*=================================
+            RESET TYPE
+    =================================*/
 
     popup.classList.remove(
         "error"
     );
 
 
+    /*=================================
+            ERROR POPUP
+    =================================*/
 
-
-    if(type === "error"){
-
+    if (
+        type === "error"
+    ) {
 
         popup.classList.add(
             "error"
         );
 
 
-        if(popupIcon){
+        if (popupIcon) {
 
             popupIcon.className =
-            "fa-solid fa-xmark";
+                "fa-solid fa-xmark";
 
         }
-
 
     }
 
 
-    else{
+    /*=================================
+            SUCCESS POPUP
+    =================================*/
 
+    else {
 
-        if(popupIcon){
+        if (popupIcon) {
 
             popupIcon.className =
-            "fa-solid fa-check";
+                "fa-solid fa-check";
 
         }
-
 
     }
 
 
-
+    /*=================================
+            SHOW POPUP
+    =================================*/
 
     popup.classList.add(
         "show"
     );
 
 
+    /*=================================
+            CLEAR OLD TIMER
+    =================================*/
 
+    if (popupTimer) {
 
-
-    setTimeout(()=>{
-
-
-        popup.classList.remove(
-            "show"
+        clearTimeout(
+            popupTimer
         );
 
+    }
 
-    },4000);
 
+    /*=================================
+            AUTO CLOSE
+    =================================*/
 
+    popupTimer =
+        setTimeout(
+            () => {
+
+                popup.classList.remove(
+                    "show"
+                );
+
+                popupTimer = null;
+
+            },
+            4000
+        );
 
 }
 
 
+/*=====================================*
+* SUCCESS POPUP
+*=====================================*/
 
-
-
-/*=====================================
-        SUCCESS POPUP
-=====================================*/
-
-
-function showSuccess(message){
-
+function showSuccess(
+    message
+) {
 
     showPopup(
         "Success",
@@ -147,20 +180,16 @@ function showSuccess(message){
         "success"
     );
 
-
 }
 
 
+/*=====================================*
+* ERROR POPUP
+*=====================================*/
 
-
-
-/*=====================================
-        ERROR POPUP
-=====================================*/
-
-
-function showError(message){
-
+function showError(
+    message
+) {
 
     showPopup(
         "Error",
@@ -168,33 +197,50 @@ function showError(message){
         "error"
     );
 
-
 }
 
 
+/*=====================================*
+* WELCOME POPUP
+*=====================================*/
 
+function showWelcomePopup() {
 
+    /*=================================
+            GET USER
+    =================================*/
 
-/*=====================================
-        WELCOME POPUP
-=====================================*/
+    if (
+        typeof getUser !== "function"
+    ) {
 
-
-function showWelcomePopup(){
-
-
-    const user =
-        getUser();
-
-
-
-    if(!user){
+        console.log(
+            "getUser() is not available"
+        );
 
         return;
 
     }
 
 
+    const user =
+        getUser();
+
+
+    /*=================================
+            NO USER
+    =================================*/
+
+    if (!user) {
+
+        return;
+
+    }
+
+
+    /*=================================
+            SHOW WELCOME
+    =================================*/
 
     showPopup(
 
@@ -206,53 +252,55 @@ function showWelcomePopup(){
 
     );
 
+}
+
+
+/*=====================================*
+* INIT WELCOME
+*=====================================*/
+
+function initWelcomePopup() {
+
+    setTimeout(
+        () => {
+
+            showWelcomePopup();
+
+        },
+        800
+    );
 
 }
 
 
-
-
-
-/*=====================================
-        INIT WELCOME
-=====================================*/
-
-
-function initWelcomePopup(){
-
-
-    setTimeout(()=>{
-
-
-        showWelcomePopup();
-
-
-    },800);
-
-
-
-}
-
-
-
-
-
-/*=====================================
-        EXPORT
-=====================================*/
-
+/*=====================================*
+* EXPORT
+*=====================================*/
 
 window.showPopup =
-showPopup;
+    showPopup;
 
 
 window.showSuccess =
-showSuccess;
+    showSuccess;
 
 
 window.showError =
-showError;
+    showError;
+
+
+window.showWelcomePopup =
+    showWelcomePopup;
 
 
 window.initWelcomePopup =
-initWelcomePopup;
+    initWelcomePopup;
+
+
+/*=====================================*
+* READY
+*=====================================*/
+
+console.log(
+    "✅ Popup system loaded"
+);

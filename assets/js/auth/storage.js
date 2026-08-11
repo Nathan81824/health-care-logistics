@@ -1,46 +1,108 @@
-/*=====================================
-            STORAGE JS
-=====================================*/
+/*=====================================*
+* STORAGE JS
+*=====================================*/
 
 
-/*=====================================
-            SAVE USER
-=====================================*/
+/*=====================================*
+* SAVE USER
+*=====================================*/
 
-function saveUser(user){
+function saveUser(user) {
 
-    localStorage.setItem(
-        "user",
-        JSON.stringify(user)
-    );
+    try {
+
+        if (
+            !user ||
+            typeof user !== "object"
+        ) {
+
+            console.error(
+                "❌ Invalid user data."
+            );
+
+            return false;
+
+        }
+
+
+        localStorage.setItem(
+            "user",
+            JSON.stringify(user)
+        );
+
+
+        return true;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "❌ Failed to save user:",
+            error
+        );
+
+        return false;
+
+    }
 
 }
 
 
+/*=====================================*
+* GET USER
+*=====================================*/
 
-/*=====================================
-            GET USER
-=====================================*/
+function getUser() {
 
-function getUser(){
+    try {
 
-    const user =
-        localStorage.getItem("user");
+        const user =
+            localStorage.getItem(
+                "user"
+            );
 
 
-    return user
-        ? JSON.parse(user)
-        : null;
+        if (!user) {
+
+            return null;
+
+        }
+
+
+        const parsedUser =
+            JSON.parse(user);
+
+
+        return (
+            parsedUser &&
+            typeof parsedUser === "object"
+        )
+            ? parsedUser
+            : null;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "❌ Failed to read user:",
+            error
+        );
+
+
+        return null;
+
+    }
 
 }
 
 
+/*=====================================*
+* LOGIN STATUS
+*=====================================*/
 
-/*=====================================
-            LOGIN STATUS
-=====================================*/
-
-function setLoginStatus(){
+function setLoginStatus() {
 
     localStorage.setItem(
         "isLoggedIn",
@@ -50,53 +112,110 @@ function setLoginStatus(){
 }
 
 
+/*=====================================*
+* CHECK LOGIN
+*=====================================*/
 
-/*=====================================
-            CHECK LOGIN
-=====================================*/
-
-function isLoggedIn(){
+function isLoggedIn() {
 
     return (
-        localStorage.getItem("isLoggedIn")
-        ===
-        "true"
+        localStorage.getItem(
+            "isLoggedIn"
+        ) === "true"
     );
 
 }
 
 
+/*=====================================*
+* LOGOUT
+*=====================================*/
 
-/*=====================================
-            LOGOUT
-=====================================*/
+function logout() {
 
-function logout(){
+    /*=================================
+            REMOVE USER
+    =================================*/
 
-    localStorage.removeItem("user");
+    localStorage.removeItem(
+        "user"
+    );
 
-    localStorage.removeItem("isLoggedIn");
 
+    /*=================================
+            REMOVE LOGIN STATUS
+    =================================*/
+
+    localStorage.removeItem(
+        "isLoggedIn"
+    );
+
+
+    /*=================================
+            FIND CURRENT LOCATION
+    =================================*/
 
     const insidePages =
-        window.location.pathname.includes("/pages/");
+        window.location.pathname
+            .toLowerCase()
+            .includes("/pages/");
 
+
+    /*=================================
+            REDIRECT
+    =================================*/
 
     window.location.href =
         insidePages
-        ? "../index.html"
-        : "index.html";
+            ? "../index.html"
+            : "index.html";
 
 }
 
 
+/*=====================================*
+* CLEAR STORAGE
+*=====================================*/
 
-/*=====================================
-            CLEAR STORAGE
-=====================================*/
-
-function clearStorage(){
+function clearStorage() {
 
     localStorage.clear();
 
 }
+
+
+/*=====================================*
+* EXPORT
+*=====================================*/
+
+window.saveUser =
+    saveUser;
+
+
+window.getUser =
+    getUser;
+
+
+window.setLoginStatus =
+    setLoginStatus;
+
+
+window.isLoggedIn =
+    isLoggedIn;
+
+
+window.logout =
+    logout;
+
+
+window.clearStorage =
+    clearStorage;
+
+
+/*=====================================*
+* READY
+*=====================================*/
+
+console.log(
+    "✅ Storage system loaded"
+);

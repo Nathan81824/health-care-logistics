@@ -409,7 +409,7 @@ backdrop-filter:blur(25px);
     position: absolute;
 
     top: calc(100% + 12px);
-    right: 0;
+    margin-left: -20rem;
 
     width: 380px;
     max-width: calc(100vw - 30px);

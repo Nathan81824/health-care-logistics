@@ -1,14 +1,22 @@
-/*=====================================
-        PASSWORD TOGGLE JS
-=====================================*/
+/*=====================================*
+* PASSWORD TOGGLE JS
+*=====================================*/
 
 
-function setupPasswordToggle(){
+/*=====================================*
+* SETUP PASSWORD TOGGLE
+*=====================================*/
+
+function setupPasswordToggle() {
+
+    console.log(
+        "✅ Password toggle initialized"
+    );
 
 
-    console.log("✅ Password toggle initialized");
-
-
+    /*=====================================
+    FIND TOGGLE BUTTONS
+    =====================================*/
 
     const buttons =
         document.querySelectorAll(
@@ -16,8 +24,7 @@ function setupPasswordToggle(){
         );
 
 
-
-    if(!buttons.length){
+    if (!buttons.length) {
 
         console.log(
             "No password buttons found"
@@ -28,45 +35,84 @@ function setupPasswordToggle(){
     }
 
 
-
-
+    /*=====================================
+    INITIALIZE BUTTONS
+    =====================================*/
 
     buttons.forEach(button => {
 
 
+        /*=================================
+        PREVENT DUPLICATE LISTENER
+        =================================*/
+
+        if (
+            button.dataset.passwordReady ===
+            "true"
+        ) {
+
+            return;
+
+        }
+
+
+        button.dataset.passwordReady =
+            "true";
+
+
+        /*=================================
+        CLICK
+        =================================*/
 
         button.addEventListener(
             "click",
-            function(){
+            function (event) {
+
+                event.preventDefault();
 
 
+                /*=============================
+                FIND INPUT
+                =============================*/
 
                 const input =
-                    this.parentElement.querySelector(
-                        "input"
+                    this.parentElement
+                        ?.querySelector(
+                            "input"
+                        );
+
+
+                /*=============================
+                FIND ICON
+                =============================*/
+
+                const icon =
+                    this.querySelector(
+                        "i"
                     );
 
 
-
-                const icon =
-                    this.querySelector("i");
-
-
-
-                if(!input || !icon){
+                if (
+                    !input ||
+                    !icon
+                ) {
 
                     return;
 
                 }
 
 
+                /*=================================
+                SHOW PASSWORD
+                =================================*/
 
+                if (
+                    input.type ===
+                    "password"
+                ) {
 
-                if(input.type === "password"){
-
-
-                    input.type = "text";
-
+                    input.type =
+                        "text";
 
 
                     icon.classList.remove(
@@ -85,14 +131,25 @@ function setupPasswordToggle(){
                     );
 
 
+                    this.setAttribute(
+                        "title",
+                        "Hide password"
+                    );
+
+
+                    input.focus();
+
                 }
 
 
-                else{
+                /*=================================
+                HIDE PASSWORD
+                =================================*/
 
+                else {
 
-                    input.type = "password";
-
+                    input.type =
+                        "password";
 
 
                     icon.classList.remove(
@@ -111,24 +168,27 @@ function setupPasswordToggle(){
                     );
 
 
+                    this.setAttribute(
+                        "title",
+                        "Show password"
+                    );
+
+
+                    input.focus();
+
                 }
-
-
 
             }
         );
 
-
-
     });
-
-
 
 }
 
 
-
-
+/*=====================================*
+* EXPORT
+*=====================================*/
 
 window.setupPasswordToggle =
-setupPasswordToggle;
+    setupPasswordToggle;

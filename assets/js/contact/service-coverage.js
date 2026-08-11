@@ -1,94 +1,198 @@
-/*====================================
-        SERVICE COVERAGE
-=====================================*/
+/*=====================================*
+* SERVICE COVERAGE
+*=====================================*/
 
-function initServiceCoverage(){
+function initServiceCoverage() {
 
     animateCoverageItems();
 
     animateStatCards();
 
+    initCoverageHover();
+
 }
 
 
-/*====================================
-        COVERAGE ITEMS
-=====================================*/
+/*=====================================*
+* COVERAGE ITEMS
+*=====================================*/
 
-function animateCoverageItems(){
+function animateCoverageItems() {
 
-    const items = document.querySelectorAll(".coverage-item");
+    const items =
+        document.querySelectorAll(
+            ".coverage-item"
+        );
 
-    if(!items.length) return;
+    if (!items.length) return;
 
-    items.forEach((item,index)=>{
+
+    items.forEach((item, index) => {
+
+        /*=====================================
+        INITIAL STATE
+        =====================================*/
 
         item.style.opacity = "0";
-        item.style.transform = "translateY(40px)";
 
-        setTimeout(()=>{
+        item.style.transform =
+            "translateY(40px)";
+
+
+        /*=====================================
+        REVEAL ANIMATION
+        =====================================*/
+
+        setTimeout(() => {
 
             item.style.transition =
                 "opacity .6s ease, transform .6s ease";
 
             item.style.opacity = "1";
-            item.style.transform = "translateY(0)";
 
-        },index * 120);
+            item.style.transform =
+                "translateY(0)";
+
+        }, index * 120);
 
     });
 
 }
 
 
-/*====================================
-        FLOATING STATS
-=====================================*/
+/*=====================================*
+* FLOATING STAT CARDS
+*=====================================*/
 
-function animateStatCards(){
+function animateStatCards() {
 
-    const cards = document.querySelectorAll(".stat-card");
+    const cards =
+        document.querySelectorAll(
+            ".stat-card"
+        );
 
-    if(!cards.length) return;
+    if (!cards.length) return;
 
-    cards.forEach((card,index)=>{
+
+    cards.forEach((card, index) => {
+
+        /*=====================================
+        PREVENT DUPLICATE ANIMATION
+        =====================================*/
+
+        if (
+            card.dataset.floatStarted ===
+            "true"
+        ) {
+
+            return;
+
+        }
+
+
+        card.dataset.floatStarted =
+            "true";
+
 
         let direction = 1;
 
-        setInterval(()=>{
+
+        /*=====================================
+        FLOAT ANIMATION
+        =====================================*/
+
+        const floatCard = () => {
 
             card.style.transform =
                 `translateY(${direction * 6}px)`;
 
             direction *= -1;
 
-        },1800 + (index * 200));
+        };
+
+
+        const interval =
+            setInterval(
+                floatCard,
+                1800 + (index * 200)
+            );
+
+
+        /*
+            Store interval so it can
+            be cleaned up later if needed.
+        */
+
+        card.dataset.floatInterval =
+            interval;
 
     });
 
 }
 
 
-/*====================================
-        COVERAGE HOVER
-=====================================*/
+/*=====================================*
+* COVERAGE HOVER
+*=====================================*/
 
-document.addEventListener("mouseover",(e)=>{
+function initCoverageHover() {
 
-    const item = e.target.closest(".coverage-item");
+    const items =
+        document.querySelectorAll(
+            ".coverage-item"
+        );
 
-    if(!item) return;
+    if (!items.length) return;
 
-    item.style.transform = "translateY(-8px) scale(1.02)";
 
-});
+    items.forEach(item => {
 
-document.addEventListener("mouseout",(e)=>{
+        /*=====================================
+        MOUSE ENTER
+        =====================================*/
 
-    const item = e.target.closest(".coverage-item");
+        item.addEventListener(
+            "mouseenter",
+            () => {
 
-    if(!item) return;
+                item.style.transform =
+                    "translateY(-8px) scale(1.02)";
 
-    item.style.transform = "";
+            }
+        );
 
-});
+
+        /*=====================================
+        MOUSE LEAVE
+        =====================================*/
+
+        item.addEventListener(
+            "mouseleave",
+            () => {
+
+                item.style.transform =
+                    "translateY(0)";
+
+            }
+        );
+
+    });
+
+}
+
+
+/*=====================================*
+* EXPORT
+*=====================================*/
+
+window.initServiceCoverage =
+    initServiceCoverage;
+
+window.animateCoverageItems =
+    animateCoverageItems;
+
+window.animateStatCards =
+    animateStatCards;
+
+window.initCoverageHover =
+    initCoverageHover;

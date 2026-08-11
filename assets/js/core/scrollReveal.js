@@ -1,47 +1,98 @@
-function initScrollReveal(){
+/*=====================================*
+        SCROLL REVEAL
+*=====================================*/
+
+function initScrollReveal() {
+
+    const revealElements =
+        document.querySelectorAll(
+            "[data-reveal]"
+        );
 
 
-const revealElements =
-document.querySelectorAll("[data-reveal]");
+    /*=================================
+            NO ELEMENTS
+    =================================*/
+
+    if (!revealElements.length) {
+
+        return;
+
+    }
 
 
-if(!revealElements.length) return;
+    /*=================================
+            INTERSECTION OBSERVER
+    =================================*/
+
+    const observer =
+        new IntersectionObserver(
+
+            function (entries) {
+
+                entries.forEach(
+                    function (entry) {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "revealed"
+                            );
+
+                            /*
+                                Stop observing once
+                                the element is revealed.
+                            */
+
+                            observer.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+
+            {
+                threshold: 0.15
+            }
+
+        );
 
 
+    /*=================================
+            OBSERVE ELEMENTS
+    =================================*/
 
-const observer = new IntersectionObserver(
-(entries)=>{
+    revealElements.forEach(
+        function (element) {
 
+            observer.observe(
+                element
+            );
 
-entries.forEach(entry=>{
-
-
-if(entry.isIntersecting){
-
-
-entry.target.classList.add("revealed");
-
+        }
+    );
 
 }
 
 
-});
+/*=====================================*
+        EXPORT
+*=====================================*/
+
+window.initScrollReveal =
+    initScrollReveal;
 
 
-},
-{
-threshold:0.15
-}
+/*=====================================*
+        READY MESSAGE
+*=====================================*/
 
+console.log(
+    "✅ Scroll Reveal JS loaded"
 );
-
-
-
-revealElements.forEach(element=>{
-
-observer.observe(element);
-
-});
-
-
-}

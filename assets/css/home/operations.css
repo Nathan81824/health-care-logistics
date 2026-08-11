@@ -1,14 +1,14 @@
-/*====================================
+/*=====================================
         OPERATIONS SECTION
 =====================================*/
 
-.operations{
+.operations {
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    padding:120px 8%;
+    padding: 120px 8%;
 
     background:
         linear-gradient(
@@ -20,39 +20,61 @@
 
 }
 
-.operations::before{
 
-    content:"";
+/*=====================================
+        BACKGROUND GRID
+=====================================*/
 
-    position:absolute;
+.operations::before {
 
-    inset:0;
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
 
     background-image:
-        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+        linear-gradient(
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px
+        );
 
-    background-size:70px 70px;
+    background-size: 70px 70px;
 
-    opacity:.35;
+    opacity: .35;
+
+    pointer-events: none;
 
 }
 
-.operations::after{
 
-    content:"";
+/*=====================================
+        BACKGROUND GLOW
+=====================================*/
 
-    position:absolute;
+.operations::after {
 
-    width:850px;
-    height:850px;
+    content: "";
 
-    left:50%;
-    top:50%;
+    position: absolute;
 
-    transform:translate(-50%,-50%);
+    width: 850px;
 
-    border-radius:50%;
+    height: 850px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
 
     background:
         radial-gradient(
@@ -61,103 +83,327 @@
             transparent 70%
         );
 
-    filter:blur(120px);
+    filter: blur(120px);
+
+    pointer-events: none;
 
 }
 
-/*====================================
+
+/*=====================================
         CONTAINER
 =====================================*/
 
-.operations-container{
+.operations-container {
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 
-    max-width:1400px;
+    width: min(
+        1400px,
+        100%
+    );
 
-    margin:auto;
+    margin: 0 auto;
 
 }
 
-/*====================================
+
+/*=====================================
         HEADING
 =====================================*/
 
-.operations-heading{
+.operations-heading {
 
-    max-width:750px;
+    max-width: 780px;
 
-    margin:0 auto 70px;
+    margin: 0 auto 70px;
 
-    text-align:center;
-
-}
-
-.operations-heading h2{
-
-    color:#fff;
-
-    font-size:clamp(2.4rem,5vw,3.8rem);
-
-    margin-bottom:20px;
+    text-align: center;
 
 }
 
-.operations-heading p{
 
-    color:#94a3b8;
-
-    line-height:1.9;
-
-}
-/*====================================
-        OPERATIONS STATS GRID
+/*=====================================
+        BADGE
 =====================================*/
 
-.operations-stats-grid{
+.operations-badge {
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    display: inline-flex;
 
-    display:grid;
+    align-items: center;
 
-    grid-template-columns:repeat(4, minmax(220px, 1fr));
+    justify-content: center;
 
-    gap:28px;
+    gap: 9px;
 
-    margin-top:70px;
+    padding: 8px 16px;
+
+    margin-bottom: 18px;
+
+    border: 1px solid
+        rgba(
+            56,
+            189,
+            248,
+            .22
+        );
+
+    border-radius: 999px;
+
+    background:
+        rgba(
+            56,
+            189,
+            248,
+            .07
+        );
+
+    color: #38bdf8;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            14,
+            165,
+            233,
+            .06
+        );
 
 }
 
 
-/*====================================
+/*=====================================
+        BADGE DOT
+=====================================*/
+
+.operations-badge-dot {
+
+    position: relative;
+
+    width: 7px;
+
+    height: 7px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #38bdf8;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(
+            56,
+            189,
+            248,
+            .10
+        ),
+        0 0 14px
+        rgba(
+            56,
+            189,
+            248,
+            .55
+        );
+
+}
+
+
+/*=====================================
+        BADGE DOT PULSE
+=====================================*/
+
+.operations-badge-dot::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -5px;
+
+    border: 1px solid
+        rgba(
+            56,
+            189,
+            248,
+            .45
+        );
+
+    border-radius: 50%;
+
+    animation:
+        operationsBadgePulse
+        2s ease-out infinite;
+
+}
+
+
+@keyframes operationsBadgePulse {
+
+    0% {
+
+        transform: scale(.7);
+
+        opacity: .8;
+
+    }
+
+    70% {
+
+        transform: scale(1.5);
+
+        opacity: 0;
+
+    }
+
+    100% {
+
+        transform: scale(1.5);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/*=====================================
+        HEADING TITLE
+=====================================*/
+
+.operations-heading h2 {
+
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-size:
+        clamp(
+            2.4rem,
+            5vw,
+            3.8rem
+        );
+
+    line-height: 1.08;
+
+    font-weight: 800;
+
+    letter-spacing: -1.8px;
+
+}
+
+
+/*=====================================
+        HEADING HIGHLIGHT
+=====================================*/
+
+.operations-heading h2 span {
+
+    display: inline-block;
+
+    color: #38bdf8;
+
+    background:
+        linear-gradient(
+            90deg,
+            #38bdf8,
+            #60a5fa
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+}
+
+
+/*=====================================
+        HEADING DESCRIPTION
+=====================================*/
+
+.operations-heading p {
+
+    max-width: 720px;
+
+    margin: 0 auto;
+
+    color: #94a3b8;
+
+    font-size: 16px;
+
+    line-height: 1.9;
+
+}
+
+
+/*=====================================
+        STATS GRID
+=====================================*/
+
+.operations-stats-grid {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(
+                220px,
+                1fr
+            )
+        );
+
+    gap: 28px;
+
+    margin-top: 70px;
+
+}
+
+
+/*=====================================
         STAT CARD
 =====================================*/
 
-.operations-stat-card{
+.operations-stat-card {
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    display:flex;
+    display: flex;
 
-    flex-direction:column;
+    flex-direction: column;
 
-    justify-content:center;
+    justify-content: center;
 
-    align-items:center;
+    align-items: center;
 
-    text-align:center;
+    min-height: 230px;
 
-    min-height:230px;
+    padding: 35px 25px;
 
-    padding:35px 25px;
-
-    border-radius:24px;
+    border-radius: 24px;
 
     background:
         linear-gradient(
@@ -166,54 +412,72 @@
             rgba(8,15,28,.98)
         );
 
-    border:1px solid rgba(255,255,255,.08);
+    border: 1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
 
     box-shadow:
-        0 20px 45px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.04);
+        0 20px 45px
+        rgba(0,0,0,.35),
+        inset 0 1px 0
+        rgba(255,255,255,.04);
+
+    opacity: 0;
+
+    transform:
+        translateY(60px);
 
     transition:
-        transform .4s ease,
+        transform .45s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        ),
         border-color .4s ease,
         box-shadow .4s ease,
         background .4s ease,
         opacity .7s ease;
 
-    opacity:0;
-
-    transform:translateY(60px);
-
 }
 
 
-/*====================================
+/*=====================================
         SHOW
 =====================================*/
 
-.operations-stat-card.show{
+.operations-stat-card.show {
 
-    opacity:1;
+    opacity: 1;
 
-    transform:translateY(0);
+    transform:
+        translateY(0);
 
 }
 
 
-/*====================================
-        TOP BORDER
+/*=====================================
+        TOP ACCENT
 =====================================*/
 
-.operations-stat-card::before{
+.operations-stat-card::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    top:0;
-    left:0;
+    top: 0;
 
-    width:100%;
-    height:3px;
+    left: 0;
+
+    width: 100%;
+
+    height: 3px;
 
     background:
         linear-gradient(
@@ -223,26 +487,30 @@
             transparent
         );
 
+    opacity: .75;
+
 }
 
 
-/*====================================
-        GLOW
+/*=====================================
+        CARD GLOW
 =====================================*/
 
-.operations-stat-card::after{
+.operations-stat-card::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    width:220px;
-    height:220px;
+    width: 220px;
 
-    top:-120px;
-    right:-120px;
+    height: 220px;
 
-    border-radius:50%;
+    top: -120px;
+
+    right: -120px;
+
+    border-radius: 50%;
 
     background:
         radial-gradient(
@@ -251,41 +519,47 @@
             transparent 70%
         );
 
+    opacity: .7;
+
+    transition:
+        transform .6s ease,
+        opacity .6s ease;
+
 }
 
 
-/*====================================
-        KEEP CONTENT ABOVE
+/*=====================================
+        CONTENT ABOVE EFFECTS
 =====================================*/
 
-.operations-stat-card>*{
+.operations-stat-card > * {
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 
 }
 
 
-/*====================================
+/*=====================================
         ICON
 =====================================*/
 
-.operations-stat-icon{
+.operations-stat-icon {
 
-    width:78px;
+    width: 78px;
 
-    height:78px;
+    height: 78px;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:center;
+    justify-content: center;
 
-    margin-bottom:22px;
+    margin-bottom: 22px;
 
-    border-radius:20px;
+    border-radius: 20px;
 
     background:
         linear-gradient(
@@ -294,66 +568,99 @@
             rgba(37,99,235,.25)
         );
 
-    border:1px solid rgba(255,255,255,.08);
+    border: 1px solid
+        rgba(
+            255,
+            255,
+            255,
+            .08
+        );
 
-    color:#38bdf8;
+    color: #38bdf8;
 
-    font-size:2rem;
+    font-size: 2rem;
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.06);
 
     transition:
-        transform .35s ease,
-        background .35s ease,
-        color .35s ease,
-        box-shadow .35s ease;
+        transform .45s
+        cubic-bezier(
+            .22,
+            1,
+            .36,
+            1
+        ),
+        background .4s ease,
+        color .4s ease,
+        box-shadow .4s ease;
 
 }
 
 
-/*====================================
+/*=====================================
         NUMBER
 =====================================*/
 
-.operations-stat-card h3{
+.operations-stat-card h3 {
 
-    color:#ffffff;
+    margin: 0 0 10px;
 
-    font-size:2.2rem;
+    color: #ffffff;
 
-    font-weight:800;
+    font-size: 2.2rem;
 
-    margin-bottom:12px;
+    line-height: 1;
 
-    transition:.35s;
+    font-weight: 800;
+
+    letter-spacing: -.8px;
+
+    transition:
+        color .35s ease,
+        transform .35s ease;
 
 }
 
 
-/*====================================
+/*=====================================
         TEXT
 =====================================*/
 
-.operations-stat-card p{
+.operations-stat-card p {
 
-    color:#94a3b8;
+    margin: 0;
 
-    font-size:1rem;
+    color: #94a3b8;
 
-    line-height:1.7;
+    font-size: 1rem;
 
-    transition:.35s;
+    line-height: 1.7;
+
+    transition:
+        color .35s ease,
+        transform .35s ease;
 
 }
 
 
-/*====================================
-        HOVER
+/*=====================================
+        CARD HOVER
 =====================================*/
 
-.operations-stat-card:hover{
+.operations-stat-card:hover {
 
-    transform:translateY(-10px);
+    transform:
+        translateY(-12px);
 
-    border-color:rgba(56,189,248,.35);
+    border-color:
+        rgba(
+            56,
+            189,
+            248,
+            .38
+        );
 
     background:
         linear-gradient(
@@ -363,15 +670,39 @@
         );
 
     box-shadow:
-        0 30px 60px rgba(0,0,0,.45),
-        0 15px 35px rgba(14,165,233,.18);
+        0 30px 65px
+        rgba(0,0,0,.45),
+        0 15px 40px
+        rgba(14,165,233,.18);
 
 }
 
 
-.operations-stat-card:hover .operations-stat-icon{
+/*=====================================
+        CARD GLOW HOVER
+=====================================*/
 
-    transform:rotate(-8deg) scale(1.08);
+.operations-stat-card:hover::after {
+
+    transform:
+        scale(1.45);
+
+    opacity: 1;
+
+}
+
+
+/*=====================================
+        ICON HOVER
+=====================================*/
+
+.operations-stat-card:hover
+.operations-stat-icon {
+
+    transform:
+        translateY(-5px)
+        rotate(-6deg)
+        scale(1.08);
 
     background:
         linear-gradient(
@@ -380,140 +711,385 @@
             #2563eb
         );
 
-    color:#ffffff;
+    color: #ffffff;
 
     box-shadow:
-        0 0 30px rgba(56,189,248,.35);
+        0 0 30px
+        rgba(
+            56,
+            189,
+            248,
+            .35
+        );
 
 }
 
 
-.operations-stat-card:hover h3{
+/*=====================================
+        NUMBER HOVER
+=====================================*/
 
-    color:#38bdf8;
+.operations-stat-card:hover h3 {
+
+    color: #38bdf8;
+
+    transform:
+        translateY(-2px);
 
 }
 
 
-.operations-stat-card:hover p{
+/*=====================================
+        TEXT HOVER
+=====================================*/
 
-    color:#cbd5e1;
+.operations-stat-card:hover p {
+
+    color: #cbd5e1;
+
+    transform:
+        translateY(-1px);
 
 }
 
 
-/*====================================
+/*=====================================
         STAGGER
 =====================================*/
 
-.operations-stat-card:nth-child(1){transition-delay:.1s;}
-.operations-stat-card:nth-child(2){transition-delay:.2s;}
-.operations-stat-card:nth-child(3){transition-delay:.3s;}
-.operations-stat-card:nth-child(4){transition-delay:.4s;}
-.operations-stat-card:nth-child(5){transition-delay:.5s;}
-.operations-stat-card:nth-child(6){transition-delay:.6s;}
-.operations-stat-card:nth-child(7){transition-delay:.7s;}
-.operations-stat-card:nth-child(8){transition-delay:.8s;}
+.operations-stat-card:nth-child(1) {
+    transition-delay: .1s;
+}
+
+.operations-stat-card:nth-child(2) {
+    transition-delay: .2s;
+}
+
+.operations-stat-card:nth-child(3) {
+    transition-delay: .3s;
+}
+
+.operations-stat-card:nth-child(4) {
+    transition-delay: .4s;
+}
+
+.operations-stat-card:nth-child(5) {
+    transition-delay: .5s;
+}
+
+.operations-stat-card:nth-child(6) {
+    transition-delay: .6s;
+}
+
+.operations-stat-card:nth-child(7) {
+    transition-delay: .7s;
+}
+
+.operations-stat-card:nth-child(8) {
+    transition-delay: .8s;
+}
 
 
-/*====================================
+/*=====================================
         LAPTOP
 =====================================*/
 
-@media (max-width:1200px){
+@media (max-width: 1200px) {
 
-    .operations-stats-grid{
+    .operations {
 
-        grid-template-columns:repeat(4, 1fr);
+        padding: 110px 5%;
 
-        gap:22px;
+    }
+
+    .operations-stats-grid {
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 22px;
 
     }
 
 }
 
 
-/*====================================
+/*=====================================
         TABLET
 =====================================*/
 
-@media (max-width:992px){
+@media (max-width: 992px) {
 
-    .operations-stats-grid{
+    .operations {
 
-        grid-template-columns:repeat(2, 1fr);
+        padding: 95px 5%;
+
+    }
+
+    .operations-heading {
+
+        margin-bottom: 55px;
+
+    }
+
+    .operations-stats-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 24px;
+
+        margin-top: 55px;
+
+    }
+
+    .operations-stat-card {
+
+        min-height: 225px;
 
     }
 
 }
 
 
-/*====================================
+/*=====================================
+        LARGE PHONE
+=====================================*/
+
+@media (max-width: 768px) {
+
+    .operations {
+
+        padding: 80px 5%;
+
+    }
+
+    .operations-heading {
+
+        max-width: 650px;
+
+        margin-bottom: 45px;
+
+    }
+
+    .operations-heading h2 {
+
+        font-size: 36px;
+
+        letter-spacing: -1.2px;
+
+    }
+
+    .operations-heading p {
+
+        font-size: 15px;
+
+        line-height: 1.8;
+
+    }
+
+    .operations-stats-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 20px;
+
+        margin-top: 45px;
+
+    }
+
+    .operations-stat-card {
+
+        min-height: 205px;
+
+        padding: 30px 22px;
+
+    }
+
+    /*
+        Disable exaggerated hover
+        movement on touch-sized screens.
+    */
+
+    .operations-stat-card:hover {
+
+        transform:
+            translateY(-6px);
+
+    }
+
+}
+
+
+/*=====================================
         MOBILE
 =====================================*/
 
-@media (max-width:768px){
+@media (max-width: 600px) {
 
-    .operations-stats-grid{
+    .operations {
 
-        grid-template-columns:1fr;
-
-    }
-
-    .operations-stat-card{
-
-        min-height:200px;
-
-        padding:30px 22px;
+        padding: 70px 5%;
 
     }
 
-    .operations-stat-card h3{
+    .operations-heading {
 
-        font-size:2rem;
+        margin-bottom: 40px;
+
+    }
+
+    .operations-badge {
+
+        padding: 7px 14px;
+
+        font-size: 11px;
+
+    }
+
+    .operations-heading h2 {
+
+        font-size: 30px;
+
+        line-height: 1.12;
+
+        letter-spacing: -1px;
+
+    }
+
+    .operations-heading p {
+
+        font-size: 14px;
+
+        line-height: 1.75;
+
+    }
+
+    .operations-stats-grid {
+
+        margin-top: 40px;
+
+    }
+
+    .operations-stat-card {
+
+        min-height: 195px;
+
+        padding: 28px 22px;
+
+        border-radius: 21px;
+
+    }
+
+    .operations-stat-icon {
+
+        width: 68px;
+
+        height: 68px;
+
+        margin-bottom: 18px;
+
+        border-radius: 18px;
+
+        font-size: 1.7rem;
+
+    }
+
+    .operations-stat-card h3 {
+
+        font-size: 2rem;
+
+    }
+
+    .operations-stat-card p {
+
+        font-size: .95rem;
 
     }
 
 }
 
 
-/*====================================
-        SMALL MOBILE
+/*=====================================
+        SMALL PHONES
 =====================================*/
 
-@media (max-width:480px){
+@media (max-width: 400px) {
 
-    .operations-stat-card{
+    .operations {
 
-        min-height:180px;
-
-        border-radius:20px;
-
-        padding:25px 18px;
+        padding: 60px 5%;
 
     }
 
-    .operations-stat-icon{
+    .operations-heading h2 {
 
-        width:65px;
-
-        height:65px;
-
-        font-size:1.7rem;
-
-        border-radius:18px;
+        font-size: 27px;
 
     }
 
-    .operations-stat-card h3{
+    .operations-heading p {
 
-        font-size:1.8rem;
+        font-size: 13.5px;
 
     }
 
-    .operations-stat-card p{
+    .operations-stat-card {
 
-        font-size:.95rem;
+        min-height: 180px;
+
+        padding: 25px 18px;
+
+        border-radius: 19px;
+
+    }
+
+    .operations-stat-icon {
+
+        width: 62px;
+
+        height: 62px;
+
+        margin-bottom: 17px;
+
+        font-size: 1.55rem;
+
+    }
+
+    .operations-stat-card h3 {
+
+        font-size: 1.8rem;
+
+    }
+
+    .operations-stat-card p {
+
+        font-size: .9rem;
+
+    }
+
+}
+
+
+/*=====================================
+        REDUCED MOTION
+=====================================*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    .operations-badge-dot::after {
+
+        animation: none;
+
+    }
+
+    .operations-stat-card,
+    .operations-stat-card::after,
+    .operations-stat-icon,
+    .operations-stat-card h3,
+    .operations-stat-card p {
+
+        transition: none !important;
 
     }
 

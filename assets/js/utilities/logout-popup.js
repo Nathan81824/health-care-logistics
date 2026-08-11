@@ -1,9 +1,17 @@
-/*=====================================
-        LOGOUT POPUP JS
-=====================================*/
+/*=====================================*
+* LOGOUT POPUP JS
+*=====================================*/
 
-function initLogoutPopup(){
 
+/*=====================================*
+* INITIALIZE LOGOUT POPUP
+*=====================================*/
+
+function initLogoutPopup() {
+
+    /*=====================================
+            GET POPUP ELEMENTS
+    =====================================*/
 
     const popup =
         document.getElementById(
@@ -14,12 +22,6 @@ function initLogoutPopup(){
     const overlay =
         document.getElementById(
             "logoutOverlay"
-        );
-
-
-    const logoutLink =
-        document.getElementById(
-            "navLogout"
         );
 
 
@@ -35,16 +37,18 @@ function initLogoutPopup(){
         );
 
 
+    /*=====================================
+            POPUP SAFETY CHECK
+    =====================================*/
 
-    if(
+    if (
         !popup ||
-        !logoutLink ||
         !cancelButton ||
         !confirmButton
-    ){
+    ) {
 
-        console.log(
-            "Logout popup not found"
+        console.warn(
+            "⚠️ Logout popup HTML not found."
         );
 
         return;
@@ -52,31 +56,29 @@ function initLogoutPopup(){
     }
 
 
-
     /*=====================================
-            OPEN POPUP
+            PREVENT DUPLICATE SETUP
     =====================================*/
 
-    logoutLink.addEventListener(
-        "click",
-        function(e){
+    if (
+        popup.dataset.logoutReady ===
+        "true"
+    ) {
 
-            e.preventDefault();
+        return;
 
-            popup.classList.add(
-                "show"
-            );
+    }
 
-        }
-    );
 
+    popup.dataset.logoutReady =
+        "true";
 
 
     /*=====================================
             CLOSE POPUP
     =====================================*/
 
-    function closePopup(){
+    function closePopup() {
 
         popup.classList.remove(
             "show"
@@ -85,28 +87,141 @@ function initLogoutPopup(){
     }
 
 
+    /*=====================================
+            OPEN POPUP
+    =====================================*/
+
+    function openPopup(event) {
+
+        if (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+        }
+
+
+        /*
+            Only allow logout popup
+            when user is logged in.
+        */
+
+        const loggedIn =
+            localStorage.getItem(
+                "isLoggedIn"
+            ) === "true";
+
+
+        if (!loggedIn) {
+
+            return;
+
+        }
+
+
+        popup.classList.add(
+            "show"
+        );
+
+    }
+
+
+    /*=====================================
+            LOGOUT LINK
+    =====================================*/
+
+    /*
+        The navbar is loaded dynamically.
+        Therefore we use event delegation
+        instead of requiring #navLogout
+        to already exist.
+    */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const logoutLink =
+                event.target.closest(
+                    "#navLogout"
+                );
+
+
+            if (!logoutLink) {
+
+                return;
+
+            }
+
+
+            openPopup(event);
+
+        }
+    );
+
+
+    /*=====================================
+            CANCEL LOGOUT
+    =====================================*/
 
     cancelButton.addEventListener(
         "click",
-        closePopup
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            closePopup();
+
+        }
     );
 
 
+    /*=====================================
+            OVERLAY CLICK
+    =====================================*/
 
-    overlay.addEventListener(
-        "click",
-        closePopup
-    );
+    if (overlay) {
+
+        overlay.addEventListener(
+            "click",
+            function (event) {
+
+                /*
+                    Close only when the
+                    overlay itself is clicked.
+                */
+
+                if (
+                    event.target ===
+                    overlay
+                ) {
+
+                    closePopup();
+
+                }
+
+            }
+        );
+
+    }
 
 
+    /*=====================================
+            ESCAPE KEY
+    =====================================*/
 
     document.addEventListener(
         "keydown",
-        function(e){
+        function (event) {
 
-            if(
-                e.key === "Escape"
-            ){
+            if (
+                event.key ===
+                "Escape"
+            ) {
 
                 closePopup();
 
@@ -116,45 +231,89 @@ function initLogoutPopup(){
     );
 
 
-
     /*=====================================
             CONFIRM LOGOUT
     =====================================*/
 
-confirmButton.addEventListener(
-    "click",
-    function(){
+    confirmButton.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
 
 
-        addNotification(
+            /*
+                Check login state.
+            */
 
-            "info",
-
-            "Logged Out",
-
-            "You signed out successfully."
-
-        );
-
+            const loggedIn =
+                localStorage.getItem(
+                    "isLoggedIn"
+                ) === "true";
 
 
-        localStorage.removeItem(
-            "user"
-        );
+            if (!loggedIn) {
+
+                closePopup();
+
+                return;
+
+            }
 
 
-        localStorage.removeItem(
-            "isLoggedIn"
-        );
+            /*=================================
+                    LOGOUT NOTIFICATION
+            =================================*/
+
+            if (
+                typeof addNotification ===
+                "function"
+            ) {
+
+                addNotification(
+
+                    "info",
+
+                    "Logged Out",
+
+                    "You signed out successfully."
+
+                );
+
+            }
+
+
+            /*=================================
+                    REMOVE LOGIN DATA
+            =================================*/
+
+            localStorage.removeItem(
+                "user"
+            );
+
+
+            localStorage.removeItem(
+                "isLoggedIn"
+            );
+
+
+            /*=================================
+                    CLOSE POPUP
+            =================================*/
 
             closePopup();
 
 
+            /*=================================
+                    SUCCESS MESSAGE
+            =================================*/
 
-            if(
+            if (
                 typeof showSuccess ===
                 "function"
-            ){
+            ) {
 
                 showSuccess(
                     "Logged out successfully."
@@ -163,36 +322,48 @@ confirmButton.addEventListener(
             }
 
 
+            /*=================================
+                    REDIRECT
+            =================================*/
 
-            setTimeout(()=>{
+            setTimeout(
+                function () {
+
+                    const insidePages =
+                        window.location.pathname
+                            .toLowerCase()
+                            .includes(
+                                "/pages/"
+                            );
 
 
-                const insidePages =
-                    window.location.pathname.includes(
-                        "/pages/"
-                    );
+                    window.location.href =
+                        insidePages
+                            ? "../index.html"
+                            : "index.html";
 
-
-                window.location.href =
-                    insidePages
-                    ? "../index.html"
-                    : "index.html";
-
-
-            },1000);
-
+                },
+                1000
+            );
 
         }
     );
 
 
+    /*=====================================
+            READY
+    =====================================*/
+
+    console.log(
+        "✅ Logout popup initialized"
+    );
+
 }
 
 
-
-/*=====================================
-        EXPORT
-=====================================*/
+/*=====================================*
+* EXPORT
+*=====================================*/
 
 window.initLogoutPopup =
-initLogoutPopup;
+    initLogoutPopup;

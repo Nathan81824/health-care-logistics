@@ -32,6 +32,40 @@ function initWhatIsHipaa() {
     COMMITMENT TIMELINE
 =====================================*/
 
+/*====================================
+            HIPAA
+=====================================*/
+
+function initHipaa() {
+
+    initWhatIsHipaa();
+
+    initCommitmentTimeline();
+
+    initHipaaProcess();
+
+}
+
+
+/*====================================
+        WHAT IS HIPAA
+=====================================*/
+
+function initWhatIsHipaa() {
+
+    const section = document.querySelector(".what-is-hipaa");
+
+    if (!section) return;
+
+    section.classList.add("loaded");
+
+}
+
+
+/*====================================
+    COMMITMENT TIMELINE
+=====================================*/
+
 function initCommitmentTimeline() {
 
     const items = document.querySelectorAll(".timeline-item");

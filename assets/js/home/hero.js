@@ -1,10 +1,8 @@
-/*=====================================
-            HERO
-=====================================*/
+/*=====================================*
+        HERO
+*=====================================*/
 
-
-function initHero(){
-
+function initHero() {
 
     console.log("Hero initialized");
 
@@ -17,342 +15,402 @@ function initHero(){
 
     initHeroAnimations();
 
-
 }
 
 
-
-
-
-/*=====================================
+/*=====================================*
         HERO SLIDER
-=====================================*/
+*=====================================*/
+
+function initHeroSlider() {
+
+    const hero =
+        document.querySelector(".hero");
 
 
-function initHeroSlider(){
+    if (!hero) {
 
-
-    const slides = document.querySelectorAll(".slide");
-
-    const dotsContainer = document.getElementById("dots");
-
-    const nextBtn = document.getElementById("next");
-
-    const prevBtn = document.getElementById("prev");
-
-    const hero = document.querySelector(".hero");
-
-
-
-    if(
-        !slides.length ||
-        !dotsContainer ||
-        !nextBtn ||
-        !prevBtn ||
-        !hero
-    ){
-
-        console.log("Hero slider elements missing");
+        console.log(
+            "⚠️ Hero element not found."
+        );
 
         return;
 
     }
 
 
+    const slides =
+        hero.querySelectorAll(".slide");
+
+
+    const dotsContainer =
+        hero.querySelector("#dots");
+
+
+    const nextBtn =
+        hero.querySelector("#next");
+
+
+    const prevBtn =
+        hero.querySelector("#prev");
+
+
+    /*=================================
+            SAFETY CHECK
+    =================================*/
+
+    if (
+        !slides.length ||
+        !dotsContainer ||
+        !nextBtn ||
+        !prevBtn
+    ) {
+
+        console.log(
+            "⚠️ Hero slider elements missing."
+        );
+
+        return;
+
+    }
+
+
+    /*=================================
+        PREVENT DUPLICATE SLIDER
+    =================================*/
+
+    if (
+        hero.dataset.sliderInitialized ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    hero.dataset.sliderInitialized =
+        "true";
+
 
     let currentSlide = 0;
 
-    let autoPlay;
+    let autoPlay = null;
 
 
+    /*=================================
+            CREATE DOTS
+    =================================*/
 
     dotsContainer.innerHTML = "";
 
 
+    slides.forEach(
+        function (slide, index) {
 
-    /*=========================
-            CREATE DOTS
-    =========================*/
-
-
-    slides.forEach((slide,index)=>{
-
-
-        const dot = document.createElement("span");
+            const dot =
+                document.createElement(
+                    "button"
+                );
 
 
-        dot.classList.add("dot");
+            dot.type =
+                "button";
 
 
+            dot.className =
+                "dot";
 
-        if(index === 0){
 
-            dot.classList.add("active");
+            dot.setAttribute(
+                "aria-label",
+                `Go to slide ${index + 1}`
+            );
+
+
+            dot.setAttribute(
+                "aria-current",
+                index === 0
+                    ? "true"
+                    : "false"
+            );
+
+
+            if (
+                index === 0
+            ) {
+
+                dot.classList.add(
+                    "active"
+                );
+
+            }
+
+
+            dot.addEventListener(
+                "click",
+                function (event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    showSlide(index);
+
+                    restartAutoPlay();
+
+                }
+            );
+
+
+            dotsContainer.appendChild(
+                dot
+            );
 
         }
+    );
 
 
-
-        dot.addEventListener("click",()=>{
-
-
-            showSlide(index);
-
-            restartAutoPlay();
+    const dots =
+        dotsContainer.querySelectorAll(
+            ".dot"
+        );
 
 
-        });
-
-
-
-        dotsContainer.appendChild(dot);
-
-
-    });
-
-
-
-    const dots = dotsContainer.querySelectorAll(".dot");
-
-
-
-
-
-    /*=========================
+    /*=================================
             SHOW SLIDE
-    =========================*/
+    =================================*/
 
+    function showSlide(index) {
 
-    function showSlide(index){
+        /*
+            Normalize index.
+        */
 
-
-        slides.forEach(slide=>{
-
-
-            slide.classList.remove("active");
-
-
-        });
-
-
-
-        dots.forEach(dot=>{
-
-
-            dot.classList.remove("active");
-
-
-        });
-
-
-
-
-
-        if(index >= slides.length){
-
+        if (
+            index >= slides.length
+        ) {
 
             currentSlide = 0;
 
+        }
+
+        else if (
+            index < 0
+        ) {
+
+            currentSlide =
+                slides.length - 1;
+
+        }
+
+        else {
+
+            currentSlide =
+                index;
 
         }
 
 
-        else if(index < 0){
+        /*=================================
+                UPDATE SLIDES
+        =================================*/
+
+        slides.forEach(
+            function (slide, slideIndex) {
+
+                slide.classList.toggle(
+                    "active",
+                    slideIndex === currentSlide
+                );
+
+            }
+        );
 
 
-            currentSlide = slides.length - 1;
+        /*=================================
+                UPDATE DOTS
+        =================================*/
+
+        dots.forEach(
+            function (dot, dotIndex) {
+
+                const active =
+                    dotIndex ===
+                    currentSlide;
 
 
-        }
+                dot.classList.toggle(
+                    "active",
+                    active
+                );
 
 
-        else{
+                dot.setAttribute(
+                    "aria-current",
+                    active
+                        ? "true"
+                        : "false"
+                );
 
-
-            currentSlide = index;
-
-
-        }
-
-
-
-
-
-        slides[currentSlide].classList.add("active");
-
-
-        dots[currentSlide].classList.add("active");
-
-
+            }
+        );
 
     }
 
 
-
-
-
-    /*=========================
+    /*=================================
             NEXT SLIDE
-    =========================*/
+    =================================*/
 
+    function nextSlide() {
 
-    function nextSlide(){
-
-
-        showSlide(currentSlide + 1);
-
+        showSlide(
+            currentSlide + 1
+        );
 
     }
 
 
-
-
-
-    /*=========================
+    /*=================================
             PREVIOUS SLIDE
-    =========================*/
+    =================================*/
 
+    function previousSlide() {
 
-    function prevSlide(){
-
-
-        showSlide(currentSlide - 1);
-
+        showSlide(
+            currentSlide - 1
+        );
 
     }
 
 
+    /*=================================
+            START AUTOPLAY
+    =================================*/
 
-
-
-    /*=========================
-            AUTO PLAY
-    =========================*/
-
-
-    function startAutoPlay(){
-
+    function startAutoPlay() {
 
         stopAutoPlay();
 
 
+        autoPlay =
+            setInterval(
+                function () {
 
-        autoPlay = setInterval(()=>{
+                    nextSlide();
+
+                },
+                5000
+            );
+
+    }
+
+
+    /*=================================
+            STOP AUTOPLAY
+    =================================*/
+
+    function stopAutoPlay() {
+
+        if (
+            autoPlay !== null
+        ) {
+
+            clearInterval(
+                autoPlay
+            );
+
+
+            autoPlay =
+                null;
+
+        }
+
+    }
+
+
+    /*=================================
+            RESTART AUTOPLAY
+    =================================*/
+
+    function restartAutoPlay() {
+
+        startAutoPlay();
+
+    }
+
+
+    /*=================================
+            NEXT BUTTON
+    =================================*/
+
+    nextBtn.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
 
 
             nextSlide();
 
+            restartAutoPlay();
 
+        }
+    );
 
-        },5000);
 
+    /*=================================
+            PREVIOUS BUTTON
+    =================================*/
 
+    prevBtn.addEventListener(
+        "click",
+        function (event) {
 
-    }
+            event.preventDefault();
 
+            event.stopPropagation();
 
 
+            previousSlide();
 
+            restartAutoPlay();
 
-    function stopAutoPlay(){
+        }
+    );
 
 
-        clearInterval(autoPlay);
+    /*=================================
+            PAUSE ON HOVER
+    =================================*/
 
+    hero.addEventListener(
+        "mouseenter",
+        function () {
 
-    }
+            stopAutoPlay();
 
+        }
+    );
 
 
+    hero.addEventListener(
+        "mouseleave",
+        function () {
 
+            startAutoPlay();
 
-    function restartAutoPlay(){
+        }
+    );
 
 
-        startAutoPlay();
-
-
-    }
-
-
-
-
-
-    /*=========================
-            BUTTONS
-    =========================*/
-
-
-    nextBtn.addEventListener("click",()=>{
-
-
-        nextSlide();
-
-
-        restartAutoPlay();
-
-
-
-    });
-
-
-
-
-
-    prevBtn.addEventListener("click",()=>{
-
-
-        prevSlide();
-
-
-        restartAutoPlay();
-
-
-
-    });
-
-
-
-
-
-
-
-    /*=========================
-            HOVER PAUSE
-    =========================*/
-
-
-    hero.addEventListener("mouseenter",()=>{
-
-
-        stopAutoPlay();
-
-
-
-    });
-
-
-
-
-    hero.addEventListener("mouseleave",()=>{
-
-
-        startAutoPlay();
-
-
-
-    });
-
-
-
-
-
-
-
-    /*=========================
-            START SLIDER
-    =========================*/
-
+    /*=================================
+            INITIAL SLIDE
+    =================================*/
 
     showSlide(0);
 
@@ -360,182 +418,223 @@ function initHeroSlider(){
     startAutoPlay();
 
 
-
-    console.log("Hero slider started");
-
+    console.log(
+        "✅ Hero slider started"
+    );
 
 }
 
 
-
-
-
-
-
-
-/*=====================================
+/*=====================================*
         HERO BUTTONS
-=====================================*/
+*=====================================*/
+
+function initHeroButtons() {
+
+    const hero =
+        document.querySelector(
+            ".hero"
+        );
 
 
-function initHeroButtons(){
+    if (!hero) {
 
-
-    const buttons = document.querySelectorAll(".hero .btn");
-
-
-
-    if(!buttons.length) return;
-
-
-
-
-
-    buttons.forEach(button=>{
-
-
-        button.addEventListener("click",()=>{
-
-
-            button.classList.add("clicked");
-
-
-
-            setTimeout(()=>{
-
-
-                button.classList.remove("clicked");
-
-
-
-            },300);
-
-
-
-        });
-
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/*=====================================
-        HERO TYPING
-=====================================*/
-
-
-function initHeroTyping(){
-
-
-    const text = document.querySelector(".hero-typing");
-
-
-
-    if(!text) return;
-
-
-
-
-
-    if(window.heroTypingInterval){
-
-        clearInterval(window.heroTypingInterval);
+        return;
 
     }
 
 
+    const buttons =
+        hero.querySelectorAll(
+            ".btn"
+        );
 
+
+    if (!buttons.length) {
+
+        return;
+
+    }
+
+
+    buttons.forEach(
+        function (button) {
+
+            if (
+                button.dataset.heroReady ===
+                "true"
+            ) {
+
+                return;
+
+            }
+
+
+            button.dataset.heroReady =
+                "true";
+
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    button.classList.add(
+                        "clicked"
+                    );
+
+
+                    setTimeout(
+                        function () {
+
+                            button.classList.remove(
+                                "clicked"
+                            );
+
+                        },
+                        300
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/*=====================================*
+        HERO TYPING
+*=====================================*/
+
+function initHeroTyping() {
+
+    const text =
+        document.querySelector(
+            ".hero-typing"
+        );
+
+
+    if (!text) {
+
+        return;
+
+    }
+
+
+    /*=================================
+            CLEAR OLD INTERVAL
+    =================================*/
+
+    if (
+        window.heroTypingInterval
+    ) {
+
+        clearInterval(
+            window.heroTypingInterval
+        );
+
+    }
 
 
     const words = [
 
-
         "Healthcare Logistics",
-
 
         "Medical Transportation",
 
-
         "Reliable Delivery"
 
-
     ];
-
 
 
     let index = 0;
 
 
+    /*=================================
+            INITIAL TEXT
+    =================================*/
+
+    text.textContent =
+        words[0];
 
 
+    /*=================================
+            START ROTATION
+    =================================*/
 
-    window.heroTypingInterval = setInterval(()=>{
+    window.heroTypingInterval =
+        setInterval(
+            function () {
 
-
-        index++;
-
-
-
-        if(index >= words.length){
-
-
-            index = 0;
+                index++;
 
 
-        }
+                if (
+                    index >= words.length
+                ) {
+
+                    index = 0;
+
+                }
 
 
+                text.textContent =
+                    words[index];
 
-
-
-        text.textContent = words[index];
-
-
-
-    },3000);
-
-
+            },
+            3000
+        );
 
 }
 
 
-
-
-
-
-
-
-
-/*=====================================
+/*=====================================*
         HERO ANIMATIONS
-=====================================*/
+*=====================================*/
+
+function initHeroAnimations() {
+
+    const hero =
+        document.querySelector(
+            ".hero"
+        );
 
 
-function initHeroAnimations(){
+    if (!hero) {
+
+        return;
+
+    }
 
 
-    const hero = document.querySelector(".hero");
+    hero.classList.add(
+        "loaded"
+    );
 
 
-
-    if(!hero) return;
-
-
-
-
-    hero.classList.add("loaded");
-
-
+    console.log(
+        "✅ Hero animations initialized"
+    );
 
 }
+
+
+/*=====================================*
+        EXPORT
+*=====================================*/
+
+window.initHero =
+    initHero;
+
+window.initHeroSlider =
+    initHeroSlider;
+
+window.initHeroButtons =
+    initHeroButtons;
+
+window.initHeroTyping =
+    initHeroTyping;
+
+window.initHeroAnimations =
+    initHeroAnimations;

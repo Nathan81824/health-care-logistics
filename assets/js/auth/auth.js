@@ -1,70 +1,81 @@
-/*=========================================
-        AUTH JS
-        Controller
-=========================================*/
+/*=========================================*
+* AUTH JS
+* Controller
+*=========================================*/
 
 
-function initAuth(){
+/*=========================================*
+* INITIALIZE AUTH
+*=========================================*/
 
+function initAuth() {
 
     console.log(
         "✅ Auth initialized"
     );
 
 
+    /*=====================================
+    LOGIN / REGISTER PANELS
+    =====================================*/
 
     setupAuthPanels();
 
 
+    /*=====================================
+    LOGIN SYSTEM
+    =====================================*/
 
-    // Start other auth systems
-
-    if(typeof setupLogin === "function"){
+    if (
+        typeof setupLogin ===
+        "function"
+    ) {
 
         setupLogin();
 
     }
 
 
+    /*=====================================
+    REGISTER SYSTEM
+    =====================================*/
 
-    if(typeof setupRegister === "function"){
+    if (
+        typeof setupRegister ===
+        "function"
+    ) {
 
         setupRegister();
 
     }
 
 
+    /*=====================================
+    PASSWORD TOGGLE
+    =====================================*/
 
-    if(typeof setupPasswordToggle === "function"){
+    if (
+        typeof setupPasswordToggle ===
+        "function"
+    ) {
 
         setupPasswordToggle();
 
     }
 
-
-
 }
 
 
+/*=========================================*
+* LOGIN / REGISTER SWITCH
+*=========================================*/
 
-
-
-
-
-/*=========================================
-        LOGIN REGISTER SWITCH
-=========================================*/
-
-
-function setupAuthPanels(){
-
-
+function setupAuthPanels() {
 
     const showRegister =
         document.querySelectorAll(
             "#showRegister"
         );
-
 
 
     const showLogin =
@@ -73,12 +84,10 @@ function setupAuthPanels(){
         );
 
 
-
     const loginForm =
         document.querySelector(
             ".login-form"
         );
-
 
 
     const registerForm =
@@ -87,12 +96,10 @@ function setupAuthPanels(){
         );
 
 
-
     const loginPanel =
         document.querySelector(
             ".login-panel"
         );
-
 
 
     const registerPanel =
@@ -101,162 +108,149 @@ function setupAuthPanels(){
         );
 
 
+    /*=====================================
+    CHECK AUTH FORMS
+    =====================================*/
 
-
-
-
-
-    if(
+    if (
         !loginForm ||
         !registerForm
-    ){
-
+    ) {
 
         console.log(
             "Auth forms not found"
         );
 
-
         return;
-
 
     }
 
 
+    /*=====================================
+    SHOW REGISTER
+    =====================================*/
 
-
-
-
-
-
-
-    showRegister.forEach(button=>{
-
+    showRegister.forEach(button => {
 
         button.addEventListener(
             "click",
-            function(e){
+            function (event) {
+
+                event.preventDefault();
 
 
-                e.preventDefault();
-
-
-
-
+                /*=========================
+                HIDE LOGIN
+                =========================*/
 
                 loginForm.classList.remove(
                     "active"
                 );
 
 
+                /*=========================
+                SHOW REGISTER
+                =========================*/
+
                 registerForm.classList.add(
                     "active"
                 );
 
 
+                /*=========================
+                UPDATE PANELS
+                =========================*/
+
+                if (loginPanel) {
+
+                    loginPanel.classList.add(
+                        "hide"
+                    );
+
+                }
 
 
+                if (registerPanel) {
 
-                loginPanel?.classList.add(
-                    "hide"
-                );
+                    registerPanel.classList.add(
+                        "active"
+                    );
 
-
-                registerPanel?.classList.add(
-                    "active"
-                );
-
-
+                }
 
             }
         );
 
-
     });
 
 
+    /*=====================================
+    SHOW LOGIN
+    =====================================*/
 
-
-
-
-
-
-
-    showLogin.forEach(button=>{
-
+    showLogin.forEach(button => {
 
         button.addEventListener(
             "click",
-            function(e){
+            function (event) {
+
+                event.preventDefault();
 
 
-                e.preventDefault();
-
-
-
-
-
+                /*=========================
+                HIDE REGISTER
+                =========================*/
 
                 registerForm.classList.remove(
                     "active"
                 );
 
 
+                /*=========================
+                SHOW LOGIN
+                =========================*/
 
                 loginForm.classList.add(
                     "active"
                 );
 
 
+                /*=========================
+                UPDATE PANELS
+                =========================*/
+
+                if (registerPanel) {
+
+                    registerPanel.classList.remove(
+                        "active"
+                    );
+
+                }
 
 
+                if (loginPanel) {
 
+                    loginPanel.classList.remove(
+                        "hide"
+                    );
 
-
-
-                registerPanel?.classList.remove(
-                    "active"
-                );
-
-
-
-                loginPanel?.classList.remove(
-                    "hide"
-                );
-
-
+                }
 
             }
         );
 
-
     });
-
-
 
 }
 
 
-
-
-
-
-
-
-/*=====================================
-        START AUTH
-=====================================*/
-
-
-
-
-
-
-
-/*=====================================
-            EXPORT
-=====================================*/
-
+/*=========================================*
+* EXPORT
+*=========================================*/
 
 window.initAuth =
-initAuth;
+    initAuth;
+
+
+window.setupAuthPanels =
+    setupAuthPanels;

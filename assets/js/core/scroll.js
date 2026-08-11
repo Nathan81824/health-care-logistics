@@ -1,224 +1,255 @@
-/*=====================================
-            MAIN
-=====================================*/
+/*=====================================*
+* SCROLL JS
+*=====================================*/
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
 
-        initApplication();
+/*=====================================*
+* APPLICATION STATE
+*=====================================*/
 
-    }
-);
+let scrollSystemInitialized = false;
 
 
-/*=====================================
-        APPLICATION
-=====================================*/
+/*=====================================*
+* INITIALIZE SCROLL SYSTEM
+*=====================================*/
 
-function initApplication() {
+function initScroll() {
 
+    /*
+        Prevent duplicate initialization
+    */
 
-    /*==============================
-            CORE
-    ==============================*/
-
-
-    if(typeof initLoader === "function"){
-
-        initLoader();
-
-    }
-
-
-    if(typeof initDarkMode === "function"){
-
-        initDarkMode();
-
-    }
-
-
-
-    if(typeof initScrollReveal === "function"){
-
-        initScrollReveal();
-
-    }
-
-
-
-    if(typeof initNavbarScroll === "function"){
-
-        initNavbarScroll();
-
-    }
-
-
-
-    /*==============================
-            NAVBAR
-    ==============================*/
-
-
-    if(typeof initNavbar === "function"){
-
-        initNavbar();
-
-    }
-
-
-
-    if(typeof initProfile === "function"){
-
-        initProfile();
-
-    }
-
-
-
-    if(typeof initLogout === "function"){
-
-        initLogout();
-
-    }
-
-
-
-    /*==============================
-            AUTH
-    ==============================*/
-
-
-    if(typeof initAuth === "function"){
-
-        initAuth();
-
-    }
-
-
-
-    /*==============================
-            PAGES
-    ==============================*/
-
-
-    if(typeof initHome === "function"){
-
-        initHome();
-
-    }
-
-
-    if(typeof initAbout === "function"){
-
-        initAbout();
-
-    }
-
-
-    if(typeof initServices === "function"){
-
-        initServices();
-
-    }
-
-
-    if(typeof initIndustries === "function"){
-
-        initIndustries();
-
-    }
-
-
-    if(typeof initHipaa === "function"){
-
-        initHipaa();
-
-    }
-
-
-    if(typeof initContact === "function"){
-
-        initContact();
-
-    }
-
-
-    if(typeof initDashboard === "function"){
-
-        initDashboard();
-
-    }
-
-
-}
-
-
-
-/*=====================================
-        NAVBAR SCROLL EFFECT
-=====================================*/
-
-
-/*=====================================
-        NAVBAR SCROLL COLOR
-=====================================*/
-
-function initNavbarScroll(){
-
-
-    const header =
-        document.querySelector(
-            ".header"
-        );
-
-
-    if(!header){
-
-        console.log(
-            "Navbar not loaded yet"
-        );
+    if (scrollSystemInitialized) {
 
         return;
 
     }
 
 
-
-    function checkScroll(){
-
-
-        if(window.scrollY > 50){
+    scrollSystemInitialized = true;
 
 
-            header.classList.add(
-                "scrolled"
-            );
+    console.log(
+        "✅ Scroll system initialized"
+    );
 
 
-        }else{
+    /*
+        Initialize navbar scroll
+    */
+
+    initNavbarScroll();
+
+}
 
 
-            header.classList.remove(
-                "scrolled"
-            );
+/*=====================================*
+* NAVBAR SCROLL
+*=====================================*/
+
+function initNavbarScroll() {
+
+    const navbar =
+        document.querySelector(
+            ".navbar"
+        );
 
 
-        }
+    /*
+        Navbar may not exist yet because
+        the loader inserts it dynamically.
 
+        Do NOT throw an error.
+    */
+
+    if (!navbar) {
+
+        return;
 
     }
 
 
+    /*
+        Prevent duplicate listeners
+    */
+
+    if (
+        navbar.dataset.scrollReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    navbar.dataset.scrollReady =
+        "true";
+
+
+    /*=====================================
+            SCROLL HANDLER
+    =====================================*/
+
+    function handleNavbarScroll() {
+
+        if (
+            window.scrollY > 50
+        ) {
+
+            navbar.classList.add(
+                "scrolled"
+            );
+
+        }
+
+        else {
+
+            navbar.classList.remove(
+                "scrolled"
+            );
+
+        }
+
+    }
+
 
     window.addEventListener(
         "scroll",
-        checkScroll
+        handleNavbarScroll,
+        {
+            passive: true
+        }
     );
 
 
-    // check immediately
-    checkScroll();
+    /*
+        Run once immediately
+    */
 
+    handleNavbarScroll();
+
+
+    console.log(
+        "✅ Navbar scroll initialized"
+    );
 
 }
+
+
+/*=====================================*
+* REFRESH NAVBAR SCROLL
+*=====================================*/
+
+function refreshNavbarScroll() {
+
+    /*
+        Used after the loader dynamically
+        inserts the navbar.
+    */
+
+    const navbar =
+        document.querySelector(
+            ".navbar"
+        );
+
+
+    if (!navbar) {
+
+        return;
+
+    }
+
+
+    /*
+        If already initialized,
+        do nothing.
+    */
+
+    if (
+        navbar.dataset.scrollReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    initNavbarScroll();
+
+}
+
+
+/*=====================================*
+* SCROLL TO TOP
+*=====================================*/
+
+function scrollToTop() {
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/*=====================================*
+* SCROLL TO ELEMENT
+*=====================================*/
+
+function scrollToElement(
+    selector
+) {
+
+    const element =
+        document.querySelector(
+            selector
+        );
+
+
+    if (!element) {
+
+        return;
+
+    }
+
+
+    element.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+}
+
+
+/*=====================================*
+* EXPORT
+*=====================================*/
+
+window.initScroll =
+    initScroll;
+
+
+window.initNavbarScroll =
+    initNavbarScroll;
+
+
+window.refreshNavbarScroll =
+    refreshNavbarScroll;
+
+
+window.scrollToTop =
+    scrollToTop;
+
+
+window.scrollToElement =
+    scrollToElement;

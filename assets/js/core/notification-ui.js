@@ -1,19 +1,75 @@
 /*==================================================*
         NOTIFICATION UI
+        notification-ui.js
+
+        PURPOSE:
+        - Update notification badges
+        - Render notifications
+        - Delete individual notifications
+        - Delete all notifications
+        - Mark notifications as read
+        - Control notification dropdown
+        - Handle outside click
+        - Handle Escape key
+
+        IMPORTANT:
+        Notification storage/data logic belongs
+        in notification.js.
+*==================================================*/
+
+
+/*==================================================*
+        UI STATE
 *==================================================*/
 
 let notificationUIStarted = false;
 
+let notificationDropdownListenersAttached = false;
+
+let notificationGlobalListenersAttached = false;
+
 
 /*==================================================*
-        CHECK LOGIN STATUS
+        GET NOTIFICATIONS SAFELY
 *==================================================*/
 
-function isUserLoggedIn() {
+function getNotificationData() {
 
-    return (
-        localStorage.getItem("isLoggedIn") === "true"
-    );
+    if (
+        typeof window.getNotifications !==
+        "function"
+    ) {
+
+        return [];
+
+    }
+
+
+    try {
+
+        const notifications =
+            window.getNotifications();
+
+
+        return Array.isArray(
+            notifications
+        )
+            ? notifications
+            : [];
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "❌ Could not get notifications:",
+            error
+        );
+
+
+        return [];
+
+    }
 
 }
 
@@ -24,114 +80,105 @@ function isUserLoggedIn() {
 
 function updateNotificationUI() {
 
-    const loggedIn = isUserLoggedIn();
-
-
-    /*
-        GUEST MODE
-    */
-
-    if (!loggedIn) {
-
-        document
-            .querySelectorAll(".notification-count")
-            .forEach(badge => {
-
-                badge.textContent = "";
-
-                badge.classList.remove("show");
-
-            });
-
-
-        document
-            .querySelectorAll(".notification-dot")
-            .forEach(dot => {
-
-                dot.classList.remove("show");
-                dot.classList.remove("active");
-
-            });
-
-
-        renderNotifications();
-
-        return;
-
-    }
-
-
-    /*
-        LOGGED-IN USER
-    */
-
-    if (
-        typeof getNotifications !== "function"
-    ) {
-
-        return;
-
-    }
-
-
     const notifications =
-        getNotifications();
+        getNotificationData();
 
 
-    const unread =
+    const unreadCount =
         notifications.filter(
             notification =>
                 !notification.read
+        ).length;
+
+
+    /*================================================
+            UPDATE BADGES
+    =================================================*/
+
+    document
+        .querySelectorAll(
+            ".notification-count"
+        )
+        .forEach(
+            badge => {
+
+                if (
+                    unreadCount > 0
+                ) {
+
+                    badge.textContent =
+                        unreadCount > 9
+                            ? "9+"
+                            : String(
+                                unreadCount
+                            );
+
+
+                    badge.classList.add(
+                        "show"
+                    );
+
+                }
+
+                else {
+
+                    badge.textContent =
+                        "";
+
+
+                    badge.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            }
         );
 
 
-    const count =
-        unread.length;
-
-
-    /*
-        UPDATE NUMBER
-    */
+    /*================================================
+            UPDATE DOTS
+    =================================================*/
 
     document
-        .querySelectorAll(".notification-count")
-        .forEach(badge => {
+        .querySelectorAll(
+            ".notification-dot"
+        )
+        .forEach(
+            dot => {
 
-            if (count > 0) {
-
-                badge.textContent =
-                    count > 9
-                        ? "9+"
-                        : count;
-
-                badge.classList.add("show");
-
-            } else {
-
-                badge.textContent = "";
-
-                badge.classList.remove("show");
+                dot.classList.toggle(
+                    "show",
+                    unreadCount > 0
+                );
 
             }
+        );
 
-        });
 
-
-    /*
-        UPDATE DOT
-    */
+    /*================================================
+            DELETE ALL BUTTONS
+    =================================================*/
 
     document
-        .querySelectorAll(".notification-dot")
-        .forEach(dot => {
+        .querySelectorAll(
+            "#deleteAllNotifications"
+        )
+        .forEach(
+            button => {
 
-            dot.classList.toggle(
-                "show",
-                count > 0
-            );
+                button.classList.toggle(
+                    "show",
+                    notifications.length > 0
+                );
 
-        });
+            }
+        );
 
+
+    /*================================================
+            RENDER
+    =================================================*/
 
     renderNotifications();
 
@@ -150,70 +197,8 @@ function renderNotifications() {
         );
 
 
-    if (!lists.length) {
-
-        return;
-
-    }
-
-
-    const loggedIn =
-        isUserLoggedIn();
-
-
-    /*
-        GUEST MODE
-    */
-
-    if (!loggedIn) {
-
-        lists.forEach(list => {
-
-            list.innerHTML = `
-
-                <div class="notification-login-message">
-
-                    <div class="notification-login-icon">
-
-                        <i class="fa-solid fa-lock"></i>
-
-                    </div>
-
-                    <h4>
-                        Please sign in to continue
-                    </h4>
-
-                    <p>
-                        Sign in to view your notifications.
-                    </p>
-
-                    <a
-                        href="../index.html"
-                        class="notification-login-btn">
-
-                        <i class="fa-solid fa-right-to-bracket"></i>
-
-                        Sign In
-
-                    </a>
-
-                </div>
-
-            `;
-
-        });
-
-        return;
-
-    }
-
-
-    /*
-        GET NOTIFICATIONS
-    */
-
     if (
-        typeof getNotifications !== "function"
+        !lists.length
     ) {
 
         return;
@@ -222,215 +207,209 @@ function renderNotifications() {
 
 
     const notifications =
-        getNotifications();
+        getNotificationData();
 
 
-    lists.forEach(list => {
+    lists.forEach(
+        list => {
 
-        /*
-            EMPTY
-        */
+            /*========================================
+                    EMPTY STATE
+            ========================================*/
 
-        if (notifications.length === 0) {
+            if (
+                notifications.length === 0
+            ) {
 
-            list.innerHTML = `
+                list.innerHTML = `
 
-                <div class="empty-notification">
+                    <div class="empty-notification">
 
-                    <i class="fa-regular fa-bell"></i>
-
-                    <h4>
-                        No notifications
-                    </h4>
-
-                    <p>
-                        You're all caught up.
-                    </p>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        /*
-            CLEAR LIST
-        */
-
-        list.innerHTML = "";
-
-
-        /*
-            CREATE NOTIFICATIONS
-        */
-
-        notifications.forEach(
-            notification => {
-
-                const item =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                item.className =
-                    "notification-item";
-
-
-                if (notification.read) {
-
-                    item.classList.add(
-                        "read"
-                    );
-
-                }
-
-
-                item.innerHTML = `
-
-                    <div class="notification-content">
-
-                        <h4>
-                            ${notification.title}
-                        </h4>
+                        <i class="fa-regular fa-bell"></i>
 
                         <p>
-                            ${notification.message}
+                            No notifications
                         </p>
 
-                        <small>
-                            ${notification.time}
-                        </small>
-
                     </div>
-
-
-                    <button
-                        type="button"
-                        class="delete-notification"
-                        aria-label="Delete notification"
-                        title="Delete notification">
-
-                        <i class="fa-solid fa-xmark"></i>
-
-                    </button>
 
                 `;
 
 
-                /*
-                    MARK AS READ
-                */
+                return;
 
-                item
-                    .querySelector(
-                        ".notification-content"
-                    )
-                    ?.addEventListener(
+            }
+
+
+            /*========================================
+                    CLEAR CURRENT LIST
+            ========================================*/
+
+            list.innerHTML =
+                "";
+
+
+            /*========================================
+                    CREATE NOTIFICATIONS
+            ========================================*/
+
+            notifications.forEach(
+                notification => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "notification-item";
+
+
+                    if (
+                        notification.read
+                    ) {
+
+                        item.classList.add(
+                            "read"
+                        );
+
+                    }
+
+
+                    /*================================
+                            CONTENT
+                    =================================*/
+
+                    item.innerHTML = `
+
+                        <div class="notification-content">
+
+                            <h4>
+                                ${escapeNotificationHTML(
+                                    notification.title
+                                )}
+                            </h4>
+
+                            <p>
+                                ${escapeNotificationHTML(
+                                    notification.message
+                                )}
+                            </p>
+
+                            <small>
+                                ${escapeNotificationHTML(
+                                    notification.time || ""
+                                )}
+                            </small>
+
+                        </div>
+
+                        <button
+                            type="button"
+                            class="notification-delete"
+                            title="Delete notification"
+                            aria-label="Delete notification">
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+
+                    `;
+
+
+                    /*================================
+                            DELETE BUTTON
+                    =================================*/
+
+                    const deleteButton =
+                        item.querySelector(
+                            ".notification-delete"
+                        );
+
+
+                    if (
+                        deleteButton
+                    ) {
+
+                        deleteButton.addEventListener(
+                            "click",
+                            function (event) {
+
+                                event.preventDefault();
+
+                                event.stopPropagation();
+
+
+                                if (
+                                    typeof window.deleteNotification ===
+                                    "function"
+                                ) {
+
+                                    window.deleteNotification(
+                                        notification.id
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+
+
+                    /*================================
+                            MARK AS READ
+                    =================================*/
+
+                    item.addEventListener(
                         "click",
-                        function () {
+                        function (event) {
 
                             if (
-                                typeof markNotificationRead ===
+                                event.target.closest(
+                                    ".notification-delete"
+                                )
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            if (
+                                notification.read
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            if (
+                                typeof window.markNotificationRead ===
                                 "function"
                             ) {
 
-                                markNotificationRead(
+                                window.markNotificationRead(
                                     notification.id
                                 );
 
                             }
 
-                            updateNotificationUI();
-
                         }
                     );
 
 
-                /*
-                    DELETE INDIVIDUAL
-                */
-
-                const deleteButton =
-                    item.querySelector(
-                        ".delete-notification"
-                    );
-
-
-                if (deleteButton) {
-
-                    deleteButton.addEventListener(
-                        "click",
-                        function (event) {
-
-                            event.preventDefault();
-
-                            event.stopPropagation();
-
-
-                            deleteNotification(
-                                notification.id
-                            );
-
-                        }
+                    list.appendChild(
+                        item
                     );
 
                 }
+            );
 
-
-                list.appendChild(item);
-
-            }
-        );
-
-    });
-
-}
-
-
-/*==================================================*
-        DELETE ONE NOTIFICATION
-*==================================================*/
-
-function deleteNotification(id) {
-
-    if (!isUserLoggedIn()) {
-
-        return;
-
-    }
-
-
-    if (
-        typeof getNotifications !== "function"
-    ) {
-
-        return;
-
-    }
-
-
-    const notifications =
-        getNotifications();
-
-
-    const updated =
-        notifications.filter(
-            notification =>
-                notification.id !== id
-        );
-
-
-    localStorage.setItem(
-        "notifications",
-        JSON.stringify(updated)
+        }
     );
-
-
-    updateNotificationUI();
 
 }
 
@@ -439,87 +418,41 @@ function deleteNotification(id) {
         DELETE ALL NOTIFICATIONS
 *==================================================*/
 
-function deleteAllNotifications() {
+function setupDeleteAllNotifications() {
 
-    if (!isUserLoggedIn()) {
+    const buttons =
+        document.querySelectorAll(
+            "#deleteAllNotifications"
+        );
+
+
+    if (
+        !buttons.length
+    ) {
 
         return;
 
     }
 
 
-    localStorage.setItem(
-        "notifications",
-        JSON.stringify([])
-    );
+    buttons.forEach(
+        button => {
 
+            if (
+                button.dataset.deleteReady ===
+                "true"
+            ) {
 
-    updateNotificationUI();
-
-}
-
-
-/*==================================================*
-        NOTIFICATION DROPDOWNS
-*==================================================*/
-
-function setupNotificationDropdowns() {
-
-    /*
-        TOP BELL
-    */
-
-    const notificationButton =
-        document.querySelector(
-            ".notification-btn"
-        );
-
-
-    const topDropdown =
-        document.querySelector(
-            ".notification-wrapper .notification-dropdown"
-        );
-
-
-    const topClose =
-        topDropdown?.querySelector(
-            ".close-notification"
-        );
-
-
-    /*
-        OPEN TOP NOTIFICATIONS
-    */
-
-    if (
-        notificationButton &&
-        topDropdown
-    ) {
-
-        notificationButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-
-                topDropdown.classList.toggle(
-                    "active"
-                );
+                return;
 
             }
-        );
 
 
-        /*
-            X BUTTON
-        */
+            button.dataset.deleteReady =
+                "true";
 
-        if (topClose) {
 
-            topClose.addEventListener(
+            button.addEventListener(
                 "click",
                 function (event) {
 
@@ -528,21 +461,179 @@ function setupNotificationDropdowns() {
                     event.stopPropagation();
 
 
-                    topDropdown.classList.remove(
-                        "active"
-                    );
+                    if (
+                        typeof window.deleteAllNotifications ===
+                        "function"
+                    ) {
+
+                        window.deleteAllNotifications();
+
+                    }
 
                 }
             );
 
         }
+    );
+
+}
 
 
-        /*
-            DON'T CLOSE INSIDE
-        */
+/*==================================================*
+        FIND NOTIFICATION ELEMENTS
+*==================================================*/
 
-        topDropdown.addEventListener(
+function getNotificationElements() {
+
+    const button =
+        document.querySelector(
+            ".notification-btn"
+        );
+
+
+    const dropdown =
+        document.querySelector(
+            ".notification-wrapper .notification-dropdown"
+        );
+
+
+    return {
+        button,
+        dropdown
+    };
+
+}
+
+
+/*==================================================*
+        SETUP NOTIFICATION DROPDOWN
+*==================================================*/
+
+function setupNotificationDropdowns() {
+
+    const {
+        button,
+        dropdown
+    } =
+        getNotificationElements();
+
+
+    /*
+     * Navbar may not have loaded yet.
+     *
+     * This is NOT an error.
+     */
+
+    if (
+        !button ||
+        !dropdown
+    ) {
+
+        return false;
+
+    }
+
+
+    /*================================================
+            ATTACH BUTTON LISTENER
+    =================================================*/
+
+    if (
+        button.dataset.notificationReady !==
+        "true"
+    ) {
+
+        button.dataset.notificationReady =
+            "true";
+
+
+        button.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                const isOpen =
+                    dropdown.classList.toggle(
+                        "active"
+                    );
+
+
+                button.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                        ? "true"
+                        : "false"
+                );
+
+
+                dropdown.setAttribute(
+                    "aria-hidden",
+                    isOpen
+                        ? "false"
+                        : "true"
+                );
+
+            }
+        );
+
+    }
+
+
+    /*================================================
+            CLOSE BUTTON
+    =================================================*/
+
+    const closeButton =
+        dropdown.querySelector(
+            ".close-notification"
+        );
+
+
+    if (
+        closeButton &&
+        closeButton.dataset.notificationReady !==
+        "true"
+    ) {
+
+        closeButton.dataset.notificationReady =
+            "true";
+
+
+        closeButton.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                closeNotificationDropdown();
+
+            }
+        );
+
+    }
+
+
+    /*================================================
+            STOP DROPDOWN CLICK PROPAGATION
+    =================================================*/
+
+    if (
+        dropdown.dataset.notificationReady !==
+        "true"
+    ) {
+
+        dropdown.dataset.notificationReady =
+            "true";
+
+
+        dropdown.addEventListener(
             "click",
             function (event) {
 
@@ -554,60 +645,77 @@ function setupNotificationDropdowns() {
     }
 
 
+    notificationDropdownListenersAttached =
+        true;
+
+
     /*
-        DELETE ALL BUTTON
-    */
+     * Global listeners are attached
+     * only once.
+     */
+
+    setupNotificationGlobalListeners();
+
+
+    return true;
+
+}
+
+
+/*==================================================*
+        GLOBAL NOTIFICATION LISTENERS
+*==================================================*/
+
+function setupNotificationGlobalListeners() {
+
+    if (
+        notificationGlobalListenersAttached
+    ) {
+
+        return;
+
+    }
+
+
+    notificationGlobalListenersAttached =
+        true;
+
+
+    /*================================================
+            OUTSIDE CLICK
+    =================================================*/
 
     document.addEventListener(
         "click",
         function (event) {
 
-            const deleteAllButton =
-                event.target.closest(
-                    ".delete-all-notifications"
-                );
+            const {
+                button,
+                dropdown
+            } =
+                getNotificationElements();
 
 
-            if (!deleteAllButton) {
+            if (
+                !button ||
+                !dropdown
+            ) {
 
                 return;
 
             }
 
 
-            event.preventDefault();
-
-            event.stopPropagation();
-
-
-            deleteAllNotifications();
-
-        }
-    );
-
-
-    /*
-        CLOSE OUTSIDE
-    */
-
-    document.addEventListener(
-        "click",
-        function (event) {
-
             if (
-                topDropdown &&
-                notificationButton &&
-                !topDropdown.contains(
+                !dropdown.contains(
                     event.target
                 ) &&
-                !notificationButton.contains(
+                !button.contains(
                     event.target
                 )
             ) {
 
-                topDropdown.classList.remove(
-                    "active"
-                );
+                closeNotificationDropdown();
 
             }
 
@@ -615,29 +723,94 @@ function setupNotificationDropdowns() {
     );
 
 
-    /*
-        ESC
-    */
+    /*================================================
+            ESCAPE KEY
+    =================================================*/
 
     document.addEventListener(
         "keydown",
         function (event) {
 
             if (
-                event.key !== "Escape"
+                event.key ===
+                "Escape"
             ) {
 
-                return;
+                closeNotificationDropdown();
 
             }
 
-
-            topDropdown?.classList.remove(
-                "active"
-            );
-
         }
     );
+
+}
+
+
+/*==================================================*
+        CLOSE DROPDOWN
+*==================================================*/
+
+function closeNotificationDropdown() {
+
+    const {
+        button,
+        dropdown
+    } =
+        getNotificationElements();
+
+
+    if (
+        dropdown
+    ) {
+
+        dropdown.classList.remove(
+            "active"
+        );
+
+
+        dropdown.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    if (
+        button
+    ) {
+
+        button.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+}
+
+
+/*==================================================*
+        ESCAPE HTML
+*==================================================*/
+
+function escapeNotificationHTML(
+    value
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        value == null
+            ? ""
+            : String(value);
+
+
+    return div.innerHTML;
 
 }
 
@@ -648,42 +821,104 @@ function setupNotificationDropdowns() {
 
 function setupNotificationUI() {
 
-    if (notificationUIStarted) {
+    /*
+     * Always refresh the notification
+     * content when this function runs.
+     */
+
+    updateNotificationUI();
+
+
+    /*
+     * Re-check buttons because the
+     * navbar may have just loaded.
+     */
+
+    setupDeleteAllNotifications();
+
+
+    /*
+     * Try to attach the dropdown.
+     *
+     * If navbar is not ready yet,
+     * simply return without an error.
+     */
+
+    const dropdownReady =
+        setupNotificationDropdowns();
+
+
+    if (
+        !notificationUIStarted
+    ) {
+
+        notificationUIStarted =
+            true;
+
+
+        console.log(
+            "✅ Notification UI initialized"
+        );
+
+    }
+
+
+    /*
+     * If the navbar wasn't ready,
+     * don't treat that as a failure.
+     */
+
+    if (
+        !dropdownReady
+    ) {
 
         return;
 
     }
 
-
-    notificationUIStarted = true;
-
-
-    updateNotificationUI();
-
-
-    setupNotificationDropdowns();
-
 }
 
 
 /*==================================================*
-        EXPORT
+        EXPORTS
 *==================================================*/
+
+window.getNotificationData =
+    getNotificationData;
+
 
 window.updateNotificationUI =
     updateNotificationUI;
 
+
 window.renderNotifications =
     renderNotifications;
 
-window.deleteNotification =
-    deleteNotification;
 
-window.deleteAllNotifications =
-    deleteAllNotifications;
+window.setupDeleteAllNotifications =
+    setupDeleteAllNotifications;
+
+
+window.setupNotificationDropdowns =
+    setupNotificationDropdowns;
+
 
 window.setupNotificationUI =
     setupNotificationUI;
 
-window.setupNotificationDropdowns =
-    setupNotificationDropdowns;
+
+window.closeNotificationDropdown =
+    closeNotificationDropdown;
+
+
+window.escapeNotificationHTML =
+    escapeNotificationHTML;
+
+
+/*==================================================*
+        LOADED
+*==================================================*/
+
+console.log(
+    "✅ Notification UI loaded"
+);

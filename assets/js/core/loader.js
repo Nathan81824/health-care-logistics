@@ -1,865 +1,2800 @@
-/*====================================
-            BASE PATH
-=====================================*/
+/*=====================================*
+ * LOADER JS
+ *=====================================*/
+
+
+/*=====================================*
+ * BASE PATH
+ *=====================================*/
 
 const basePath =
-    window.location.pathname.toLowerCase().includes("/pages/")
+    window.location.pathname
+        .toLowerCase()
+        .includes("/pages/")
         ? "../"
         : "";
 
 
+/*=====================================*
+ * LOADER STATE
+ *=====================================*/
 
-/*====================================
-            LOAD SECTION
-=====================================*/
+let loadedComponents = 0;
 
-function loadSection(file, containerId, callback = null){
+let totalComponents = 0;
 
+let componentsLoading = false;
 
-    const container = document.getElementById(containerId);
-
-
-    if(!container) return;
-
+let componentsLoaded = false;
 
 
-    fetch(file)
+/*=====================================*
+ * LOADER PROMISE
+ *=====================================*/
 
-    .then(response=>{
+let resolveComponentLoaderReady;
 
-
-        if(!response.ok){
-
-            throw new Error(
-                `Failed to load ${file}`
-            );
-
-        }
+let rejectComponentLoaderReady;
 
 
-        return response.text();
+window.componentLoaderReady =
+    new Promise((resolve, reject) => {
 
+        resolveComponentLoaderReady =
+            resolve;
 
-    })
-
-
-    .then(html=>{
-
-
-        container.innerHTML = html;
-
-
-
-        if(typeof callback === "function"){
-
-            callback();
-
-        }
-
-
-
-        /*
-            Refresh animations
-            because new HTML was added
-        */
-
-        if(typeof initScrollReveal === "function"){
-
-            initScrollReveal();
-
-        }
-
-
-
-    })
-
-
-    .catch(error=>{
-
-        console.error(error);
+        rejectComponentLoaderReady =
+            reject;
 
     });
 
 
-}
+/*=====================================*
+ * LOAD SECTION
+ *=====================================*/
+
+function loadSection(
+    file,
+    containerId,
+    callback = null
+) {
+
+    return new Promise((resolve) => {
 
 
+        const container =
+            document.getElementById(
+                containerId
+            );
 
 
+        /*=====================================
+         * CONTAINER NOT FOUND
+         =====================================*/
 
+        if (!container) {
 
-/*====================================
-            PAGE LOAD
-=====================================*/
+            /*
+                This is not an error.
 
+                A component may simply not
+                belong to the current page.
+            */
 
-document.addEventListener("DOMContentLoaded",()=>{
+            resolve(false);
 
-
-
-/*================================
-            AUTH PAGE
-================================*/
-
-loadSection(
-    `${basePath}components/auth/auth.html`,
-    "auth-container",
-    () => {
-
-        if (typeof initAuth === "function") {
-
-            initAuth();
+            return;
 
         }
 
-    }
-);
 
+        /*=====================================
+         * FETCH COMPONENT
+         =====================================*/
 
+        fetch(file)
 
-/*====================================
-            NAVBAR
-=====================================*/
+            .then(response => {
 
+                if (!response.ok) {
 
-loadSection(
+                    throw new Error(
+                        `Failed to load ${file} (${response.status})`
+                    );
 
-`${basePath}components/shared/navbar.html`,
+                }
 
-"navbar-container",
 
-()=>{
+                return response.text();
 
+            })
 
-    if(typeof initNavbar==="function"){
 
-        initNavbar();
+            .then(html => {
 
-    }
 
+                /*=====================================
+                 * INSERT HTML
+                 =====================================*/
 
+                container.innerHTML =
+                    html;
 
-    if(typeof initNavbarScroll==="function"){
 
-        initNavbarScroll();
+                /*=====================================
+                 * CALLBACK
+                 =====================================*/
 
-    }
+                if (
+                    typeof callback ===
+                    "function"
+                ) {
 
+                    try {
 
-}
+                        callback();
 
-);
+                    }
+                    catch (error) {
 
+                        console.error(
+                            `❌ Component initialization error for ${containerId}:`,
+                            error
+                        );
 
+                    }
 
+                }
 
 
+                /*=====================================
+                 * SCROLL REVEAL REFRESH
+                 =====================================*/
 
+                if (
+                    typeof initScrollReveal ===
+                    "function"
+                ) {
 
-/*====================================
-            HOME PAGE
-=====================================*/
+                    setTimeout(() => {
 
+                        initScrollReveal();
 
+                    }, 0);
 
-loadSection(
+                }
 
-`${basePath}components/home/hero.html`,
 
-"hero-container",
+                resolve(true);
 
-()=>{
+            })
 
 
-if(typeof initHero==="function"){
+            .catch(error => {
 
-    initHero();
+                console.error(
+                    "❌ Component loading error:",
+                    error
+                );
 
-}
+                resolve(false);
 
+            });
 
-}
-
-);
-
-
-
-
-
-loadSection(
-
-`${basePath}components/home/services.html`,
-
-"services-container",
-
-()=>{
-
-
-if(typeof initHomeServices==="function"){
-
-    initHomeServices();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-
-loadSection(
-
-`${basePath}components/home/why-choose-us.html`,
-
-"why-choose-us-container",
-
-()=>{
-
-
-if(typeof initWhyChooseUs==="function"){
-
-    initWhyChooseUs();
+    });
 
 }
 
 
-}
+/*=====================================*
+ * REGISTER COMPONENT
+ *=====================================*/
 
-);
+function registerComponent(
+    file,
+    containerId,
+    callback = null
+) {
 
-
-
-
-
-
-
-loadSection(
-
-`${basePath}components/home/how-it-works.html`,
-
-"how-it-works-container",
-
-()=>{
-
-
-if(typeof initHowItWorks==="function"){
-
-    initHowItWorks();
+    return loadSection(
+        file,
+        containerId,
+        callback
+    );
 
 }
 
 
-}
+/*=====================================*
+ * LOAD SHARED COMPONENTS
+ *=====================================*/
 
-);
-
-
-
-
+function loadSharedComponents() {
 
 
-
-loadSection(
-
-`${basePath}components/home/operations.html`,
-
-"operations-container",
-
-()=>{
+    const promises = [];
 
 
-if(typeof initOperations==="function"){
+    /*=====================================
+     * NAVBAR
+     *=====================================*/
 
-    initOperations();
+    if (
+        document.getElementById(
+            "navbar-container"
+        )
+    ) {
 
-}
+        promises.push(
 
+            registerComponent(
 
-}
+                `${basePath}components/shared/navbar.html`,
 
-);
+                "navbar-container",
 
+                () => {
 
+                    if (
+                        typeof initNavbar ===
+                        "function"
+                    ) {
 
+                        initNavbar();
 
+                    }
 
+                }
 
+            )
 
-loadSection(
-
-`${basePath}components/home/industries.html`,
-
-"industries-container",
-
-()=>{
-
-
-if(typeof initIndustries==="function"){
-
-    initIndustries();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-
-
-loadSection(
-
-`${basePath}components/home/testimonials.html`,
-
-"testimonials-container",
-
-()=>{
-
-
-if(typeof initTestimonials==="function"){
-
-    initTestimonials();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-
-
-loadSection(
-`${basePath}components/home/cta.html`,
-"cta-container",
-()=>{
-
-    if(typeof initCTA === "function"){
-
-        initCTA();
+        );
 
     }
 
-}
-);
 
+    /*=====================================
+     * FOOTER
+     *=====================================*/
 
+    if (
+        document.getElementById(
+            "footer-container"
+        )
+    ) {
 
+        promises.push(
 
+            registerComponent(
 
+                `${basePath}components/shared/footer.html`,
 
+                "footer-container",
 
+                () => {
 
-/*====================================
-            ABOUT PAGE
-=====================================*/
+                    if (
+                        typeof initFooter ===
+                        "function"
+                    ) {
 
+                        initFooter();
 
+                    }
 
-loadSection(
+                }
 
-`${basePath}components/about/hero.html`,
+            )
 
-"about-hero-container",
+        );
 
-()=>{
-
-
-if(typeof initAboutHero==="function"){
-
-initAboutHero();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-loadSection(
-
-`${basePath}components/about/our-story.html`,
-
-"about-our-story-container",
-
-()=>{
-
-
-if(typeof initOurStory==="function"){
-
-initOurStory();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-loadSection(
-
-`${basePath}components/about/vision.html`,
-
-"about-vision-container",
-
-()=>{
-
-
-if(typeof initVision==="function"){
-
-initVision();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-loadSection(
-
-`${basePath}components/about/stats.html`,
-
-"about-stats-container",
-
-()=>{
-
-
-if(typeof initStats==="function"){
-
-initStats();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-loadSection(
-
-`${basePath}components/about/values.html`,
-
-"about-values-container",
-
-()=>{
-
-
-if(typeof initValues==="function"){
-
-initValues();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-loadSection(
-
-`${basePath}components/about/team.html`,
-
-"about-team-container",
-
-()=>{
-
-
-if(typeof initTeam==="function"){
-
-initTeam();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-
-
-
-/*====================================
-            SERVICES PAGE
-=====================================*/
-
-
-loadSection(
-
-`${basePath}components/services/hero.html`,
-
-"services-hero-container",
-
-()=>{
-
-
-if(typeof initServicesHero==="function"){
-
-initServicesHero();
-
-}
-
-
-}
-
-);
-
-
-
-
-loadSection(
-
-`${basePath}components/services/overview.html`,
-
-"overview-container",
-
-()=>{
-
-
-if(typeof initOverview==="function"){
-
-initOverview();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-loadSection(
-
-`${basePath}components/services/core-services.html`,
-
-"core-services-container",
-
-()=>{
-
-
-if(typeof initCoreServices==="function"){
-
-initCoreServices();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-
-loadSection(
-
-`${basePath}components/services/process.html`,
-
-"process-container",
-
-()=>{
-
-
-if(typeof initProcess==="function"){
-
-initProcess();
-
-}
-
-
-}
-
-);
-
-
-
-
-
-
-loadSection(
-
-`${basePath}components/services/faq.html`,
-
-"faq-container",
-
-()=>{
-
-
-if(typeof initFAQ==="function"){
-
-initFAQ();
-
-}
-
-
-}
-
-);
-
-/*====================================
-        INDUSTRIES PAGE
-=====================================*/
-
-loadSection(
-`${basePath}components/industries-we-serve/hero.html`,
-"industries-hero-container",
-()=>{
-    if(typeof initIndustriesHero==="function"){
-        initIndustriesHero();
     }
-}
-);
 
-loadSection(
-`${basePath}components/industries-we-serve/industries-overview.html`,
-"industries-overview-container",
-()=>{
-    if(typeof initIndustriesOverview==="function"){
-        initIndustriesOverview();
+
+    /*=====================================
+     * LOGOUT POPUP
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "logout-popup-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/shared/logout-popup.html`,
+
+                "logout-popup-container",
+
+                () => {
+
+                    if (
+                        typeof initLogoutPopup ===
+                        "function"
+                    ) {
+
+                        initLogoutPopup();
+
+                    }
+
+                }
+
+            )
+
+        );
+
     }
-}
-);
 
-loadSection(
-`${basePath}components/industries-we-serve/hospital.html`,
-"hospital-container",
-()=>{
-    if(typeof initHospital==="function"){
-        initHospital();
+
+    /*=====================================
+     * WHATSAPP
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "whatsapp-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/shared/whatsapp-button.html`,
+
+                "whatsapp-container",
+
+                () => {
+
+                    if (
+                        typeof initWhatsAppWidget ===
+                        "function"
+                    ) {
+
+                        initWhatsAppWidget();
+
+                    }
+
+                }
+
+            )
+
+        );
+
     }
-}
-);
 
-loadSection(
-`${basePath}components/industries-we-serve/labotories.html`,
-"labotories-container",
-()=>{
-    if(typeof initLabotories==="function"){
-        initLabotories();
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD AUTH PAGE
+ *=====================================*/
+
+function loadAuthPage() {
+
+
+    const promises = [];
+
+
+    if (
+        document.getElementById(
+            "auth-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/auth/auth.html`,
+
+                "auth-container",
+
+                () => {
+
+                    if (
+                        typeof initAuth ===
+                        "function"
+                    ) {
+
+                        initAuth();
+
+                    }
+
+                }
+
+            )
+
+        );
+
     }
-}
-);
 
-loadSection(
-`${basePath}components/industries-we-serve/pharmacies.html`,
-"pharmacies-container",
-()=>{
-    if(typeof initPharmacies==="function"){
-        initPharmacies();
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD HOME PAGE
+ *=====================================*/
+
+function loadHomePage() {
+
+
+    const promises = [];
+
+
+    /*=====================================
+     * HERO
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "hero-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/hero.html`,
+
+                "hero-container",
+
+                () => {
+
+                    if (
+                        typeof initHero ===
+                        "function"
+                    ) {
+
+                        initHero();
+
+                    }
+
+                }
+
+            )
+
+        );
+
     }
-}
-);
 
-loadSection(
-`${basePath}components/industries-we-serve/pharmaceutical-companies.html`,
-"pharmaceutical-companies-container",
-()=>{
-    if(typeof initPharmaceuticalCompanies==="function"){
-        initPharmaceuticalCompanies();
+
+    /*=====================================
+     * SERVICES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "services-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/services.html`,
+
+                "services-container",
+
+                () => {
+
+                    if (
+                        typeof initHomeServices ===
+                        "function"
+                    ) {
+
+                        initHomeServices();
+
+                    }
+
+                }
+
+            )
+
+        );
+
     }
-}
-);
 
-loadSection(
-`${basePath}components/industries-we-serve/blood-bank.html`,
-"blood-bank-container",
-()=>{
-    if(typeof initBloodBank==="function"){
-        initBloodBank();
+
+    /*=====================================
+     * WHY CHOOSE US
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "why-choose-us-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/why-choose-us.html`,
+
+                "why-choose-us-container",
+
+                () => {
+
+                    if (
+                        typeof initWhyChooseUs ===
+                        "function"
+                    ) {
+
+                        initWhyChooseUs();
+
+                    }
+
+                }
+
+            )
+
+        );
+
     }
-}
-);
 
-loadSection(
-`${basePath}components/industries-we-serve/medical-suppliers.html`,
-"medical-suppliers-container",
-()=>{
-    if(typeof initMedicalSuppliers==="function"){
-        initMedicalSuppliers();
+
+/*=====================================
+ * HOW IT WORKS
+ *=====================================*/
+
+if (
+    document.getElementById(
+        "how-it-works-container"
+    )
+) {
+
+    promises.push(
+
+        registerComponent(
+
+            `${basePath}components/home/how-it-works.html`,
+
+            "how-it-works-container",
+
+            () => {
+
+                if (
+                    typeof initHowItWorks ===
+                    "function"
+                ) {
+
+                    initHowItWorks();
+
+                }
+
+            }
+
+        )
+
+    );
+
+}
+
+
+    /*=====================================
+     * OPERATIONS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "operations-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/operations.html`,
+
+                "operations-container",
+
+                () => {
+
+                    if (
+                        typeof initOperations ===
+                        "function"
+                    ) {
+
+                        initOperations();
+
+                    }
+
+                }
+
+            )
+
+        );
+
     }
+
+
+    /*=====================================
+     * INDUSTRIES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "industries-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/industries.html`,
+
+                "industries-container",
+
+                () => {
+
+                    if (
+                        typeof initIndustries ===
+                        "function"
+                    ) {
+
+                        initIndustries();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * TESTIMONIALS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "testimonials-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/testimonials.html`,
+
+                "testimonials-container",
+
+                () => {
+
+                    if (
+                        typeof initTestimonials ===
+                        "function"
+                    ) {
+
+                        initTestimonials();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CTA
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "cta-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/cta.html`,
+
+                "cta-container",
+
+                () => {
+
+                    if (
+                        typeof initCTA ===
+                        "function"
+                    ) {
+
+                        initCTA();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    return promises;
+
 }
-);
-
-/*====================================
-            HIPAA PAGE
-=====================================*/
 
 
-    loadSection(
-        `${basePath}components/hipaa/what-is-hipaa.html`,
-        "what-is-hipaa-container"
+/*=====================================*
+ * LOAD ABOUT PAGE
+ *=====================================*/
+
+function loadAboutPage() {
+
+
+    const promises = [];
+
+
+    /*=====================================
+     * ABOUT HERO
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "about-hero-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/about/hero.html`,
+
+                "about-hero-container",
+
+                () => {
+
+                    if (
+                        typeof initAboutHero ===
+                        "function"
+                    ) {
+
+                        initAboutHero();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * OUR STORY
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "about-our-story-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/about/our-story.html`,
+
+                "about-our-story-container",
+
+                () => {
+
+                    if (
+                        typeof initOurStory ===
+                        "function"
+                    ) {
+
+                        initOurStory();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * VISION
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "about-vision-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/about/vision.html`,
+
+                "about-vision-container",
+
+                () => {
+
+                    if (
+                        typeof initVision ===
+                        "function"
+                    ) {
+
+                        initVision();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * STATS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "about-stats-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/about/stats.html`,
+
+                "about-stats-container",
+
+                () => {
+
+                    if (
+                        typeof initStats ===
+                        "function"
+                    ) {
+
+                        initStats();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * VALUES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "about-values-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/about/values.html`,
+
+                "about-values-container",
+
+                () => {
+
+                    if (
+                        typeof initValues ===
+                        "function"
+                    ) {
+
+                        initValues();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * TEAM
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "about-team-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/about/team.html`,
+
+                "about-team-container",
+
+                () => {
+
+                    if (
+                        typeof initTeam ===
+                        "function"
+                    ) {
+
+                        initTeam();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * WHY CHOOSE US
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "why-choose-us-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/why-choose-us.html`,
+
+                "why-choose-us-container",
+
+                () => {
+
+                    if (
+                        typeof initWhyChooseUs ===
+                        "function"
+                    ) {
+
+                        initWhyChooseUs();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * TESTIMONIALS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "testimonials-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/testimonials.html`,
+
+                "testimonials-container",
+
+                () => {
+
+                    if (
+                        typeof initTestimonials ===
+                        "function"
+                    ) {
+
+                        initTestimonials();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CTA
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "cta-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/cta.html`,
+
+                "cta-container",
+
+                () => {
+
+                    if (
+                        typeof initCTA ===
+                        "function"
+                    ) {
+
+                        initCTA();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD SERVICES PAGE
+ *=====================================*/
+
+function loadServicesPage() {
+
+
+    const promises = [];
+
+
+    /*=====================================
+     * SERVICES HERO
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "services-hero-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/services/hero.html`,
+
+                "services-hero-container",
+
+                () => {
+
+                    if (
+                        typeof initServicesHero ===
+                        "function"
+                    ) {
+
+                        initServicesHero();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * OVERVIEW
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "overview-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/services/overview.html`,
+
+                "overview-container",
+
+                () => {
+
+                    if (
+                        typeof initOverview ===
+                        "function"
+                    ) {
+
+                        initOverview();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CORE SERVICES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "core-services-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/services/core-services.html`,
+
+                "core-services-container",
+
+                () => {
+
+                    if (
+                        typeof initCoreServices ===
+                        "function"
+                    ) {
+
+                        initCoreServices();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * PROCESS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "process-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/services/process.html`,
+
+                "process-container",
+
+                () => {
+
+                    if (
+                        typeof initProcess ===
+                        "function"
+                    ) {
+
+                        initProcess();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * WHY CHOOSE US
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "why-choose-us-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/why-choose-us.html`,
+
+                "why-choose-us-container",
+
+                () => {
+
+                    if (
+                        typeof initWhyChooseUs ===
+                        "function"
+                    ) {
+
+                        initWhyChooseUs();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * SERVICE ADVANTAGES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "why-choose-services-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/services/why-choose-services.html`,
+
+                "why-choose-services-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * INDUSTRIES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "industries-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/industries.html`,
+
+                "industries-container",
+
+                () => {
+
+                    if (
+                        typeof initIndustries ===
+                        "function"
+                    ) {
+
+                        initIndustries();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * FAQ
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "faq-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/contact/faq.html`,
+
+                "faq-container",
+
+                () => {
+
+                    if (
+                        typeof initFAQ ===
+                        "function"
+                    ) {
+
+                        initFAQ();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * TESTIMONIALS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "testimonials-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/testimonials.html`,
+
+                "testimonials-container",
+
+                () => {
+
+                    if (
+                        typeof initTestimonials ===
+                        "function"
+                    ) {
+
+                        initTestimonials();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CTA
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "cta-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/cta.html`,
+
+                "cta-container",
+
+                () => {
+
+                    if (
+                        typeof initCTA ===
+                        "function"
+                    ) {
+
+                        initCTA();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD INDUSTRIES PAGE
+ *=====================================*/
+
+function loadIndustriesPage() {
+
+
+    const promises = [];
+
+
+    /*=====================================
+     * HERO
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "industries-hero-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/hero.html`,
+
+                "industries-hero-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * OVERVIEW
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "industries-overview-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/industries-overview.html`,
+
+                "industries-overview-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * HOSPITALS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "hospital-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/hospital.html`,
+
+                "hospital-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * LABORATORIES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "labotories-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/labotories.html`,
+
+                "labotories-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * PHARMACIES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "pharmacies-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/pharmacies.html`,
+
+                "pharmacies-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * PHARMACEUTICAL COMPANIES
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "pharmaceutical-companies-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/pharmaceutical-companies.html`,
+
+                "pharmaceutical-companies-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * BLOOD BANKS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "blood-bank-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/blood-bank.html`,
+
+                "blood-bank-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * MEDICAL SUPPLIERS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "medical-suppliers-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/industries-we-serve/medical-suppliers.html`,
+
+                "medical-suppliers-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * WHY CHOOSE US
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "why-choose-us-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/why-choose-us.html`,
+
+                "why-choose-us-container",
+
+                () => {
+
+                    if (
+                        typeof initWhyChooseUs ===
+                        "function"
+                    ) {
+
+                        initWhyChooseUs();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * TESTIMONIALS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "testimonials-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/testimonials.html`,
+
+                "testimonials-container",
+
+                () => {
+
+                    if (
+                        typeof initTestimonials ===
+                        "function"
+                    ) {
+
+                        initTestimonials();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CTA
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "cta-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/cta.html`,
+
+                "cta-container",
+
+                () => {
+
+                    if (
+                        typeof initCTA ===
+                        "function"
+                    ) {
+
+                        initCTA();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD HIPAA PAGE
+ *=====================================*/
+
+function loadHipaaPage() {
+
+
+    const promises = [];
+
+
+    /*=====================================
+     * HERO
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "hipaa-hero-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/hipaa/hero.html`,
+
+                "hipaa-hero-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * WHAT IS HIPAA
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "what-is-hipaa-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/hipaa/what-is-hipaa.html`,
+
+                "what-is-hipaa-container",
+
+                () => {
+
+                    if (
+                        typeof initWhatIsHipaa ===
+                        "function"
+                    ) {
+
+                        initWhatIsHipaa();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * HIPAA COMMITMENT
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "hipaa-commitment-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/hipaa/our-commitments.html`,
+
+                "hipaa-commitment-container",
+
+                () => {
+
+                    if (
+                        typeof initCommitmentTimeline ===
+                        "function"
+                    ) {
+
+                        initCommitmentTimeline();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * HIPAA PROCESS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "hipaa-process-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/hipaa/hipaa-process.html`,
+
+                "hipaa-process-container",
+
+                () => {
+
+                    if (
+                        typeof initHipaaProcess ===
+                        "function"
+                    ) {
+
+                        initHipaaProcess();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * FAQ
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "faq-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/contact/faq.html`,
+
+                "faq-container",
+
+                () => {
+
+                    if (
+                        typeof initFAQ ===
+                        "function"
+                    ) {
+
+                        initFAQ();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CTA
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "cta-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/cta.html`,
+
+                "cta-container",
+
+                () => {
+
+                    if (
+                        typeof initCTA ===
+                        "function"
+                    ) {
+
+                        initCTA();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD CONTACT PAGE
+ *=====================================*/
+
+function loadContactPage() {
+
+
+    const promises = [];
+
+
+    /*=====================================
+     * CONTACT HERO
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "contact-hero-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/contact/contactHero.html`,
+
+                "contact-hero-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CONTACT FORM
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "contact-form-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/contact/contactForm.html`,
+
+                "contact-form-container",
+
+                () => {
+
+                    if (
+                        typeof initContact ===
+                        "function"
+                    ) {
+
+                        initContact();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * MAP
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "map-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/contact/map.html`,
+
+                "map-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * WHY CHOOSE US
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "why-choose-us-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/why-choose-us.html`,
+
+                "why-choose-us-container",
+
+                () => {
+
+                    if (
+                        typeof initWhyChooseUs ===
+                        "function"
+                    ) {
+
+                        initWhyChooseUs();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * FAQ
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "faq-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/contact/faq.html`,
+
+                "faq-container",
+
+                () => {
+
+                    if (
+                        typeof initFAQ ===
+                        "function"
+                    ) {
+
+                        initFAQ();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * SERVICE COVERAGE
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "service-coverage-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/contact/service-coverage.html`,
+
+                "service-coverage-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * CTA
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "cta-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/home/cta.html`,
+
+                "cta-container",
+
+                () => {
+
+                    if (
+                        typeof initCTA ===
+                        "function"
+                    ) {
+
+                        initCTA();
+
+                    }
+
+                }
+
+            )
+
+        );
+
+    }
+
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD DASHBOARD PAGE
+ *=====================================*/
+
+function loadDashboardPage() {
+
+
+    const promises = [];
+
+
+    /*=====================================
+     * SIDEBAR
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "sidebar-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/sidebar.html`,
+
+                "sidebar-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * TOPBAR
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "topbar-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/topbar.html`,
+
+                "topbar-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * OVERVIEW
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "overview-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/overview.html`,
+
+                "overview-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * ANALYTICS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "analytics-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/analytics.html`,
+
+                "analytics-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * SHIPMENTS
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "shipments-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/shipments.html`,
+
+                "shipments-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * ACTIVITY
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "activity-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/activity.html`,
+
+                "activity-container"
+
+            )
+
+        );
+
+    }
+
+
+    /*=====================================
+     * FLEET
+     *=====================================*/
+
+    if (
+        document.getElementById(
+            "fleet-container"
+        )
+    ) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/fleet.html`,
+
+                "fleet-container"
+
+            )
+
+        );
+
+    }
+
+
+    return promises;
+
+}
+
+
+/*=====================================*
+ * LOAD CURRENT PAGE
+ *=====================================*/
+
+function loadCurrentPage() {
+
+
+    const page =
+        document.body.dataset.page ||
+        "";
+
+
+    console.log(
+        "📦 Loading components for page:",
+        page
     );
 
 
-    loadSection(
-        `${basePath}components/hipaa/our-commitments.html`,
-        "hipaa-commitment-container"
-    );
+    let pagePromises = [];
 
 
-    loadSection(
-        `${basePath}components/hipaa/hipaa-process.html`,
-        "hipaa-process-container"
-    );
+    /*=====================================
+     * AUTH
+     *=====================================*/
 
-/* ==========================================
-        CONTACT PAGE
-========================================== */
+    if (
+        page === "auth"
+    ) {
 
-    loadSection(
-        `${basePath}components/contact/contactHero.html`,
-        "contact-hero-container"
-    );
+        pagePromises =
+            loadAuthPage();
 
-    
-    loadSection(
-        `${basePath}components/contact/contactForm.html`,
-        "contact-form-container"
-    );
-
-    loadSection(
-        `${basePath}components/contact/map.html`,
-        "map-container"
-    );
+    }
 
 
+    /*=====================================
+     * HOME
+     *=====================================*/
+
+    else if (
+        page === "home"
+    ) {
+
+        pagePromises =
+            loadHomePage();
+
+    }
 
 
-/*====================================
-            FOOTER
-=====================================*/
+    /*=====================================
+     * ABOUT
+     *=====================================*/
+
+    else if (
+        page === "about"
+    ) {
+
+        pagePromises =
+            loadAboutPage();
+
+    }
 
 
-loadSection(
+    /*=====================================
+     * SERVICES
+     *=====================================*/
 
-`${basePath}components/shared/footer.html`,
+    else if (
+        page === "services"
+    ) {
 
-"footer-container",
+        pagePromises =
+            loadServicesPage();
 
-()=>{
+    }
 
 
-if(typeof initFooter==="function"){
+    /*=====================================
+     * INDUSTRIES
+     *=====================================*/
 
-initFooter();
+    else if (
+        page === "industries"
+    ) {
+
+        pagePromises =
+            loadIndustriesPage();
+
+    }
+
+
+    /*=====================================
+     * HIPAA
+     *=====================================*/
+
+    else if (
+        page === "hipaa"
+    ) {
+
+        pagePromises =
+            loadHipaaPage();
+
+    }
+
+
+    /*=====================================
+     * CONTACT
+     *=====================================*/
+
+    else if (
+        page === "contact"
+    ) {
+
+        pagePromises =
+            loadContactPage();
+
+    }
+
+
+    /*=====================================
+     * DASHBOARD
+     *=====================================*/
+
+    else if (
+        page === "dashboard"
+    ) {
+
+        pagePromises =
+            loadDashboardPage();
+
+    }
+
+
+    /*=====================================
+     * UNKNOWN
+     *=====================================*/
+
+    else {
+
+        console.warn(
+            "⚠️ Unknown page:",
+            page
+        );
+
+    }
+
+
+    return Promise
+        .all(pagePromises);
 
 }
 
 
+/*=====================================*
+ * START LOADER
+ *=====================================*/
+
+function startComponentLoader() {
+
+
+    if (
+        componentsLoading
+    ) {
+
+        return window.componentLoaderReady;
+
+    }
+
+
+    componentsLoading =
+        true;
+
+
+    /*=====================================
+     * LOAD ONLY CURRENT PAGE
+     *=====================================*/
+
+    loadCurrentPage()
+
+        .then(() => {
+
+
+            /*=====================================
+             * LOAD SHARED COMPONENTS
+             *=====================================*/
+
+            return Promise.all(
+                loadSharedComponents()
+            );
+
+        })
+
+
+        .then(() => {
+
+
+            /*=====================================
+             * MARK COMPLETE
+             *=====================================*/
+
+            componentsLoaded =
+                true;
+
+
+            window.componentsLoaded =
+                true;
+
+
+            window.allComponentsLoaded =
+                true;
+
+
+            /*=====================================
+             * GLOBAL COUNT
+             *=====================================*/
+
+            loadedComponents =
+                totalComponents;
+
+
+            /*=====================================
+             * RESOLVE PROMISE
+             *=====================================*/
+
+            resolveComponentLoaderReady();
+
+
+            /*=====================================
+             * LOG
+             *=====================================*/
+
+            console.log(
+                "✅ All components loaded"
+            );
+
+        })
+
+
+        .catch(error => {
+
+
+            console.error(
+                "❌ Component loader failed:",
+                error
+            );
+
+
+            /*
+                Resolve instead of completely
+                killing the application.
+
+                This allows main.js to continue.
+            */
+
+            componentsLoaded =
+                true;
+
+
+            window.componentsLoaded =
+                true;
+
+
+            window.allComponentsLoaded =
+                true;
+
+
+            resolveComponentLoaderReady();
+
+        });
+
+
+    return window.componentLoaderReady;
+
 }
 
-);
+
+/*=====================================*
+ * DOM READY
+ *=====================================*/
+
+function initializeComponentLoader() {
 
 
+    startComponentLoader();
 
-loadSection(
-    `${basePath}components/shared/logout-popup.html`,
-    "logout-popup-container",
-    ()=>{
+}
 
-        if(typeof initLogoutPopup === "function"){
 
-            initLogoutPopup();
+if (
+    document.readyState ===
+    "loading"
+) {
 
+    document.addEventListener(
+
+        "DOMContentLoaded",
+
+        initializeComponentLoader,
+
+        {
+            once: true
         }
 
-    }
-);
+    );
 
+}
+else {
 
-
-
-
-
-
-/*====================================
-            WHATSAPP
-=====================================*/
-
-
-loadSection(
-
-`${basePath}components/shared/whatsapp-button.html`,
-
-"whatsapp-container",
-
-()=>{
-
-
-if(typeof initWhatsAppWidget==="function"){
-
-initWhatsAppWidget();
+    initializeComponentLoader();
 
 }
 
 
-}
+/*=====================================*
+ * EXPORT
+ *=====================================*/
 
-);
+window.loadSection =
+    loadSection;
 
+window.registerComponent =
+    registerComponent;
 
+window.startComponentLoader =
+    startComponentLoader;
 
-
-
-
-/*====================================
-        FINAL SCROLL CHECK
-=====================================*/
-
-
-setTimeout(()=>{
-
-
-if(typeof initScrollReveal==="function"){
-
-    initScrollReveal();
-
-}
-
-
-},1500);
-
-
-
-});
+window.componentLoaderReady =
+    window.componentLoaderReady;

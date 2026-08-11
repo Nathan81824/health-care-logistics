@@ -1,95 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
+    <!-- ====================================
+                META
+    ===================================== -->
+
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="IDOKO LEGACY Healthcare Logistics Dashboard"
+    >
 
     <title>IDOKO LEGACY Dashboard</title>
 
-    <link rel="stylesheet"
-          href="../assets/css/global.css">
 
-          <link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- ====================================
+                FAVICON
+    ===================================== -->
 
     <link
-    class="logo-up"
         rel="icon"
         type="image/png"
-        href="/assets/logo/ChatGPT_Image_Aug_6__2026__01_13_27_AM-removebg-preview.png" >
+        href="../assets/logo/ChatGPT_Image_Aug_6__2026__01_13_27_AM-removebg-preview.png"
+    >
+
+
+    <!-- ====================================
+                GLOBAL CSS
+    ===================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../assets/css/global.css"
+    >
+
+
+    <!-- ====================================
+                FONT AWESOME
+    ===================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
 
 </head>
 
-<body data-page="dashboard" class="dashboard">
+
+<body data-page="dashboard">
 
 
-<div class="dashboard-layout">
-
-
-    <!-- Sidebar -->
+    <!-- ====================================
+                SIDEBAR
+    ===================================== -->
 
     <aside id="sidebar-container"></aside>
 
 
-
-    <!-- Main -->
+    <!-- ====================================
+                MAIN
+    ===================================== -->
 
     <main class="dashboard-main">
 
 
-        <!-- Topbar -->
+        <!-- ====================================
+                    TOPBAR
+        ==================================== -->
 
         <header id="topbar-container"></header>
 
 
-
-        <!-- Dashboard Content -->
+        <!-- ====================================
+                DASHBOARD CONTENT
+        ==================================== -->
 
         <div class="dashboard-content">
 
 
-            <!-- Overview Cards -->
+            <!-- ====================================
+                    OVERVIEW
+            ==================================== -->
 
-            <section id="overview-container"></section>
+            <section
+                id="overview-container"
+            ></section>
 
 
-            <!-- Future Sections -->
+            <!-- ====================================
+                    ANALYTICS
+            ==================================== -->
 
-            <section id="analytics-container"></section>
+            <section
+                id="analytics-container"
+            ></section>
 
-            <section id="shipments-container"></section>
 
-            <section id="activity-container"></section>
+            <!-- ====================================
+                    SHIPMENTS
+            ==================================== -->
 
-            <section id="fleet-container"></section>
+            <section
+                id="shipments-container"
+            ></section>
+
+
+            <!-- ====================================
+                    ACTIVITY
+            ==================================== -->
+
+            <section
+                id="activity-container"
+            ></section>
+
+
+            <!-- ====================================
+                    FLEET
+            ==================================== -->
+
+            <section
+                id="fleet-container"
+            ></section>
 
 
         </div>
 
-
     </main>
 
 
-</div>
+    <!-- ====================================
+                LOGOUT POPUP
+    ==================================== -->
+
+    <div id="logout-popup-container"></div>
 
 
-<div id="whatsapp-container"></div>
+    <!-- ====================================
+                CORE JS
+    ==================================== -->
 
-<div id="logout-popup-container"></div>
+    <script src="../assets/js/core/helpers.js"></script>
+
+    <script src="../assets/js/auth/storage.js"></script>
+
+    <script src="../assets/js/core/observer.js"></script>
+
+    <script src="../assets/js/core/scroll.js"></script>
+
+    <script src="../assets/js/core/scrollReveal.js"></script>
+
+    <script src="../assets/js/core/loader.js"></script>
 
 
+    <!-- ====================================
+                DASHBOARD
+    ==================================== -->
 
-<script src="../assets/js/core/loader.js"></script>
-<script src="../assets/js/utilities/whatsapp.js"></script>
+    <script src="../assets/js/dashboard/dashboard.js"></script>
 
-<script src="../assets/js/dashboard/dashboard.js"></script>
-<script src="/assets/js/core/notifications.js"></script>
+    <script src="/assets/js/utilities/stats.js"></script>
 
 
-<script src="../assets/js/core/main.js"></script>
+    <!-- ====================================
+                NAVBAR
+    ==================================== -->
+
+    <script src="../assets/js/utilities/navbar.js"></script>
+
+
+    <!-- ====================================
+                LOGOUT POPUP
+    ==================================== -->
+
     <script src="../assets/js/utilities/logout-popup.js"></script>
 
+
+    <!-- ====================================
+            NOTIFICATION SYSTEM
+    ==================================== -->
+
+    <script src="../assets/js/core/notification.js"></script>
+
+    <script src="../assets/js/core/notification-ui.js"></script>
+
+
+    <!-- ====================================
+                    MAIN
+    ==================================== -->
+
+    <script src="../assets/js/core/main.js"></script>
+
+
 </body>
+
 </html>

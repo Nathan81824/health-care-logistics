@@ -14,7 +14,19 @@ function initNavbar() {
 
     setupThemeToggle();
 
-    setupNotificationUI();
+    /*
+        Notification UI is handled by
+        notification-ui.js.
+    */
+
+    if (
+        typeof setupNotificationUI ===
+        "function"
+    ) {
+
+        setupNotificationUI();
+
+    }
 
     setupLogout();
 
@@ -33,23 +45,47 @@ function initNavbar() {
 
 function loadNavbarUser() {
 
-    const user = getUser();
+    /*
+        Get user safely.
+    */
+
+    let user = null;
+
+
+    if (
+        typeof getUser ===
+        "function"
+    ) {
+
+        user = getUser();
+
+    }
 
 
     const username =
-        document.getElementById("navUsername");
+        document.getElementById(
+            "navUsername"
+        );
 
     const avatar =
-        document.getElementById("navUserInitial");
+        document.getElementById(
+            "navUserInitial"
+        );
 
     const dropdownUsername =
-        document.getElementById("dropdownUsername");
+        document.getElementById(
+            "dropdownUsername"
+        );
 
     const dropdownEmail =
-        document.getElementById("dropdownEmail");
+        document.getElementById(
+            "dropdownEmail"
+        );
 
     const dropdownAvatar =
-        document.getElementById("dropdownUserInitial");
+        document.getElementById(
+            "dropdownUserInitial"
+        );
 
 
     /*=================================
@@ -59,27 +95,47 @@ function loadNavbarUser() {
     if (!user) {
 
         if (username) {
-            username.textContent = "Guest";
+
+            username.textContent =
+                "Guest";
+
         }
+
 
         if (avatar) {
-            avatar.textContent = "G";
+
+            avatar.textContent =
+                "G";
+
         }
+
 
         if (dropdownUsername) {
-            dropdownUsername.textContent = "Guest";
+
+            dropdownUsername.textContent =
+                "Guest";
+
         }
+
 
         if (dropdownEmail) {
+
             dropdownEmail.textContent =
                 "Please sign in";
+
         }
+
 
         if (dropdownAvatar) {
-            dropdownAvatar.textContent = "G";
+
+            dropdownAvatar.textContent =
+                "G";
+
         }
 
+
         return;
+
     }
 
 
@@ -87,12 +143,20 @@ function loadNavbarUser() {
             LOGGED IN USER
     =================================*/
 
+    const name =
+        user.name || "User";
+
+
+    const email =
+        user.email || "";
+
+
     if (username) {
 
         username.textContent =
-            user.name.length > 9
-                ? user.name.slice(0, 9) + "..."
-                : user.name;
+            name.length > 9
+                ? name.slice(0, 9) + "..."
+                : name;
 
     }
 
@@ -100,7 +164,7 @@ function loadNavbarUser() {
     if (avatar) {
 
         avatar.textContent =
-            user.name
+            name
                 .charAt(0)
                 .toUpperCase();
 
@@ -110,7 +174,7 @@ function loadNavbarUser() {
     if (dropdownUsername) {
 
         dropdownUsername.textContent =
-            user.name;
+            name;
 
     }
 
@@ -118,7 +182,7 @@ function loadNavbarUser() {
     if (dropdownEmail) {
 
         dropdownEmail.textContent =
-            user.email;
+            email;
 
     }
 
@@ -126,7 +190,7 @@ function loadNavbarUser() {
     if (dropdownAvatar) {
 
         dropdownAvatar.textContent =
-            user.name
+            name
                 .charAt(0)
                 .toUpperCase();
 
@@ -141,7 +205,17 @@ function loadNavbarUser() {
 
 function showWelcomeToast() {
 
-    const user = getUser();
+    let user = null;
+
+
+    if (
+        typeof getUser ===
+        "function"
+    ) {
+
+        user = getUser();
+
+    }
 
 
     const toast =
@@ -160,6 +234,10 @@ function showWelcomeToast() {
         );
 
 
+    /*
+        Do not show toast for guests.
+    */
+
     if (
         !toast ||
         !user ||
@@ -172,24 +250,36 @@ function showWelcomeToast() {
     }
 
 
+    const name =
+        user.name || "User";
+
+
     title.textContent =
         "Welcome Back 👋";
 
 
     text.textContent =
-        `Good to see you, ${user.name}`;
+        `Good to see you, ${name}`;
 
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        toast.classList.remove("show");
+            toast.classList.remove(
+                "show"
+            );
 
-    }, 4000);
+        },
+        4000
+    );
 
 }
+
 
 /*=====================================*
         PROFILE DROPDOWN
@@ -198,20 +288,31 @@ function showWelcomeToast() {
 function setupProfileDropdown() {
 
     const profileCard =
-        document.getElementById("profileCard");
+        document.getElementById(
+            "profileCard"
+        );
+
 
     const profileDropdown =
-        document.getElementById("profileDropdown");
+        document.getElementById(
+            "profileDropdown"
+        );
+
 
     const chevron =
-        document.getElementById("profileChevron");
+        document.getElementById(
+            "profileChevron"
+        );
 
 
     /*=================================
             CHECK ELEMENTS
     =================================*/
 
-    if (!profileCard || !profileDropdown) {
+    if (
+        !profileCard ||
+        !profileDropdown
+    ) {
 
         console.warn(
             "⚠️ Profile elements not found"
@@ -223,14 +324,13 @@ function setupProfileDropdown() {
 
 
     /*
-        GET THE PROFILE WRAPPER
-
-        This is the parent containing
-        both the button and dropdown.
+        Find profile wrapper.
     */
 
     const profile =
-        profileCard.closest(".profile");
+        profileCard.closest(
+            ".profile"
+        );
 
 
     if (!profile) {
@@ -242,6 +342,24 @@ function setupProfileDropdown() {
         return;
 
     }
+
+
+    /*
+        Prevent duplicate listeners.
+    */
+
+    if (
+        profileCard.dataset.profileReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    profileCard.dataset.profileReady =
+        "true";
 
 
     /*=================================
@@ -263,10 +381,6 @@ function setupProfileDropdown() {
                 );
 
 
-            /*=========================
-                    CHEVRON
-            =========================*/
-
             if (chevron) {
 
                 chevron.style.transform =
@@ -276,10 +390,6 @@ function setupProfileDropdown() {
 
             }
 
-
-            /*=========================
-                    ACCESSIBILITY
-            =========================*/
 
             profileCard.setAttribute(
                 "aria-expanded",
@@ -320,23 +430,7 @@ function setupProfileDropdown() {
                 )
             ) {
 
-                profile.classList.remove(
-                    "active"
-                );
-
-
-                profileCard.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                if (chevron) {
-
-                    chevron.style.transform =
-                        "rotate(0deg)";
-
-                }
+                closeProfileDropdown();
 
             }
 
@@ -356,330 +450,39 @@ function setupProfileDropdown() {
                 event.key === "Escape"
             ) {
 
-                profile.classList.remove(
-                    "active"
-                );
-
-
-                profileCard.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-
-
-                if (chevron) {
-
-                    chevron.style.transform =
-                        "rotate(0deg)";
-
-                }
+                closeProfileDropdown();
 
             }
 
         }
     );
+
+
+    function closeProfileDropdown() {
+
+        profile.classList.remove(
+            "active"
+        );
+
+
+        profileCard.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+
+        if (chevron) {
+
+            chevron.style.transform =
+                "rotate(0deg)";
+
+        }
+
+    }
 
 
     console.log(
         "✅ Profile dropdown initialized"
-    );
-
-}
-
-/*=====================================*
-        NOTIFICATION DROPDOWNS
-*=====================================*/
-
-function setupNotificationDropdowns() {
-
-    /*=================================
-            TOP NAVBAR BELL
-    =================================*/
-
-    const notificationButton =
-        document.querySelector(
-            ".notification-btn"
-        );
-
-
-    const topDropdown =
-        document.querySelector(
-            ".notification-wrapper .notification-dropdown"
-        );
-
-
-    const topCloseButton =
-        topDropdown
-            ?.querySelector(
-                ".close-notification"
-            );
-
-
-    /*=================================
-            PROFILE NOTIFICATION
-    =================================*/
-
-    const profileNotificationLink =
-        document.getElementById(
-            "profileNotificationLink"
-        );
-
-
-    const profileDropdown =
-        document.getElementById(
-            "notificationDropdown"
-        );
-
-
-    const profileCloseButton =
-        profileDropdown
-            ?.querySelector(
-                ".close-notification"
-            );
-
-
-    /*=================================
-            TOP BELL CLICK
-    =================================*/
-
-    if (
-        notificationButton &&
-        topDropdown
-    ) {
-
-        notificationButton.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-
-                /* Close profile notification */
-
-                if (profileDropdown) {
-
-                    profileDropdown.classList.remove(
-                        "active"
-                    );
-
-                }
-
-
-                /* Open top notification */
-
-                topDropdown.classList.toggle(
-                    "active"
-                );
-
-            }
-        );
-
-
-        /*=================================
-                TOP X BUTTON
-        =================================*/
-
-        if (topCloseButton) {
-
-            topCloseButton.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-
-                    topDropdown.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
-
-
-        /*=================================
-                KEEP TOP OPEN
-        =================================*/
-
-        topDropdown.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-            }
-        );
-
-    }
-
-
-    /*=================================
-        PROFILE NOTIFICATION CLICK
-    =================================*/
-
-    if (
-        profileNotificationLink &&
-        profileDropdown
-    ) {
-
-        profileNotificationLink.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-
-                /* Close top notification */
-
-                if (topDropdown) {
-
-                    topDropdown.classList.remove(
-                        "active"
-                    );
-
-                }
-
-
-                /* Open profile notification */
-
-                profileDropdown.classList.toggle(
-                    "active"
-                );
-
-            }
-        );
-
-
-        /*=================================
-                PROFILE X BUTTON
-        =================================*/
-
-        if (profileCloseButton) {
-
-            profileCloseButton.addEventListener(
-                "click",
-                function (event) {
-
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-
-                    profileDropdown.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
-
-
-        /*=================================
-                KEEP PROFILE OPEN
-        =================================*/
-
-        profileDropdown.addEventListener(
-            "click",
-            function (event) {
-
-                event.stopPropagation();
-
-            }
-        );
-
-    }
-
-
-    /*=================================
-            CLOSE OUTSIDE
-    =================================*/
-
-    document.addEventListener(
-        "click",
-        function (event) {
-
-            /* TOP */
-
-            if (
-                topDropdown &&
-                notificationButton &&
-                !topDropdown.contains(
-                    event.target
-                ) &&
-                !notificationButton.contains(
-                    event.target
-                )
-            ) {
-
-                topDropdown.classList.remove(
-                    "active"
-                );
-
-            }
-
-
-            /* PROFILE */
-
-            if (
-                profileDropdown &&
-                profileNotificationLink &&
-                !profileDropdown.contains(
-                    event.target
-                ) &&
-                !profileNotificationLink.contains(
-                    event.target
-                )
-            ) {
-
-                profileDropdown.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
-    );
-
-
-    /*=================================
-            ESCAPE
-    =================================*/
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (event.key !== "Escape") {
-                return;
-            }
-
-
-            if (topDropdown) {
-
-                topDropdown.classList.remove(
-                    "active"
-                );
-
-            }
-
-
-            if (profileDropdown) {
-
-                profileDropdown.classList.remove(
-                    "active"
-                );
-
-            }
-
-        }
     );
 
 }
@@ -713,13 +516,41 @@ function setupMobileMenu() {
     }
 
 
+    /*
+        Prevent duplicate listeners.
+    */
+
+    if (
+        menuBtn.dataset.mobileReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    menuBtn.dataset.mobileReady =
+        "true";
+
+
+    /*=================================
+            OPEN / CLOSE
+    =================================*/
+
     menuBtn.addEventListener(
         "click",
-        function () {
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
 
             menuBtn.classList.toggle(
                 "active"
             );
+
 
             navLinks.classList.toggle(
                 "active"
@@ -729,28 +560,35 @@ function setupMobileMenu() {
     );
 
 
+    /*=================================
+            CLOSE AFTER LINK CLICK
+    =================================*/
+
     document
         .querySelectorAll(
             ".nav-links a"
         )
-        .forEach(link => {
+        .forEach(
+            link => {
 
-            link.addEventListener(
-                "click",
-                function () {
+                link.addEventListener(
+                    "click",
+                    function () {
 
-                    menuBtn.classList.remove(
-                        "active"
-                    );
+                        menuBtn.classList.remove(
+                            "active"
+                        );
 
-                    navLinks.classList.remove(
-                        "active"
-                    );
 
-                }
-            );
+                        navLinks.classList.remove(
+                            "active"
+                        );
 
-        });
+                    }
+                );
+
+            }
+        );
 
 }
 
@@ -768,22 +606,48 @@ function setupThemeToggle() {
 
 
     if (!button) {
+
         return;
+
     }
 
 
+    /*
+        Prevent duplicate listeners.
+    */
+
+    if (
+        button.dataset.themeReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    button.dataset.themeReady =
+        "true";
+
+
     const icon =
-        button.querySelector("i");
+        button.querySelector(
+            "i"
+        );
 
 
     /*=================================
             LOAD SAVED THEME
     =================================*/
 
-    if (
+    const savedTheme =
         localStorage.getItem(
             "theme"
-        ) === "dark"
+        );
+
+
+    if (
+        savedTheme === "dark"
     ) {
 
         document.body.classList.add(
@@ -795,6 +659,21 @@ function setupThemeToggle() {
 
             icon.className =
                 "fa-solid fa-sun";
+
+        }
+
+    }
+    else {
+
+        document.body.classList.remove(
+            "dark-mode"
+        );
+
+
+        if (icon) {
+
+            icon.className =
+                "fa-solid fa-moon";
 
         }
 
@@ -861,8 +740,28 @@ function setupLogout() {
 
 
     if (!logoutBtn) {
+
         return;
+
     }
+
+
+    /*
+        Prevent duplicate listeners.
+    */
+
+    if (
+        logoutBtn.dataset.logoutReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    logoutBtn.dataset.logoutReady =
+        "true";
 
 
     logoutBtn.addEventListener(
@@ -880,6 +779,10 @@ function setupLogout() {
                 ) === "true";
 
 
+            /*=================================
+                    GUEST
+            =================================*/
+
             if (!loggedIn) {
 
                 if (
@@ -893,18 +796,29 @@ function setupLogout() {
 
                 }
 
+
                 return;
 
             }
 
 
-            document
-                .getElementById(
+            /*=================================
+                    SHOW LOGOUT POPUP
+            =================================*/
+
+            const popup =
+                document.getElementById(
                     "logoutPopup"
-                )
-                ?.classList.add(
+                );
+
+
+            if (popup) {
+
+                popup.classList.add(
                     "show"
                 );
+
+            }
 
         }
     );
@@ -1010,40 +924,63 @@ function setActiveLink() {
         .querySelectorAll(
             ".nav-links a"
         )
-        .forEach(link => {
+        .forEach(
+            link => {
 
-            const href =
-                link.getAttribute(
-                    "href"
-                );
+                const href =
+                    link.getAttribute(
+                        "href"
+                    );
 
 
-            if (!href) {
-                return;
+                if (!href) {
+
+                    return;
+
+                }
+
+
+                /*
+                    Ignore hash links.
+                */
+
+                if (
+                    href === "#" ||
+                    href.startsWith(
+                        "javascript:"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                const page =
+                    href
+                        .split("/")
+                        .pop();
+
+
+                if (
+                    page === current
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                }
+                else {
+
+                    link.classList.remove(
+                        "active"
+                    );
+
+                }
+
             }
-
-
-            const page =
-                href
-                    .split("/")
-                    .pop();
-
-
-            if (page === current) {
-
-                link.classList.add(
-                    "active"
-                );
-
-            } else {
-
-                link.classList.remove(
-                    "active"
-                );
-
-            }
-
-        });
+        );
 
 }
 

@@ -1,8 +1,10 @@
-/*====================================
-            INDUSTRIES
-=====================================*/
+/*=====================================*
+        INDUSTRIES
+*=====================================*/
 
 function initIndustries() {
+
+    console.log("✅ Industries initialized.");
 
     initIndustriesHero();
 
@@ -23,89 +25,290 @@ function initIndustries() {
 }
 
 
-/*====================================
+/*=====================================*
         INDUSTRIES HERO
-=====================================*/
+*=====================================*/
 
 function initIndustriesHero() {
 
-    // Hero JavaScript
+    const hero =
+        document.querySelector(
+            ".industries-hero"
+        );
+
+
+    if (!hero) {
+
+        return;
+
+    }
+
+
+    hero.classList.add(
+        "loaded"
+    );
 
 }
 
 
-/*====================================
-    INDUSTRIES OVERVIEW
-=====================================*/
+/*=====================================*
+        INDUSTRIES OVERVIEW
+*=====================================*/
 
 function initIndustriesOverview() {
 
-    // Overview Animation
+    const overview =
+        document.querySelector(
+            ".industries-overview"
+        );
+
+
+    if (!overview) {
+
+        return;
+
+    }
+
+
+    overview.classList.add(
+        "loaded"
+    );
 
 }
 
 
-/*====================================
-            HOSPITALS
-=====================================*/
+/*=====================================*
+        HOSPITALS
+*=====================================*/
 
 function initHospitals() {
 
-    // Hospital Cards
+    const cards =
+        document.querySelectorAll(
+            ".hospital-card"
+        );
+
+
+    if (!cards.length) {
+
+        return;
+
+    }
+
+
+    cards.forEach(
+        function (card) {
+
+            card.classList.add(
+                "loaded"
+            );
+
+        }
+    );
 
 }
 
 
-/*====================================
+/*=====================================*
         LABORATORIES
-=====================================*/
+*=====================================*/
 
 function initLaboratories() {
 
-    // Laboratory Cards
+    const cards =
+        document.querySelectorAll(
+            ".laboratory-card"
+        );
+
+
+    if (!cards.length) {
+
+        return;
+
+    }
+
+
+    cards.forEach(
+        function (card) {
+
+            card.classList.add(
+                "loaded"
+            );
+
+        }
+    );
 
 }
 
 
-/*====================================
+/*=====================================*
         PHARMACIES
-=====================================*/
+*=====================================*/
 
 function initPharmacies() {
 
-    // Pharmacy Cards
+    const cards =
+        document.querySelectorAll(
+            ".pharmacy-card"
+        );
+
+
+    if (!cards.length) {
+
+        return;
+
+    }
+
+
+    cards.forEach(
+        function (card) {
+
+            card.classList.add(
+                "loaded"
+            );
+
+        }
+    );
 
 }
 
 
-/*====================================
-PHARMACEUTICAL COMPANIES
-=====================================*/
+/*=====================================*
+        PHARMACEUTICAL COMPANIES
+*=====================================*/
 
 function initPharmaceuticalCompanies() {
 
-    // Pharmaceutical Companies
+    const cards =
+        document.querySelectorAll(
+            ".pharmaceutical-card"
+        );
+
+
+    if (!cards.length) {
+
+        return;
+
+    }
+
+
+    cards.forEach(
+        function (card) {
+
+            card.classList.add(
+                "loaded"
+            );
+
+        }
+    );
 
 }
 
 
-/*====================================
+/*=====================================*
         BLOOD BANKS
-=====================================*/
+*=====================================*/
 
 function initBloodBanks() {
 
-    // Blood Bank Animation
+    const cards =
+        document.querySelectorAll(
+            ".blood-bank-card"
+        );
+
+
+    if (!cards.length) {
+
+        return;
+
+    }
+
+
+    cards.forEach(
+        function (card) {
+
+            card.classList.add(
+                "loaded"
+            );
+
+        }
+    );
 
 }
 
 
-/*====================================
-    MEDICAL SUPPLIERS
-=====================================*/
+/*=====================================*
+        MEDICAL SUPPLIERS
+*=====================================*/
 
 function initMedicalSuppliers() {
 
-    // Medical Suppliers
+    const cards =
+        document.querySelectorAll(
+            ".medical-supplier-card"
+        );
+
+
+    if (!cards.length) {
+
+        return;
+
+    }
+
+
+    cards.forEach(
+        function (card) {
+
+            card.classList.add(
+                "loaded"
+            );
+
+        }
+    );
 
 }
+
+
+/*=====================================*
+        EXPORT
+*=====================================*/
+
+window.initIndustries =
+    initIndustries;
+
+
+window.initIndustriesHero =
+    initIndustriesHero;
+
+
+window.initIndustriesOverview =
+    initIndustriesOverview;
+
+
+window.initHospitals =
+    initHospitals;
+
+
+window.initLaboratories =
+    initLaboratories;
+
+
+window.initPharmacies =
+    initPharmacies;
+
+
+window.initPharmaceuticalCompanies =
+    initPharmaceuticalCompanies;
+
+
+window.initBloodBanks =
+    initBloodBanks;
+
+
+window.initMedicalSuppliers =
+    initMedicalSuppliers;
+
+
+console.log(
+    "✅ Industries JS loaded"
+);

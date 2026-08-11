@@ -1,252 +1,315 @@
-/*=====================================
-        AUTH VALIDATION JS
-=====================================*/
+/*=====================================*
+* AUTH VALIDATION JS
+*=====================================*/
 
 
-/*=====================================
-        EMAIL VALIDATION
-=====================================*/
+/*=====================================*
+* EMAIL VALIDATION
+*=====================================*/
 
+function validateEmail(email) {
 
-function validateEmail(email){
+    if (
+        typeof email !== "string"
+    ) {
+
+        return false;
+
+    }
 
 
     const emailPattern =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-    return emailPattern.test(email);
-
-
-}
-
-
-
-
-
-/*=====================================
-        PASSWORD VALIDATION
-=====================================*/
-
-
-function validatePassword(password){
-
-
-    return password.length >= 6;
-
+    return emailPattern.test(
+        email.trim()
+    );
 
 }
 
 
+/*=====================================*
+* PASSWORD VALIDATION
+*=====================================*/
+
+function validatePassword(password) {
+
+    if (
+        typeof password !== "string"
+    ) {
+
+        return false;
+
+    }
 
 
-
-/*=====================================
-        REQUIRED FIELD
-=====================================*/
-
-
-function validateRequired(value){
-
-
-    return value.trim() !== "";
-
+    return (
+        password.length >= 6
+    );
 
 }
 
 
+/*=====================================*
+* REQUIRED FIELD
+*=====================================*/
 
+function validateRequired(value) {
 
+    if (
+        typeof value !== "string"
+    ) {
 
-/*=====================================
-        REGISTER VALIDATION
-=====================================*/
-
-
-function validateRegister(data){
-
-
-
-    if(!validateRequired(data.name)){
-
-
-        return {
-
-            valid:false,
-
-            message:
-            "Please enter your full name."
-
-        };
-
+        return false;
 
     }
 
 
+    return (
+        value.trim() !== ""
+    );
+
+}
 
 
+/*=====================================*
+* REGISTER VALIDATION
+*=====================================*/
 
-    if(!validateEmail(data.email)){
+function validateRegister(data) {
 
+    if (
+        !data ||
+        typeof data !== "object"
+    ) {
 
         return {
 
-            valid:false,
+            valid: false,
 
             message:
-            "Please enter a valid email address."
+                "Invalid registration data."
 
         };
-
 
     }
 
 
+    /*=================================
+            FULL NAME
+    =================================*/
 
-
-
-    if(!validatePassword(data.password)){
-
+    if (
+        !validateRequired(
+            data.name
+        )
+    ) {
 
         return {
 
-            valid:false,
+            valid: false,
 
             message:
-            "Password must be at least 6 characters."
+                "Please enter your full name."
 
         };
-
 
     }
 
 
+    /*=================================
+            EMAIL
+    =================================*/
+
+    if (
+        !validateEmail(
+            data.email
+        )
+    ) {
+
+        return {
+
+            valid: false,
+
+            message:
+                "Please enter a valid email address."
+
+        };
+
+    }
 
 
+    /*=================================
+            PASSWORD
+    =================================*/
 
-    if(
+    if (
+        !validatePassword(
+            data.password
+        )
+    ) {
+
+        return {
+
+            valid: false,
+
+            message:
+                "Password must be at least 6 characters."
+
+        };
+
+    }
+
+
+    /*=================================
+            CONFIRM PASSWORD
+    =================================*/
+
+    if (
         data.password !==
         data.confirmPassword
-    ){
-
+    ) {
 
         return {
 
-            valid:false,
+            valid: false,
 
             message:
-            "Passwords do not match."
+                "Passwords do not match."
 
         };
-
 
     }
 
 
-
-
+    /*=================================
+            SUCCESS
+    =================================*/
 
     return {
 
-        valid:true,
+        valid: true,
 
         message:
-        "Validation successful."
+            "Validation successful."
 
     };
-
 
 }
 
 
+/*=====================================*
+* LOGIN VALIDATION
+*=====================================*/
 
+function validateLogin(data) {
 
-
-/*=====================================
-        LOGIN VALIDATION
-=====================================*/
-
-
-function validateLogin(data){
-
-
-
-    if(!validateEmail(data.email)){
-
+    if (
+        !data ||
+        typeof data !== "object"
+    ) {
 
         return {
 
-            valid:false,
+            valid: false,
 
             message:
-            "Invalid email address."
+                "Invalid login data."
 
         };
-
 
     }
 
 
+    /*=================================
+            EMAIL
+    =================================*/
 
-
-
-    if(!validateRequired(data.password)){
-
+    if (
+        !validateEmail(
+            data.email
+        )
+    ) {
 
         return {
 
-            valid:false,
+            valid: false,
 
             message:
-            "Please enter your password."
+                "Invalid email address."
 
         };
-
 
     }
 
 
+    /*=================================
+            PASSWORD
+    =================================*/
+
+    if (
+        !validateRequired(
+            data.password
+        )
+    ) {
+
+        return {
+
+            valid: false,
+
+            message:
+                "Please enter your password."
+
+        };
+
+    }
 
 
+    /*=================================
+            SUCCESS
+    =================================*/
 
     return {
 
-
-        valid:true,
+        valid: true,
 
         message:
-        "Validation successful."
-
+            "Validation successful."
 
     };
-
 
 }
 
 
-
-
-
-/*=====================================
-            EXPORT
-=====================================*/
-
+/*=====================================*
+* EXPORT
+*=====================================*/
 
 window.validateEmail =
-validateEmail;
+    validateEmail;
 
 
 window.validatePassword =
-validatePassword;
+    validatePassword;
 
 
 window.validateRequired =
-validateRequired;
+    validateRequired;
 
 
 window.validateRegister =
-validateRegister;
+    validateRegister;
 
 
 window.validateLogin =
-validateLogin;
+    validateLogin;
+
+
+/*=====================================*
+* READY
+*=====================================*/
+
+console.log(
+    "✅ Auth validation loaded"
+);

@@ -1,3 +1,4 @@
+
 <!--==================================================
                     HEADER
 ===================================================-->
@@ -90,13 +91,15 @@
 
 
             <!--==================================================
-                            NOTIFICATION
+                            NOTIFICATIONS
             ===================================================-->
 
             <div class="notification-wrapper">
 
 
-                <!-- BELL BUTTON -->
+                <!--==================================================
+                            NOTIFICATION BUTTON
+                ===================================================-->
 
                 <button
                     type="button"
@@ -106,10 +109,12 @@
 
                     <i class="fa-regular fa-bell"></i>
 
-
                     <!-- UNREAD COUNT -->
 
-                    <span class="notification-count"></span>
+                    <span
+                        class="notification-count"
+                        aria-hidden="true">
+                    </span>
 
                 </button>
 
@@ -151,7 +156,7 @@
                         <div class="notification-actions">
 
 
-                            <!-- NUMBER OF NOTIFICATIONS -->
+                            <!-- UNREAD COUNT -->
 
                             <span
                                 class="notification-count"
@@ -160,7 +165,10 @@
 
 
 
-                            <!-- DELETE ALL -->
+                            <!--==================================================
+                                DELETE ALL
+                                Hidden automatically for guests
+                            ===================================================-->
 
                             <button
                                 type="button"
@@ -179,7 +187,9 @@
 
 
 
-                            <!-- CLOSE -->
+                            <!--==================================================
+                                    CLOSE
+                            ===================================================-->
 
                             <button
                                 type="button"
@@ -201,26 +211,24 @@
 
                     <!--==================================================
                             NOTIFICATION LIST
+
+                            DO NOT PUT STATIC NOTIFICATIONS HERE.
+
+                            notification-ui.js controls this area.
+
+                            GUEST:
+                            Please sign in to continue
+
+                            LOGGED IN:
+                            Real notifications
+
+                            NO NOTIFICATIONS:
+                            You're all caught up.
                     ===================================================-->
 
                     <div
                         id="notificationList"
                         class="notification-list">
-
-
-                        <!-- EMPTY STATE -->
-
-                        <div class="empty-notification">
-
-                            <i class="fa-regular fa-bell"></i>
-
-                            <p>
-                                No notifications
-                            </p>
-
-                        </div>
-
-
                     </div>
 
 
@@ -301,7 +309,7 @@
 
 
                     <!--==================================================
-                                USER INFORMATION
+                            USER INFORMATION
                     ===================================================-->
 
                     <div class="dropdown-user">
@@ -343,7 +351,7 @@
 
 
                     <!--==================================================
-                                GUEST LINKS
+                            GUEST LINKS
                     ===================================================-->
 
                     <a
@@ -374,7 +382,7 @@
 
 
                     <!--==================================================
-                                LOGGED-IN LINKS
+                            LOGGED-IN LINKS
                     ===================================================-->
 
                     <a
@@ -425,7 +433,7 @@
 
 
                     <!--==================================================
-                                QUICK ACCESS
+                            QUICK ACCESS
                     ===================================================-->
 
                     <div class="quick-access-wrapper">
@@ -452,6 +460,8 @@
                         <div class="quick-menu">
 
 
+                            <!-- LIVE TRACKING -->
+
                             <a href="#">
 
                                 <i class="fa-solid fa-satellite-dish"></i>
@@ -462,6 +472,8 @@
 
                             </a>
 
+
+                            <!-- COLD CHAIN -->
 
                             <a href="#">
 
@@ -474,6 +486,8 @@
                             </a>
 
 
+                            <!-- AI ASSISTANT -->
+
                             <a href="#">
 
                                 <i class="fa-solid fa-robot"></i>
@@ -484,6 +498,8 @@
 
                             </a>
 
+
+                            <!-- SHIPMENT MAP -->
 
                             <a href="#">
 
@@ -496,6 +512,8 @@
                             </a>
 
 
+                            <!-- SUPPORT -->
+
                             <a href="#">
 
                                 <i class="fa-solid fa-headset"></i>
@@ -506,6 +524,8 @@
 
                             </a>
 
+
+                            <!-- ACCOUNT SETTINGS -->
 
                             <a href="#">
 
@@ -530,7 +550,7 @@
 
 
                     <!--==================================================
-                                SETTINGS
+                            SETTINGS
                     ===================================================-->
 
                     <a
@@ -548,7 +568,7 @@
 
 
                     <!--==================================================
-                                HELP CENTER
+                            HELP CENTER
                     ===================================================-->
 
                     <a
@@ -566,7 +586,7 @@
 
 
                     <!--==================================================
-                                LOGOUT
+                            LOGOUT
                     ===================================================-->
 
                     <a
@@ -622,3 +642,4 @@
 
 
 </div>
+

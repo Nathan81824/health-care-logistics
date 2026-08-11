@@ -1,79 +1,127 @@
-/*=====================================
+/*=====================================*
         SCROLLBAR COLOR CHANGE
-=====================================*/
+*=====================================*/
 
-function initScrollbar(){
+function initScrollbar() {
 
+    /*=================================
+            PREVENT DUPLICATE
+            EVENT LISTENERS
+    =================================*/
 
-    window.addEventListener("scroll",()=>{
+    if (window.scrollbarInitialized) {
 
+        return;
 
-        const scroll =
-        window.scrollY;
-
-
-        const height =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
-
-
-        const progress =
-        scroll / height;
+    }
 
 
+    window.scrollbarInitialized = true;
 
-        const html =
+
+    /*=================================
+            SCROLL EVENT
+    =================================*/
+
+    window.addEventListener(
+        "scroll",
+        function () {
+
+
+            const scroll =
+                window.scrollY;
+
+
+            const height =
+                document.documentElement.scrollHeight -
+                window.innerHeight;
+
+
+            /*=================================
+                    PREVENT DIVISION BY ZERO
+            =================================*/
+
+            const progress =
+                height > 0
+                    ? scroll / height
+                    : 0;
+
+
+            const html =
+                document.documentElement;
+
+
+            /*=================================
+                    REMOVE OLD COLORS
+            =================================*/
+
+            html.classList.remove(
+
+                "scroll-blue",
+
+                "scroll-cyan",
+
+                "scroll-purple"
+
+            );
+
+
+            /*=================================
+                    CHANGE COLOR
+            =================================*/
+
+            if (progress < 0.33) {
+
+                html.classList.add(
+                    "scroll-cyan"
+                );
+
+            }
+
+            else if (progress < 0.66) {
+
+                html.classList.add(
+                    "scroll-blue"
+                );
+
+            }
+
+            else {
+
+                html.classList.add(
+                    "scroll-purple"
+                );
+
+            }
+
+        }
+
+    );
+
+
+    /*=================================
+            SET INITIAL COLOR
+    =================================*/
+
+    const html =
         document.documentElement;
 
 
-
-        html.classList.remove(
-            "scroll-blue",
-            "scroll-cyan",
-            "scroll-purple"
-        );
+    html.classList.add(
+        "scroll-cyan"
+    );
 
 
-
-        if(progress < 0.33){
-
-
-            html.classList.add(
-                "scroll-cyan"
-            );
-
-
-        }
-
-
-        else if(progress < 0.66){
-
-
-            html.classList.add(
-                "scroll-blue"
-            );
-
-
-        }
-
-
-        else{
-
-
-            html.classList.add(
-                "scroll-purple"
-            );
-
-
-        }
-
-
-
-    });
-
+    console.log(
+        "✅ Scrollbar initialized"
+    );
 
 }
 
 
+/*=====================================*
+        EXPORT
+*=====================================*/
 
-initScrollbar();
+window.initScrollbar =
+    initScrollbar;

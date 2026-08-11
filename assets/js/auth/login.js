@@ -1,16 +1,22 @@
-/*=====================================
-        LOGIN JS
-=====================================*/
+/*=====================================*
+* LOGIN JS
+*=====================================*/
 
 
-function setupLogin(){
+/*=====================================*
+* SETUP LOGIN
+*=====================================*/
 
+function setupLogin() {
 
     console.log(
         "✅ Login initialized"
     );
 
 
+    /*=====================================
+    GET LOGIN FORM
+    =====================================*/
 
     const form =
         document.getElementById(
@@ -18,8 +24,7 @@ function setupLogin(){
         );
 
 
-
-    if(!form){
+    if (!form) {
 
         console.log(
             "Login form not found"
@@ -30,97 +35,173 @@ function setupLogin(){
     }
 
 
+    /*=====================================
+    PREVENT DUPLICATE LISTENER
+    =====================================*/
+
+    if (
+        form.dataset.loginReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
 
 
+    form.dataset.loginReady =
+        "true";
+
+
+    /*=====================================
+    LOGIN SUBMIT
+    =====================================*/
 
     form.addEventListener(
         "submit",
-        function(e){
+        function (event) {
+
+            event.preventDefault();
 
 
-            e.preventDefault();
+            /*=================================
+            GET EMAIL
+            =================================*/
 
-
-
-
-
-            const email =
-                document
-                .getElementById(
+            const emailInput =
+                document.getElementById(
                     "loginEmail"
-                )
-                .value
-                .trim();
-
-
-
-
-
-            const password =
-                document
-                .getElementById(
-                    "loginPassword"
-                )
-                .value;
-
-
-
-
-
-
-
-            const result =
-                validateLogin({
-
-                    email:email,
-
-                    password:password
-
-                });
-
-
-
-
-
-
-
-            if(!result.valid){
-
-
-                showPopup(
-
-                    "Error",
-
-                    result.message,
-
-                    "error"
-
                 );
 
+
+            /*=================================
+            GET PASSWORD
+            =================================*/
+
+            const passwordInput =
+                document.getElementById(
+                    "loginPassword"
+                );
+
+
+            if (
+                !emailInput ||
+                !passwordInput
+            ) {
+
+                showPopup(
+                    "Error",
+                    "Login fields could not be found.",
+                    "error"
+                );
 
                 return;
 
             }
 
 
+            const email =
+                emailInput.value.trim();
 
 
+            const password =
+                passwordInput.value;
 
 
+            /*=================================
+            VALIDATE LOGIN INPUT
+            =================================*/
+
+            if (
+                typeof validateLogin !==
+                "function"
+            ) {
+
+                console.error(
+                    "validateLogin() is not available."
+                );
+
+
+                showPopup(
+                    "Error",
+                    "Login validation is unavailable.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            const result =
+                validateLogin({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+            /*=================================
+            VALIDATION FAILED
+            =================================*/
+
+            if (
+                !result ||
+                !result.valid
+            ) {
+
+                showPopup(
+
+                    "Error",
+
+                    result?.message ||
+                        "Please enter valid login details.",
+
+                    "error"
+
+                );
+
+                return;
+
+            }
+
+
+            /*=================================
+            GET STORED USER
+            =================================*/
+
+            if (
+                typeof getUser !==
+                "function"
+            ) {
+
+                console.error(
+                    "getUser() is not available."
+                );
+
+
+                showPopup(
+                    "Error",
+                    "User account data could not be loaded.",
+                    "error"
+                );
+
+                return;
+
+            }
 
 
             const user =
                 getUser();
 
 
+            /*=================================
+            CHECK ACCOUNT
+            =================================*/
 
-
-
-
-
-
-            if(!user){
-
+            if (!user) {
 
                 showPopup(
 
@@ -132,23 +213,19 @@ function setupLogin(){
 
                 );
 
-
                 return;
 
             }
 
 
+            /*=================================
+            CHECK EMAIL AND PASSWORD
+            =================================*/
 
-
-
-
-
-
-            if(
+            if (
                 user.email !== email ||
                 user.password !== password
-            ){
-
+            ) {
 
                 showPopup(
 
@@ -160,99 +237,120 @@ function setupLogin(){
 
                 );
 
-
                 return;
 
             }
 
 
+            /*=================================
+            LOGIN SUCCESS
+            =================================*/
+
+            if (
+                typeof setLoginStatus ===
+                "function"
+            ) {
+
+                setLoginStatus();
+
+            }
+            else {
+
+                /*
+                    Fallback so the
+                    auth guard still works.
+                */
+
+                localStorage.setItem(
+                    "isLoggedIn",
+                    "true"
+                );
+
+            }
 
 
+            /*=================================
+            LOGIN NOTIFICATION
+            =================================*/
+
+            if (
+                typeof addNotification ===
+                "function"
+            ) {
+
+                addNotification(
+
+                    "success",
+
+                    "Login Successful",
+
+                    `Welcome back, ${user.name}!`
+
+                );
+
+            }
 
 
+            /*=================================
+            SUCCESS POPUP
+            =================================*/
+
+            if (
+                typeof showPopup ===
+                "function"
+            ) {
+
+                showPopup(
+
+                    "Welcome Back",
+
+                    `Welcome back ${user.name}`,
+
+                    "success"
+
+                );
+
+            }
 
 
-setLoginStatus();
-
-
-
-addNotification(
-
-    "success",
-
-    "Login Successful",
-
-    `Welcome back, ${user.name}!`
-
-);
-
-
-showPopup(
-
-    "Welcome Back",
-
-    `Welcome back ${user.name}`,
-
-    "success"
-
-);
-
-
-
-
-
-
+            /*=================================
+            RESET FORM
+            =================================*/
 
             form.reset();
 
 
+            /*=================================
+            REDIRECT TO DASHBOARD
+            =================================*/
 
-
-
-
-
-
-            setTimeout(()=>{
-
-
+            setTimeout(() => {
 
                 const insidePages =
-                    window.location.pathname.includes(
-                        "/pages/"
-                    );
-
+                    window.location.pathname
+                        .toLowerCase()
+                        .includes(
+                            "/pages/"
+                        );
 
 
                 window.location.href =
                     insidePages
-                    ? "dashboard.html"
-                    : "pages/dashboard.html";
+                        ? "dashboard.html"
+                        : "pages/dashboard.html";
 
 
-
-            },1500);
-
-
-
-
-
-
+            }, 1500);
 
         }
     );
 
-
-
 }
 
 
-
-
-
-/*=====================================
-            EXPORT
-=====================================*/
-
+/*=====================================*
+* EXPORT
+*=====================================*/
 
 window.setupLogin =
-setupLogin;
+    setupLogin;
