@@ -1374,7 +1374,7 @@ function loadServicesPage() {
 
             registerComponent(
 
-                `${basePath}components/contact/faq.html`,
+                `${basePath}components/services/faq.html`,
 
                 "faq-container",
 

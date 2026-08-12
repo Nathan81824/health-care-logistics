@@ -304,3 +304,22 @@
     order:1;
 }
 
+.industry-item {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+
+/* IMAGE LEFT */
+
+.industry-item.image-left {
+    flex-direction: row;
+}
+
+
+/* IMAGE RIGHT */
+
+.industry-item.image-right {
+    flex-direction: row-reverse;
+}

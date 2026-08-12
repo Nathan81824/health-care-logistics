@@ -1,3 +1,4 @@
+
 /*==========================================================
     FOOTER
 ==========================================================*/
@@ -26,11 +27,13 @@ function initFooterYear() {
     const yearElement =
         document.getElementById("footerYear");
 
+
     if (!yearElement) {
 
         return;
 
     }
+
 
     yearElement.textContent =
         new Date().getFullYear();
@@ -58,8 +61,10 @@ function footerUserIsLoggedIn() {
 
     }
 
+
     /*
-        Fallback to your existing AUTH_KEY.
+        Fallback to existing
+        login state.
     */
 
     return (
@@ -79,11 +84,14 @@ function showFooterGuestMessage() {
     const title =
         "Sign in required";
 
+
     const message =
         "Please sign in to continue.";
 
+
     /*
-        Existing notification system.
+        Use the existing notification
+        toast if available.
     */
 
     if (
@@ -102,7 +110,7 @@ function showFooterGuestMessage() {
 
 
     /*
-        Custom event fallback.
+        Fallback custom event.
     */
 
     window.dispatchEvent(
@@ -110,8 +118,8 @@ function showFooterGuestMessage() {
             "footer:guest",
             {
                 detail: {
-                    title:title,
-                    message:message
+                    title: title,
+                    message: message
                 }
             }
         )
@@ -131,26 +139,35 @@ function initNewsletter() {
             "newsletterForm"
         );
 
+
     const emailInput =
         document.getElementById(
             "newsletterEmail"
         );
+
 
     const subscribed =
         document.getElementById(
             "newsletterSubscribed"
         );
 
+
     const unsubscribeBtn =
         document.getElementById(
             "unsubscribeBtn"
         );
+
 
     const bell =
         document.getElementById(
             "newsletterBell"
         );
 
+
+    /*
+        Stop if newsletter elements
+        do not exist.
+    */
 
     if (
         !form ||
@@ -163,6 +180,10 @@ function initNewsletter() {
 
     }
 
+
+    /*
+        Prevent duplicate initialization.
+    */
 
     if (
         form.dataset.initialized ===
@@ -177,6 +198,10 @@ function initNewsletter() {
     form.dataset.initialized =
         "true";
 
+
+    /*
+        Check for an existing subscription.
+    */
 
     const savedEmail =
         localStorage.getItem(
@@ -207,9 +232,17 @@ function initNewsletter() {
             event.preventDefault();
 
 
+            /*
+                Get email.
+            */
+
             const email =
                 emailInput.value.trim();
 
+
+            /*
+                Empty email.
+            */
 
             if (!email) {
 
@@ -219,6 +252,10 @@ function initNewsletter() {
 
             }
 
+
+            /*
+                Validate email.
+            */
 
             if (
                 !emailInput.checkValidity()
@@ -231,11 +268,19 @@ function initNewsletter() {
             }
 
 
+            /*
+                Save subscription.
+            */
+
             localStorage.setItem(
                 "idokoNewsletterEmail",
                 email
             );
 
+
+            /*
+                Show subscribed state.
+            */
 
             showSubscribedState(
                 form,
@@ -244,6 +289,10 @@ function initNewsletter() {
                 bell
             );
 
+
+            /*
+                Create notification.
+            */
 
             sendFooterNotification(
                 "Subscription successful",
@@ -262,10 +311,18 @@ function initNewsletter() {
         "click",
         function() {
 
+            /*
+                Remove saved subscription.
+            */
+
             localStorage.removeItem(
                 "idokoNewsletterEmail"
             );
 
+
+            /*
+                Show subscribe form again.
+            */
 
             showSubscribeState(
                 form,
@@ -274,6 +331,10 @@ function initNewsletter() {
                 bell
             );
 
+
+            /*
+                Create notification.
+            */
 
             sendFooterNotification(
                 "Unsubscribed",
@@ -307,9 +368,17 @@ function showSubscribedState(
     }
 
 
+    /*
+        Hide subscribe form.
+    */
+
     form.style.display =
         "none";
 
+
+    /*
+        Show subscribed state.
+    */
 
     subscribed.classList.add(
         "show"
@@ -322,11 +391,16 @@ function showSubscribedState(
     );
 
 
+    /*
+        Show bell.
+    */
+
     if (bell) {
 
         bell.classList.add(
             "show"
         );
+
 
         bell.setAttribute(
             "aria-hidden",
@@ -335,6 +409,10 @@ function showSubscribedState(
 
     }
 
+
+    /*
+        Restore email value.
+    */
 
     const emailInput =
         document.getElementById(
@@ -376,6 +454,10 @@ function showSubscribeState(
     }
 
 
+    /*
+        Hide subscribed state.
+    */
+
     subscribed.classList.remove(
         "show"
     );
@@ -387,11 +469,16 @@ function showSubscribeState(
     );
 
 
+    /*
+        Hide bell.
+    */
+
     if (bell) {
 
         bell.classList.remove(
             "show"
         );
+
 
         bell.setAttribute(
             "aria-hidden",
@@ -401,9 +488,17 @@ function showSubscribeState(
     }
 
 
+    /*
+        Show subscribe form.
+    */
+
     form.style.display =
         "flex";
 
+
+    /*
+        Clear email field.
+    */
 
     if (emailInput) {
 
@@ -424,18 +519,41 @@ function sendFooterNotification(
     message
 ) {
 
-    window.dispatchEvent(
-        new CustomEvent(
-            "footer:notification",
-            {
-                detail: {
-                    title:title,
-                    message:message
-                }
-            }
-        )
-    );
+    /*
+        Use the main notification system.
 
+        notification.js provides:
+            window.addNotification()
+    */
+
+    if (
+        typeof window.addNotification ===
+        "function"
+    ) {
+
+        window.addNotification(
+            "success",
+            title,
+            message
+        );
+
+    }
+    else {
+
+        console.warn(
+            "⚠️ Notification system is not loaded."
+        );
+
+    }
+
+
+    /*
+        Also show the existing toast
+        notification if available.
+
+        This does NOT create another
+        stored notification.
+    */
 
     if (
         typeof window.showNotification ===
@@ -463,6 +581,7 @@ function initFooterBackTop() {
             "footerBackTop"
         );
 
+
     const panel =
         document.getElementById(
             "footerNavigationPanel"
@@ -475,6 +594,10 @@ function initFooterBackTop() {
 
     }
 
+
+    /*
+        Prevent duplicate initialization.
+    */
 
     if (
         backTop.dataset.initialized ===
@@ -517,7 +640,7 @@ function initFooterBackTop() {
 
         },
         {
-            passive:true
+            passive: true
         }
     );
 
@@ -531,8 +654,8 @@ function initFooterBackTop() {
         function() {
 
             /*
-                NEVER show the panel when
-                the button itself isn't visible.
+                Never open navigation when
+                the button is hidden.
             */
 
             if (
@@ -561,8 +684,8 @@ function initFooterBackTop() {
         function() {
 
             /*
-                Give the user a small amount
-                of time to move into the panel.
+                Give the user a moment to
+                move into the panel.
             */
 
             setTimeout(
@@ -597,12 +720,15 @@ function initFooterBackTop() {
 
 
             /*
-                If panel is already open,
-                clicking the button takes
-                the user directly to the top.
+                Close navigation first.
             */
 
             closeFooterNavigation();
+
+
+            /*
+                Then scroll to top.
+            */
 
             footerScrollToTop();
 
@@ -652,6 +778,7 @@ function updateBackTopVisibility(
             "show"
         );
 
+
         closeFooterNavigation();
 
     }
@@ -670,6 +797,7 @@ function initFooterNavigation() {
             "footerNavigationPanel"
         );
 
+
     const closeButton =
         document.getElementById(
             "footerNavigationClose"
@@ -682,6 +810,10 @@ function initFooterNavigation() {
 
     }
 
+
+    /*
+        Prevent duplicate initialization.
+    */
 
     if (
         panel.dataset.initialized ===
@@ -796,9 +928,8 @@ function initFooterNavigation() {
 
 
                     /*
-                        Wait for the panel to
-                        begin closing before
-                        scrolling.
+                        Wait for panel closing
+                        animation before scrolling.
                     */
 
                     setTimeout(
@@ -832,6 +963,7 @@ function openFooterNavigation() {
             "footerNavigationPanel"
         );
 
+
     const backTop =
         document.getElementById(
             "footerBackTop"
@@ -839,8 +971,8 @@ function openFooterNavigation() {
 
 
     /*
-        NEVER open the panel when
-        the back-top button isn't visible.
+        Never open if back-to-top
+        button is hidden.
     */
 
     if (
@@ -886,6 +1018,7 @@ function closeFooterNavigation() {
             "footerNavigationPanel"
         );
 
+
     const backTop =
         document.getElementById(
             "footerBackTop"
@@ -897,6 +1030,7 @@ function closeFooterNavigation() {
         panel.classList.remove(
             "show"
         );
+
 
         panel.setAttribute(
             "aria-hidden",
@@ -929,11 +1063,11 @@ function footerScrollToTop() {
 
     window.scrollTo({
 
-        top:0,
+        top: 0,
 
-        left:0,
+        left: 0,
 
-        behavior:"smooth"
+        behavior: "smooth"
 
     });
 
@@ -965,7 +1099,7 @@ function scrollToFooterSection(
 
 
     /*
-        Account for your fixed navbar.
+        Account for fixed navbar.
     */
 
     if (navbar) {
@@ -984,14 +1118,14 @@ function scrollToFooterSection(
 
     window.scrollTo({
 
-        top:Math.max(
+        top: Math.max(
             0,
             targetPosition
         ),
 
-        left:0,
+        left: 0,
 
-        behavior:"smooth"
+        behavior: "smooth"
 
     });
 
@@ -1027,8 +1161,8 @@ function initFooterInternalLinks() {
         function(link) {
 
             /*
-                Don't initialize the same
-                link twice.
+                Don't initialize the
+                same link twice.
             */
 
             if (
@@ -1151,40 +1285,45 @@ function startFooter() {
 }
 
 
-/*
-    If your component loader calls
-    initFooter(), this remains safe.
-*/
+/*==========================================================
+    EXPORT TO WINDOW
+==========================================================*/
 
 window.initFooter =
     initFooter;
 
+
 window.initNewsletter =
     initNewsletter;
+
 
 window.initFooterBackTop =
     initFooterBackTop;
 
+
 window.initFooterNavigation =
     initFooterNavigation;
+
 
 window.openFooterNavigation =
     openFooterNavigation;
 
+
 window.closeFooterNavigation =
     closeFooterNavigation;
 
+
 window.footerScrollToTop =
     footerScrollToTop;
+
 
 window.scrollToFooterSection =
     scrollToFooterSection;
 
 
-/*
-    Start immediately if the footer
-    already exists on the page.
-*/
+/*==========================================================
+    START FOOTER
+==========================================================*/
 
 if (
     document.querySelector(
@@ -1195,3 +1334,4 @@ if (
     startFooter();
 
 }
+ 

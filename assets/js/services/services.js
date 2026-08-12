@@ -36,6 +36,13 @@ function initServices() {
 
 
     /*=====================================
+            STATS
+    =====================================*/
+
+    initStats();
+
+
+    /*=====================================
             FAQ
     =====================================*/
 
@@ -51,9 +58,7 @@ function initServices() {
 function initServicesHero() {
 
     /*
-        Services hero JavaScript
-        Add hero functionality here
-        when needed.
+        Services hero functionality
     */
 
 }
@@ -66,9 +71,7 @@ function initServicesHero() {
 function initOverview() {
 
     /*
-        Overview animation
-        Add overview functionality here
-        when needed.
+        Overview functionality
     */
 
 }
@@ -82,8 +85,6 @@ function initCoreServices() {
 
     /*
         Core services functionality
-        Add service-card functionality here
-        when needed.
     */
 
 }
@@ -96,102 +97,8 @@ function initCoreServices() {
 function initProcess() {
 
     /*
-        Timeline animation
-
-        Process cards
+        Process functionality
     */
-
-}
-
-
-/*====================================*
-        FAQ
-*=====================================*/
-
-function initFAQ() {
-
-    const faqItems =
-        document.querySelectorAll(
-            ".faq-item"
-        );
-
-
-    /*
-        No FAQ section on this page
-    */
-
-    if (!faqItems.length) {
-
-        return;
-
-    }
-
-
-    faqItems.forEach(
-        function (item) {
-
-            const question =
-                item.querySelector(
-                    ".faq-question"
-                );
-
-
-            /*
-                Make sure the question
-                actually exists.
-            */
-
-            if (!question) {
-
-                return;
-
-            }
-
-
-            question.addEventListener(
-                "click",
-                function () {
-
-
-                    /*
-                        Close all other FAQs
-                    */
-
-                    faqItems.forEach(
-                        function (faq) {
-
-                            if (
-                                faq !== item
-                            ) {
-
-                                faq.classList.remove(
-                                    "active"
-                                );
-
-                            }
-
-                        }
-                    );
-
-
-                    /*
-                        Toggle current FAQ
-                    */
-
-                    item.classList.toggle(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
-    );
-
-
-    console.log(
-        "✅ FAQ initialized"
-    );
 
 }
 
