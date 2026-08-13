@@ -1,4 +1,3 @@
-
 <!--==================================================
                     HEADER
 ===================================================-->
@@ -7,13 +6,17 @@
 
     <nav class="navbar">
 
+
         <!--==================================================
                         LEFT SIDE
         ===================================================-->
 
         <div class="nav-left">
 
-            <!-- LOGO -->
+
+            <!--==================================================
+                            LOGO
+            ===================================================-->
 
             <a
                 href="../pages/home.html"
@@ -21,13 +24,16 @@
                 aria-label="IDOKO LEGACY Home">
 
                 <img
-                    src="/assets/logo/download.webp"
+                    src="/assets/logo/testing/ChatGPT_Image_Aug_12__2026__09_14_30_PM-removebg-preview.png"
                     alt="IDOKO LEGACY">
 
             </a>
 
 
-            <!-- NAVIGATION -->
+
+            <!--==================================================
+                        NAVIGATION
+            ===================================================-->
 
             <ul class="nav-links">
 
@@ -37,11 +43,13 @@
                     </a>
                 </li>
 
+
                 <li>
                     <a href="../pages/industries-we-serve.html">
                         Industries
                     </a>
                 </li>
+
 
                 <li>
                     <a href="../pages/hipaa.html">
@@ -49,11 +57,13 @@
                     </a>
                 </li>
 
+
                 <li>
                     <a href="../pages/about.html">
                         About
                     </a>
                 </li>
+
 
                 <li>
                     <a href="../pages/contact.html">
@@ -98,7 +108,7 @@
 
 
                 <!--==================================================
-                            NOTIFICATION BUTTON
+                        NOTIFICATION BUTTON
                 ===================================================-->
 
                 <button
@@ -109,7 +119,21 @@
 
                     <i class="fa-regular fa-bell"></i>
 
-                    <!-- UNREAD COUNT -->
+
+                    <!--
+                        IMPORTANT:
+
+                        Leave this empty.
+
+                        notification-ui.js will automatically
+                        insert the unread notification count.
+
+                        Example:
+
+                        5
+
+                        will appear inside the red badge.
+                    -->
 
                     <span
                         class="notification-count"
@@ -137,7 +161,9 @@
                     <div class="notification-header">
 
 
-                        <!-- TITLE -->
+                        <!--==================================================
+                                TITLE
+                        ===================================================-->
 
                         <div class="notification-title">
 
@@ -156,7 +182,12 @@
                         <div class="notification-actions">
 
 
-                            <!-- UNREAD COUNT -->
+                            <!--==================================================
+                                DROPDOWN COUNT
+
+                                This is separate from the red
+                                notification badge on the bell.
+                            ===================================================-->
 
                             <span
                                 class="notification-count"
@@ -167,7 +198,6 @@
 
                             <!--==================================================
                                 DELETE ALL
-                                Hidden automatically for guests
                             ===================================================-->
 
                             <button
@@ -188,7 +218,7 @@
 
 
                             <!--==================================================
-                                    CLOSE
+                                CLOSE
                             ===================================================-->
 
                             <button
@@ -201,9 +231,7 @@
 
                             </button>
 
-
                         </div>
-
 
                     </div>
 
@@ -212,18 +240,14 @@
                     <!--==================================================
                             NOTIFICATION LIST
 
-                            DO NOT PUT STATIC NOTIFICATIONS HERE.
-
                             notification-ui.js controls this area.
 
-                            GUEST:
-                            Please sign in to continue
+                            It will automatically display:
 
-                            LOGGED IN:
-                            Real notifications
-
-                            NO NOTIFICATIONS:
-                            You're all caught up.
+                            • Real notifications
+                            • Guest message
+                            • Empty state
+                            • Notification timestamps
                     ===================================================-->
 
                     <div
@@ -257,7 +281,9 @@
                     aria-expanded="false">
 
 
-                    <!-- AVATAR -->
+                    <!--==================================================
+                            PROFILE AVATAR
+                    ===================================================-->
 
                     <div class="profile-avatar">
 
@@ -271,7 +297,9 @@
 
 
 
-                    <!-- USER INFO -->
+                    <!--==================================================
+                            USER INFORMATION
+                    ===================================================-->
 
                     <div class="profile-info">
 
@@ -283,7 +311,9 @@
 
 
 
-                    <!-- CHEVRON -->
+                    <!--==================================================
+                            CHEVRON
+                    ===================================================-->
 
                     <div class="profile-arrow">
 
@@ -300,7 +330,7 @@
 
 
                 <!--==================================================
-                            PROFILE DROPDOWN
+                        PROFILE DROPDOWN
                 ===================================================-->
 
                 <div
@@ -345,6 +375,8 @@
                     </div>
 
 
+
+                    <!-- DIVIDER -->
 
                     <div class="dropdown-divider"></div>
 
@@ -428,6 +460,8 @@
 
 
 
+                    <!-- DIVIDER -->
+
                     <div class="dropdown-divider"></div>
 
 
@@ -438,6 +472,8 @@
 
                     <div class="quick-access-wrapper">
 
+
+                        <!-- QUICK ACCESS BUTTON -->
 
                         <a
                             href="#"
@@ -455,7 +491,9 @@
 
 
 
-                        <!-- QUICK ACCESS SUBMENU -->
+                        <!--==================================================
+                                QUICK ACCESS SUBMENU
+                        ===================================================-->
 
                         <div class="quick-menu">
 
@@ -473,6 +511,7 @@
                             </a>
 
 
+
                             <!-- COLD CHAIN -->
 
                             <a href="#">
@@ -484,6 +523,7 @@
                                 </span>
 
                             </a>
+
 
 
                             <!-- AI ASSISTANT -->
@@ -499,6 +539,7 @@
                             </a>
 
 
+
                             <!-- SHIPMENT MAP -->
 
                             <a href="#">
@@ -512,6 +553,7 @@
                             </a>
 
 
+
                             <!-- SUPPORT -->
 
                             <a href="#">
@@ -523,6 +565,7 @@
                                 </span>
 
                             </a>
+
 
 
                             <!-- ACCOUNT SETTINGS -->
@@ -544,6 +587,8 @@
                     </div>
 
 
+
+                    <!-- DIVIDER -->
 
                     <div class="dropdown-divider"></div>
 
@@ -605,10 +650,12 @@
 
                 </div>
 
+
             </div>
 
 
         </div>
+
 
     </nav>
 
@@ -625,8 +672,12 @@
     class="welcome-toast">
 
 
+    <!-- ICON -->
+
     <i class="fa-solid fa-hand-sparkles"></i>
 
+
+    <!-- CONTENT -->
 
     <div>
 
@@ -642,4 +693,3 @@
 
 
 </div>
-

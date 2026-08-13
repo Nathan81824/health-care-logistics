@@ -166,8 +166,6 @@ backdrop-filter:blur(25px);
     height:170px;
 
     object-fit:contain;
-        filter:
-    drop-shadow(0 0 8px rgba(32,184,255,.25));
 
 }
 

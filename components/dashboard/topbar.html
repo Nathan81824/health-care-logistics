@@ -1,31 +1,42 @@
-<!-- ==========================================
-                DASHBOARD TOPBAR
-========================================== -->
+<!--==================================================
+                    DASHBOARD TOPBAR
+===================================================-->
 
-<header class="dashboard-topbar" data-reveal>
+<header
+    class="dashboard-topbar"
+    data-reveal>
 
 
-    <!-- ==========================================
-                    LEFT
-    ========================================== -->
+    <!--==================================================
+                        LEFT SIDE
+    ===================================================-->
 
     <div class="topbar-left">
 
 
-        <!-- Mobile Menu -->
+        <!--==================================================
+                        MOBILE MENU
+        ===================================================-->
 
         <button
+            type="button"
             class="menu-toggle"
-            id="menuToggle">
+            id="menuToggle"
+            aria-label="Open dashboard menu"
+            aria-expanded="false">
 
             <i class="fa-solid fa-bars"></i>
 
         </button>
 
 
-        <!-- Page Title -->
+
+        <!--==================================================
+                        PAGE TITLE
+        ===================================================-->
 
         <div class="page-title">
+
 
             <span class="breadcrumb">
 
@@ -33,11 +44,13 @@
 
             </span>
 
+
             <h2>
 
                 Healthcare Logistics Dashboard
 
             </h2>
+
 
         </div>
 
@@ -46,89 +59,257 @@
 
 
 
-
-
-
-
-    <!-- ==========================================
-                    RIGHT
-    ========================================== -->
+    <!--==================================================
+                        RIGHT SIDE
+    ===================================================-->
 
     <div class="topbar-right">
 
 
+        <!--==================================================
+                            SEARCH
+        ===================================================-->
 
-        <!-- SEARCH -->
+        <div class="topbar-search">
 
-        <div class="search-box">
 
             <i class="fa-solid fa-magnifying-glass"></i>
 
+
             <input
-                type="text"
-                placeholder="Search shipments...">
+                type="search"
+                id="dashboardSearch"
+                placeholder="Search shipments..."
+                aria-label="Search shipments">
+
 
         </div>
 
 
 
+        <!--==================================================
+                        NOTIFICATIONS
+        ===================================================-->
+
+        <div
+            class="notification-wrapper">
 
 
-        <!-- NOTIFICATIONS -->
+            <!--==================================================
+                        NOTIFICATION BUTTON
+            ===================================================-->
 
-        <button class="topbar-btn">
-
-            <i class="fa-regular fa-bell"></i>
-
-            <span class="notification-dot"></span>
-
-        </button>
-
-
+            <button
+                type="button"
+                class="topbar-btn notification-btn"
+                aria-label="Open notifications"
+                aria-expanded="false">
 
 
-
-        <!-- DARK MODE -->
-
-        <button
-            class="topbar-btn"
-            id="themeToggle">
-
-            <i class="fa-solid fa-moon"></i>
-
-        </button>
+                <i class="fa-regular fa-bell"></i>
 
 
+                <!-- UNREAD DOT -->
+
+                <span
+                    class="notification-dot"
+                    aria-hidden="true">
+                </span>
 
 
+                <!-- UNREAD COUNT -->
 
-        <!-- PROFILE -->
+                <span
+                    class="notification-count"
+                    aria-hidden="true">
+                </span>
 
-        <div class="profile">
 
-
-
-            <button class="profile-card">
+            </button>
 
 
 
-                <div
-                    class="profile-avatar"
-                    id="topbarInitial">
+            <!--==================================================
+                    NOTIFICATION DROPDOWN
+            ===================================================-->
 
-                    U
+            <div
+                class="notification-dropdown"
+                id="notificationDropdown"
+                aria-hidden="true">
+
+
+                <!--==================================================
+                        NOTIFICATION HEADER
+                ===================================================-->
+
+                <div class="notification-header">
+
+
+                    <!-- TITLE -->
+
+                    <div class="notification-title">
+
+
+                        <h4>
+
+                            Notifications
+
+                        </h4>
+
+
+                    </div>
+
+
+
+                    <!--==================================================
+                            ACTIONS
+                    ===================================================-->
+
+                    <div class="notification-actions">
+
+
+                        <!-- UNREAD COUNT -->
+
+                        <span
+                            class="notification-count"
+                            aria-label="Unread notifications">
+                        </span>
+
+
+
+                        <!-- DELETE ALL -->
+
+                        <button
+                            type="button"
+                            class="delete-all-notifications"
+                            id="deleteAllNotifications"
+                            title="Delete all notifications"
+                            aria-label="Delete all notifications">
+
+
+                            <i class="fa-solid fa-trash"></i>
+
+
+                            <span>
+
+                                Delete All
+
+                            </span>
+
+
+                        </button>
+
+
+
+                        <!-- CLOSE -->
+
+                        <button
+                            type="button"
+                            class="close-notification"
+                            title="Close notifications"
+                            aria-label="Close notifications">
+
+
+                            <i class="fa-solid fa-xmark"></i>
+
+
+                        </button>
+
+
+                    </div>
+
 
                 </div>
 
 
 
+                <!--==================================================
+                        NOTIFICATION LIST
+
+                        notification-ui.js controls this.
+                ===================================================-->
+
+                <div
+                    id="notificationList"
+                    class="notification-list">
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!--==================================================
+                        THEME TOGGLE
+        ===================================================-->
+
+        <button
+            type="button"
+            class="topbar-btn theme-toggle"
+            title="Toggle Theme"
+            aria-label="Toggle dark and light mode">
+
+
+            <i class="fa-solid fa-moon"></i>
+
+
+        </button>
+
+
+
+        <!--==================================================
+                        PROFILE
+        ===================================================-->
+
+        <div class="profile">
+
+
+            <!--==================================================
+                        PROFILE CARD
+            ===================================================-->
+
+            <button
+                type="button"
+                class="profile-card"
+                id="profileCard"
+                aria-label="Open profile menu"
+                aria-expanded="false">
+
+
+                <!-- AVATAR -->
+
+                <div class="profile-avatar">
+
+
+                    <span id="topbarInitial">
+
+                        G
+
+                    </span>
+
+
+                    <span class="online-status"></span>
+
+
+                </div>
+
+
+
+                <!-- USER INFORMATION -->
+
                 <div class="profile-info">
+
 
                     <h4 id="topbarUsername">
 
-                        User
+                        Guest
 
                     </h4>
+
 
                     <span>
 
@@ -136,88 +317,408 @@
 
                     </span>
 
+
                 </div>
 
 
 
-                <i class="fa-solid fa-chevron-down"></i>
+                <!-- CHEVRON -->
 
+                <div class="profile-arrow">
+
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+
+                </div>
 
 
             </button>
 
 
 
+            <!--==================================================
+                        PROFILE DROPDOWN
+            ===================================================-->
+
+            <div
+                class="profile-dropdown"
+                id="profileDropdown">
 
 
-            <!-- DROPDOWN -->
+                <!--==================================================
+                        USER INFORMATION
+                ===================================================-->
 
-            <div class="profile-dropdown">
+                <div class="dropdown-user">
+
+
+                    <!-- AVATAR -->
+
+                    <div class="dropdown-avatar">
+
+
+                        <span id="topbarDropdownInitial">
+
+                            G
+
+                        </span>
+
+
+                    </div>
 
 
 
-                <a href="#">
+                    <!-- USER DETAILS -->
+
+                    <div class="dropdown-user-details">
+
+
+                        <h4 id="topbarDropdownUsername">
+
+                            Guest
+
+                        </h4>
+
+
+                        <p id="topbarEmail">
+
+                            Please sign in
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DIVIDER -->
+
+                <div class="dropdown-divider"></div>
+
+
+
+                <!--==================================================
+                        PROFILE
+                ===================================================-->
+
+                <a
+                    href="#"
+                    id="topbarProfileLink">
 
 
                     <i class="fa-regular fa-user"></i>
 
-                    My Profile
+
+                    <span>
+
+                        My Profile
+
+                    </span>
 
 
                 </a>
 
 
 
+                <!--==================================================
+                        DASHBOARD
+                ===================================================-->
+
+                <a
+                    href="../pages/dashboard.html"
+                    id="topbarDashboardLink">
 
 
-                <a href="#">
+                    <i class="fa-solid fa-table-columns"></i>
+
+
+                    <span>
+
+                        Dashboard
+
+                    </span>
+
+
+                </a>
+
+
+
+                <!--==================================================
+                        SHIPMENTS
+                ===================================================-->
+
+                <a
+                    href="#"
+                    id="topbarShipmentsLink">
+
+
+                    <i class="fa-solid fa-box"></i>
+
+
+                    <span>
+
+                        My Shipments
+
+                    </span>
+
+
+                </a>
+
+
+
+                <!--==================================================
+                        ORDER HISTORY
+                ===================================================-->
+
+                <a
+                    href="#"
+                    id="topbarHistoryLink">
+
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+
+                    <span>
+
+                        Order History
+
+                    </span>
+
+
+                </a>
+
+
+
+                <!-- DIVIDER -->
+
+                <div class="dropdown-divider"></div>
+
+
+
+                <!--==================================================
+                        QUICK ACCESS
+                ===================================================-->
+
+                <div class="quick-access-wrapper">
+
+
+                    <!-- QUICK ACCESS BUTTON -->
+
+                    <button
+                        type="button"
+                        class="quick-access-btn"
+                        id="quickAccessBtn">
+
+
+                        <i class="fa-solid fa-bolt"></i>
+
+
+                        <span>
+
+                            Quick Access
+
+                        </span>
+
+
+                        <i class="fa-solid fa-chevron-right"></i>
+
+
+                    </button>
+
+
+
+                    <!--==================================================
+                            QUICK ACCESS MENU
+                    ===================================================-->
+
+                    <div class="quick-menu">
+
+
+                        <!-- LIVE TRACKING -->
+
+                        <a href="#">
+
+                            <i class="fa-solid fa-satellite-dish"></i>
+
+                            <span>
+
+                                Live Tracking
+
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- COLD CHAIN -->
+
+                        <a href="#">
+
+                            <i class="fa-solid fa-temperature-half"></i>
+
+                            <span>
+
+                                Cold Chain Monitor
+
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- AI ASSISTANT -->
+
+                        <a href="#">
+
+                            <i class="fa-solid fa-robot"></i>
+
+                            <span>
+
+                                AI Assistant
+
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- SHIPMENT MAP -->
+
+                        <a href="#">
+
+                            <i class="fa-solid fa-map-location-dot"></i>
+
+                            <span>
+
+                                Shipment Map
+
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- SUPPORT -->
+
+                        <a href="#">
+
+                            <i class="fa-solid fa-headset"></i>
+
+                            <span>
+
+                                Support Center
+
+                            </span>
+
+                        </a>
+
+
+
+                        <!-- ACCOUNT SETTINGS -->
+
+                        <a href="#">
+
+                            <i class="fa-solid fa-user-gear"></i>
+
+                            <span>
+
+                                Account Settings
+
+                            </span>
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DIVIDER -->
+
+                <div class="dropdown-divider"></div>
+
+
+
+                <!--==================================================
+                        SETTINGS
+                ===================================================-->
+
+                <a
+                    href="#"
+                    id="topbarSettingsLink">
 
 
                     <i class="fa-solid fa-gear"></i>
 
-                    Settings
+
+                    <span>
+
+                        Settings
+
+                    </span>
 
 
                 </a>
 
 
 
-
-
-                <a href="../pages/home.html">
-
-
-                    <i class="fa-solid fa-house"></i>
-
-                    Home
-
-
-                </a>
-
-
-
-
+                <!--==================================================
+                        HELP
+                ===================================================-->
 
                 <a
                     href="#"
-                    id="logoutTopbar">
+                    id="topbarHelpLink">
+
+
+                    <i class="fa-solid fa-circle-question"></i>
+
+
+                    <span>
+
+                        Help Center
+
+                    </span>
+
+
+                </a>
+
+
+
+                <!--==================================================
+                        LOGOUT
+                ===================================================-->
+
+                <a
+                    href="#"
+                    id="logoutTopbar"
+                    class="logout-link">
 
 
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
 
-                    Logout
+
+                    <span>
+
+                        Logout
+
+                    </span>
 
 
                 </a>
-
 
 
             </div>
 
 
-
         </div>
-
 
 
     </div>

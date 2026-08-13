@@ -1,0 +1,604 @@
+<!-- ==========================================
+        DASHBOARD OVERVIEW
+========================================== -->
+
+<main class="dashboard-main">
+
+
+    <!-- ==========================================
+            DASHBOARD HEADER
+    =========================================== -->
+
+    <section class="dashboard-header">
+
+        <div class="dashboard-heading">
+
+            <span class="dashboard-tag">
+                Healthcare Logistics
+            </span>
+
+            <h1>
+                Dashboard Overview
+            </h1>
+
+            <p>
+                Monitor your healthcare shipments, deliveries,
+                and logistics activity from one place.
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-date">
+
+            <i class="fa-regular fa-calendar"></i>
+
+            <span id="dashboardDate">
+                August 12, 2026
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+            STATISTICS
+    =========================================== -->
+
+    <section class="dashboard-stats">
+
+
+        <!-- TOTAL SHIPMENTS -->
+
+        <div class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-boxes-stacked"></i>
+                </div>
+
+                <span class="stat-status positive">
+                    +12.5%
+                </span>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span>
+                    Total Shipments
+                </span>
+
+                <h2>
+                    1,284
+                </h2>
+
+                <p>
+                    Compared with last month
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- IN TRANSIT -->
+
+        <div class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+
+                <span class="stat-status positive">
+                    +8.2%
+                </span>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span>
+                    In Transit
+                </span>
+
+                <h2>
+                    326
+                </h2>
+
+                <p>
+                    Currently on the road
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DELIVERED -->
+
+        <div class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <span class="stat-status positive">
+                    +15.4%
+                </span>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span>
+                    Delivered
+                </span>
+
+                <h2>
+                    842
+                </h2>
+
+                <p>
+                    Successfully delivered
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PENDING -->
+
+        <div class="stat-card">
+
+            <div class="stat-card-top">
+
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <span class="stat-status warning">
+                    4.8%
+                </span>
+
+            </div>
+
+
+            <div class="stat-content">
+
+                <span>
+                    Pending
+                </span>
+
+                <h2>
+                    116
+                </h2>
+
+                <p>
+                    Awaiting processing
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==========================================
+            DASHBOARD GRID
+    =========================================== -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- ==========================================
+                SHIPMENT OVERVIEW
+        =========================================== -->
+
+        <div class="dashboard-card shipment-overview">
+
+            <div class="card-header">
+
+                <div>
+
+                    <span class="card-label">
+                        Performance
+                    </span>
+
+                    <h3>
+                        Shipment Overview
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="card-menu"
+                    aria-label="Shipment overview options">
+
+                    <i class="fa-solid fa-ellipsis"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- OVERVIEW SUMMARY -->
+
+            <div class="overview-summary">
+
+
+                <div class="overview-item">
+
+                    <span class="overview-dot delivered"></span>
+
+                    <div>
+                        <strong>842</strong>
+                        <small>Delivered</small>
+                    </div>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <span class="overview-dot transit"></span>
+
+                    <div>
+                        <strong>326</strong>
+                        <small>In Transit</small>
+                    </div>
+
+                </div>
+
+
+                <div class="overview-item">
+
+                    <span class="overview-dot pending"></span>
+
+                    <div>
+                        <strong>116</strong>
+                        <small>Pending</small>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- CHART PLACEHOLDER -->
+
+            <div class="shipment-chart">
+
+                <div class="chart-line">
+
+                    <span style="height:45%;"></span>
+                    <span style="height:62%;"></span>
+                    <span style="height:50%;"></span>
+                    <span style="height:75%;"></span>
+                    <span style="height:68%;"></span>
+                    <span style="height:88%;"></span>
+                    <span style="height:80%;"></span>
+
+                </div>
+
+
+                <div class="chart-days">
+
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                    <span>Sun</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+                RECENT ACTIVITY
+        =========================================== -->
+
+        <div class="dashboard-card recent-activity">
+
+            <div class="card-header">
+
+                <div>
+
+                    <span class="card-label">
+                        Latest Updates
+                    </span>
+
+                    <h3>
+                        Recent Activity
+                    </h3>
+
+                </div>
+
+
+                <a href="#" class="view-all">
+                    View All
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div class="activity-list">
+
+
+                <!-- ACTIVITY 1 -->
+
+                <div class="activity-item">
+
+                    <div class="activity-icon blue">
+                        <i class="fa-solid fa-truck"></i>
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h4>
+                            Shipment in transit
+                        </h4>
+
+                        <p>
+                            Shipment #IDK1024 is on its way
+                            to Lagos.
+                        </p>
+
+                        <span>
+                            12 minutes ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTIVITY 2 -->
+
+                <div class="activity-item">
+
+                    <div class="activity-icon green">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h4>
+                            Delivery completed
+                        </h4>
+
+                        <p>
+                            Shipment #IDK1021 was successfully
+                            delivered.
+                        </p>
+
+                        <span>
+                            45 minutes ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTIVITY 3 -->
+
+                <div class="activity-item">
+
+                    <div class="activity-icon orange">
+                        <i class="fa-solid fa-box"></i>
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h4>
+                            New shipment created
+                        </h4>
+
+                        <p>
+                            Shipment #IDK1027 has been created.
+                        </p>
+
+                        <span>
+                            1 hour ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTIVITY 4 -->
+
+                <div class="activity-item">
+
+                    <div class="activity-icon purple">
+                        <i class="fa-solid fa-temperature-half"></i>
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h4>
+                            Cold-chain shipment
+                        </h4>
+
+                        <p>
+                            Temperature monitoring is active
+                            for shipment #IDK1026.
+                        </p>
+
+                        <span>
+                            2 hours ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==========================================
+            QUICK ACTIONS
+    =========================================== -->
+
+    <section class="quick-actions">
+
+        <div class="quick-actions-header">
+
+            <div>
+
+                <span class="card-label">
+                    Get Started
+                </span>
+
+                <h3>
+                    Quick Actions
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="quick-actions-grid">
+
+
+            <a href="#" class="quick-action-card">
+
+                <div class="quick-action-icon blue">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        Track Shipment
+                    </h4>
+
+                    <p>
+                        Check your shipment status
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+            </a>
+
+
+
+            <a href="#" class="quick-action-card">
+
+                <div class="quick-action-icon green">
+                    <i class="fa-solid fa-truck-ramp-box"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        Request Pickup
+                    </h4>
+
+                    <p>
+                        Schedule a new pickup
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+            </a>
+
+
+
+            <a href="#" class="quick-action-card">
+
+                <div class="quick-action-icon purple">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        View Reports
+                    </h4>
+
+                    <p>
+                        Review logistics reports
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+            </a>
+
+
+
+            <a href="#" class="quick-action-card">
+
+                <div class="quick-action-icon orange">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+
+                <div>
+
+                    <h4>
+                        Contact Support
+                    </h4>
+
+                    <p>
+                        Get help from our team
+                    </p>
+
+                </div>
+
+                <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+</main>

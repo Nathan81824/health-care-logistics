@@ -1,23 +1,62 @@
-/*=====================================*
-        NAVBAR
-*=====================================*/
+/*==================================================*
+                    NAVBAR JS
+*
+* PURPOSE:
+* - Load navbar user
+* - Profile dropdown
+* - Mobile menu
+* - Theme toggle
+* - Notification UI
+* - Authentication visibility
+* - Active navigation link
+* - Modern logout popup
+* - Welcome toast
+*
+* IMPORTANT:
+* Dashboard topbar is handled by topbar.js.
+*==================================================*/
+
+
+/*==================================================*
+                    INITIALIZE NAVBAR
+*==================================================*/
 
 function initNavbar() {
 
     console.log("✅ Navbar initialized");
 
+
+    /*===============================================
+                    USER
+    ===============================================*/
+
     loadNavbarUser();
+
+
+    /*===============================================
+                    PROFILE
+    ===============================================*/
 
     setupProfileDropdown();
 
+
+    /*===============================================
+                    MOBILE MENU
+    ===============================================*/
+
     setupMobileMenu();
+
+
+    /*===============================================
+                    THEME
+    ===============================================*/
 
     setupThemeToggle();
 
-    /*
-        Notification UI is handled by
-        notification-ui.js.
-    */
+
+    /*===============================================
+                    NOTIFICATIONS
+    ===============================================*/
 
     if (
         typeof setupNotificationUI ===
@@ -28,26 +67,42 @@ function initNavbar() {
 
     }
 
-    setupLogout();
+
+    /*===============================================
+                    LOGOUT
+    ===============================================*/
+
+    setupNavbarLogout();
+
+
+    /*===============================================
+                    AUTH UI
+    ===============================================*/
 
     updateNavbarAuth();
 
+
+    /*===============================================
+                    ACTIVE LINK
+    ===============================================*/
+
     setActiveLink();
+
+
+    /*===============================================
+                    WELCOME TOAST
+    ===============================================*/
 
     showWelcomeToast();
 
 }
 
 
-/*=====================================*
-        LOAD NAVBAR USER
-*=====================================*/
+/*==================================================*
+                LOAD NAVBAR USER
+*==================================================*/
 
 function loadNavbarUser() {
-
-    /*
-        Get user safely.
-    */
 
     let user = null;
 
@@ -57,7 +112,19 @@ function loadNavbarUser() {
         "function"
     ) {
 
-        user = getUser();
+        try {
+
+            user = getUser();
+
+        }
+        catch (error) {
+
+            console.error(
+                "❌ Failed to get navbar user:",
+                error
+            );
+
+        }
 
     }
 
@@ -67,20 +134,24 @@ function loadNavbarUser() {
             "navUsername"
         );
 
+
     const avatar =
         document.getElementById(
             "navUserInitial"
         );
+
 
     const dropdownUsername =
         document.getElementById(
             "dropdownUsername"
         );
 
+
     const dropdownEmail =
         document.getElementById(
             "dropdownEmail"
         );
+
 
     const dropdownAvatar =
         document.getElementById(
@@ -88,9 +159,9 @@ function loadNavbarUser() {
         );
 
 
-    /*=================================
-            GUEST
-    =================================*/
+    /*===============================================
+                        GUEST
+    ===============================================*/
 
     if (!user) {
 
@@ -139,23 +210,35 @@ function loadNavbarUser() {
     }
 
 
-    /*=================================
-            LOGGED IN USER
-    =================================*/
+    /*===============================================
+                    LOGGED IN
+    ===============================================*/
 
     const name =
-        user.name || "User";
+        String(
+            user.name ||
+            "User"
+        );
 
 
     const email =
-        user.email || "";
+        String(
+            user.email ||
+            ""
+        );
+
+
+    const initial =
+        name
+            .charAt(0)
+            .toUpperCase();
 
 
     if (username) {
 
         username.textContent =
-            name.length > 9
-                ? name.slice(0, 9) + "..."
+            name.length > 12
+                ? name.slice(0, 12) + "..."
                 : name;
 
     }
@@ -164,9 +247,7 @@ function loadNavbarUser() {
     if (avatar) {
 
         avatar.textContent =
-            name
-                .charAt(0)
-                .toUpperCase();
+            initial;
 
     }
 
@@ -190,18 +271,16 @@ function loadNavbarUser() {
     if (dropdownAvatar) {
 
         dropdownAvatar.textContent =
-            name
-                .charAt(0)
-                .toUpperCase();
+            initial;
 
     }
 
 }
 
 
-/*=====================================*
-        WELCOME TOAST
-*=====================================*/
+/*==================================================*
+                    WELCOME TOAST
+*==================================================*/
 
 function showWelcomeToast() {
 
@@ -213,7 +292,19 @@ function showWelcomeToast() {
         "function"
     ) {
 
-        user = getUser();
+        try {
+
+            user = getUser();
+
+        }
+        catch (error) {
+
+            console.error(
+                "❌ Failed to load welcome user:",
+                error
+            );
+
+        }
 
     }
 
@@ -223,20 +314,18 @@ function showWelcomeToast() {
             "welcomeToast"
         );
 
+
     const title =
         document.getElementById(
             "welcomeTitle"
         );
+
 
     const text =
         document.getElementById(
             "welcomeText"
         );
 
-
-    /*
-        Do not show toast for guests.
-    */
 
     if (
         !toast ||
@@ -251,7 +340,8 @@ function showWelcomeToast() {
 
 
     const name =
-        user.name || "User";
+        user.name ||
+        "User";
 
 
     title.textContent =
@@ -281,9 +371,9 @@ function showWelcomeToast() {
 }
 
 
-/*=====================================*
-        PROFILE DROPDOWN
-*=====================================*/
+/*==================================================*
+                PROFILE DROPDOWN
+*==================================================*/
 
 function setupProfileDropdown() {
 
@@ -299,33 +389,15 @@ function setupProfileDropdown() {
         );
 
 
-    const chevron =
-        document.getElementById(
-            "profileChevron"
-        );
-
-
-    /*=================================
-            CHECK ELEMENTS
-    =================================*/
-
     if (
         !profileCard ||
         !profileDropdown
     ) {
 
-        console.warn(
-            "⚠️ Profile elements not found"
-        );
-
         return;
 
     }
 
-
-    /*
-        Find profile wrapper.
-    */
 
     const profile =
         profileCard.closest(
@@ -335,18 +407,16 @@ function setupProfileDropdown() {
 
     if (!profile) {
 
-        console.warn(
-            "⚠️ .profile wrapper not found"
-        );
-
         return;
 
     }
 
 
-    /*
-        Prevent duplicate listeners.
-    */
+    const chevron =
+        document.getElementById(
+            "profileChevron"
+        );
+
 
     if (
         profileCard.dataset.profileReady ===
@@ -362,9 +432,9 @@ function setupProfileDropdown() {
         "true";
 
 
-    /*=================================
-            OPEN / CLOSE
-    =================================*/
+    /*===============================================
+                    OPEN / CLOSE
+    ===============================================*/
 
     profileCard.addEventListener(
         "click",
@@ -381,6 +451,12 @@ function setupProfileDropdown() {
                 );
 
 
+            profileCard.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+
             if (chevron) {
 
                 chevron.style.transform =
@@ -390,21 +466,13 @@ function setupProfileDropdown() {
 
             }
 
-
-            profileCard.setAttribute(
-                "aria-expanded",
-                isOpen
-                    ? "true"
-                    : "false"
-            );
-
         }
     );
 
 
-    /*=================================
-        DON'T CLOSE INSIDE DROPDOWN
-    =================================*/
+    /*===============================================
+                    INSIDE CLICK
+    ===============================================*/
 
     profileDropdown.addEventListener(
         "click",
@@ -416,9 +484,9 @@ function setupProfileDropdown() {
     );
 
 
-    /*=================================
-            CLOSE OUTSIDE
-    =================================*/
+    /*===============================================
+                    OUTSIDE CLICK
+    ===============================================*/
 
     document.addEventListener(
         "click",
@@ -430,7 +498,7 @@ function setupProfileDropdown() {
                 )
             ) {
 
-                closeProfileDropdown();
+                closeProfile();
 
             }
 
@@ -438,19 +506,20 @@ function setupProfileDropdown() {
     );
 
 
-    /*=================================
-            CLOSE WITH ESC
-    =================================*/
+    /*===============================================
+                        ESCAPE
+    ===============================================*/
 
     document.addEventListener(
         "keydown",
         function (event) {
 
             if (
-                event.key === "Escape"
+                event.key ===
+                "Escape"
             ) {
 
-                closeProfileDropdown();
+                closeProfile();
 
             }
 
@@ -458,7 +527,7 @@ function setupProfileDropdown() {
     );
 
 
-    function closeProfileDropdown() {
+    function closeProfile() {
 
         profile.classList.remove(
             "active"
@@ -480,17 +549,12 @@ function setupProfileDropdown() {
 
     }
 
-
-    console.log(
-        "✅ Profile dropdown initialized"
-    );
-
 }
 
 
-/*=====================================*
-        MOBILE MENU
-*=====================================*/
+/*==================================================*
+                    MOBILE MENU
+*==================================================*/
 
 function setupMobileMenu() {
 
@@ -516,10 +580,6 @@ function setupMobileMenu() {
     }
 
 
-    /*
-        Prevent duplicate listeners.
-    */
-
     if (
         menuBtn.dataset.mobileReady ===
         "true"
@@ -533,10 +593,6 @@ function setupMobileMenu() {
     menuBtn.dataset.mobileReady =
         "true";
 
-
-    /*=================================
-            OPEN / CLOSE
-    =================================*/
 
     menuBtn.addEventListener(
         "click",
@@ -560,16 +616,10 @@ function setupMobileMenu() {
     );
 
 
-    /*=================================
-            CLOSE AFTER LINK CLICK
-    =================================*/
-
-    document
-        .querySelectorAll(
-            ".nav-links a"
-        )
+    navLinks
+        .querySelectorAll("a")
         .forEach(
-            link => {
+            function (link) {
 
                 link.addEventListener(
                     "click",
@@ -593,9 +643,9 @@ function setupMobileMenu() {
 }
 
 
-/*=====================================*
-        THEME TOGGLE
-*=====================================*/
+/*==================================================*
+                    THEME TOGGLE
+*==================================================*/
 
 function setupThemeToggle() {
 
@@ -611,10 +661,6 @@ function setupThemeToggle() {
 
     }
 
-
-    /*
-        Prevent duplicate listeners.
-    */
 
     if (
         button.dataset.themeReady ===
@@ -636,53 +682,16 @@ function setupThemeToggle() {
         );
 
 
-    /*=================================
-            LOAD SAVED THEME
-    =================================*/
-
     const savedTheme =
         localStorage.getItem(
             "theme"
         );
 
 
-    if (
+    applyTheme(
         savedTheme === "dark"
-    ) {
+    );
 
-        document.body.classList.add(
-            "dark-mode"
-        );
-
-
-        if (icon) {
-
-            icon.className =
-                "fa-solid fa-sun";
-
-        }
-
-    }
-    else {
-
-        document.body.classList.remove(
-            "dark-mode"
-        );
-
-
-        if (icon) {
-
-            icon.className =
-                "fa-solid fa-moon";
-
-        }
-
-    }
-
-
-    /*=================================
-            TOGGLE
-    =================================*/
 
     button.addEventListener(
         "click",
@@ -693,65 +702,71 @@ function setupThemeToggle() {
             event.stopPropagation();
 
 
-            document.body.classList.toggle(
-                "dark-mode"
-            );
-
-
             const dark =
-                document.body.classList.contains(
+                !document.body.classList.contains(
                     "dark-mode"
                 );
 
 
-            localStorage.setItem(
-                "theme",
+            applyTheme(
                 dark
-                    ? "dark"
-                    : "light"
             );
-
-
-            if (icon) {
-
-                icon.className =
-                    dark
-                        ? "fa-solid fa-sun"
-                        : "fa-solid fa-moon";
-
-            }
 
         }
     );
 
+
+    function applyTheme(dark) {
+
+        document.body.classList.toggle(
+            "dark-mode",
+            dark
+        );
+
+
+        localStorage.setItem(
+            "theme",
+            dark
+                ? "dark"
+                : "light"
+        );
+
+
+        if (icon) {
+
+            icon.className =
+                dark
+                    ? "fa-solid fa-sun"
+                    : "fa-solid fa-moon";
+
+        }
+
+    }
+
 }
 
 
-/*=====================================*
-        LOGOUT
-*=====================================*/
+/*==================================================*
+                    LOGOUT
+*==================================================*/
 
-function setupLogout() {
+function setupNavbarLogout() {
 
-    const logoutBtn =
+    const logout =
         document.getElementById(
             "navLogout"
         );
 
 
-    if (!logoutBtn) {
+    if (!logout) {
 
         return;
 
     }
 
 
-    /*
-        Prevent duplicate listeners.
-    */
-
     if (
-        logoutBtn.dataset.logoutReady ===
+        logout.dataset.logoutReady ===
         "true"
     ) {
 
@@ -760,11 +775,11 @@ function setupLogout() {
     }
 
 
-    logoutBtn.dataset.logoutReady =
+    logout.dataset.logoutReady =
         "true";
 
 
-    logoutBtn.addEventListener(
+    logout.addEventListener(
         "click",
         function (event) {
 
@@ -773,52 +788,7 @@ function setupLogout() {
             event.stopPropagation();
 
 
-            const loggedIn =
-                localStorage.getItem(
-                    "isLoggedIn"
-                ) === "true";
-
-
-            /*=================================
-                    GUEST
-            =================================*/
-
-            if (!loggedIn) {
-
-                if (
-                    typeof showError ===
-                    "function"
-                ) {
-
-                    showError(
-                        "You're not logged in."
-                    );
-
-                }
-
-
-                return;
-
-            }
-
-
-            /*=================================
-                    SHOW LOGOUT POPUP
-            =================================*/
-
-            const popup =
-                document.getElementById(
-                    "logoutPopup"
-                );
-
-
-            if (popup) {
-
-                popup.classList.add(
-                    "show"
-                );
-
-            }
+            openModernLogout();
 
         }
     );
@@ -826,9 +796,44 @@ function setupLogout() {
 }
 
 
-/*=====================================*
-        UPDATE NAVBAR AUTH
-*=====================================*/
+/*==================================================*
+                MODERN LOGOUT POPUP
+*==================================================*/
+
+function openModernLogout() {
+
+    const popup =
+        document.getElementById(
+            "logoutPopup"
+        );
+
+
+    if (!popup) {
+
+        console.warn(
+            "⚠️ Logout popup not found"
+        );
+
+        return;
+
+    }
+
+
+    popup.classList.add(
+        "show"
+    );
+
+
+    document.body.classList.add(
+        "logout-popup-open"
+    );
+
+}
+
+
+/*==================================================*
+                UPDATE AUTH UI
+*==================================================*/
 
 function updateNavbarAuth() {
 
@@ -838,86 +843,61 @@ function updateNavbarAuth() {
         ) === "true";
 
 
-    /*=================================
-            GUEST LINKS
-    =================================*/
-
-    document
-        .getElementById(
-            "loginLink"
-        )
-        ?.classList.toggle(
-            "hidden",
-            loggedIn
-        );
+    const guestLinks = [
+        "loginLink",
+        "createAccountLink"
+    ];
 
 
-    document
-        .getElementById(
-            "createAccountLink"
-        )
-        ?.classList.toggle(
-            "hidden",
-            loggedIn
-        );
+    const userLinks = [
+        "dashboardLink",
+        "shipmentsLink",
+        "historyLink",
+        "navLogout"
+    ];
 
 
-    /*=================================
-            USER LINKS
-    =================================*/
+    guestLinks.forEach(
+        function (id) {
 
-    document
-        .getElementById(
-            "dashboardLink"
-        )
-        ?.classList.toggle(
-            "hidden",
-            !loggedIn
-        );
+            document
+                .getElementById(id)
+                ?.classList.toggle(
+                    "hidden",
+                    loggedIn
+                );
 
-
-    document
-        .getElementById(
-            "shipmentsLink"
-        )
-        ?.classList.toggle(
-            "hidden",
-            !loggedIn
-        );
+        }
+    );
 
 
-    document
-        .getElementById(
-            "historyLink"
-        )
-        ?.classList.toggle(
-            "hidden",
-            !loggedIn
-        );
+    userLinks.forEach(
+        function (id) {
 
+            document
+                .getElementById(id)
+                ?.classList.toggle(
+                    "hidden",
+                    !loggedIn
+                );
 
-    document
-        .getElementById(
-            "navLogout"
-        )
-        ?.classList.toggle(
-            "hidden",
-            !loggedIn
-        );
+        }
+    );
 
 }
 
 
-/*=====================================*
-        ACTIVE NAV LINK
-*=====================================*/
+/*==================================================*
+                ACTIVE NAV LINK
+*==================================================*/
 
 function setActiveLink() {
 
     const current =
         window.location.pathname
             .split("/")
-            .pop();
+            .pop()
+            .toLowerCase();
 
 
     document
@@ -925,7 +905,7 @@ function setActiveLink() {
             ".nav-links a"
         )
         .forEach(
-            link => {
+            function (link) {
 
                 const href =
                     link.getAttribute(
@@ -939,10 +919,6 @@ function setActiveLink() {
 
                 }
 
-
-                /*
-                    Ignore hash links.
-                */
 
                 if (
                     href === "#" ||
@@ -959,25 +935,14 @@ function setActiveLink() {
                 const page =
                     href
                         .split("/")
-                        .pop();
+                        .pop()
+                        .toLowerCase();
 
 
-                if (
+                link.classList.toggle(
+                    "active",
                     page === current
-                ) {
-
-                    link.classList.add(
-                        "active"
-                    );
-
-                }
-                else {
-
-                    link.classList.remove(
-                        "active"
-                    );
-
-                }
+                );
 
             }
         );
@@ -985,9 +950,14 @@ function setActiveLink() {
 }
 
 
-/*=====================================*
-        EXPORT
-*=====================================*/
+/*==================================================*
+                    EXPORT
+*==================================================*/
 
 window.initNavbar =
     initNavbar;
+
+
+console.log(
+    "✅ Navbar JS loaded"
+);

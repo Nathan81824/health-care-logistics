@@ -1957,43 +1957,6 @@ function loadHipaaPage() {
     }
 
 
-    /*=====================================
-     * FAQ
-     *=====================================*/
-
-    if (
-        document.getElementById(
-            "faq-container"
-        )
-    ) {
-
-        promises.push(
-
-            registerComponent(
-
-                `${basePath}components/contact/faq.html`,
-
-                "faq-container",
-
-                () => {
-
-                    if (
-                        typeof initFAQ ===
-                        "function"
-                    ) {
-
-                        initFAQ();
-
-                    }
-
-                }
-
-            )
-
-        );
-
-    }
-
 
     /*=====================================
      * CTA
@@ -2174,42 +2137,6 @@ function loadContactPage() {
     }
 
 
-    /*=====================================
-     * FAQ
-     *=====================================*/
-
-    if (
-        document.getElementById(
-            "faq-container"
-        )
-    ) {
-
-        promises.push(
-
-            registerComponent(
-
-                `${basePath}components/contact/faq.html`,
-
-                "faq-container",
-
-                () => {
-
-                    if (
-                        typeof initFAQ ===
-                        "function"
-                    ) {
-
-                        initFAQ();
-
-                    }
-
-                }
-
-            )
-
-        );
-
-    }
 
 
     /*=====================================
