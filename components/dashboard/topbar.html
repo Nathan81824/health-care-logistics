@@ -1,21 +1,22 @@
 <!--==================================================
-                    DASHBOARD TOPBAR
+                DASHBOARD TOPBAR
 ===================================================-->
 
 <header
     class="dashboard-topbar"
-    data-reveal>
+    data-reveal
+    id="dashboardTopbar">
 
 
     <!--==================================================
-                        LEFT SIDE
+                    LEFT SIDE
     ===================================================-->
 
     <div class="topbar-left">
 
 
         <!--==================================================
-                        MOBILE MENU
+                    MOBILE MENU
         ===================================================-->
 
         <button
@@ -30,51 +31,39 @@
         </button>
 
 
-
         <!--==================================================
-                        PAGE TITLE
+                    PAGE TITLE
         ===================================================-->
 
         <div class="page-title">
 
-
             <span class="breadcrumb">
-
                 Dashboard
-
             </span>
 
-
             <h2>
-
                 Healthcare Logistics Dashboard
-
             </h2>
 
-
         </div>
-
 
     </div>
 
 
-
     <!--==================================================
-                        RIGHT SIDE
+                    RIGHT SIDE
     ===================================================-->
 
     <div class="topbar-right">
 
 
         <!--==================================================
-                            SEARCH
+                        SEARCH
         ===================================================-->
 
         <div class="topbar-search">
 
-
             <i class="fa-solid fa-magnifying-glass"></i>
-
 
             <input
                 type="search"
@@ -82,29 +71,29 @@
                 placeholder="Search shipments..."
                 aria-label="Search shipments">
 
-
         </div>
 
 
-
         <!--==================================================
-                        NOTIFICATIONS
+                    NOTIFICATION SYSTEM
         ===================================================-->
 
         <div
-            class="notification-wrapper">
+            class="notification-wrapper"
+            id="topbarNotificationWrapper">
 
 
             <!--==================================================
-                        NOTIFICATION BUTTON
+                    NOTIFICATION BUTTON
             ===================================================-->
 
             <button
                 type="button"
                 class="topbar-btn notification-btn"
+                id="topbarNotificationButton"
                 aria-label="Open notifications"
-                aria-expanded="false">
-
+                aria-expanded="false"
+                aria-controls="notificationDropdown">
 
                 <i class="fa-regular fa-bell"></i>
 
@@ -124,9 +113,7 @@
                     aria-hidden="true">
                 </span>
 
-
             </button>
-
 
 
             <!--==================================================
@@ -150,16 +137,11 @@
 
                     <div class="notification-title">
 
-
                         <h4>
-
                             Notifications
-
                         </h4>
 
-
                     </div>
-
 
 
                     <!--==================================================
@@ -177,7 +159,6 @@
                         </span>
 
 
-
                         <!-- DELETE ALL -->
 
                         <button
@@ -187,19 +168,13 @@
                             title="Delete all notifications"
                             aria-label="Delete all notifications">
 
-
                             <i class="fa-solid fa-trash"></i>
 
-
                             <span>
-
                                 Delete All
-
                             </span>
 
-
                         </button>
-
 
 
                         <!-- CLOSE -->
@@ -207,65 +182,65 @@
                         <button
                             type="button"
                             class="close-notification"
+                            id="closeNotification"
                             title="Close notifications"
                             aria-label="Close notifications">
 
-
                             <i class="fa-solid fa-xmark"></i>
-
 
                         </button>
 
-
                     </div>
 
-
                 </div>
-
 
 
                 <!--==================================================
                         NOTIFICATION LIST
 
-                        notification-ui.js controls this.
+                        notification-ui.js renders
+                        notifications here.
                 ===================================================-->
 
                 <div
                     id="notificationList"
                     class="notification-list">
+
+                    <!--
+                        Notifications are inserted
+                        by notification-ui.js.
+                    -->
+
                 </div>
 
-
             </div>
-
 
         </div>
 
 
-
         <!--==================================================
-                        THEME TOGGLE
+                    THEME TOGGLE
         ===================================================-->
 
         <button
             type="button"
             class="topbar-btn theme-toggle"
+            id="topbarThemeToggle"
             title="Toggle Theme"
             aria-label="Toggle dark and light mode">
 
-
             <i class="fa-solid fa-moon"></i>
 
-
         </button>
-
 
 
         <!--==================================================
                         PROFILE
         ===================================================-->
 
-        <div class="profile">
+        <div
+            class="profile"
+            id="topbarProfile">
 
 
             <!--==================================================
@@ -277,73 +252,57 @@
                 class="profile-card"
                 id="profileCard"
                 aria-label="Open profile menu"
-                aria-expanded="false">
+                aria-expanded="false"
+                aria-controls="profileDropdown">
 
 
                 <!-- AVATAR -->
 
                 <div class="profile-avatar">
 
-
                     <span id="topbarInitial">
-
                         G
-
                     </span>
-
 
                     <span class="online-status"></span>
 
-
                 </div>
-
 
 
                 <!-- USER INFORMATION -->
 
                 <div class="profile-info">
 
-
                     <h4 id="topbarUsername">
-
                         Guest
-
                     </h4>
 
-
                     <span>
-
                         Administrator
-
                     </span>
 
-
                 </div>
-
 
 
                 <!-- CHEVRON -->
 
                 <div class="profile-arrow">
 
-
                     <i class="fa-solid fa-chevron-down"></i>
 
-
                 </div>
-
 
             </button>
 
 
-
             <!--==================================================
-                        PROFILE DROPDOWN
+                    PROFILE DROPDOWN
             ===================================================-->
 
             <div
                 class="profile-dropdown"
-                id="profileDropdown">
+                id="profileDropdown"
+                aria-hidden="true">
 
 
                 <!--==================================================
@@ -357,48 +316,33 @@
 
                     <div class="dropdown-avatar">
 
-
                         <span id="topbarDropdownInitial">
-
                             G
-
                         </span>
 
-
                     </div>
-
 
 
                     <!-- USER DETAILS -->
 
                     <div class="dropdown-user-details">
 
-
                         <h4 id="topbarDropdownUsername">
-
                             Guest
-
                         </h4>
 
-
                         <p id="topbarEmail">
-
                             Please sign in
-
                         </p>
-
 
                     </div>
 
-
                 </div>
-
 
 
                 <!-- DIVIDER -->
 
                 <div class="dropdown-divider"></div>
-
 
 
                 <!--==================================================
@@ -409,19 +353,13 @@
                     href="#"
                     id="topbarProfileLink">
 
-
                     <i class="fa-regular fa-user"></i>
 
-
                     <span>
-
                         My Profile
-
                     </span>
 
-
                 </a>
-
 
 
                 <!--==================================================
@@ -432,19 +370,13 @@
                     href="../pages/dashboard.html"
                     id="topbarDashboardLink">
 
-
                     <i class="fa-solid fa-table-columns"></i>
 
-
                     <span>
-
                         Dashboard
-
                     </span>
 
-
                 </a>
-
 
 
                 <!--==================================================
@@ -455,19 +387,13 @@
                     href="#"
                     id="topbarShipmentsLink">
 
-
                     <i class="fa-solid fa-box"></i>
 
-
                     <span>
-
                         My Shipments
-
                     </span>
 
-
                 </a>
-
 
 
                 <!--==================================================
@@ -478,25 +404,18 @@
                     href="#"
                     id="topbarHistoryLink">
 
-
                     <i class="fa-solid fa-clock-rotate-left"></i>
 
-
                     <span>
-
                         Order History
-
                     </span>
 
-
                 </a>
-
 
 
                 <!-- DIVIDER -->
 
                 <div class="dropdown-divider"></div>
-
 
 
                 <!--==================================================
@@ -511,31 +430,27 @@
                     <button
                         type="button"
                         class="quick-access-btn"
-                        id="quickAccessBtn">
-
+                        id="quickAccessBtn"
+                        aria-expanded="false">
 
                         <i class="fa-solid fa-bolt"></i>
 
-
                         <span>
-
                             Quick Access
-
                         </span>
-
 
                         <i class="fa-solid fa-chevron-right"></i>
 
-
                     </button>
-
 
 
                     <!--==================================================
                             QUICK ACCESS MENU
                     ===================================================-->
 
-                    <div class="quick-menu">
+                    <div
+                        class="quick-menu"
+                        id="quickMenu">
 
 
                         <!-- LIVE TRACKING -->
@@ -545,13 +460,10 @@
                             <i class="fa-solid fa-satellite-dish"></i>
 
                             <span>
-
                                 Live Tracking
-
                             </span>
 
                         </a>
-
 
 
                         <!-- COLD CHAIN -->
@@ -561,13 +473,10 @@
                             <i class="fa-solid fa-temperature-half"></i>
 
                             <span>
-
                                 Cold Chain Monitor
-
                             </span>
 
                         </a>
-
 
 
                         <!-- AI ASSISTANT -->
@@ -577,13 +486,10 @@
                             <i class="fa-solid fa-robot"></i>
 
                             <span>
-
                                 AI Assistant
-
                             </span>
 
                         </a>
-
 
 
                         <!-- SHIPMENT MAP -->
@@ -593,13 +499,10 @@
                             <i class="fa-solid fa-map-location-dot"></i>
 
                             <span>
-
                                 Shipment Map
-
                             </span>
 
                         </a>
-
 
 
                         <!-- SUPPORT -->
@@ -609,13 +512,10 @@
                             <i class="fa-solid fa-headset"></i>
 
                             <span>
-
                                 Support Center
-
                             </span>
 
                         </a>
-
 
 
                         <!-- ACCOUNT SETTINGS -->
@@ -625,25 +525,19 @@
                             <i class="fa-solid fa-user-gear"></i>
 
                             <span>
-
                                 Account Settings
-
                             </span>
 
                         </a>
 
-
                     </div>
 
-
                 </div>
-
 
 
                 <!-- DIVIDER -->
 
                 <div class="dropdown-divider"></div>
-
 
 
                 <!--==================================================
@@ -654,19 +548,13 @@
                     href="#"
                     id="topbarSettingsLink">
 
-
                     <i class="fa-solid fa-gear"></i>
 
-
                     <span>
-
                         Settings
-
                     </span>
 
-
                 </a>
-
 
 
                 <!--==================================================
@@ -677,19 +565,13 @@
                     href="#"
                     id="topbarHelpLink">
 
-
                     <i class="fa-solid fa-circle-question"></i>
 
-
                     <span>
-
                         Help Center
-
                     </span>
 
-
                 </a>
-
 
 
                 <!--==================================================
@@ -701,27 +583,18 @@
                     id="logoutTopbar"
                     class="logout-link">
 
-
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
 
-
                     <span>
-
                         Logout
-
                     </span>
-
 
                 </a>
 
-
             </div>
-
 
         </div>
 
-
     </div>
-
 
 </header>

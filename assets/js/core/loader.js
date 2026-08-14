@@ -16,6 +16,67 @@ const basePath =
 
 
 /*=====================================*
+ * SOUND SYSTEM LOADER
+ *=====================================*/
+
+/*=====================================*
+ * SOUND SYSTEM LOADER
+ *=====================================*/
+
+function loadSoundSystem() {
+
+    return new Promise((resolve) => {
+
+        if (window.soundSystemLoaded) {
+
+            resolve();
+
+            return;
+
+        }
+
+
+        const script =
+            document.createElement("script");
+
+
+        script.src =
+            `${basePath}assets/js/sounds/sound.js`;
+
+
+        script.onload = () => {
+
+            window.soundSystemLoaded = true;
+
+            console.log(
+                "🔊 Sound system loaded"
+            );
+
+            resolve();
+
+        };
+
+
+        script.onerror = () => {
+
+            console.error(
+                "❌ Sound system failed to load:",
+                script.src
+            );
+
+            resolve();
+
+        };
+
+
+        document.head.appendChild(script);
+
+    });
+
+}
+
+
+/*=====================================*
  * LOADER STATE
  *=====================================*/
 
@@ -26,7 +87,6 @@ let totalComponents = 0;
 let componentsLoading = false;
 
 let componentsLoaded = false;
-
 
 /*=====================================*
  * LOADER PROMISE
@@ -2206,26 +2266,55 @@ function loadContactPage() {
 
 }
 
+/*==================================================*
+                    DASHBOARD PAGE LOADER
+*
+* PURPOSE:
+* - Register dashboard components
+* - Load sidebar
+* - Load topbar
+* - Load overview
+* - Load analytics
+* - Load shipments
+* - Load activity
+* - Load fleet
+* - Load inventory
+* - Load hospitals
+* - Load drivers
+* - Load live tracking
+* - Load reports
+*
+* NOTE:
+* Settings is a separate page and is NOT loaded here.
+*
+* NOTE:
+* Sidebar navigation/active state is handled
+* separately by sidebar.js.
+*==================================================*/
 
-/*=====================================*
- * LOAD DASHBOARD PAGE
- *=====================================*/
 
 function loadDashboardPage() {
 
 
+    /*==================================================
+            COMPONENT PROMISES
+    ==================================================*/
+
     const promises = [];
 
 
-    /*=====================================
-     * SIDEBAR
-     *=====================================*/
 
-    if (
+    /*==================================================
+            SIDEBAR
+    ==================================================*/
+
+    const sidebarContainer =
         document.getElementById(
             "sidebar-container"
-        )
-    ) {
+        );
+
+
+    if (sidebarContainer) {
 
         promises.push(
 
@@ -2242,15 +2331,18 @@ function loadDashboardPage() {
     }
 
 
-    /*=====================================
-     * TOPBAR
-     *=====================================*/
 
-    if (
+    /*==================================================
+            TOPBAR
+    ==================================================*/
+
+    const topbarContainer =
         document.getElementById(
             "topbar-container"
-        )
-    ) {
+        );
+
+
+    if (topbarContainer) {
 
         promises.push(
 
@@ -2267,15 +2359,18 @@ function loadDashboardPage() {
     }
 
 
-    /*=====================================
-     * OVERVIEW
-     *=====================================*/
 
-    if (
+    /*==================================================
+            OVERVIEW
+    ==================================================*/
+
+    const overviewContainer =
         document.getElementById(
             "overview-container"
-        )
-    ) {
+        );
+
+
+    if (overviewContainer) {
 
         promises.push(
 
@@ -2292,15 +2387,18 @@ function loadDashboardPage() {
     }
 
 
-    /*=====================================
-     * ANALYTICS
-     *=====================================*/
 
-    if (
+    /*==================================================
+            ANALYTICS
+    ==================================================*/
+
+    const analyticsContainer =
         document.getElementById(
             "analytics-container"
-        )
-    ) {
+        );
+
+
+    if (analyticsContainer) {
 
         promises.push(
 
@@ -2317,15 +2415,18 @@ function loadDashboardPage() {
     }
 
 
-    /*=====================================
-     * SHIPMENTS
-     *=====================================*/
 
-    if (
+    /*==================================================
+            SHIPMENTS
+    ==================================================*/
+
+    const shipmentsContainer =
         document.getElementById(
             "shipments-container"
-        )
-    ) {
+        );
+
+
+    if (shipmentsContainer) {
 
         promises.push(
 
@@ -2342,15 +2443,18 @@ function loadDashboardPage() {
     }
 
 
-    /*=====================================
-     * ACTIVITY
-     *=====================================*/
 
-    if (
+    /*==================================================
+            ACTIVITY
+    ==================================================*/
+
+    const activityContainer =
         document.getElementById(
             "activity-container"
-        )
-    ) {
+        );
+
+
+    if (activityContainer) {
 
         promises.push(
 
@@ -2367,15 +2471,18 @@ function loadDashboardPage() {
     }
 
 
-    /*=====================================
-     * FLEET
-     *=====================================*/
 
-    if (
+    /*==================================================
+            FLEET
+    ==================================================*/
+
+    const fleetContainer =
         document.getElementById(
             "fleet-container"
-        )
-    ) {
+        );
+
+
+    if (fleetContainer) {
 
         promises.push(
 
@@ -2392,10 +2499,154 @@ function loadDashboardPage() {
     }
 
 
+
+    /*==================================================
+            INVENTORY
+    ==================================================*/
+
+    const inventoryContainer =
+        document.getElementById(
+            "inventory-container"
+        );
+
+
+    if (inventoryContainer) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/inventory.html`,
+
+                "inventory-container"
+
+            )
+
+        );
+
+    }
+
+
+
+    /*==================================================
+            HOSPITALS
+    ==================================================*/
+
+    const hospitalsContainer =
+        document.getElementById(
+            "hospitals-container"
+        );
+
+
+    if (hospitalsContainer) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/hospitals.html`,
+
+                "hospitals-container"
+
+            )
+
+        );
+
+    }
+
+
+
+    /*==================================================
+            DRIVERS
+    ==================================================*/
+
+    const driversContainer =
+        document.getElementById(
+            "drivers-container"
+        );
+
+
+    if (driversContainer) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/drivers.html`,
+
+                "drivers-container"
+
+            )
+
+        );
+
+    }
+
+
+
+    /*==================================================
+            LIVE TRACKING
+    ==================================================*/
+
+    const trackingContainer =
+        document.getElementById(
+            "tracking-container"
+        );
+
+
+    if (trackingContainer) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/tracking.html`,
+
+                "tracking-container"
+
+            )
+
+        );
+
+    }
+
+
+
+    /*==================================================
+            REPORTS
+    ==================================================*/
+
+    const reportsContainer =
+        document.getElementById(
+            "reports-container"
+        );
+
+
+    if (reportsContainer) {
+
+        promises.push(
+
+            registerComponent(
+
+                `${basePath}components/dashboard/reports.html`,
+
+                "reports-container"
+
+            )
+
+        );
+
+    }
+
+
+
+    /*==================================================
+            RETURN ALL COMPONENT PROMISES
+    ==================================================*/
+
     return promises;
 
 }
-
 
 /*=====================================*
  * LOAD CURRENT PAGE

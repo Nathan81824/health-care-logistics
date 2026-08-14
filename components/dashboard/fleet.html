@@ -1,0 +1,401 @@
+<!-- ==================================================
+                    FLEET
+================================================== -->
+
+<section
+    class="fleet-section"
+    data-reveal
+>
+
+
+    <!-- ==================================================
+                    HEADER
+    ================================================== -->
+
+    <div class="fleet-header">
+
+        <div class="fleet-title">
+
+            <span class="section-label">
+                FLEET MANAGEMENT
+            </span>
+
+            <h2>
+                Fleet
+            </h2>
+
+            <p>
+                Monitor vehicles and their current operational status.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="fleet-action"
+            id="viewAllFleet"
+        >
+
+            <span>
+                Manage Fleet
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- ==================================================
+                    FLEET STATS
+    ================================================== -->
+
+    <div class="fleet-stats">
+
+
+        <!-- AVAILABLE -->
+
+        <div class="fleet-stat-card">
+
+            <div class="fleet-stat-icon fleet-icon-green">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div class="fleet-stat-content">
+
+                <span>
+                    Available
+                </span>
+
+                <strong id="availableVehicles">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ON ROUTE -->
+
+        <div class="fleet-stat-card">
+
+            <div class="fleet-stat-icon fleet-icon-blue">
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+            </div>
+
+            <div class="fleet-stat-content">
+
+                <span>
+                    On Route
+                </span>
+
+                <strong id="vehiclesOnRoute">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MAINTENANCE -->
+
+        <div class="fleet-stat-card">
+
+            <div class="fleet-stat-icon fleet-icon-orange">
+
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+
+            </div>
+
+            <div class="fleet-stat-content">
+
+                <span>
+                    Maintenance
+                </span>
+
+                <strong id="vehiclesMaintenance">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TOTAL -->
+
+        <div class="fleet-stat-card">
+
+            <div class="fleet-stat-icon fleet-icon-purple">
+
+                <i class="fa-solid fa-truck"></i>
+
+            </div>
+
+            <div class="fleet-stat-content">
+
+                <span>
+                    Total Vehicles
+                </span>
+
+                <strong id="totalVehicles">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+                    VEHICLES CARD
+    ================================================== -->
+
+    <div class="fleet-card">
+
+
+        <!-- ==================================================
+                        CARD HEADER
+        ================================================== -->
+
+        <div class="fleet-card-header">
+
+            <div>
+
+                <h3>
+                    Fleet Overview
+                </h3>
+
+                <p>
+                    Current vehicle status and availability
+                </p>
+
+            </div>
+
+
+            <div class="fleet-live">
+
+                <span class="fleet-live-dot"></span>
+
+                Live
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+                        VEHICLE LIST
+        ================================================== -->
+
+        <div
+            class="fleet-list"
+            id="fleetList"
+        >
+
+
+            <!-- ==================================================
+                            VEHICLE
+            ================================================== -->
+
+            <div class="fleet-item">
+
+
+                <div class="fleet-vehicle-icon">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                </div>
+
+
+                <div class="fleet-vehicle-info">
+
+                    <strong>
+                        IDK-TRK-001
+                    </strong>
+
+                    <span>
+                        Medical Transport Vehicle
+                    </span>
+
+                </div>
+
+
+                <div class="fleet-driver">
+
+                    <span>
+                        Driver
+                    </span>
+
+                    <strong>
+                        Assigned
+                    </strong>
+
+                </div>
+
+
+                <div class="fleet-status fleet-status-available">
+
+                    <span></span>
+
+                    Available
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                            VEHICLE
+            ================================================== -->
+
+            <div class="fleet-item">
+
+
+                <div class="fleet-vehicle-icon">
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                </div>
+
+
+                <div class="fleet-vehicle-info">
+
+                    <strong>
+                        IDK-TRK-002
+                    </strong>
+
+                    <span>
+                        Cold Chain Transport
+                    </span>
+
+                </div>
+
+
+                <div class="fleet-driver">
+
+                    <span>
+                        Driver
+                    </span>
+
+                    <strong>
+                        En Route
+                    </strong>
+
+                </div>
+
+
+                <div class="fleet-status fleet-status-route">
+
+                    <span></span>
+
+                    On Route
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==================================================
+                            VEHICLE
+            ================================================== -->
+
+            <div class="fleet-item">
+
+
+                <div class="fleet-vehicle-icon">
+
+                    <i class="fa-solid fa-van-shuttle"></i>
+
+                </div>
+
+
+                <div class="fleet-vehicle-info">
+
+                    <strong>
+                        IDK-VAN-003
+                    </strong>
+
+                    <span>
+                        Healthcare Delivery Van
+                    </span>
+
+                </div>
+
+
+                <div class="fleet-driver">
+
+                    <span>
+                        Driver
+                    </span>
+
+                    <strong>
+                        Maintenance
+                    </strong>
+
+                </div>
+
+
+                <div class="fleet-status fleet-status-maintenance">
+
+                    <span></span>
+
+                    Maintenance
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================================
+                    EMPTY STATE
+        ================================================== -->
+
+        <div
+            class="fleet-empty"
+            id="fleetEmpty"
+            hidden
+        >
+
+            <i class="fa-solid fa-truck"></i>
+
+            <strong>
+                No vehicles available
+            </strong>
+
+            <span>
+                Fleet information will appear here.
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>

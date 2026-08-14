@@ -11,11 +11,15 @@
 
     <div class="sidebar-header">
 
-        <a href="../pages/home.html" class="sidebar-logo">
+        <a
+            href="../pages/home.html"
+            class="sidebar-logo"
+        >
 
             <img
                 src="../assets/logo/WhatsApp_Image_2026-07-14_at_12.22.22_PM-removebg-preview.png"
-                alt="IDOKO LEGACY">
+                alt="IDOKO LEGACY"
+            >
 
             <div class="logo-text">
 
@@ -31,8 +35,6 @@
 
 
 
-
-
     <!-- ==========================================
                     USER
     ========================================== -->
@@ -41,24 +43,20 @@
 
         <div
             class="sidebar-avatar"
-            id="sidebarInitial">
-
+            id="sidebarInitial"
+        >
             U
-
         </div>
+
 
         <div class="sidebar-user-info">
 
             <h4 id="sidebarUsername">
-
                 User
-
             </h4>
 
             <span>
-
                 Administrator
-
             </span>
 
         </div>
@@ -67,25 +65,35 @@
 
 
 
-
-
     <!-- ==========================================
                     NAVIGATION
     ========================================== -->
 
-    <nav class="sidebar-nav">
+    <nav
+        class="sidebar-nav"
+        aria-label="Dashboard navigation"
+    >
 
         <ul>
+
+
+            <!-- ==================================
+                    DASHBOARD / OVERVIEW
+            ================================== -->
 
             <li>
 
                 <a
-                    href="../pages/dashboard.html"
-                    class="active">
+                    href="#overview-container"
+                    class="nav-link active"
+                    data-section="overview-container"
+                >
 
                     <i class="fa-solid fa-house"></i>
 
-                    <span>Dashboard</span>
+                    <span>
+                        Dashboard
+                    </span>
 
                 </a>
 
@@ -93,13 +101,47 @@
 
 
 
+            <!-- ==================================
+                    ANALYTICS
+            ================================== -->
+
             <li>
 
-                <a href="#">
+                <a
+                    href="#analytics-container"
+                    class="nav-link"
+                    data-section="analytics-container"
+                >
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    <span>
+                        Analytics
+                    </span>
+
+                </a>
+
+            </li>
+
+
+
+            <!-- ==================================
+                    SHIPMENTS
+            ================================== -->
+
+            <li>
+
+                <a
+                    href="#shipments-container"
+                    class="nav-link"
+                    data-section="shipments-container"
+                >
 
                     <i class="fa-solid fa-truck-fast"></i>
 
-                    <span>Shipments</span>
+                    <span>
+                        Shipments
+                    </span>
 
                 </a>
 
@@ -107,13 +149,23 @@
 
 
 
+            <!-- ==================================
+                    INVENTORY
+            ================================== -->
+
             <li>
 
-                <a href="#">
+                <a
+                    href="#inventory-container"
+                    class="nav-link"
+                    data-section="inventory-container"
+                >
 
                     <i class="fa-solid fa-boxes-stacked"></i>
 
-                    <span>Inventory</span>
+                    <span>
+                        Inventory
+                    </span>
 
                 </a>
 
@@ -121,13 +173,23 @@
 
 
 
+            <!-- ==================================
+                    HOSPITALS
+            ================================== -->
+
             <li>
 
-                <a href="#">
+                <a
+                    href="#hospitals-container"
+                    class="nav-link"
+                    data-section="hospitals-container"
+                >
 
                     <i class="fa-solid fa-hospital"></i>
 
-                    <span>Hospitals</span>
+                    <span>
+                        Hospitals
+                    </span>
 
                 </a>
 
@@ -135,13 +197,23 @@
 
 
 
+            <!-- ==================================
+                    DRIVERS
+            ================================== -->
+
             <li>
 
-                <a href="#">
+                <a
+                    href="#drivers-container"
+                    class="nav-link"
+                    data-section="drivers-container"
+                >
 
                     <i class="fa-solid fa-users"></i>
 
-                    <span>Drivers</span>
+                    <span>
+                        Drivers
+                    </span>
 
                 </a>
 
@@ -149,13 +221,23 @@
 
 
 
+            <!-- ==================================
+                    LIVE TRACKING
+            ================================== -->
+
             <li>
 
-                <a href="#">
+                <a
+                    href="#tracking-container"
+                    class="nav-link"
+                    data-section="tracking-container"
+                >
 
                     <i class="fa-solid fa-location-dot"></i>
 
-                    <span>Live Tracking</span>
+                    <span>
+                        Live Tracking
+                    </span>
 
                 </a>
 
@@ -163,37 +245,104 @@
 
 
 
+            <!-- ==================================
+                    ACTIVITY
+            ================================== -->
+
             <li>
 
-                <a href="#">
+                <a
+                    href="#activity-container"
+                    class="nav-link"
+                    data-section="activity-container"
+                >
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                    <span>
+                        Activity
+                    </span>
+
+                </a>
+
+            </li>
+
+
+
+            <!-- ==================================
+                    FLEET
+            ================================== -->
+
+            <li>
+
+                <a
+                    href="#fleet-container"
+                    class="nav-link"
+                    data-section="fleet-container"
+                >
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    <span>
+                        Fleet
+                    </span>
+
+                </a>
+
+            </li>
+
+
+
+            <!-- ==================================
+                    REPORTS
+            ================================== -->
+
+            <li>
+
+                <a
+                    href="#reports-container"
+                    class="nav-link"
+                    data-section="reports-container"
+                >
 
                     <i class="fa-solid fa-chart-line"></i>
 
-                    <span>Reports</span>
+                    <span>
+                        Reports
+                    </span>
 
                 </a>
 
             </li>
 
 
+
+            <!-- ==================================
+                    SETTINGS
+            ================================== -->
 
             <li>
 
-                <a href="#">
+                <a
+                    href="#settings-container"
+                    class="nav-link"
+                    data-section="settings-container"
+                >
 
                     <i class="fa-solid fa-gear"></i>
 
-                    <span>Settings</span>
+                    <span>
+                        Settings
+                    </span>
 
                 </a>
 
             </li>
+
 
         </ul>
 
     </nav>
-
-
 
 
 
@@ -204,15 +353,15 @@
     <div class="sidebar-footer">
 
         <button
+            type="button"
             id="logoutBtn"
-            class="logout-btn">
+            class="logout-btn"
+        >
 
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
 
             <span>
-
                 Logout
-
             </span>
 
         </button>

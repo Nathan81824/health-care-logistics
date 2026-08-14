@@ -184,10 +184,6 @@ function initHeroSlider() {
 
     function showSlide(index) {
 
-        /*
-            Normalize index.
-        */
-
         if (
             index >= slides.length
         ) {
@@ -414,7 +410,6 @@ function initHeroSlider() {
 
     showSlide(0);
 
-
     startAutoPlay();
 
 
@@ -460,6 +455,10 @@ function initHeroButtons() {
     buttons.forEach(
         function (button) {
 
+            /*=================================
+                PREVENT DUPLICATE INITIALIZATION
+            =================================*/
+
             if (
                 button.dataset.heroReady ===
                 "true"
@@ -474,9 +473,31 @@ function initHeroButtons() {
                 "true";
 
 
+            /*=================================
+                    BUTTON CLICK
+            =================================*/
+
             button.addEventListener(
                 "click",
                 function () {
+
+                    /*=============================
+                        PLAY CLICK SOUND
+                    =============================*/
+
+                    if (
+                        typeof playSound ===
+                        "function"
+                    ) {
+
+                        playSound("click");
+
+                    }
+
+
+                    /*=============================
+                        CLICK ANIMATION
+                    =============================*/
 
                     button.classList.add(
                         "clicked"

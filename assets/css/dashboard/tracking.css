@@ -1,0 +1,1088 @@
+/* ==================================================
+                LIVE TRACKING
+================================================== */
+
+.tracking-section{
+
+    width:100%;
+
+    padding:10px 0 40px;
+
+    color:#ffffff;
+
+}
+
+
+/* ==================================================
+                HEADER
+================================================== */
+
+.tracking-header{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    margin-bottom:28px;
+
+}
+
+
+.tracking-title{
+
+    min-width:0;
+
+}
+
+
+.tracking-title .section-label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#22b8ff;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    letter-spacing:1.8px;
+
+    text-transform:uppercase;
+
+}
+
+
+.tracking-title h2{
+
+    margin:0 0 8px;
+
+    color:#ffffff;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    line-height:1.15;
+
+}
+
+
+.tracking-title p{
+
+    margin:0;
+
+    max-width:650px;
+
+    color:#8da8bd;
+
+    font-size:.92rem;
+
+    line-height:1.7;
+
+}
+
+
+/* ==================================================
+                LIVE INDICATOR
+================================================== */
+
+.tracking-live{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:9px 13px;
+
+    background:rgba(52,211,153,.08);
+
+    border:1px solid rgba(52,211,153,.16);
+
+    border-radius:20px;
+
+    color:#4ade80;
+
+    font-size:.72rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+
+.tracking-live-dot{
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    background:#34d399;
+
+    box-shadow:
+        0 0 0 4px rgba(52,211,153,.08),
+        0 0 12px rgba(52,211,153,.5);
+
+    animation:trackingPulse 1.8s infinite;
+
+}
+
+
+@keyframes trackingPulse{
+
+    0%,
+    100%{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        opacity:.5;
+
+        transform:scale(.75);
+
+    }
+
+}
+
+
+/* ==================================================
+                TRACKING STATS
+================================================== */
+
+.tracking-stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:18px;
+
+    margin-bottom:24px;
+
+}
+
+
+.tracking-stat-card{
+
+    min-height:115px;
+
+    padding:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,35,53,.94),
+            rgba(9,27,43,.88)
+        );
+
+    border:1px solid rgba(148,163,184,.11);
+
+    border-radius:18px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.16);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.tracking-stat-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:rgba(56,189,248,.22);
+
+    box-shadow:
+        0 16px 35px rgba(0,0,0,.22);
+
+}
+
+
+/* ==================================================
+                STAT ICONS
+================================================== */
+
+.tracking-stat-icon{
+
+    width:48px;
+
+    height:48px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    font-size:1.05rem;
+
+}
+
+
+.tracking-stat-icon.blue{
+
+    background:rgba(56,189,248,.14);
+
+    color:#38bdf8;
+
+}
+
+
+.tracking-stat-icon.green{
+
+    background:rgba(52,211,153,.14);
+
+    color:#34d399;
+
+}
+
+
+.tracking-stat-icon.orange{
+
+    background:rgba(251,146,60,.14);
+
+    color:#fb923c;
+
+}
+
+
+.tracking-stat-icon.purple{
+
+    background:rgba(167,139,250,.14);
+
+    color:#a78bfa;
+
+}
+
+
+/* ==================================================
+                STAT INFO
+================================================== */
+
+.tracking-stat-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+
+.tracking-stat-info span{
+
+    color:#8da8bd;
+
+    font-size:.78rem;
+
+    font-weight:500;
+
+}
+
+
+.tracking-stat-info strong{
+
+    color:#ffffff;
+
+    font-size:1.45rem;
+
+    line-height:1;
+
+}
+
+
+/* ==================================================
+                MAIN TRACKING PANEL
+================================================== */
+
+.tracking-panel{
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,35,53,.96),
+            rgba(8,27,43,.94)
+        );
+
+    border:1px solid rgba(148,163,184,.12);
+
+    border-radius:22px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.2);
+
+}
+
+
+/* ==================================================
+                PANEL HEADER
+================================================== */
+
+.tracking-panel-header{
+
+    min-height:80px;
+
+    padding:20px 24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    border-bottom:1px solid rgba(148,163,184,.09);
+
+}
+
+
+.tracking-panel-header h3{
+
+    margin:0;
+
+    color:#ffffff;
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+}
+
+
+.tracking-refresh{
+
+    width:38px;
+
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:1px solid rgba(148,163,184,.1);
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.035);
+
+    color:#7f9aae;
+
+    cursor:pointer;
+
+    transition:
+        color .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+
+}
+
+
+.tracking-refresh:hover{
+
+    color:#38bdf8;
+
+    background:rgba(56,189,248,.08);
+
+    border-color:rgba(56,189,248,.2);
+
+    transform:rotate(20deg);
+
+}
+
+
+/* ==================================================
+                TRACKING BODY
+================================================== */
+
+.tracking-body{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.7fr)
+        minmax(280px,.8fr);
+
+    min-height:430px;
+
+}
+
+
+/* ==================================================
+                MAP AREA
+================================================== */
+
+.tracking-map{
+
+    position:relative;
+
+    min-height:430px;
+
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 30% 35%,
+            rgba(56,189,248,.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 70% 65%,
+            rgba(37,99,235,.08),
+            transparent 30%
+        ),
+        #061725;
+
+    border-right:1px solid rgba(148,163,184,.09);
+
+}
+
+
+/*
+    Decorative map grid.
+*/
+
+.tracking-map::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(56,189,248,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(56,189,248,.055) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        45px 45px;
+
+    opacity:.55;
+
+}
+
+
+/* ==================================================
+                MAP LABEL
+================================================== */
+
+.tracking-map-label{
+
+    position:absolute;
+
+    top:18px;
+
+    left:18px;
+
+    z-index:2;
+
+    padding:8px 12px;
+
+    background:rgba(4,17,29,.78);
+
+    border:1px solid rgba(148,163,184,.1);
+
+    border-radius:10px;
+
+    color:#8da8bd;
+
+    font-size:.7rem;
+
+    backdrop-filter:blur(10px);
+
+}
+
+
+/* ==================================================
+                MAP ROUTE
+================================================== */
+
+.tracking-route{
+
+    position:absolute;
+
+    top:50%;
+
+    left:18%;
+
+    width:62%;
+
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #20b8ff,
+            #34d399
+        );
+
+    transform:
+        rotate(-14deg);
+
+    transform-origin:left center;
+
+    box-shadow:
+        0 0 12px rgba(56,189,248,.25);
+
+    z-index:1;
+
+}
+
+
+/* ==================================================
+                MAP MARKERS
+================================================== */
+
+.tracking-marker{
+
+    position:absolute;
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    z-index:3;
+
+}
+
+
+.tracking-marker i{
+
+    font-size:.8rem;
+
+}
+
+
+.tracking-marker.start{
+
+    left:17%;
+
+    top:59%;
+
+    background:rgba(52,211,153,.14);
+
+    border:1px solid rgba(52,211,153,.35);
+
+    color:#34d399;
+
+}
+
+
+.tracking-marker.destination{
+
+    right:17%;
+
+    top:34%;
+
+    background:rgba(56,189,248,.14);
+
+    border:1px solid rgba(56,189,248,.35);
+
+    color:#38bdf8;
+
+}
+
+
+.tracking-marker.vehicle{
+
+    left:57%;
+
+    top:42%;
+
+    width:42px;
+
+    height:42px;
+
+    background:#20b8ff;
+
+    color:#ffffff;
+
+    box-shadow:
+        0 0 0 8px rgba(32,184,255,.08),
+        0 8px 20px rgba(14,165,233,.25);
+
+    animation:vehiclePulse 2s infinite;
+
+}
+
+
+@keyframes vehiclePulse{
+
+    0%,
+    100%{
+
+        box-shadow:
+            0 0 0 8px rgba(32,184,255,.08),
+            0 8px 20px rgba(14,165,233,.25);
+
+    }
+
+    50%{
+
+        box-shadow:
+            0 0 0 14px rgba(32,184,255,.025),
+            0 8px 25px rgba(14,165,233,.32);
+
+    }
+
+}
+
+
+/* ==================================================
+                MAP INFO
+================================================== */
+
+.tracking-map-info{
+
+    position:absolute;
+
+    left:18px;
+
+    bottom:18px;
+
+    z-index:4;
+
+    max-width:230px;
+
+    padding:14px 16px;
+
+    background:rgba(4,17,29,.82);
+
+    border:1px solid rgba(148,163,184,.1);
+
+    border-radius:13px;
+
+    backdrop-filter:blur(12px);
+
+}
+
+
+.tracking-map-info strong{
+
+    display:block;
+
+    margin-bottom:4px;
+
+    color:#ffffff;
+
+    font-size:.8rem;
+
+}
+
+
+.tracking-map-info span{
+
+    color:#718ca1;
+
+    font-size:.68rem;
+
+}
+
+
+/* ==================================================
+                ACTIVE SHIPMENTS
+================================================== */
+
+.tracking-list{
+
+    padding:20px;
+
+    overflow-y:auto;
+
+}
+
+
+.tracking-list-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:15px;
+
+}
+
+
+.tracking-list-title h4{
+
+    margin:0;
+
+    color:#ffffff;
+
+    font-size:.9rem;
+
+}
+
+
+.tracking-list-title span{
+
+    color:#38bdf8;
+
+    font-size:.68rem;
+
+}
+
+
+/* ==================================================
+                TRACKING ITEM
+================================================== */
+
+.tracking-item{
+
+    padding:15px;
+
+    margin-bottom:12px;
+
+    background:rgba(2,6,23,.27);
+
+    border:1px solid rgba(148,163,184,.08);
+
+    border-radius:13px;
+
+    transition:
+        border-color .25s ease,
+        background .25s ease,
+        transform .25s ease;
+
+}
+
+
+.tracking-item:hover{
+
+    transform:translateX(3px);
+
+    background:rgba(56,189,248,.035);
+
+    border-color:rgba(56,189,248,.16);
+
+}
+
+
+.tracking-item:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+.tracking-item-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:9px;
+
+}
+
+
+.tracking-item-top strong{
+
+    color:#ffffff;
+
+    font-size:.76rem;
+
+}
+
+
+.tracking-item-status{
+
+    color:#34d399;
+
+    font-size:.64rem;
+
+    font-weight:600;
+
+}
+
+
+.tracking-item-route{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#7f9aae;
+
+    font-size:.68rem;
+
+}
+
+
+.tracking-item-route i{
+
+    color:#38bdf8;
+
+    font-size:.65rem;
+
+}
+
+
+.tracking-progress{
+
+    width:100%;
+
+    height:5px;
+
+    margin-top:12px;
+
+    overflow:hidden;
+
+    background:rgba(148,163,184,.09);
+
+    border-radius:20px;
+
+}
+
+
+.tracking-progress span{
+
+    display:block;
+
+    height:100%;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #20b8ff,
+            #34d399
+        );
+
+}
+
+
+/* ==================================================
+                TABLET
+================================================== */
+
+@media (max-width:1100px){
+
+    .tracking-stats{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+
+    .tracking-body{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .tracking-map{
+
+        border-right:none;
+
+        border-bottom:1px solid rgba(148,163,184,.09);
+
+    }
+
+}
+
+
+/* ==================================================
+                MOBILE
+================================================== */
+
+@media (max-width:800px){
+
+    .tracking-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+
+    .tracking-live{
+
+        align-self:flex-start;
+
+    }
+
+
+    .tracking-panel-header{
+
+        align-items:flex-start;
+
+    }
+
+
+    .tracking-map{
+
+        min-height:350px;
+
+    }
+
+}
+
+
+/* ==================================================
+                SMALL MOBILE
+================================================== */
+
+@media (max-width:600px){
+
+    .tracking-section{
+
+        padding-bottom:25px;
+
+    }
+
+
+    .tracking-title h2{
+
+        font-size:1.65rem;
+
+    }
+
+
+    .tracking-title p{
+
+        font-size:.82rem;
+
+    }
+
+
+    .tracking-stats{
+
+        grid-template-columns:1fr;
+
+        gap:12px;
+
+    }
+
+
+    .tracking-stat-card{
+
+        min-height:95px;
+
+        padding:16px;
+
+    }
+
+
+    .tracking-panel-header{
+
+        padding:18px;
+
+    }
+
+
+    .tracking-map{
+
+        min-height:300px;
+
+    }
+
+
+    .tracking-marker.vehicle{
+
+        left:52%;
+
+    }
+
+
+    .tracking-route{
+
+        width:60%;
+
+    }
+
+
+    .tracking-list{
+
+        padding:18px;
+
+    }
+
+}
+
+
+/* ==================================================
+                REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .tracking-live-dot,
+    .tracking-marker.vehicle{
+
+        animation:none;
+
+    }
+
+    .tracking-refresh{
+
+        transition:none;
+
+    }
+
+}

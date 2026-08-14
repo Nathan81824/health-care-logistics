@@ -3,13 +3,18 @@
 *
 * PURPOSE:
 * - Initialize dashboard
-* - Load dashboard components
 * - Initialize sidebar
 * - Load user information
 * - Initialize dashboard logout
 *
+* COMPONENT LOADING:
+* Handled by loader.js / loadDashboardPage()
+*
+* SIDEBAR:
+* Handled by sidebar.js
+*
 * TOPBAR:
-* Handled separately by topbar.js
+* Handled separately by top-bar.js
 *
 * LOGOUT:
 * Uses the modern logout popup.
@@ -27,407 +32,48 @@ function initDashboard() {
     );
 
 
-    /*===============================================
-                    CHECK LOADER
-    ===============================================*/
+    /*==================================================
+                    SIDEBAR
+    ==================================================*/
+
+    /*
+        The sidebar is loaded by the dashboard
+        component loader.
+
+        initSidebar() is responsible for:
+
+        - Navigation
+        - Active blue state
+        - Smooth scrolling
+        - Scroll tracking
+    */
 
     if (
-        typeof loadSection !==
+        typeof initSidebar ===
         "function"
     ) {
 
-        console.error(
-            "❌ loadSection() is not available."
-        );
-
-        return;
+        initSidebar();
 
     }
 
 
-    /*===============================================
-                    SIDEBAR
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/sidebar.html",
-
-        "sidebar-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard sidebar loaded"
-            );
-
-
-            /*-----------------------------------------
-                    SIDEBAR INITIALIZATION
-            -----------------------------------------*/
-
-            if (
-                typeof initSidebar ===
-                "function"
-            ) {
-
-                initSidebar();
-
-            }
-
-
-            /*-----------------------------------------
-                    ACTIVE LINK
-            -----------------------------------------*/
-
-            initSidebarActive();
-
-
-            /*-----------------------------------------
+    /*==================================================
                     USER
-            -----------------------------------------*/
+    ==================================================*/
 
-            loadUserProfile();
+    loadUserProfile();
 
 
-            /*-----------------------------------------
+    /*==================================================
                     LOGOUT
-            -----------------------------------------*/
+    ==================================================*/
 
-            initDashboardLogout();
+    initDashboardLogout();
 
-        }
 
-    );
-
-
-    /*===============================================
-                    TOPBAR
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/topbar.html",
-
-        "topbar-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard topbar loaded"
-            );
-
-
-            /*
-                topbar.js owns:
-
-                - profile
-                - notifications
-                - theme
-                - menu
-                - topbar user
-            */
-
-            if (
-                typeof initTopbar ===
-                "function"
-            ) {
-
-                initTopbar();
-
-            }
-
-
-            /*
-                If topbar.js already loads
-                the user, this function
-                simply won't interfere.
-            */
-
-            loadTopbarUser();
-
-        }
-
-    );
-
-
-    /*===============================================
-                    WELCOME
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/welcome.html",
-
-        "welcome-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard welcome loaded"
-            );
-
-
-            if (
-                typeof initWelcome ===
-                "function"
-            ) {
-
-                initWelcome();
-
-            }
-
-        }
-
-    );
-
-
-    /*===============================================
-                    OVERVIEW
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/overview.html",
-
-        "overview-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard overview loaded"
-            );
-
-
-            if (
-                typeof initOverview ===
-                "function"
-            ) {
-
-                initOverview();
-
-            }
-
-        }
-
-    );
-
-
-    /*===============================================
-                    ANALYTICS
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/analytics.html",
-
-        "analytics-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard analytics loaded"
-            );
-
-
-            if (
-                typeof initAnalytics ===
-                "function"
-            ) {
-
-                initAnalytics();
-
-            }
-
-        }
-
-    );
-
-
-    /*===============================================
-                    SHIPMENTS
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/shipments.html",
-
-        "shipments-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard shipments loaded"
-            );
-
-
-            if (
-                typeof initShipments ===
-                "function"
-            ) {
-
-                initShipments();
-
-            }
-
-        }
-
-    );
-
-
-    /*===============================================
-                    ACTIVITY
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/activity.html",
-
-        "activity-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard activity loaded"
-            );
-
-
-            if (
-                typeof initActivity ===
-                "function"
-            ) {
-
-                initActivity();
-
-            }
-
-        }
-
-    );
-
-
-    /*===============================================
-                    FLEET
-    ===============================================*/
-
-    loadSection(
-
-        "../components/dashboard/fleet.html",
-
-        "fleet-container",
-
-        function () {
-
-            console.log(
-                "✅ Dashboard fleet loaded"
-            );
-
-
-            if (
-                typeof initFleet ===
-                "function"
-            ) {
-
-                initFleet();
-
-            }
-
-        }
-
-    );
-
-}
-
-
-/*==================================================*
-                SIDEBAR ACTIVE LINK
-*==================================================*/
-
-function initSidebarActive() {
-
-    const links =
-        document.querySelectorAll(
-            ".nav-link"
-        );
-
-
-    if (!links.length) {
-
-        return;
-
-    }
-
-
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop()
-            .toLowerCase();
-
-
-    links.forEach(
-        function (link) {
-
-            const href =
-                link.getAttribute(
-                    "href"
-                );
-
-
-            /*
-                Automatically activate
-                current dashboard page.
-            */
-
-            if (href) {
-
-                const page =
-                    href
-                        .split("/")
-                        .pop()
-                        .toLowerCase();
-
-
-                if (
-                    page === currentPage
-                ) {
-
-                    link.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
-
-
-            /*-----------------------------------------
-                        CLICK
-            -----------------------------------------*/
-
-            link.addEventListener(
-                "click",
-                function () {
-
-                    links.forEach(
-                        function (item) {
-
-                            item.classList.remove(
-                                "active"
-                            );
-
-                        }
-                    );
-
-
-                    link.classList.add(
-                        "active"
-                    );
-
-                }
-            );
-
-        }
+    console.log(
+        "✅ Dashboard initialized"
     );
 
 }
@@ -441,6 +87,10 @@ function loadUserProfile() {
 
     let user = null;
 
+
+    /*==================================================
+                    GET USER
+    ==================================================*/
 
     try {
 
@@ -472,6 +122,11 @@ function loadUserProfile() {
     }
 
 
+
+    /*==================================================
+                    SIDEBAR ELEMENTS
+    ==================================================*/
+
     const username =
         document.getElementById(
             "sidebarUsername"
@@ -484,9 +139,10 @@ function loadUserProfile() {
         );
 
 
-    /*
-        Guest state.
-    */
+
+    /*==================================================
+                    GUEST STATE
+    ==================================================*/
 
     if (!user) {
 
@@ -511,27 +167,43 @@ function loadUserProfile() {
     }
 
 
+
+    /*==================================================
+                    USER NAME
+    ==================================================*/
+
     const name =
         String(
             user.name ||
             "User"
-        );
+        ).trim();
 
+
+
+    /*==================================================
+                    DISPLAY NAME
+    ==================================================*/
 
     if (username) {
 
         username.textContent =
-            name;
+            name || "User";
 
     }
 
 
+
+    /*==================================================
+                    USER INITIAL
+    ==================================================*/
+
     if (initial) {
 
         initial.textContent =
-            name
-                .charAt(0)
-                .toUpperCase();
+            (
+                name.charAt(0) ||
+                "U"
+            ).toUpperCase();
 
     }
 
@@ -542,15 +214,21 @@ function loadUserProfile() {
                 LOAD TOPBAR USER
 *
 * NOTE:
-* topbar.js is responsible for the
-* topbar itself. This function is kept
-* as a compatibility helper.
+* top-bar.js is responsible for the
+* topbar itself.
+*
+* This function remains as a compatibility
+* helper for existing dashboard code.
 *==================================================*/
 
 function loadTopbarUser() {
 
     let user = null;
 
+
+    /*==================================================
+                    GET USER
+    ==================================================*/
 
     try {
 
@@ -582,6 +260,11 @@ function loadTopbarUser() {
     }
 
 
+
+    /*==================================================
+                    TOPBAR ELEMENTS
+    ==================================================*/
+
     const username =
         document.getElementById(
             "topbarUsername"
@@ -593,6 +276,11 @@ function loadTopbarUser() {
             "topbarInitial"
         );
 
+
+
+    /*==================================================
+                    GUEST STATE
+    ==================================================*/
 
     if (!user) {
 
@@ -617,29 +305,45 @@ function loadTopbarUser() {
     }
 
 
+
+    /*==================================================
+                    USER NAME
+    ==================================================*/
+
     const name =
         String(
             user.name ||
             "User"
-        );
+        ).trim();
 
+
+
+    /*==================================================
+                    TOPBAR NAME
+    ==================================================*/
 
     if (username) {
 
         username.textContent =
             name.length > 12
                 ? name.slice(0, 12) + "..."
-                : name;
+                : name || "User";
 
     }
 
 
+
+    /*==================================================
+                    TOPBAR INITIAL
+    ==================================================*/
+
     if (initial) {
 
         initial.textContent =
-            name
-                .charAt(0)
-                .toUpperCase();
+            (
+                name.charAt(0) ||
+                "U"
+            ).toUpperCase();
 
     }
 
@@ -668,10 +372,10 @@ function initDashboardLogout() {
     logoutButtons.forEach(
         function (button) {
 
-            /*
-                Prevent duplicate
-                listeners.
-            */
+
+            /*------------------------------------------
+                    PREVENT DUPLICATE LISTENERS
+            ------------------------------------------*/
 
             if (
                 button.dataset.dashboardLogoutReady ===
@@ -686,6 +390,10 @@ function initDashboardLogout() {
             button.dataset.dashboardLogoutReady =
                 "true";
 
+
+            /*------------------------------------------
+                    CLICK
+            ------------------------------------------*/
 
             button.addEventListener(
                 "click",
@@ -719,10 +427,9 @@ function openDashboardLogoutPopup() {
         );
 
 
-    /*
-        If your logout popup has already
-        been loaded, simply show it.
-    */
+    /*==================================================
+            POPUP ALREADY EXISTS
+    ==================================================*/
 
     if (popup) {
 
@@ -736,15 +443,18 @@ function openDashboardLogoutPopup() {
         );
 
 
+        setupLogoutPopupButtons();
+
+
         return;
 
     }
 
 
-    /*
-        If it isn't loaded yet, try
-        loading it automatically.
-    */
+
+    /*==================================================
+            POPUP CONTAINER
+    ==================================================*/
 
     const container =
         document.getElementById(
@@ -792,15 +502,16 @@ function openDashboardLogoutPopup() {
 
         );
 
+
         return;
 
     }
 
 
-    /*
-        Last fallback:
-        create the modern popup.
-    */
+
+    /*==================================================
+            FALLBACK
+    ==================================================*/
 
     createModernLogoutPopup();
 
@@ -813,6 +524,10 @@ function openDashboardLogoutPopup() {
 
 function createModernLogoutPopup() {
 
+    /*==================================================
+            PREVENT DUPLICATE POPUP
+    ==================================================*/
+
     if (
         document.getElementById(
             "logoutPopup"
@@ -823,6 +538,11 @@ function createModernLogoutPopup() {
 
     }
 
+
+
+    /*==================================================
+            CREATE POPUP
+    ==================================================*/
 
     const popup =
         document.createElement(
@@ -838,15 +558,22 @@ function createModernLogoutPopup() {
         "logout-popup";
 
 
+
+    /*==================================================
+            POPUP HTML
+    ==================================================*/
+
     popup.innerHTML = `
 
         <div class="logout-popup-overlay"></div>
+
 
         <div
             class="logout-popup-card"
             role="dialog"
             aria-modal="true"
-            aria-labelledby="logoutPopupTitle">
+            aria-labelledby="logoutPopupTitle"
+        >
 
 
             <div class="logout-popup-icon">
@@ -862,6 +589,7 @@ function createModernLogoutPopup() {
                     Logout?
                 </h3>
 
+
                 <p>
                     Are you sure you want to log out of your account?
                 </p>
@@ -874,7 +602,8 @@ function createModernLogoutPopup() {
                 <button
                     type="button"
                     class="logout-cancel"
-                    id="cancelLogout">
+                    id="cancelLogout"
+                >
 
                     Cancel
 
@@ -884,7 +613,8 @@ function createModernLogoutPopup() {
                 <button
                     type="button"
                     class="logout-confirm"
-                    id="confirmLogout">
+                    id="confirmLogout"
+                >
 
                     Logout
 
@@ -892,15 +622,26 @@ function createModernLogoutPopup() {
 
             </div>
 
+
         </div>
 
     `;
 
 
+
+    /*==================================================
+            ADD TO PAGE
+    ==================================================*/
+
     document.body.appendChild(
         popup
     );
 
+
+
+    /*==================================================
+            SHOW POPUP
+    ==================================================*/
 
     popup.classList.add(
         "show"
@@ -911,6 +652,11 @@ function createModernLogoutPopup() {
         "logout-popup-open"
     );
 
+
+
+    /*==================================================
+            INITIALIZE BUTTONS
+    ==================================================*/
 
     setupLogoutPopupButtons();
 
@@ -936,6 +682,11 @@ function setupLogoutPopupButtons() {
     }
 
 
+
+    /*==================================================
+                    BUTTONS
+    ==================================================*/
+
     const cancel =
         document.getElementById(
             "cancelLogout"
@@ -954,6 +705,11 @@ function setupLogoutPopupButtons() {
         );
 
 
+
+    /*==================================================
+            PREVENT DUPLICATE INITIALIZATION
+    ==================================================*/
+
     if (
         popup.dataset.popupReady ===
         "true"
@@ -968,9 +724,10 @@ function setupLogoutPopupButtons() {
         "true";
 
 
-    /*===============================================
+
+    /*==================================================
                     CANCEL
-    ===============================================*/
+    ==================================================*/
 
     if (cancel) {
 
@@ -986,9 +743,10 @@ function setupLogoutPopupButtons() {
     }
 
 
-    /*===============================================
+
+    /*==================================================
                     OVERLAY
-    ===============================================*/
+    ==================================================*/
 
     if (overlay) {
 
@@ -1004,9 +762,10 @@ function setupLogoutPopupButtons() {
     }
 
 
-    /*===============================================
+
+    /*==================================================
                     CONFIRM
-    ===============================================*/
+    ==================================================*/
 
     if (confirm) {
 
@@ -1022,25 +781,36 @@ function setupLogoutPopupButtons() {
     }
 
 
-    /*===============================================
+
+    /*==================================================
                     ESCAPE
-    ===============================================*/
+    ==================================================*/
 
-    document.addEventListener(
-        "keydown",
-        function (event) {
+    if (
+        !window.dashboardLogoutEscapeReady
+    ) {
 
-            if (
-                event.key ===
-                "Escape"
-            ) {
+        window.dashboardLogoutEscapeReady =
+            true;
 
-                closeLogoutPopup();
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeLogoutPopup();
+
+                }
 
             }
+        );
 
-        }
-    );
+    }
 
 }
 
@@ -1082,9 +852,9 @@ function closeLogoutPopup() {
 
 function performLogout() {
 
-    /*
-        Remove authentication data.
-    */
+    /*==================================================
+            REMOVE AUTHENTICATION DATA
+    ==================================================*/
 
     localStorage.removeItem(
         "user"
@@ -1096,21 +866,25 @@ function performLogout() {
     );
 
 
-    /*
-        Keep notification storage.
 
-        Notifications are NOT deleted
-        here so your notification system
-        remains independent.
+    /*
+        Notification storage is intentionally
+        preserved.
     */
 
+
+
+    /*==================================================
+            CLOSE POPUP
+    ==================================================*/
 
     closeLogoutPopup();
 
 
-    /*
-        Redirect to login page.
-    */
+
+    /*==================================================
+            REDIRECT TO LOGIN
+    ==================================================*/
 
     window.location.href =
         "../index.html";
@@ -1125,23 +899,26 @@ function performLogout() {
 window.initDashboard =
     initDashboard;
 
-window.initSidebarActive =
-    initSidebarActive;
 
 window.loadUserProfile =
     loadUserProfile;
 
+
 window.loadTopbarUser =
     loadTopbarUser;
+
 
 window.initDashboardLogout =
     initDashboardLogout;
 
+
 window.openDashboardLogoutPopup =
     openDashboardLogoutPopup;
 
+
 window.closeLogoutPopup =
     closeLogoutPopup;
+
 
 window.performLogout =
     performLogout;

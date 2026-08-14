@@ -1,57 +1,41 @@
+/*==================================================
+        DASHBOARD IMPORTS
+==================================================*/
+
 @import "sidebar.css";
 @import "topbar.css";
 @import "welcome.css";
+@import "overview.css";
+@import "analytics.css";
+@import "shipments.css";
+@import "activity.css";
+@import "fleet.css";
+@import "inventory.css";
+@import "hospitals.css";
+@import "drivers.css";
+@import "tracking.css";
+@import "reports.css";
+@import "settings.css";
 
-/* ==========================================
+
+
+/*==================================================
         DASHBOARD
-========================================== */
+==================================================*/
 
 .dashboard{
 
+    --sidebar-width:280px;
+
     min-height:100vh;
 
-    background:
-    radial-gradient(circle at top left,#E0F2FE 0%,transparent 35%),
-    radial-gradient(circle at bottom right,#DBEAFE 0%,transparent 35%),
-    #F8FAFC;
+    width:100%;
 
-    font-family:"Poppins",sans-serif;
+    background:#071827;
+
+    font-family:"Inter",sans-serif;
 
     color:#ffffff;
-
-}
-
-
-
-
-/* ==========================================
-        LAYOUT
-========================================== */
-
-.dashboard-layout{
-
-    display:flex;
-
-    min-height:100vh;
-
-}
-
-
-
-
-/* ==========================================
-        MAIN
-========================================== */
-
-.dashboard-main{
-
-    flex:1;
-
-    margin-left:260px;
-
-    display:flex;
-
-    flex-direction:column;
 
     overflow-x:hidden;
 
@@ -59,25 +43,90 @@
 
 
 
+/*==================================================
+        LAYOUT
+==================================================*/
 
-/* ==========================================
-        CONTENT
-========================================== */
+.dashboard-layout{
 
-.dashboard-content{
+    display:flex;
 
-    flex:1;
+    width:100%;
 
-    padding:30px;
+    min-height:100vh;
+
+    position:relative;
 
 }
 
 
 
+/*==================================================
+        MAIN
+==================================================*/
 
-/* ==========================================
-        SECTIONS
-========================================== */
+.dashboard-main{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    width:calc(100% - var(--sidebar-width));
+
+    min-width:0;
+
+    min-height:100vh;
+
+    margin-left:var(--sidebar-width);
+
+    background:#071827;
+
+    overflow-x:hidden;
+
+}
+
+
+
+/*==================================================
+        CONTENT
+==================================================*/
+
+.dashboard-content{
+
+    position:relative;
+
+    width:100%;
+
+    min-width:0;
+
+    flex:1;
+
+    margin:0;
+
+    padding:30px 38px 60px;
+
+    box-sizing:border-box;
+
+    background:
+        linear-gradient(
+            180deg,
+            #071827 0%,
+            #061522 100%
+        );
+
+    overflow-x:hidden;
+
+}
+
+
+
+/*==================================================
+        ALL SECTIONS
+==================================================*/
 
 #overview-container,
 #analytics-container,
@@ -85,28 +134,458 @@
 #activity-container,
 #fleet-container{
 
-    margin-bottom:30px;
+    position:relative;
+
+    left:0 !important;
+
+    right:auto !important;
+
+    transform:none !important;
+
+    width:100% !important;
+
+    max-width:none !important;
+
+    min-width:0;
+
+    margin:0 0 30px !important;
+
+    padding:0 !important;
+
+    box-sizing:border-box;
 
 }
+
+
+
+/*==================================================
+        OVERVIEW
+==================================================*/
+
+#overview-container{
+
+    position:relative;
+
+    left:0 !important;
+
+    right:0 !important;
+
+    top:auto !important;
+
+    transform:none !important;
+
+    width:100% !important;
+
+    max-width:none !important;
+
+    margin-left:0 !important;
+
+    margin-right:0 !important;
+
+    overflow:visible;
+
+}
+
+
+
+/*==================================================
+        OVERVIEW INNER WRAPPERS
+==================================================*/
+
+#overview-container > *,
+#overview-container .overview,
+#overview-container .overview-section,
+#overview-container .overview-wrapper,
+#overview-container .overview-content,
+#overview-container .dashboard-overview{
+
+    position:relative;
+
+    left:0 !important;
+
+    right:auto !important;
+
+    transform:none !important;
+
+    width:100% !important;
+
+    max-width:none !important;
+
+    min-width:0;
+
+    margin-left:0 !important;
+
+    margin-right:0 !important;
+
+    box-sizing:border-box;
+
+}
+
+
+
+/*==================================================
+        OVERVIEW GRIDS
+==================================================*/
+
+#overview-container .overview-grid,
+#overview-container .stats-grid,
+#overview-container .overview-cards{
+
+    position:relative;
+
+    left:0 !important;
+
+    right:auto !important;
+
+    transform:none !important;
+
+    width:100% !important;
+
+    max-width:none !important;
+
+    min-width:0;
+
+    margin-left:0 !important;
+
+    margin-right:0 !important;
+
+    box-sizing:border-box;
+
+}
+
+
+
+/*==================================================
+        OTHER SECTIONS
+==================================================*/
+
+#analytics-container,
+#shipments-container,
+#activity-container,
+#fleet-container{
+
+    position:relative;
+
+    left:0 !important;
+
+    transform:none !important;
+
+}
+
+
+
+/*==================================================
+        DIRECT CHILDREN
+==================================================*/
+
+#analytics-container > *,
+#shipments-container > *,
+#activity-container > *,
+#fleet-container > *{
+
+    position:relative;
+
+    left:0 !important;
+
+    right:auto !important;
+
+    transform:none !important;
+
+    width:100% !important;
+
+    max-width:none !important;
+
+    min-width:0;
+
+    box-sizing:border-box;
+
+}
+
+
+
+/*==================================================
+        GENERAL CARD
+==================================================*/
 
 .card{
 
-    background:rgba(255,255,255,.7);
+    background:rgba(14,35,53,.78);
 
     backdrop-filter:blur(18px);
 
-    border:1px solid rgba(255,255,255,.4);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(148,163,184,.12);
 
     border-radius:22px;
 
-    box-shadow:var(--shadow);
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
 
-    transition:.35s;
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
 
 }
 
+
+
+/*==================================================
+        CARD HOVER
+==================================================*/
+
 .card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.25);
+
+    border-color:
+        rgba(56,189,248,.18);
+
+}
+
+
+
+/*==================================================
+        SIDEBAR SAFETY
+==================================================*/
+
+#sidebar-container{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:var(--sidebar-width);
+
+    height:100vh;
+
+    z-index:1000;
+
+}
+
+
+
+/*==================================================
+        TOPBAR SAFETY
+==================================================*/
+
+#topbar-container{
+
+    position:relative;
+
+    z-index:900;
+
+    width:100%;
+
+    flex-shrink:0;
+
+}
+
+
+
+/*==================================================
+        CONTENT SAFETY
+==================================================*/
+
+.dashboard-content{
+
+    z-index:1;
+
+}
+
+
+
+/*==================================================
+        PREVENT HORIZONTAL OVERFLOW
+==================================================*/
+
+.dashboard,
+.dashboard-layout,
+.dashboard-main,
+.dashboard-content{
+
+    overflow-x:hidden;
+
+}
+
+
+
+/*==================================================
+        LARGE DESKTOP
+==================================================*/
+
+@media (min-width:1400px){
+
+    .dashboard-content{
+
+        padding-left:45px;
+
+        padding-right:45px;
+
+    }
+
+}
+
+
+
+/*==================================================
+        TABLET
+==================================================*/
+
+@media (max-width:1100px){
+
+    .dashboard{
+
+        --sidebar-width:260px;
+
+    }
+
+    #sidebar-container{
+
+        width:var(--sidebar-width);
+
+    }
+
+    .dashboard-main{
+
+        width:calc(100% - var(--sidebar-width));
+
+        margin-left:var(--sidebar-width);
+
+    }
+
+    .dashboard-content{
+
+        padding:
+
+            28px
+
+            25px
+
+            50px;
+
+    }
+
+}
+
+
+
+/*==================================================
+        SMALL TABLET
+==================================================*/
+
+@media (max-width:900px){
+
+    .dashboard-content{
+
+        padding:
+
+            25px
+
+            22px
+
+            45px;
+
+    }
+
+}
+
+
+
+/*==================================================
+        MOBILE
+==================================================*/
+
+@media (max-width:800px){
+
+    .dashboard{
+
+        --sidebar-width:0px;
+
+    }
+
+    #sidebar-container{
+
+        width:0;
+
+    }
+
+    .dashboard-main{
+
+        width:100%;
+
+        margin-left:0;
+
+    }
+
+    .dashboard-content{
+
+        width:100%;
+
+        padding:
+
+            25px
+
+            20px
+
+            45px;
+
+    }
+
+}
+
+
+
+/*==================================================
+        SMALL MOBILE
+==================================================*/
+
+@media (max-width:500px){
+
+    .dashboard-content{
+
+        padding:
+
+            20px
+
+            15px
+
+            40px;
+
+    }
+
+    #overview-container,
+    #analytics-container,
+    #shipments-container,
+    #activity-container,
+    #fleet-container{
+
+        margin-bottom:20px !important;
+
+    }
+
+}
+
+
+
+/*==================================================
+        EXTRA SMALL
+==================================================*/
+
+@media (max-width:380px){
+
+    .dashboard-content{
+
+        padding-left:12px;
+
+        padding-right:12px;
+
+    }
 
 }

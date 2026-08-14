@@ -1,26 +1,19 @@
 /*==================================================*
                     DASHBOARD TOPBAR
                         topbar.js
-*
-* PURPOSE:
-*
-* - Initialize dashboard topbar
-* - Load logged-in user
-* - Profile dropdown
-* - Theme toggle
-* - Notifications
-* - Mobile menu
-* - Logout
-*
-* IMPORTANT:
-*
-* This file controls ONLY the dashboard topbar.
-*
-* Main website navbar logic belongs to:
-* navbar.js
-*
-* Logout confirmation is handled by the
-* modern logout popup.
+
+    PURPOSE:
+    - Initialize dashboard topbar
+    - Load logged-in user
+    - Profile dropdown
+    - Quick Access dropdown
+    - Theme toggle
+    - Notifications
+    - Mobile menu
+    - Logout
+
+    IMPORTANT:
+    This file controls ONLY the dashboard topbar.
 *==================================================*/
 
 
@@ -35,44 +28,17 @@ function initTopbar() {
     );
 
 
-    /*==============================================
-                    LOAD USER
-    ==============================================*/
-
     loadTopbarUser();
-
-
-    /*==============================================
-                    PROFILE
-    ==============================================*/
 
     setupTopbarProfile();
 
-
-    /*==============================================
-                    THEME
-    ==============================================*/
-
     setupTopbarTheme();
-
-
-    /*==============================================
-                    NOTIFICATIONS
-    ==============================================*/
 
     setupTopbarNotifications();
 
-
-    /*==============================================
-                    MOBILE MENU
-    ==============================================*/
+    setupTopbarQuickAccess();
 
     setupTopbarMenu();
-
-
-    /*==============================================
-                    LOGOUT
-    ==============================================*/
 
     setupTopbarLogout();
 
@@ -80,7 +46,7 @@ function initTopbar() {
 
 
 /*==================================================*
-                LOAD TOPBAR USER
+                    LOAD TOPBAR USER
 *==================================================*/
 
 function loadTopbarUser() {
@@ -93,13 +59,14 @@ function loadTopbarUser() {
     ==============================================*/
 
     if (
-        typeof getUser ===
+        typeof window.getUser ===
         "function"
     ) {
 
         try {
 
-            user = getUser();
+            user =
+                window.getUser();
 
         }
         catch (error) {
@@ -114,9 +81,9 @@ function loadTopbarUser() {
     }
 
 
-    /*
-        Fallback to localStorage.
-    */
+    /*==============================================
+                    FALLBACK STORAGE
+    ==============================================*/
 
     if (!user) {
 
@@ -166,6 +133,18 @@ function loadTopbarUser() {
         );
 
 
+    const dropdownUsername =
+        document.getElementById(
+            "topbarDropdownUsername"
+        );
+
+
+    const dropdownInitial =
+        document.getElementById(
+            "topbarDropdownInitial"
+        );
+
+
     const email =
         document.getElementById(
             "topbarEmail"
@@ -189,6 +168,22 @@ function loadTopbarUser() {
         if (initial) {
 
             initial.textContent =
+                "G";
+
+        }
+
+
+        if (dropdownUsername) {
+
+            dropdownUsername.textContent =
+                "Guest";
+
+        }
+
+
+        if (dropdownInitial) {
+
+            dropdownInitial.textContent =
                 "G";
 
         }
@@ -232,7 +227,7 @@ function loadTopbarUser() {
 
 
     /*==============================================
-                    USERNAME
+                    TOPBAR USERNAME
     ==============================================*/
 
     if (username) {
@@ -246,12 +241,36 @@ function loadTopbarUser() {
 
 
     /*==============================================
-                    INITIAL
+                    TOPBAR INITIAL
     ==============================================*/
 
     if (initial) {
 
         initial.textContent =
+            userInitial;
+
+    }
+
+
+    /*==============================================
+                    DROPDOWN USERNAME
+    ==============================================*/
+
+    if (dropdownUsername) {
+
+        dropdownUsername.textContent =
+            name;
+
+    }
+
+
+    /*==============================================
+                    DROPDOWN INITIAL
+    ==============================================*/
+
+    if (dropdownInitial) {
+
+        dropdownInitial.textContent =
             userInitial;
 
     }
@@ -264,7 +283,8 @@ function loadTopbarUser() {
     if (email) {
 
         email.textContent =
-            userEmail;
+            userEmail ||
+            "No email available";
 
     }
 
@@ -272,7 +292,7 @@ function loadTopbarUser() {
 
 
 /*==================================================*
-                PROFILE DROPDOWN
+                    PROFILE DROPDOWN
 *==================================================*/
 
 function setupTopbarProfile() {
@@ -358,14 +378,32 @@ function setupTopbarProfile() {
 
 
             const isOpen =
-                profile.classList.toggle(
+                !profile.classList.contains(
                     "active"
                 );
+
+
+            closeTopbarNotification();
+
+
+            closeTopbarQuickAccess();
+
+
+            profile.classList.toggle(
+                "active",
+                isOpen
+            );
 
 
             profileCard.setAttribute(
                 "aria-expanded",
                 String(isOpen)
+            );
+
+
+            dropdown.setAttribute(
+                "aria-hidden",
+                String(!isOpen)
             );
 
 
@@ -397,7 +435,7 @@ function setupTopbarProfile() {
 
 
     /*==============================================
-                    OUTSIDE
+                    OUTSIDE CLICK
     ==============================================*/
 
     document.addEventListener(
@@ -410,7 +448,7 @@ function setupTopbarProfile() {
                 )
             ) {
 
-                closeProfile();
+                closeTopbarProfile();
 
             }
 
@@ -431,37 +469,82 @@ function setupTopbarProfile() {
                 "Escape"
             ) {
 
-                closeProfile();
+                closeTopbarProfile();
 
             }
 
         }
     );
 
+}
 
-    /*==============================================
-                CLOSE FUNCTION
-    ==============================================*/
 
-    function closeProfile() {
+/*==================================================*
+                CLOSE PROFILE
+*==================================================*/
 
-        profile.classList.remove(
-            "active"
+function closeTopbarProfile() {
+
+    const profile =
+        document.querySelector(
+            ".dashboard-topbar .profile"
         );
 
+
+    if (!profile) {
+
+        return;
+
+    }
+
+
+    const profileCard =
+        profile.querySelector(
+            ".profile-card"
+        );
+
+
+    const dropdown =
+        profile.querySelector(
+            ".profile-dropdown"
+        );
+
+
+    const chevron =
+        profile.querySelector(
+            ".profile-arrow i"
+        );
+
+
+    profile.classList.remove(
+        "active"
+    );
+
+
+    if (profileCard) {
 
         profileCard.setAttribute(
             "aria-expanded",
             "false"
         );
 
+    }
 
-        if (chevron) {
 
-            chevron.style.transform =
-                "rotate(0deg)";
+    if (dropdown) {
 
-        }
+        dropdown.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+    }
+
+
+    if (chevron) {
+
+        chevron.style.transform =
+            "rotate(0deg)";
 
     }
 
@@ -521,7 +604,7 @@ function setupTopbarTheme() {
         );
 
 
-    applyTheme(
+    applyTopbarTheme(
         savedTheme === "dark"
     );
 
@@ -545,7 +628,7 @@ function setupTopbarTheme() {
                 );
 
 
-            applyTheme(
+            applyTopbarTheme(
                 dark
             );
 
@@ -554,10 +637,10 @@ function setupTopbarTheme() {
 
 
     /*==============================================
-                APPLY THEME FUNCTION
+                APPLY THEME
     ==============================================*/
 
-    function applyTheme(dark) {
+    function applyTopbarTheme(dark) {
 
         document.body.classList.toggle(
             "dark-mode",
@@ -593,13 +676,13 @@ function setupTopbarTheme() {
 
 function setupTopbarNotifications() {
 
-    const notificationWrapper =
+    const wrapper =
         document.querySelector(
-            ".dashboard-topbar .notification-wrapper"
+            "#topbarNotificationWrapper"
         );
 
 
-    if (!notificationWrapper) {
+    if (!wrapper) {
 
         console.warn(
             "⚠️ Topbar notification wrapper not found"
@@ -611,19 +694,19 @@ function setupTopbarNotifications() {
 
 
     const button =
-        notificationWrapper.querySelector(
+        wrapper.querySelector(
             ".notification-btn"
         );
 
 
     const dropdown =
-        notificationWrapper.querySelector(
-            ".notification-dropdown"
+        wrapper.querySelector(
+            "#notificationDropdown"
         );
 
 
     const closeButton =
-        notificationWrapper.querySelector(
+        wrapper.querySelector(
             ".close-notification"
         );
 
@@ -634,7 +717,7 @@ function setupTopbarNotifications() {
     ) {
 
         console.warn(
-            "⚠️ Notification elements missing"
+            "⚠️ Topbar notification elements missing"
         );
 
         return;
@@ -647,21 +730,51 @@ function setupTopbarNotifications() {
     ==============================================*/
 
     if (
-        button.dataset.notificationReady ===
+        button.dataset.topbarNotificationReady ===
         "true"
     ) {
+
+        /*
+            Still refresh the UI if it
+            has already been initialized.
+        */
+
+        if (
+            typeof window.setupNotificationUI ===
+            "function"
+        ) {
+
+            window.setupNotificationUI();
+
+        }
 
         return;
 
     }
 
 
-    button.dataset.notificationReady =
+    button.dataset.topbarNotificationReady =
         "true";
 
 
     /*==============================================
-                    OPEN
+                    INITIAL STATE
+    ==============================================*/
+
+    button.setAttribute(
+        "aria-expanded",
+        "false"
+    );
+
+
+    dropdown.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    /*==============================================
+                    OPEN / CLOSE
     ==============================================*/
 
     button.addEventListener(
@@ -674,9 +787,28 @@ function setupTopbarNotifications() {
 
 
             const isOpen =
-                notificationWrapper.classList.toggle(
+                !wrapper.classList.contains(
                     "active"
                 );
+
+
+            /*==============================
+                    CLOSE OTHER MENUS
+            ==============================*/
+
+            closeTopbarProfile();
+
+            closeTopbarQuickAccess();
+
+
+            /*==============================
+                    TOGGLE
+            ==============================*/
+
+            wrapper.classList.toggle(
+                "active",
+                isOpen
+            );
 
 
             button.setAttribute(
@@ -691,21 +823,18 @@ function setupTopbarNotifications() {
             );
 
 
-            /*
-                Close profile when
-                notifications open.
-            */
+            /*==============================
+                    SOUND
+            ==============================*/
 
-            const profile =
-                document.querySelector(
-                    ".dashboard-topbar .profile"
-                );
+            if (
+                isOpen &&
+                typeof window.playSound ===
+                "function"
+            ) {
 
-
-            if (profile) {
-
-                profile.classList.remove(
-                    "active"
+                window.playSound(
+                    "click"
                 );
 
             }
@@ -729,7 +858,7 @@ function setupTopbarNotifications() {
                 event.stopPropagation();
 
 
-                closeNotifications();
+                closeTopbarNotification();
 
             }
         );
@@ -738,7 +867,7 @@ function setupTopbarNotifications() {
 
 
     /*==============================================
-                    OUTSIDE CLICK
+                DROPDOWN CLICK
     ==============================================*/
 
     dropdown.addEventListener(
@@ -751,17 +880,21 @@ function setupTopbarNotifications() {
     );
 
 
+    /*==============================================
+                OUTSIDE CLICK
+    ==============================================*/
+
     document.addEventListener(
         "click",
         function (event) {
 
             if (
-                !notificationWrapper.contains(
+                !wrapper.contains(
                     event.target
                 )
             ) {
 
-                closeNotifications();
+                closeTopbarNotification();
 
             }
 
@@ -782,7 +915,7 @@ function setupTopbarNotifications() {
                 "Escape"
             ) {
 
-                closeNotifications();
+                closeTopbarNotification();
 
             }
 
@@ -791,21 +924,115 @@ function setupTopbarNotifications() {
 
 
     /*==============================================
-                CLOSE FUNCTION
+                EXISTING NOTIFICATION UI
     ==============================================*/
 
-    function closeNotifications() {
+    if (
+        typeof window.setupNotificationUI ===
+        "function"
+    ) {
 
-        notificationWrapper.classList.remove(
+        window.setupNotificationUI();
+
+    }
+
+}
+
+/*==================================================*
+        OPEN NOTIFICATION DROPDOWN
+*==================================================*/
+
+function openTopbarNotification() {
+
+    const wrapper =
+        document.querySelector(
+            "#topbarNotificationWrapper"
+        );
+
+    if (!wrapper) {
+        return;
+    }
+
+
+    const button =
+        wrapper.querySelector(
+            ".notification-btn"
+        );
+
+
+    const dropdown =
+        wrapper.querySelector(
+            "#notificationDropdown"
+        );
+
+
+    if (!button || !dropdown) {
+        return;
+    }
+
+
+    /* CLOSE OTHER MENUS */
+
+    closeTopbarProfile();
+
+    closeTopbarQuickAccess();
+
+
+    /* OPEN DROPDOWN */
+
+    dropdown.classList.add(
+        "active"
+    );
+
+
+    button.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+
+    dropdown.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+}
+
+
+/*==================================================*
+        CLOSE NOTIFICATION DROPDOWN
+*==================================================*/
+
+function closeTopbarNotification() {
+
+    const wrapper =
+        document.querySelector(
+            "#topbarNotificationWrapper"
+        );
+
+
+    if (!wrapper) {
+        return;
+    }
+
+
+    const button =
+        wrapper.querySelector(
+            ".notification-btn"
+        );
+
+
+    const dropdown =
+        wrapper.querySelector(
+            "#notificationDropdown"
+        );
+
+
+    if (dropdown) {
+
+        dropdown.classList.remove(
             "active"
         );
-
-
-        button.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
 
         dropdown.setAttribute(
             "aria-hidden",
@@ -815,17 +1042,168 @@ function setupTopbarNotifications() {
     }
 
 
-    /*
-        Connect your existing
-        notification UI.
-    */
+    if (button) {
+
+        button.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+}
+
+/*==================================================*
+                QUICK ACCESS
+*==================================================*/
+
+function setupTopbarQuickAccess() {
+
+    const button =
+        document.querySelector(
+            "#quickAccessBtn"
+        );
+
+
+    const wrapper =
+        document.querySelector(
+            ".quick-access-wrapper"
+        );
+
 
     if (
-        typeof setupNotificationUI ===
-        "function"
+        !button ||
+        !wrapper
     ) {
 
-        setupNotificationUI();
+        return;
+
+    }
+
+
+    const menu =
+        wrapper.querySelector(
+            ".quick-menu"
+        );
+
+
+    if (!menu) {
+
+        return;
+
+    }
+
+
+    if (
+        button.dataset.quickReady ===
+        "true"
+    ) {
+
+        return;
+
+    }
+
+
+    button.dataset.quickReady =
+        "true";
+
+
+    button.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+
+            const isOpen =
+                !wrapper.classList.contains(
+                    "active"
+                );
+
+
+            closeTopbarProfile();
+
+            closeTopbarNotification();
+
+
+            wrapper.classList.toggle(
+                "active",
+                isOpen
+            );
+
+
+            button.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+
+            if (
+                isOpen &&
+                typeof window.playSound ===
+                "function"
+            ) {
+
+                window.playSound(
+                    "click"
+                );
+
+            }
+
+        }
+    );
+
+
+    menu.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+}
+
+
+/*==================================================*
+                CLOSE QUICK ACCESS
+*==================================================*/
+
+function closeTopbarQuickAccess() {
+
+    const wrapper =
+        document.querySelector(
+            ".quick-access-wrapper"
+        );
+
+
+    if (!wrapper) {
+
+        return;
+
+    }
+
+
+    const button =
+        wrapper.querySelector(
+            "#quickAccessBtn"
+        );
+
+
+    wrapper.classList.remove(
+        "active"
+    );
+
+
+    if (button) {
+
+        button.setAttribute(
+            "aria-expanded",
+            "false"
+        );
 
     }
 
@@ -884,28 +1262,44 @@ function setupTopbarMenu() {
             event.stopPropagation();
 
 
+            const isOpen =
+                !menuButton.classList.contains(
+                    "active"
+                );
+
+
             menuButton.classList.toggle(
-                "active"
+                "active",
+                isOpen
             );
 
-
-            /*
-                Support both possible
-                sidebar class systems.
-            */
 
             if (sidebar) {
 
                 sidebar.classList.toggle(
-                    "active"
+                    "active",
+                    isOpen
                 );
 
             }
 
 
             document.body.classList.toggle(
-                "sidebar-open"
+                "sidebar-open",
+                isOpen
             );
+
+
+            if (
+                typeof window.playSound ===
+                "function"
+            ) {
+
+                window.playSound(
+                    "click"
+                );
+
+            }
 
         }
     );
@@ -996,46 +1390,32 @@ function setupTopbarLogout() {
             event.stopPropagation();
 
 
-            /*
-                Close profile dropdown
-                before opening logout.
-            */
+            closeTopbarProfile();
 
-            const profile =
-                document.querySelector(
-                    ".dashboard-topbar .profile"
-                );
+            closeTopbarNotification();
 
-
-            if (profile) {
-
-                profile.classList.remove(
-                    "active"
-                );
-
-            }
+            closeTopbarQuickAccess();
 
 
             /*======================================
-                    USE MODERN POPUP
+                    MODERN LOGOUT POPUP
             ======================================*/
 
             if (
-                typeof openDashboardLogoutPopup ===
+                typeof window.openDashboardLogoutPopup ===
                 "function"
             ) {
 
-                openDashboardLogoutPopup();
+                window.openDashboardLogoutPopup();
 
                 return;
 
             }
 
 
-            /*
-                Fallback if dashboard.js
-                hasn't loaded yet.
-            */
+            /*======================================
+                    FALLBACK
+            ======================================*/
 
             const popup =
                 document.getElementById(
@@ -1054,6 +1434,7 @@ function setupTopbarLogout() {
                     "logout-popup-open"
                 );
 
+
                 return;
 
             }
@@ -1071,9 +1452,6 @@ function setupTopbarLogout() {
 
 /*==================================================*
                 REFRESH TOPBAR USER
-*
-* Useful after login/logout without
-* reloading the entire page.
 *==================================================*/
 
 function refreshTopbarUser() {
@@ -1089,90 +1467,51 @@ function refreshTopbarUser() {
 
 function closeAllTopbarMenus() {
 
-    /*==============================================
-                    PROFILE
-    ==============================================*/
+    closeTopbarProfile();
 
-    const profile =
+    closeTopbarNotification();
+
+    closeTopbarQuickAccess();
+
+
+    const menuButton =
         document.querySelector(
-            ".dashboard-topbar .profile"
+            ".dashboard-topbar .menu-toggle"
         );
 
 
-    if (profile) {
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
 
-        profile.classList.remove(
+
+    if (menuButton) {
+
+        menuButton.classList.remove(
             "active"
         );
 
-
-        const card =
-            profile.querySelector(
-                ".profile-card"
-            );
-
-
-        if (card) {
-
-            card.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-        }
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
 
     }
 
 
-    /*==============================================
-                    NOTIFICATIONS
-    ==============================================*/
+    if (sidebar) {
 
-    const notifications =
-        document.querySelector(
-            ".dashboard-topbar .notification-wrapper"
-        );
-
-
-    if (notifications) {
-
-        notifications.classList.remove(
+        sidebar.classList.remove(
             "active"
         );
 
-
-        const button =
-            notifications.querySelector(
-                ".notification-btn"
-            );
-
-
-        const dropdown =
-            notifications.querySelector(
-                ".notification-dropdown"
-            );
-
-
-        if (button) {
-
-            button.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-        }
-
-
-        if (dropdown) {
-
-            dropdown.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-        }
-
     }
+
+
+    document.body.classList.remove(
+        "sidebar-open"
+    );
 
 }
 
@@ -1193,13 +1532,29 @@ window.refreshTopbarUser =
     refreshTopbarUser;
 
 
+window.closeTopbarProfile =
+    closeTopbarProfile;
+
+
+window.openTopbarNotification =
+    openTopbarNotification;
+
+
+window.closeTopbarNotification =
+    closeTopbarNotification;
+
+
+window.closeTopbarQuickAccess =
+    closeTopbarQuickAccess;
+
+
 window.closeAllTopbarMenus =
     closeAllTopbarMenus;
 
 
 /*==================================================*
                     READY
-*==================================================*/
+==================================================*/
 
 console.log(
     "✅ Topbar JS loaded"

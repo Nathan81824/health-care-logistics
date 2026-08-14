@@ -1,0 +1,748 @@
+/* ==================================================
+        ACTIVITY SECTION
+================================================== */
+
+.activity-section{
+
+    width:100%;
+
+    margin:0;
+
+    padding:0;
+
+    color:#ffffff;
+
+}
+
+
+/* ==================================================
+        HEADER
+================================================== */
+
+.activity-header{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    margin-bottom:25px;
+
+}
+
+
+.activity-title{
+
+    min-width:0;
+
+}
+
+
+.activity-title .section-label{
+
+    display:inline-block;
+
+    margin-bottom:8px;
+
+    color:#38bdf8;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+}
+
+
+.activity-title h2{
+
+    margin:0 0 7px;
+
+    color:#ffffff;
+
+    font-size:1.8rem;
+
+    font-weight:750;
+
+}
+
+
+.activity-title p{
+
+    margin:0;
+
+    color:#8fa8ba;
+
+    font-size:.9rem;
+
+    line-height:1.6;
+
+}
+
+
+/* ==================================================
+        VIEW ALL BUTTON
+================================================== */
+
+.activity-action{
+
+    flex-shrink:0;
+
+    min-height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:0 17px;
+
+    border:1px solid rgba(56,189,248,.18);
+
+    border-radius:12px;
+
+    background:rgba(14,165,233,.07);
+
+    color:#8fdcff;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.activity-action i{
+
+    font-size:.75rem;
+
+    transition:
+        transform .3s ease;
+
+}
+
+
+.activity-action:hover{
+
+    background:rgba(14,165,233,.14);
+
+    border-color:rgba(56,189,248,.35);
+
+    color:#ffffff;
+
+    transform:translateY(-2px);
+
+}
+
+
+.activity-action:hover i{
+
+    transform:translateX(4px);
+
+}
+
+
+/* ==================================================
+        ACTIVITY CARD
+================================================== */
+
+.activity-card{
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,37,56,.88),
+            rgba(7,26,42,.94)
+        );
+
+    border:1px solid rgba(148,163,184,.10);
+
+    border-radius:20px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
+
+}
+
+
+/* ==================================================
+        CARD HEADER
+================================================== */
+
+.activity-card-header{
+
+    min-height:78px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:20px 24px;
+
+    border-bottom:
+        1px solid rgba(148,163,184,.09);
+
+}
+
+
+.activity-card-header h3{
+
+    margin:0 0 5px;
+
+    color:#ffffff;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+
+.activity-card-header p{
+
+    margin:0;
+
+    color:#7892a5;
+
+    font-size:.78rem;
+
+}
+
+
+/* ==================================================
+        LIVE INDICATOR
+================================================== */
+
+.activity-live{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:6px 10px;
+
+    border:1px solid rgba(34,197,94,.12);
+
+    border-radius:20px;
+
+    background:rgba(34,197,94,.07);
+
+    color:#86efac;
+
+    font-size:.7rem;
+
+    font-weight:600;
+
+}
+
+
+.activity-live-dot{
+
+    width:7px;
+
+    height:7px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,.08);
+
+    animation:
+        activityPulse 2s ease-in-out infinite;
+
+}
+
+
+@keyframes activityPulse{
+
+    0%,
+    100%{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        opacity:.55;
+
+        transform:scale(.8);
+
+    }
+
+}
+
+
+/* ==================================================
+        ACTIVITY LIST
+================================================== */
+
+.activity-list{
+
+    width:100%;
+
+}
+
+
+/* ==================================================
+        ACTIVITY ITEM
+================================================== */
+
+.activity-item{
+
+    position:relative;
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:19px 24px;
+
+    border-bottom:
+        1px solid rgba(148,163,184,.06);
+
+    transition:
+        background .25s ease;
+
+}
+
+
+.activity-item:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.activity-item:hover{
+
+    background:
+        rgba(56,189,248,.035);
+
+}
+
+
+/* ==================================================
+        ACTIVITY ICON
+================================================== */
+
+.activity-icon{
+
+    width:43px;
+
+    height:43px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    font-size:.95rem;
+
+    border:1px solid transparent;
+
+}
+
+
+.activity-icon-blue{
+
+    color:#38bdf8;
+
+    background:rgba(56,189,248,.09);
+
+    border-color:rgba(56,189,248,.12);
+
+}
+
+
+.activity-icon-green{
+
+    color:#4ade80;
+
+    background:rgba(34,197,94,.09);
+
+    border-color:rgba(34,197,94,.12);
+
+}
+
+
+.activity-icon-purple{
+
+    color:#a78bfa;
+
+    background:rgba(139,92,246,.09);
+
+    border-color:rgba(139,92,246,.12);
+
+}
+
+
+.activity-icon-orange{
+
+    color:#fb923c;
+
+    background:rgba(249,115,22,.09);
+
+    border-color:rgba(249,115,22,.12);
+
+}
+
+
+.activity-icon-cyan{
+
+    color:#22d3ee;
+
+    background:rgba(6,182,212,.09);
+
+    border-color:rgba(6,182,212,.12);
+
+}
+
+
+/* ==================================================
+        ACTIVITY CONTENT
+================================================== */
+
+.activity-content{
+
+    min-width:0;
+
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+}
+
+
+.activity-main{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+
+.activity-main strong{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#dcebf4;
+
+    font-size:.84rem;
+
+    font-weight:650;
+
+}
+
+
+.activity-main span{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#71899b;
+
+    font-size:.75rem;
+
+}
+
+
+.activity-content time{
+
+    flex-shrink:0;
+
+    color:#617b8c;
+
+    font-size:.7rem;
+
+    white-space:nowrap;
+
+}
+
+
+/* ==================================================
+        EMPTY STATE
+================================================== */
+
+.activity-empty{
+
+    min-height:220px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    text-align:center;
+
+    padding:30px;
+
+}
+
+
+.activity-empty i{
+
+    margin-bottom:5px;
+
+    color:#3d6279;
+
+    font-size:1.6rem;
+
+}
+
+
+.activity-empty strong{
+
+    color:#a9bdc9;
+
+    font-size:.86rem;
+
+    font-weight:600;
+
+}
+
+
+.activity-empty span{
+
+    color:#627d8e;
+
+    font-size:.75rem;
+
+}
+
+
+/* ==================================================
+        HIDDEN EMPTY STATE
+================================================== */
+
+.activity-empty[hidden]{
+
+    display:none !important;
+
+}
+
+
+/* ==================================================
+        TABLET
+================================================== */
+
+@media(max-width:800px){
+
+    .activity-header{
+
+        align-items:flex-start;
+
+    }
+
+
+    .activity-title h2{
+
+        font-size:1.55rem;
+
+    }
+
+
+    .activity-card-header{
+
+        padding:18px 20px;
+
+    }
+
+
+    .activity-item{
+
+        padding:17px 20px;
+
+    }
+
+}
+
+
+/* ==================================================
+        MOBILE
+================================================== */
+
+@media(max-width:600px){
+
+    .activity-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        margin-bottom:20px;
+
+    }
+
+
+    .activity-action{
+
+        width:auto;
+
+    }
+
+
+    .activity-card-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:12px;
+
+        padding:18px;
+
+    }
+
+
+    .activity-item{
+
+        align-items:flex-start;
+
+        gap:12px;
+
+        padding:16px 18px;
+
+    }
+
+
+    .activity-icon{
+
+        width:40px;
+
+        height:40px;
+
+        border-radius:11px;
+
+        font-size:.85rem;
+
+    }
+
+
+    .activity-content{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:6px;
+
+    }
+
+
+    .activity-main strong,
+    .activity-main span{
+
+        white-space:normal;
+
+    }
+
+
+    .activity-content time{
+
+        font-size:.68rem;
+
+    }
+
+}
+
+
+/* ==================================================
+        SMALL MOBILE
+================================================== */
+
+@media(max-width:400px){
+
+    .activity-title h2{
+
+        font-size:1.4rem;
+
+    }
+
+
+    .activity-item{
+
+        padding:15px;
+
+    }
+
+
+    .activity-main strong{
+
+        font-size:.8rem;
+
+    }
+
+
+    .activity-main span{
+
+        font-size:.7rem;
+
+    }
+
+}

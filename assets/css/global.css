@@ -1,32 +1,77 @@
-/*==========================================
+/*==================================================
+            GLOBAL CSS
+==================================================*/
+
+
+/*==================================================
             IMPORTS
-==========================================*/
-
-@import "core/main.css";
-@import "home/index.css";
-@import "about/index.css";
-@import "services/index.css";
-@import "industries-we-serve/index.css";
-@import "hipaa/index.css";
-@import "contact/index.css";
-@import "auth/index.css";
-@import "dashboard/dashboard.css";
-@import "shared/index.css";
-
-@import"/assets/css/core/responsive/responsive.css";
+==================================================*/
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
 
-/*==========================================
+/*==================================================
+            CORE
+==================================================*/
+
+@import "core/main.css";
+
+
+/*==================================================
+            PAGES
+==================================================*/
+
+@import "home/index.css";
+
+@import "about/index.css";
+
+@import "services/index.css";
+
+@import "industries-we-serve/index.css";
+
+@import "hipaa/index.css";
+
+@import "contact/index.css";
+
+@import "auth/index.css";
+
+@import "dashboard/dashboard.css";
+
+
+/*==================================================
+            SHARED
+==================================================*/
+
+@import "shared/index.css";
+
+
+/*==================================================
+            RESPONSIVE
+==================================================*/
+
+@import "/assets/css/core/responsive/responsive.css";
+
+
+
+/*==================================================
             RESET
-==========================================*/
+==================================================*/
 
 *{
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
 }
+
+
+
+/*==================================================
+            HTML
+==================================================*/
 
 html{
 
@@ -38,7 +83,15 @@ html{
 
 }
 
+
+
+/*==================================================
+            BODY
+==================================================*/
+
 body{
+
+    min-height:100vh;
 
     font-family:"Inter",sans-serif;
 
@@ -48,39 +101,13 @@ body{
 
     overflow-x:hidden;
 
-    min-height:100vh;
-
-}
-
-.logo-up{
-    width:52px;
-    height:52px;
-    object-fit:contain;
-}
-
-/*================================
-   FIX CHROME AUTOFILL COLORS
-================================*/
-
-.input-box input:-webkit-autofill,
-.input-box input:-webkit-autofill:hover,
-.input-box input:-webkit-autofill:focus,
-.input-box input:-webkit-autofill:active {
-
-    -webkit-text-fill-color:#ffffff;
-
-    -webkit-box-shadow:
-        0 0 0px 1000px #162033 inset;
-
-    transition:
-        background-color 5000s ease-in-out 0s;
-
 }
 
 
-/*==========================================
-            TYPOGRAPHY
-==========================================*/
+
+/*==================================================
+            HEADINGS
+==================================================*/
 
 h1,
 h2,
@@ -99,6 +126,12 @@ h6{
 
 }
 
+
+
+/*==================================================
+            PARAGRAPHS
+==================================================*/
+
 p{
 
     color:#94a3b8;
@@ -107,6 +140,12 @@ p{
 
 }
 
+
+
+/*==================================================
+            LINKS
+==================================================*/
+
 a{
 
     color:inherit;
@@ -114,6 +153,30 @@ a{
     text-decoration:none;
 
 }
+
+
+
+/*==================================================
+            BUTTONS
+==================================================*/
+
+button{
+
+    cursor:pointer;
+
+    border:none;
+
+    background:none;
+
+    font-family:"Inter",sans-serif;
+
+}
+
+
+
+/*==================================================
+            FORM ELEMENTS
+==================================================*/
 
 button,
 input,
@@ -124,42 +187,11 @@ select{
 
 }
 
-button{
-
-    cursor:pointer;
-
-    border:none;
-
-    background:none;
-
-}
-
-img{
-
-    display:block;
-
-    max-width:100%;
-
-    height:auto;
-
-}
 
 
-/*==========================================
-            LIST RESET
-==========================================*/
-
-ul,
-ol{
-
-    list-style:none;
-
-}
-
-
-/*==========================================
-            FORM RESET
-==========================================*/
+/*==================================================
+            INPUT RESET
+==================================================*/
 
 input,
 textarea,
@@ -172,9 +204,76 @@ select{
 }
 
 
-/*==========================================
+
+/*==================================================
+            IMAGES
+==================================================*/
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+
+
+/*==================================================
+            LIST RESET
+==================================================*/
+
+ul,
+ol{
+
+    list-style:none;
+
+}
+
+
+
+/*==================================================
+            LOGO
+==================================================*/
+
+.logo-up{
+
+    width:52px;
+
+    height:52px;
+
+    object-fit:contain;
+
+}
+
+
+
+/*==================================================
+            CHROME AUTOFILL
+==================================================*/
+
+.input-box input:-webkit-autofill,
+.input-box input:-webkit-autofill:hover,
+.input-box input:-webkit-autofill:focus,
+.input-box input:-webkit-autofill:active{
+
+    -webkit-text-fill-color:#ffffff;
+
+    -webkit-box-shadow:
+        0 0 0 1000px #162033 inset;
+
+    transition:
+        background-color 5000s ease-in-out 0s;
+
+}
+
+
+
+/*==================================================
             OVERLAY
-==========================================*/
+==================================================*/
 
 .overlay{
 
@@ -189,11 +288,22 @@ select{
 }
 
 
+
+/*==================================================
+            UTILITY — HIDDEN
+==================================================*/
+
 .hidden{
 
     display:none !important;
 
 }
+
+
+
+/*==================================================
+            UTILITY — VISIBLE
+==================================================*/
 
 .visible{
 
@@ -201,9 +311,11 @@ select{
 
 }
 
-/*==========================================
+
+
+/*==================================================
             CUSTOM SCROLLBAR
-==========================================*/
+==================================================*/
 
 ::-webkit-scrollbar{
 
@@ -211,11 +323,23 @@ select{
 
 }
 
+
+
+/*==================================================
+            SCROLLBAR TRACK
+==================================================*/
+
 ::-webkit-scrollbar-track{
 
     background:#020617;
 
 }
+
+
+
+/*==================================================
+            SCROLLBAR THUMB
+==================================================*/
 
 ::-webkit-scrollbar-thumb{
 
@@ -227,6 +351,12 @@ select{
 
 }
 
+
+
+/*==================================================
+            SCROLLBAR HOVER
+==================================================*/
+
 ::-webkit-scrollbar-thumb:hover{
 
     background:#0ea5e9;
@@ -234,9 +364,10 @@ select{
 }
 
 
-/*==========================================
-            DYNAMIC SCROLLBAR COLORS
-==========================================*/
+
+/*==================================================
+            DYNAMIC SCROLLBAR — CYAN
+==================================================*/
 
 html.scroll-cyan::-webkit-scrollbar-thumb{
 
@@ -244,11 +375,23 @@ html.scroll-cyan::-webkit-scrollbar-thumb{
 
 }
 
+
+
+/*==================================================
+            DYNAMIC SCROLLBAR — BLUE
+==================================================*/
+
 html.scroll-blue::-webkit-scrollbar-thumb{
 
     background:#0ea5e9;
 
 }
+
+
+
+/*==================================================
+            DYNAMIC SCROLLBAR — PURPLE
+==================================================*/
 
 html.scroll-purple::-webkit-scrollbar-thumb{
 

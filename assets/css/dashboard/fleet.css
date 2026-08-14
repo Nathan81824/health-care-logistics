@@ -1,0 +1,1036 @@
+/* ==================================================
+        FLEET SECTION
+================================================== */
+
+.fleet-section{
+
+    width:100%;
+
+    margin:0;
+
+    padding:0;
+
+    color:#ffffff;
+
+}
+
+
+/* ==================================================
+        HEADER
+================================================== */
+
+.fleet-header{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    margin-bottom:25px;
+
+}
+
+
+.fleet-title{
+
+    min-width:0;
+
+}
+
+
+.fleet-title .section-label{
+
+    display:inline-block;
+
+    margin-bottom:8px;
+
+    color:#38bdf8;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+}
+
+
+.fleet-title h2{
+
+    margin:0 0 7px;
+
+    color:#ffffff;
+
+    font-size:1.8rem;
+
+    font-weight:750;
+
+}
+
+
+.fleet-title p{
+
+    margin:0;
+
+    color:#8fa8ba;
+
+    font-size:.9rem;
+
+    line-height:1.6;
+
+}
+
+
+/* ==================================================
+        MANAGE FLEET BUTTON
+================================================== */
+
+.fleet-action{
+
+    flex-shrink:0;
+
+    min-height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    padding:0 17px;
+
+    border:1px solid rgba(56,189,248,.18);
+
+    border-radius:12px;
+
+    background:rgba(14,165,233,.07);
+
+    color:#8fdcff;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.fleet-action i{
+
+    font-size:.75rem;
+
+    transition:
+        transform .3s ease;
+
+}
+
+
+.fleet-action:hover{
+
+    background:rgba(14,165,233,.14);
+
+    border-color:rgba(56,189,248,.35);
+
+    color:#ffffff;
+
+    transform:translateY(-2px);
+
+}
+
+
+.fleet-action:hover i{
+
+    transform:translateX(4px);
+
+}
+
+
+/* ==================================================
+        FLEET STATS
+================================================== */
+
+.fleet-stats{
+
+    width:100%;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:18px;
+
+    margin-bottom:22px;
+
+}
+
+
+/* ==================================================
+        STAT CARD
+================================================== */
+
+.fleet-stat-card{
+
+    min-width:0;
+
+    min-height:105px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15,42,64,.82),
+            rgba(8,29,47,.88)
+        );
+
+    border:1px solid rgba(148,163,184,.10);
+
+    border-radius:18px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.16);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.fleet-stat-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:
+        rgba(56,189,248,.22);
+
+    box-shadow:
+        0 16px 35px rgba(0,0,0,.23);
+
+}
+
+
+/* ==================================================
+        STAT ICON
+================================================== */
+
+.fleet-stat-icon{
+
+    width:45px;
+
+    height:45px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    font-size:1rem;
+
+    border:1px solid transparent;
+
+}
+
+
+.fleet-icon-green{
+
+    color:#4ade80;
+
+    background:rgba(34,197,94,.09);
+
+    border-color:rgba(34,197,94,.12);
+
+}
+
+
+.fleet-icon-blue{
+
+    color:#38bdf8;
+
+    background:rgba(56,189,248,.09);
+
+    border-color:rgba(56,189,248,.12);
+
+}
+
+
+.fleet-icon-orange{
+
+    color:#fb923c;
+
+    background:rgba(249,115,22,.09);
+
+    border-color:rgba(249,115,22,.12);
+
+}
+
+
+.fleet-icon-purple{
+
+    color:#a78bfa;
+
+    background:rgba(139,92,246,.09);
+
+    border-color:rgba(139,92,246,.12);
+
+}
+
+
+/* ==================================================
+        STAT CONTENT
+================================================== */
+
+.fleet-stat-content{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+
+.fleet-stat-content span{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#8fa8ba;
+
+    font-size:.76rem;
+
+    font-weight:500;
+
+}
+
+
+.fleet-stat-content strong{
+
+    color:#ffffff;
+
+    font-size:1.45rem;
+
+    line-height:1;
+
+    font-weight:750;
+
+}
+
+
+/* ==================================================
+        FLEET CARD
+================================================== */
+
+.fleet-card{
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,37,56,.88),
+            rgba(7,26,42,.94)
+        );
+
+    border:1px solid rgba(148,163,184,.10);
+
+    border-radius:20px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
+
+}
+
+
+/* ==================================================
+        CARD HEADER
+================================================== */
+
+.fleet-card-header{
+
+    min-height:78px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:20px 24px;
+
+    border-bottom:
+        1px solid rgba(148,163,184,.09);
+
+}
+
+
+.fleet-card-header h3{
+
+    margin:0 0 5px;
+
+    color:#ffffff;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+
+.fleet-card-header p{
+
+    margin:0;
+
+    color:#7892a5;
+
+    font-size:.78rem;
+
+}
+
+
+/* ==================================================
+        LIVE STATUS
+================================================== */
+
+.fleet-live{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:6px 10px;
+
+    border:1px solid rgba(34,197,94,.12);
+
+    border-radius:20px;
+
+    background:rgba(34,197,94,.07);
+
+    color:#86efac;
+
+    font-size:.7rem;
+
+    font-weight:600;
+
+}
+
+
+.fleet-live-dot{
+
+    width:7px;
+
+    height:7px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 0 4px rgba(34,197,94,.08);
+
+    animation:
+        fleetPulse 2s ease-in-out infinite;
+
+}
+
+
+@keyframes fleetPulse{
+
+    0%,
+    100%{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        opacity:.55;
+
+        transform:scale(.8);
+
+    }
+
+}
+
+
+/* ==================================================
+        FLEET LIST
+================================================== */
+
+.fleet-list{
+
+    width:100%;
+
+}
+
+
+/* ==================================================
+        FLEET ITEM
+================================================== */
+
+.fleet-item{
+
+    width:100%;
+
+    min-height:82px;
+
+    display:grid;
+
+    grid-template-columns:
+        48px
+        minmax(180px,1fr)
+        minmax(120px,180px)
+        auto;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:17px 24px;
+
+    border-bottom:
+        1px solid rgba(148,163,184,.06);
+
+    transition:
+        background .25s ease;
+
+}
+
+
+.fleet-item:last-child{
+
+    border-bottom:none;
+
+}
+
+
+.fleet-item:hover{
+
+    background:
+        rgba(56,189,248,.035);
+
+}
+
+
+/* ==================================================
+        VEHICLE ICON
+================================================== */
+
+.fleet-vehicle-icon{
+
+    width:44px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    color:#38bdf8;
+
+    background:
+        rgba(56,189,248,.09);
+
+    border:
+        1px solid rgba(56,189,248,.12);
+
+    font-size:.95rem;
+
+}
+
+
+/* ==================================================
+        VEHICLE INFO
+================================================== */
+
+.fleet-vehicle-info{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+
+.fleet-vehicle-info strong{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#dcebf4;
+
+    font-size:.84rem;
+
+    font-weight:650;
+
+}
+
+
+.fleet-vehicle-info span{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    color:#71899b;
+
+    font-size:.74rem;
+
+}
+
+
+/* ==================================================
+        DRIVER
+================================================== */
+
+.fleet-driver{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+
+.fleet-driver span{
+
+    color:#617b8c;
+
+    font-size:.68rem;
+
+}
+
+
+.fleet-driver strong{
+
+    color:#a9bdc9;
+
+    font-size:.76rem;
+
+    font-weight:600;
+
+}
+
+
+/* ==================================================
+        VEHICLE STATUS
+================================================== */
+
+.fleet-status{
+
+    min-width:105px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    padding:7px 10px;
+
+    border-radius:20px;
+
+    font-size:.68rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+
+.fleet-status span{
+
+    width:6px;
+
+    height:6px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+}
+
+
+/* ==================================================
+        AVAILABLE
+================================================== */
+
+.fleet-status-available{
+
+    color:#86efac;
+
+    background:rgba(34,197,94,.07);
+
+    border:1px solid rgba(34,197,94,.12);
+
+}
+
+
+.fleet-status-available span{
+
+    background:#22c55e;
+
+}
+
+
+/* ==================================================
+        ON ROUTE
+================================================== */
+
+.fleet-status-route{
+
+    color:#7dd3fc;
+
+    background:rgba(14,165,233,.07);
+
+    border:1px solid rgba(14,165,233,.12);
+
+}
+
+
+.fleet-status-route span{
+
+    background:#0ea5e9;
+
+}
+
+
+/* ==================================================
+        MAINTENANCE
+================================================== */
+
+.fleet-status-maintenance{
+
+    color:#fdba74;
+
+    background:rgba(249,115,22,.07);
+
+    border:1px solid rgba(249,115,22,.12);
+
+}
+
+
+.fleet-status-maintenance span{
+
+    background:#f97316;
+
+}
+
+
+/* ==================================================
+        EMPTY STATE
+================================================== */
+
+.fleet-empty{
+
+    min-height:220px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:30px;
+
+    text-align:center;
+
+}
+
+
+.fleet-empty[hidden]{
+
+    display:none !important;
+
+}
+
+
+.fleet-empty i{
+
+    margin-bottom:5px;
+
+    color:#3d6279;
+
+    font-size:1.6rem;
+
+}
+
+
+.fleet-empty strong{
+
+    color:#a9bdc9;
+
+    font-size:.86rem;
+
+    font-weight:600;
+
+}
+
+
+.fleet-empty span{
+
+    color:#627d8e;
+
+    font-size:.75rem;
+
+}
+
+
+/* ==================================================
+        TABLET
+================================================== */
+
+@media(max-width:1100px){
+
+    .fleet-stats{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+
+    .fleet-item{
+
+        grid-template-columns:
+            48px
+            minmax(160px,1fr)
+            auto;
+
+    }
+
+
+    .fleet-driver{
+
+        display:none;
+
+    }
+
+}
+
+
+/* ==================================================
+        MOBILE
+================================================== */
+
+@media(max-width:600px){
+
+    .fleet-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        margin-bottom:20px;
+
+    }
+
+
+    .fleet-title h2{
+
+        font-size:1.55rem;
+
+    }
+
+
+    .fleet-action{
+
+        width:auto;
+
+    }
+
+
+    .fleet-stats{
+
+        grid-template-columns:1fr;
+
+        gap:12px;
+
+    }
+
+
+    .fleet-stat-card{
+
+        min-height:90px;
+
+        padding:17px;
+
+    }
+
+
+    .fleet-card-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:12px;
+
+        padding:18px;
+
+    }
+
+
+    .fleet-item{
+
+        grid-template-columns:
+            42px
+            minmax(0,1fr)
+            auto;
+
+        gap:12px;
+
+        padding:16px 18px;
+
+    }
+
+
+    .fleet-vehicle-icon{
+
+        width:40px;
+
+        height:40px;
+
+        border-radius:11px;
+
+    }
+
+
+    .fleet-status{
+
+        min-width:auto;
+
+        padding:6px 8px;
+
+    }
+
+
+    .fleet-status{
+
+        font-size:.63rem;
+
+    }
+
+}
+
+
+/* ==================================================
+        SMALL MOBILE
+================================================== */
+
+@media(max-width:400px){
+
+    .fleet-title h2{
+
+        font-size:1.4rem;
+
+    }
+
+
+    .fleet-item{
+
+        grid-template-columns:
+            40px
+            minmax(0,1fr);
+
+    }
+
+
+    .fleet-status{
+
+        grid-column:2;
+
+        justify-self:start;
+
+    }
+
+
+    .fleet-stat-card{
+
+        padding:15px;
+
+    }
+
+
+    .fleet-stat-icon{
+
+        width:40px;
+
+        height:40px;
+
+    }
+
+
+    .fleet-stat-content strong{
+
+        font-size:1.25rem;
+
+    }
+
+}

@@ -1,0 +1,648 @@
+<section class="analytics-section">
+
+
+    <!-- ==========================================
+            SECTION HEADER
+    =========================================== -->
+
+    <div class="analytics-header">
+
+        <div class="analytics-heading">
+
+            <span class="analytics-tag">
+                Analytics
+            </span>
+
+            <h2>
+                Logistics Performance
+            </h2>
+
+            <p>
+                Monitor shipment activity, delivery performance,
+                and logistics trends across your operations.
+            </p>
+
+        </div>
+
+
+        <div class="analytics-filter">
+
+            <button
+                type="button"
+                class="analytics-filter-btn active"
+                data-period="7"
+            >
+                7 Days
+            </button>
+
+            <button
+                type="button"
+                class="analytics-filter-btn"
+                data-period="30"
+            >
+                30 Days
+            </button>
+
+            <button
+                type="button"
+                class="analytics-filter-btn"
+                data-period="90"
+            >
+                90 Days
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==========================================
+            ANALYTICS GRID
+    =========================================== -->
+
+    <div class="analytics-grid">
+
+
+        <!-- ==========================================
+                SHIPMENT PERFORMANCE
+        =========================================== -->
+
+        <article class="analytics-card analytics-chart-card">
+
+            <div class="analytics-card-header">
+
+                <div>
+
+                    <span class="analytics-card-label">
+                        Shipment Performance
+                    </span>
+
+                    <h3>
+                        Delivery Overview
+                    </h3>
+
+                </div>
+
+
+                <div class="analytics-card-icon">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-chart">
+
+                <div class="chart-y-axis">
+
+                    <span>100</span>
+                    <span>75</span>
+                    <span>50</span>
+                    <span>25</span>
+                    <span>0</span>
+
+                </div>
+
+
+                <div class="chart-area">
+
+                    <div class="chart-grid-lines">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+
+                    <svg
+                        class="analytics-line-chart"
+                        viewBox="0 0 700 260"
+                        preserveAspectRatio="none"
+                        aria-label="Shipment performance chart"
+                    >
+
+                        <defs>
+
+                            <linearGradient
+                                id="analyticsGradient"
+                                x1="0"
+                                y1="0"
+                                x2="0"
+                                y2="1"
+                            >
+
+                                <stop
+                                    offset="0%"
+                                    stop-opacity=".35"
+                                />
+
+                                <stop
+                                    offset="100%"
+                                    stop-opacity="0"
+                                />
+
+                            </linearGradient>
+
+                        </defs>
+
+
+                        <path
+                            class="chart-area-fill"
+                            d="M0 210
+                               L70 180
+                               L140 190
+                               L210 145
+                               L280 160
+                               L350 110
+                               L420 125
+                               L490 80
+                               L560 95
+                               L630 55
+                               L700 70
+                               L700 260
+                               L0 260 Z"
+                        ></path>
+
+
+                        <path
+                            class="chart-line"
+                            d="M0 210
+                               L70 180
+                               L140 190
+                               L210 145
+                               L280 160
+                               L350 110
+                               L420 125
+                               L490 80
+                               L560 95
+                               L630 55
+                               L700 70"
+                        ></path>
+
+
+                        <circle
+                            cx="70"
+                            cy="180"
+                            r="5"
+                        ></circle>
+
+                        <circle
+                            cx="210"
+                            cy="145"
+                            r="5"
+                        ></circle>
+
+                        <circle
+                            cx="350"
+                            cy="110"
+                            r="5"
+                        ></circle>
+
+                        <circle
+                            cx="490"
+                            cy="80"
+                            r="5"
+                        ></circle>
+
+                        <circle
+                            cx="630"
+                            cy="55"
+                            r="5"
+                        ></circle>
+
+                    </svg>
+
+
+                    <div class="chart-x-axis">
+
+                        <span>Mon</span>
+                        <span>Tue</span>
+                        <span>Wed</span>
+                        <span>Thu</span>
+                        <span>Fri</span>
+                        <span>Sat</span>
+                        <span>Sun</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-legend">
+
+                <span>
+
+                    <i class="legend-dot shipments"></i>
+
+                    Shipments
+
+                </span>
+
+                <span>
+
+                    <i class="legend-dot deliveries"></i>
+
+                    Deliveries
+
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ==========================================
+                DELIVERY RATE
+        =========================================== -->
+
+        <article class="analytics-card delivery-card">
+
+            <div class="analytics-card-header">
+
+                <div>
+
+                    <span class="analytics-card-label">
+                        Delivery Rate
+                    </span>
+
+                    <h3>
+                        On-Time Delivery
+                    </h3>
+
+                </div>
+
+
+                <div class="analytics-card-icon">
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="delivery-stat">
+
+                <div class="delivery-circle">
+
+                    <div class="delivery-circle-inner">
+
+                        <strong>
+                            94%
+                        </strong>
+
+                        <span>
+                            On Time
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="delivery-info">
+
+                    <div class="delivery-info-row">
+
+                        <span>
+                            Delivered
+                        </span>
+
+                        <strong>
+                            1,248
+                        </strong>
+
+                    </div>
+
+
+                    <div class="delivery-info-row">
+
+                        <span>
+                            Delayed
+                        </span>
+
+                        <strong>
+                            82
+                        </strong>
+
+                    </div>
+
+
+                    <div class="delivery-info-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong>
+                            1,330
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ==========================================
+                LOGISTICS METRICS
+        =========================================== -->
+
+        <article class="analytics-card metrics-card">
+
+            <div class="analytics-card-header">
+
+                <div>
+
+                    <span class="analytics-card-label">
+                        Logistics Metrics
+                    </span>
+
+                    <h3>
+                        Key Performance
+                    </h3>
+
+                </div>
+
+
+                <div class="analytics-card-icon">
+
+                    <i class="fa-solid fa-gauge-high"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="metrics-list">
+
+
+                <div class="metric-item">
+
+                    <div class="metric-icon">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                    </div>
+
+                    <div class="metric-content">
+
+                        <span>
+                            Average Delivery Time
+                        </span>
+
+                        <strong>
+                            2.4 hrs
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="metric-item">
+
+                    <div class="metric-icon">
+
+                        <i class="fa-solid fa-route"></i>
+
+                    </div>
+
+                    <div class="metric-content">
+
+                        <span>
+                            Average Distance
+                        </span>
+
+                        <strong>
+                            18.6 km
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="metric-item">
+
+                    <div class="metric-icon">
+
+                        <i class="fa-solid fa-box"></i>
+
+                    </div>
+
+                    <div class="metric-content">
+
+                        <span>
+                            Packages Delivered
+                        </span>
+
+                        <strong>
+                            3,842
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="metric-item">
+
+                    <div class="metric-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+                    <div class="metric-content">
+
+                        <span>
+                            Successful Deliveries
+                        </span>
+
+                        <strong>
+                            98.2%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ==========================================
+                SHIPMENT STATUS
+        =========================================== -->
+
+        <article class="analytics-card status-card">
+
+            <div class="analytics-card-header">
+
+                <div>
+
+                    <span class="analytics-card-label">
+                        Shipment Status
+                    </span>
+
+                    <h3>
+                        Current Distribution
+                    </h3>
+
+                </div>
+
+
+                <div class="analytics-card-icon">
+
+                    <i class="fa-solid fa-boxes-stacked"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="status-list">
+
+
+                <div class="status-item">
+
+                    <div class="status-name">
+
+                        <span class="status-dot in-transit"></span>
+
+                        <span>
+                            In Transit
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        32%
+                    </strong>
+
+                </div>
+
+
+                <div class="status-bar">
+
+                    <span
+                        class="status-progress in-transit-progress"
+                        style="width:32%"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="status-item">
+
+                    <div class="status-name">
+
+                        <span class="status-dot delivered"></span>
+
+                        <span>
+                            Delivered
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        48%
+                    </strong>
+
+                </div>
+
+
+                <div class="status-bar">
+
+                    <span
+                        class="status-progress delivered-progress"
+                        style="width:48%"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="status-item">
+
+                    <div class="status-name">
+
+                        <span class="status-dot pending"></span>
+
+                        <span>
+                            Pending
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        14%
+                    </strong>
+
+                </div>
+
+
+                <div class="status-bar">
+
+                    <span
+                        class="status-progress pending-progress"
+                        style="width:14%"
+                    ></span>
+
+                </div>
+
+
+
+                <div class="status-item">
+
+                    <div class="status-name">
+
+                        <span class="status-dot cancelled"></span>
+
+                        <span>
+                            Cancelled
+                        </span>
+
+                    </div>
+
+                    <strong>
+                        6%
+                    </strong>
+
+                </div>
+
+
+                <div class="status-bar">
+
+                    <span
+                        class="status-progress cancelled-progress"
+                        style="width:6%"
+                    ></span>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>

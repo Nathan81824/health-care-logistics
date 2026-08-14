@@ -8,41 +8,42 @@
         - Delete individual notifications
         - Delete all notifications
         - Mark notifications as read
-        - Control notification dropdown
+        - Control navbar notification dropdown
+        - Control dashboard topbar notification dropdown
         - Handle outside click
         - Handle Escape key
         - Smooth notification animations
+        - Preserve automatic notification opening
+        - Preserve notification sound system
 
         IMPORTANT:
         Notification storage/data logic belongs
         in notification.js.
+
+        IMPORTANT:
+        This file supports MULTIPLE notification
+        wrappers on the same page.
 *==================================================*/
 
 
 /*==================================================*
-        UI STATE
+                    UI STATE
 *==================================================*/
 
 let notificationUIStarted = false;
 
-let notificationDropdownListenersAttached = false;
-
-let notificationGlobalListenersAttached = false;
-
 
 /*==================================================*
-        ANIMATION SETTINGS
+                    ANIMATION
 *==================================================*/
 
-const NOTIFICATION_SHOW_DELAY =
-    300;
+const NOTIFICATION_SHOW_DELAY = 300;
 
-const NOTIFICATION_EXIT_DURATION =
-    350;
+const NOTIFICATION_EXIT_DURATION = 350;
 
 
 /*==================================================*
-        GET NOTIFICATIONS SAFELY
+            GET NOTIFICATIONS SAFELY
 *==================================================*/
 
 function getNotificationData() {
@@ -87,7 +88,7 @@ function getNotificationData() {
 
 
 /*==================================================*
-        UPDATE NOTIFICATION UI
+            UPDATE NOTIFICATION UI
 *==================================================*/
 
 function updateNotificationUI() {
@@ -103,9 +104,9 @@ function updateNotificationUI() {
         ).length;
 
 
-    /*================================================
-            UPDATE BADGES
-    =================================================*/
+    /*==============================================
+                UPDATE ALL BADGES
+    ==============================================*/
 
     document
         .querySelectorAll(
@@ -148,9 +149,9 @@ function updateNotificationUI() {
         );
 
 
-    /*================================================
-            UPDATE DOTS
-    =================================================*/
+    /*==============================================
+                    UPDATE DOTS
+    ==============================================*/
 
     document
         .querySelectorAll(
@@ -168,13 +169,13 @@ function updateNotificationUI() {
         );
 
 
-    /*================================================
-            DELETE ALL BUTTONS
-    =================================================*/
+    /*==============================================
+                DELETE ALL BUTTONS
+    ==============================================*/
 
     document
         .querySelectorAll(
-            "#deleteAllNotifications"
+            ".delete-all-notifications"
         )
         .forEach(
             button => {
@@ -188,9 +189,9 @@ function updateNotificationUI() {
         );
 
 
-    /*================================================
-            RENDER
-    =================================================*/
+    /*==============================================
+                    RENDER
+    ==============================================*/
 
     renderNotifications();
 
@@ -198,14 +199,14 @@ function updateNotificationUI() {
 
 
 /*==================================================*
-        RENDER NOTIFICATIONS
+                RENDER NOTIFICATIONS
 *==================================================*/
 
 function renderNotifications() {
 
     const lists =
         document.querySelectorAll(
-            "#notificationList"
+            ".notification-list"
         );
 
 
@@ -254,15 +255,14 @@ function renderNotifications() {
 
 
             /*========================================
-                    CLEAR CURRENT LIST
+                    CLEAR LIST
             ========================================*/
 
-            list.innerHTML =
-                "";
+            list.innerHTML = "";
 
 
             /*========================================
-                    CREATE NOTIFICATIONS
+                    CREATE ITEMS
             ========================================*/
 
             notifications.forEach(
@@ -281,18 +281,13 @@ function renderNotifications() {
                         "notification-item";
 
 
-                    /*
-                        Store notification ID
-                        directly on the element.
-                    */
-
                     item.dataset.notificationId =
                         notification.id;
 
 
-                    /*
-                        Read state.
-                    */
+                    /*================================
+                            READ STATE
+                    =================================*/
 
                     if (
                         notification.read
@@ -305,12 +300,9 @@ function renderNotifications() {
                     }
 
 
-                    /*
-                        Start hidden.
-
-                        The CSS animation will
-                        bring it into view.
-                    */
+                    /*================================
+                        ENTER ANIMATION
+                    =================================*/
 
                     item.classList.add(
                         "notification-enter"
@@ -318,7 +310,7 @@ function renderNotifications() {
 
 
                     /*================================
-                            CONTENT
+                        CONTENT
                     =================================*/
 
                     item.innerHTML = `
@@ -345,6 +337,7 @@ function renderNotifications() {
 
                         </div>
 
+
                         <button
                             type="button"
                             class="notification-delete"
@@ -359,7 +352,7 @@ function renderNotifications() {
 
 
                     /*================================
-                            DELETE BUTTON
+                        DELETE BUTTON
                     =================================*/
 
                     const deleteButton =
@@ -393,7 +386,7 @@ function renderNotifications() {
 
 
                     /*================================
-                            MARK AS READ
+                        MARK AS READ
                     =================================*/
 
                     item.addEventListener(
@@ -441,17 +434,11 @@ function renderNotifications() {
 
 
                     /*================================
-                            ENTER ANIMATION
+                        ENTER ANIMATION
                     =================================*/
 
                     setTimeout(
-                        function() {
-
-                            /*
-                                Make sure the item
-                                still exists before
-                                starting animation.
-                            */
+                        function () {
 
                             if (
                                 item &&
@@ -461,6 +448,7 @@ function renderNotifications() {
                                 item.classList.remove(
                                     "notification-enter"
                                 );
+
 
                                 item.classList.add(
                                     "notification-visible"
@@ -485,7 +473,7 @@ function renderNotifications() {
 
 
 /*==================================================*
-        ANIMATE DELETE NOTIFICATION
+        DELETE ONE NOTIFICATION
 *==================================================*/
 
 function animateDeleteNotification(
@@ -502,11 +490,6 @@ function animateDeleteNotification(
     }
 
 
-    /*
-        Prevent multiple clicks while
-        the notification is leaving.
-    */
-
     if (
         item.dataset.deleting ===
         "true"
@@ -521,17 +504,9 @@ function animateDeleteNotification(
         "true";
 
 
-    /*
-        Disable interaction.
-    */
-
     item.style.pointerEvents =
         "none";
 
-
-    /*
-        Start exit animation.
-    */
 
     item.classList.remove(
         "notification-visible"
@@ -543,13 +518,8 @@ function animateDeleteNotification(
     );
 
 
-    /*
-        Wait for the animation to finish
-        before deleting from storage.
-    */
-
     setTimeout(
-        function() {
+        function () {
 
             if (
                 typeof window.deleteNotification ===
@@ -577,17 +547,8 @@ function setupDeleteAllNotifications() {
 
     const buttons =
         document.querySelectorAll(
-            "#deleteAllNotifications"
+            ".delete-all-notifications"
         );
-
-
-    if (
-        !buttons.length
-    ) {
-
-        return;
-
-    }
 
 
     buttons.forEach(
@@ -635,7 +596,7 @@ function animateDeleteAllNotifications() {
 
     const lists =
         document.querySelectorAll(
-            "#notificationList"
+            ".notification-list"
         );
 
 
@@ -648,8 +609,7 @@ function animateDeleteAllNotifications() {
     }
 
 
-    const items =
-        [];
+    const items = [];
 
 
     lists.forEach(
@@ -663,7 +623,8 @@ function animateDeleteAllNotifications() {
                     item => {
 
                         if (
-                            !item.dataset.deleting
+                            item.dataset.deleting !==
+                            "true"
                         ) {
 
                             items.push(
@@ -679,10 +640,9 @@ function animateDeleteAllNotifications() {
     );
 
 
-    /*
-        If there are no visible
-        notification items, just clear.
-    */
+    /*==============================================
+                NOTHING TO DELETE
+    ==============================================*/
 
     if (
         !items.length
@@ -702,9 +662,9 @@ function animateDeleteAllNotifications() {
     }
 
 
-    /*
-        Prevent interaction.
-    */
+    /*==============================================
+                START ANIMATION
+    ==============================================*/
 
     items.forEach(
         (
@@ -720,13 +680,8 @@ function animateDeleteAllNotifications() {
                 "none";
 
 
-            /*
-                Slight stagger makes
-                the delete feel smoother.
-            */
-
             setTimeout(
-                function() {
+                function () {
 
                     item.classList.remove(
                         "notification-visible"
@@ -745,11 +700,6 @@ function animateDeleteAllNotifications() {
     );
 
 
-    /*
-        Wait until the last animation
-        has finished.
-    */
-
     const totalDuration =
         NOTIFICATION_EXIT_DURATION +
         (
@@ -761,7 +711,7 @@ function animateDeleteAllNotifications() {
 
 
     setTimeout(
-        function() {
+        function () {
 
             if (
                 typeof window.deleteAllNotifications ===
@@ -780,24 +730,55 @@ function animateDeleteAllNotifications() {
 
 
 /*==================================================*
-        FIND NOTIFICATION ELEMENTS
+        GET ALL NOTIFICATION WRAPPERS
 *==================================================*/
 
-function getNotificationElements() {
+function getNotificationWrappers() {
+
+    return Array.from(
+        document.querySelectorAll(
+            ".notification-wrapper"
+        )
+    );
+
+}
+
+
+/*==================================================*
+        GET ELEMENTS FOR ONE WRAPPER
+*==================================================*/
+
+function getNotificationElements(
+    wrapper
+) {
+
+    if (
+        !wrapper
+    ) {
+
+        return {
+            wrapper: null,
+            button: null,
+            dropdown: null
+        };
+
+    }
+
 
     const button =
-        document.querySelector(
+        wrapper.querySelector(
             ".notification-btn"
         );
 
 
     const dropdown =
-        document.querySelector(
-            ".notification-wrapper .notification-dropdown"
+        wrapper.querySelector(
+            ".notification-dropdown"
         );
 
 
     return {
+        wrapper,
         button,
         dropdown
     };
@@ -806,16 +787,62 @@ function getNotificationElements() {
 
 
 /*==================================================*
-        SETUP NOTIFICATION DROPDOWN
+        SETUP ALL NOTIFICATION DROPDOWNS
 *==================================================*/
 
 function setupNotificationDropdowns() {
+
+    const wrappers =
+        getNotificationWrappers();
+
+
+    if (
+        !wrappers.length
+    ) {
+
+        console.warn(
+            "⚠️ No notification wrappers found."
+        );
+
+        return false;
+
+    }
+
+
+    wrappers.forEach(
+        wrapper => {
+
+            setupSingleNotificationDropdown(
+                wrapper
+            );
+
+        }
+    );
+
+
+    setupNotificationGlobalListeners();
+
+
+    return true;
+
+}
+
+
+/*==================================================*
+        SETUP ONE NOTIFICATION DROPDOWN
+*==================================================*/
+
+function setupSingleNotificationDropdown(
+    wrapper
+) {
 
     const {
         button,
         dropdown
     } =
-        getNotificationElements();
+        getNotificationElements(
+            wrapper
+        );
 
 
     if (
@@ -823,21 +850,25 @@ function setupNotificationDropdowns() {
         !dropdown
     ) {
 
-        return false;
+        console.warn(
+            "⚠️ Notification elements missing in wrapper."
+        );
+
+        return;
 
     }
 
 
-    /*================================================
-            ATTACH BUTTON LISTENER
-    =================================================*/
+    /*==============================================
+                BUTTON
+    ==============================================*/
 
     if (
-        button.dataset.notificationReady !==
+        button.dataset.notificationUIReady !==
         "true"
     ) {
 
-        button.dataset.notificationReady =
+        button.dataset.notificationUIReady =
             "true";
 
 
@@ -851,25 +882,38 @@ function setupNotificationDropdowns() {
 
 
                 const isOpen =
-                    dropdown.classList.toggle(
+                    dropdown.classList.contains(
                         "active"
                     );
 
 
-                button.setAttribute(
-                    "aria-expanded",
-                    isOpen
-                        ? "true"
-                        : "false"
+                /*
+                    Close other notification
+                    dropdowns first.
+                */
+
+                closeAllNotificationDropdowns(
+                    wrapper
                 );
 
 
-                dropdown.setAttribute(
-                    "aria-hidden",
+                if (
                     isOpen
-                        ? "false"
-                        : "true"
-                );
+                ) {
+
+                    closeNotificationDropdown(
+                        wrapper
+                    );
+
+                }
+
+                else {
+
+                    openNotificationDropdown(
+                        wrapper
+                    );
+
+                }
 
             }
         );
@@ -877,9 +921,9 @@ function setupNotificationDropdowns() {
     }
 
 
-    /*================================================
-            CLOSE BUTTON
-    =================================================*/
+    /*==============================================
+                CLOSE BUTTON
+    ==============================================*/
 
     const closeButton =
         dropdown.querySelector(
@@ -889,11 +933,11 @@ function setupNotificationDropdowns() {
 
     if (
         closeButton &&
-        closeButton.dataset.notificationReady !==
+        closeButton.dataset.notificationCloseReady !==
         "true"
     ) {
 
-        closeButton.dataset.notificationReady =
+        closeButton.dataset.notificationCloseReady =
             "true";
 
 
@@ -906,7 +950,9 @@ function setupNotificationDropdowns() {
                 event.stopPropagation();
 
 
-                closeNotificationDropdown();
+                closeNotificationDropdown(
+                    wrapper
+                );
 
             }
         );
@@ -914,16 +960,16 @@ function setupNotificationDropdowns() {
     }
 
 
-    /*================================================
-            STOP DROPDOWN CLICK PROPAGATION
-    =================================================*/
+    /*==============================================
+                DROPDOWN CLICK
+    ==============================================*/
 
     if (
-        dropdown.dataset.notificationReady !==
+        dropdown.dataset.notificationClickReady !==
         "true"
     ) {
 
-        dropdown.dataset.notificationReady =
+        dropdown.dataset.notificationClickReady =
             "true";
 
 
@@ -939,11 +985,234 @@ function setupNotificationDropdowns() {
     }
 
 
-    notificationDropdownListenersAttached =
+    /*==============================================
+                DELETE ALL
+    ==============================================*/
+
+    const deleteAll =
+        dropdown.querySelector(
+            ".delete-all-notifications"
+        );
+
+
+    if (
+        deleteAll &&
+        deleteAll.dataset.deleteReady !==
+        "true"
+    ) {
+
+        deleteAll.dataset.deleteReady =
+            "true";
+
+
+        deleteAll.addEventListener(
+            "click",
+            function (event) {
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+
+                animateDeleteAllNotifications();
+
+            }
+        );
+
+    }
+
+}
+
+
+/*==================================================*
+        GLOBAL OUTSIDE CLICK / ESCAPE
+*==================================================*/
+
+let notificationGlobalListenersReady =
+    false;
+
+
+function setupNotificationGlobalListeners() {
+
+    if (
+        notificationGlobalListenersReady
+    ) {
+
+        return;
+
+    }
+
+
+    notificationGlobalListenersReady =
         true;
 
 
-    setupNotificationGlobalListeners();
+    /*==============================================
+                    OUTSIDE CLICK
+    ==============================================*/
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            const wrappers =
+                getNotificationWrappers();
+
+
+            wrappers.forEach(
+                wrapper => {
+
+                    if (
+                        !wrapper.contains(
+                            event.target
+                        )
+                    ) {
+
+                        closeNotificationDropdown(
+                            wrapper
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /*==============================================
+                    ESCAPE
+    ==============================================*/
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key !==
+                "Escape"
+            ) {
+
+                return;
+
+            }
+
+
+            closeAllNotificationDropdowns();
+
+        }
+    );
+
+}
+
+
+/*==================================================*
+        OPEN NOTIFICATION DROPDOWN
+*==================================================*/
+
+function openNotificationDropdown(
+    wrapper
+) {
+
+    /*
+        If no wrapper was supplied,
+        use the first available wrapper.
+    */
+
+    if (
+        !wrapper
+    ) {
+
+        wrapper =
+            getNotificationWrappers()[0];
+
+    }
+
+
+    const {
+        button,
+        dropdown
+    } =
+        getNotificationElements(
+            wrapper
+        );
+
+
+    if (
+        !wrapper ||
+        !button ||
+        !dropdown
+    ) {
+
+        console.warn(
+            "⚠️ Notification dropdown elements not found."
+        );
+
+        return false;
+
+    }
+
+
+    /*==============================================
+                CLOSE OTHER DROPDOWNS
+    ==============================================*/
+
+    closeAllNotificationDropdowns(
+        wrapper
+    );
+
+
+    /*==============================================
+                    OPEN
+    ==============================================*/
+
+    dropdown.classList.add(
+        "active"
+    );
+
+
+    wrapper.classList.add(
+        "active"
+    );
+
+
+    /*==============================================
+                ACCESSIBILITY
+    ==============================================*/
+
+    button.setAttribute(
+        "aria-expanded",
+        "true"
+    );
+
+
+    dropdown.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    /*==============================================
+                SCROLL TO FIRST
+    ==============================================*/
+
+    const firstNotification =
+        dropdown.querySelector(
+            ".notification-item"
+        );
+
+
+    if (
+        firstNotification
+    ) {
+
+        firstNotification.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+        });
+
+    }
 
 
     return true;
@@ -952,13 +1221,25 @@ function setupNotificationDropdowns() {
 
 
 /*==================================================*
-        GLOBAL NOTIFICATION LISTENERS
+        CLOSE ONE DROPDOWN
 *==================================================*/
 
-function setupNotificationGlobalListeners() {
+function closeNotificationDropdown(
+    wrapper
+) {
 
     if (
-        notificationGlobalListenersAttached
+        !wrapper
+    ) {
+
+        wrapper =
+            getNotificationWrappers()[0];
+
+    }
+
+
+    if (
+        !wrapper
     ) {
 
         return;
@@ -966,86 +1247,13 @@ function setupNotificationGlobalListeners() {
     }
 
 
-    notificationGlobalListenersAttached =
-        true;
-
-
-    /*================================================
-            OUTSIDE CLICK
-    =================================================*/
-
-    document.addEventListener(
-        "click",
-        function (event) {
-
-            const {
-                button,
-                dropdown
-            } =
-                getNotificationElements();
-
-
-            if (
-                !button ||
-                !dropdown
-            ) {
-
-                return;
-
-            }
-
-
-            if (
-                !dropdown.contains(
-                    event.target
-                ) &&
-                !button.contains(
-                    event.target
-                )
-            ) {
-
-                closeNotificationDropdown();
-
-            }
-
-        }
-    );
-
-
-    /*================================================
-            ESCAPE KEY
-    =================================================*/
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            if (
-                event.key ===
-                "Escape"
-            ) {
-
-                closeNotificationDropdown();
-
-            }
-
-        }
-    );
-
-}
-
-
-/*==================================================*
-        CLOSE DROPDOWN
-*==================================================*/
-
-function closeNotificationDropdown() {
-
     const {
         button,
         dropdown
     } =
-        getNotificationElements();
+        getNotificationElements(
+            wrapper
+        );
 
 
     if (
@@ -1065,6 +1273,11 @@ function closeNotificationDropdown() {
     }
 
 
+    wrapper.classList.remove(
+        "active"
+    );
+
+
     if (
         button
     ) {
@@ -1075,6 +1288,41 @@ function closeNotificationDropdown() {
         );
 
     }
+
+}
+
+
+/*==================================================*
+        CLOSE ALL DROPDOWNS
+*==================================================*/
+
+function closeAllNotificationDropdowns(
+    exceptWrapper = null
+) {
+
+    const wrappers =
+        getNotificationWrappers();
+
+
+    wrappers.forEach(
+        wrapper => {
+
+            if (
+                exceptWrapper &&
+                wrapper === exceptWrapper
+            ) {
+
+                return;
+
+            }
+
+
+            closeNotificationDropdown(
+                wrapper
+            );
+
+        }
+    );
 
 }
 
@@ -1105,32 +1353,111 @@ function escapeNotificationHTML(
 
 
 /*==================================================*
+        AUTOMATIC OPEN
+*
+* IMPORTANT:
+* This function is intentionally preserved.
+*
+* Your notification.js / sound system can call:
+*
+*     openNotificationDropdown()
+*
+* and the first available notification
+* dropdown will open.
+*
+* If you want a specific wrapper to open,
+* call:
+*
+*     openNotificationDropdown(wrapper)
+*
+*==================================================*/
+
+function autoOpenNotificationDropdown() {
+
+    const wrappers =
+        getNotificationWrappers();
+
+
+    if (
+        !wrappers.length
+    ) {
+
+        return false;
+
+    }
+
+
+    /*
+        Prefer a currently visible /
+        available notification wrapper.
+    */
+
+    const wrapper =
+        wrappers.find(
+            item => {
+
+                const button =
+                    item.querySelector(
+                        ".notification-btn"
+                    );
+
+
+                const dropdown =
+                    item.querySelector(
+                        ".notification-dropdown"
+                    );
+
+
+                return (
+                    button &&
+                    dropdown
+                );
+
+            }
+        );
+
+
+    if (
+        !wrapper
+    ) {
+
+        return false;
+
+    }
+
+
+    return openNotificationDropdown(
+        wrapper
+    );
+
+}
+
+
+/*==================================================*
         START NOTIFICATION UI
 *==================================================*/
 
 function setupNotificationUI() {
 
     /*
-        Always refresh notification
-        content.
+        Update badges and notifications.
     */
 
     updateNotificationUI();
 
 
     /*
-        Re-check delete-all buttons.
+        Setup dropdowns.
     */
 
-    setupDeleteAllNotifications();
+    setupNotificationDropdowns();
 
 
     /*
-        Try dropdown setup.
+        Setup delete-all buttons.
     */
 
-    const dropdownReady =
-        setupNotificationDropdowns();
+    setupDeleteAllNotifications();
 
 
     if (
@@ -1147,20 +1474,11 @@ function setupNotificationUI() {
 
     }
 
-
-    if (
-        !dropdownReady
-    ) {
-
-        return;
-
-    }
-
 }
 
 
 /*==================================================*
-        EXPORTS
+                    EXPORTS
 *==================================================*/
 
 window.getNotificationData =
@@ -1187,8 +1505,20 @@ window.setupNotificationUI =
     setupNotificationUI;
 
 
+window.openNotificationDropdown =
+    openNotificationDropdown;
+
+
 window.closeNotificationDropdown =
     closeNotificationDropdown;
+
+
+window.closeAllNotificationDropdowns =
+    closeAllNotificationDropdowns;
+
+
+window.autoOpenNotificationDropdown =
+    autoOpenNotificationDropdown;
 
 
 window.escapeNotificationHTML =
@@ -1196,7 +1526,7 @@ window.escapeNotificationHTML =
 
 
 /*==================================================*
-        LOADED
+                    LOADED
 *==================================================*/
 
 console.log(

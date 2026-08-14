@@ -1,0 +1,289 @@
+<!-- ==================================================
+                    SHIPMENTS
+================================================== -->
+
+<section class="shipments-section" data-reveal>
+
+
+    <!-- ==================================================
+                    HEADER
+    ================================================== -->
+
+    <div class="shipments-header">
+
+
+        <div class="shipments-title">
+
+            <span class="section-label">
+                LOGISTICS
+            </span>
+
+            <h2>
+                Shipments
+            </h2>
+
+            <p>
+                Monitor and manage your healthcare shipments.
+            </p>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="shipments-action"
+            id="viewAllShipments"
+        >
+
+            <span>
+                View All
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+                    SHIPMENT STATS
+    ================================================== -->
+
+    <div class="shipments-stats">
+
+
+        <!-- ==========================================
+                    TOTAL
+        =========================================== -->
+
+        <div class="shipment-stat-card">
+
+            <div class="shipment-stat-icon">
+
+                <i class="fa-solid fa-box"></i>
+
+            </div>
+
+            <div class="shipment-stat-content">
+
+                <span>
+                    Total Shipments
+                </span>
+
+                <strong id="totalShipments">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+                    IN TRANSIT
+        =========================================== -->
+
+        <div class="shipment-stat-card">
+
+            <div class="shipment-stat-icon">
+
+                <i class="fa-solid fa-truck-fast"></i>
+
+            </div>
+
+            <div class="shipment-stat-content">
+
+                <span>
+                    In Transit
+                </span>
+
+                <strong id="inTransitShipments">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+                    DELIVERED
+        =========================================== -->
+
+        <div class="shipment-stat-card">
+
+            <div class="shipment-stat-icon">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+            </div>
+
+            <div class="shipment-stat-content">
+
+                <span>
+                    Delivered
+                </span>
+
+                <strong id="deliveredShipments">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==========================================
+                    PENDING
+        =========================================== -->
+
+        <div class="shipment-stat-card">
+
+            <div class="shipment-stat-icon">
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+            <div class="shipment-stat-content">
+
+                <span>
+                    Pending
+                </span>
+
+                <strong id="pendingShipments">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==================================================
+                    RECENT SHIPMENTS
+    ================================================== -->
+
+    <div class="shipments-card">
+
+
+        <!-- ==========================================
+                    CARD HEADER
+        =========================================== -->
+
+        <div class="shipments-card-header">
+
+            <div>
+
+                <h3>
+                    Recent Shipments
+                </h3>
+
+                <p>
+                    Latest shipment activity
+                </p>
+
+            </div>
+
+
+            <span class="shipment-live-status">
+
+                <span class="live-dot"></span>
+
+                Live
+
+            </span>
+
+        </div>
+
+
+
+        <!-- ==================================================
+                    SHIPMENT TABLE
+        ================================================== -->
+
+        <div class="shipments-table-wrapper">
+
+            <table class="shipments-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Shipment
+                        </th>
+
+                        <th>
+                            Destination
+                        </th>
+
+                        <th>
+                            Driver
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="shipmentsTableBody">
+
+                    <!--
+                        Shipment rows will be
+                        inserted by shipments.js
+                    -->
+
+
+                    <tr class="shipment-empty">
+
+                        <td colspan="5">
+
+                            <div class="shipment-empty-content">
+
+                                <i class="fa-solid fa-box-open"></i>
+
+                                <strong>
+                                    No shipments yet
+                                </strong>
+
+                                <span>
+                                    Shipment activity will appear here.
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+    </div>
+
+
+
+</section>

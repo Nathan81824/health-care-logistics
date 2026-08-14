@@ -1,0 +1,920 @@
+/* ==================================================
+                    HOSPITALS
+================================================== */
+
+.hospitals-section{
+
+    width:100%;
+
+    padding:10px 0 40px;
+
+    color:#ffffff;
+
+}
+
+
+/* ==================================================
+                    HEADER
+================================================== */
+
+.hospitals-header{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    margin-bottom:28px;
+
+}
+
+
+.hospitals-title{
+
+    min-width:0;
+
+}
+
+
+.hospitals-title .section-label,
+.hospitals-panel-header .section-label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#22b8ff;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    letter-spacing:1.8px;
+
+    text-transform:uppercase;
+
+}
+
+
+.hospitals-title h2{
+
+    margin:0 0 8px;
+
+    color:#ffffff;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    line-height:1.15;
+
+}
+
+
+.hospitals-title p{
+
+    margin:0;
+
+    max-width:650px;
+
+    color:#8da8bd;
+
+    font-size:.92rem;
+
+    line-height:1.7;
+
+}
+
+
+/* ==================================================
+                    ADD BUTTON
+================================================== */
+
+.hospital-add-btn{
+
+    flex-shrink:0;
+
+    min-height:48px;
+
+    padding:0 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+    border:1px solid rgba(56,189,248,.2);
+
+    border-radius:13px;
+
+    background:linear-gradient(
+        135deg,
+        #20b8ff,
+        #0ea5e9
+    );
+
+    color:#ffffff;
+
+    font-family:"Inter",sans-serif;
+
+    font-size:.88rem;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 10px 25px rgba(14,165,233,.18);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        filter .25s ease;
+
+}
+
+
+.hospital-add-btn i{
+
+    font-size:.85rem;
+
+}
+
+
+.hospital-add-btn:hover{
+
+    transform:translateY(-2px);
+
+    filter:brightness(1.08);
+
+    box-shadow:
+        0 14px 30px rgba(14,165,233,.25);
+
+}
+
+
+.hospital-add-btn:active{
+
+    transform:translateY(0);
+
+}
+
+
+/* ==================================================
+                    HOSPITAL STATS
+================================================== */
+
+.hospital-stats{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:18px;
+
+    margin-bottom:24px;
+
+}
+
+
+.hospital-stat-card{
+
+    min-height:115px;
+
+    padding:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,35,53,.94),
+            rgba(9,27,43,.88)
+        );
+
+    border:1px solid rgba(148,163,184,.11);
+
+    border-radius:18px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.16);
+
+    transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+
+}
+
+
+.hospital-stat-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:rgba(56,189,248,.22);
+
+    box-shadow:
+        0 16px 35px rgba(0,0,0,.22);
+
+}
+
+
+/* ==================================================
+                    STAT ICON
+================================================== */
+
+.hospital-stat-icon{
+
+    width:48px;
+
+    height:48px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    font-size:1.05rem;
+
+}
+
+
+.hospital-stat-icon.blue{
+
+    background:rgba(56,189,248,.14);
+
+    color:#38bdf8;
+
+}
+
+
+.hospital-stat-icon.green{
+
+    background:rgba(52,211,153,.14);
+
+    color:#34d399;
+
+}
+
+
+.hospital-stat-icon.orange{
+
+    background:rgba(251,146,60,.14);
+
+    color:#fb923c;
+
+}
+
+
+.hospital-stat-icon.purple{
+
+    background:rgba(167,139,250,.14);
+
+    color:#a78bfa;
+
+}
+
+
+/* ==================================================
+                    STAT INFO
+================================================== */
+
+.hospital-stat-info{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+
+.hospital-stat-info span{
+
+    color:#8da8bd;
+
+    font-size:.78rem;
+
+    font-weight:500;
+
+}
+
+
+.hospital-stat-info strong{
+
+    color:#ffffff;
+
+    font-size:1.45rem;
+
+    line-height:1;
+
+}
+
+
+/* ==================================================
+                    MAIN PANEL
+================================================== */
+
+.hospitals-panel{
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,35,53,.96),
+            rgba(8,27,43,.94)
+        );
+
+    border:1px solid rgba(148,163,184,.12);
+
+    border-radius:22px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.2);
+
+}
+
+
+/* ==================================================
+                    PANEL HEADER
+================================================== */
+
+.hospitals-panel-header{
+
+    min-height:85px;
+
+    padding:20px 24px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    border-bottom:1px solid rgba(148,163,184,.09);
+
+}
+
+
+.hospitals-panel-header h3{
+
+    margin:0;
+
+    color:#ffffff;
+
+    font-size:1.15rem;
+
+    font-weight:700;
+
+}
+
+
+/* ==================================================
+                    SEARCH
+================================================== */
+
+.hospital-search{
+
+    width:260px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 13px;
+
+    background:rgba(2,6,23,.42);
+
+    border:1px solid rgba(148,163,184,.13);
+
+    border-radius:11px;
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+.hospital-search:focus-within{
+
+    border-color:rgba(56,189,248,.4);
+
+    box-shadow:
+        0 0 0 3px rgba(56,189,248,.07);
+
+}
+
+
+.hospital-search i{
+
+    color:#647f95;
+
+    font-size:.82rem;
+
+}
+
+
+.hospital-search input{
+
+    width:100%;
+
+    min-width:0;
+
+    padding:0;
+
+    background:transparent;
+
+    border:none;
+
+    outline:none;
+
+    color:#ffffff;
+
+    font-family:"Inter",sans-serif;
+
+    font-size:.8rem;
+
+}
+
+
+.hospital-search input::placeholder{
+
+    color:#61798d;
+
+}
+
+
+/* ==================================================
+                    TABLE WRAPPER
+================================================== */
+
+.hospital-table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+
+}
+
+
+.hospital-table{
+
+    width:100%;
+
+    min-width:760px;
+
+    border-collapse:collapse;
+
+}
+
+
+/* ==================================================
+                    TABLE HEAD
+================================================== */
+
+.hospital-table thead{
+
+    background:rgba(2,6,23,.2);
+
+}
+
+
+.hospital-table th{
+
+    padding:15px 24px;
+
+    color:#6f8da4;
+
+    font-size:.7rem;
+
+    font-weight:600;
+
+    letter-spacing:.8px;
+
+    text-align:left;
+
+    text-transform:uppercase;
+
+    white-space:nowrap;
+
+}
+
+
+/* ==================================================
+                    TABLE BODY
+================================================== */
+
+.hospital-table tbody tr{
+
+    border-top:1px solid rgba(148,163,184,.07);
+
+    transition:
+        background .25s ease;
+
+}
+
+
+.hospital-table tbody tr:hover{
+
+    background:rgba(56,189,248,.035);
+
+}
+
+
+.hospital-table td{
+
+    padding:17px 24px;
+
+    color:#a8bfd1;
+
+    font-size:.82rem;
+
+    vertical-align:middle;
+
+}
+
+
+/* ==================================================
+                    HOSPITAL NAME
+================================================== */
+
+.hospital-name{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    min-width:220px;
+
+}
+
+
+.hospital-avatar{
+
+    width:42px;
+
+    height:42px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(56,189,248,.12);
+
+    color:#38bdf8;
+
+    font-size:.95rem;
+
+}
+
+
+.hospital-name div:last-child{
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:3px;
+
+}
+
+
+.hospital-name strong{
+
+    max-width:240px;
+
+    overflow:hidden;
+
+    color:#ffffff;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+}
+
+
+.hospital-name span{
+
+    color:#637e94;
+
+    font-size:.7rem;
+
+}
+
+
+/* ==================================================
+                    STATUS
+================================================== */
+
+.hospital-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    font-size:.68rem;
+
+    font-weight:600;
+
+}
+
+
+.hospital-status::before{
+
+    content:"";
+
+    width:6px;
+
+    height:6px;
+
+    border-radius:50%;
+
+}
+
+
+.hospital-status.active{
+
+    background:rgba(52,211,153,.1);
+
+    color:#4ade80;
+
+}
+
+
+.hospital-status.active::before{
+
+    background:#34d399;
+
+    box-shadow:
+        0 0 8px rgba(52,211,153,.5);
+
+}
+
+
+/* ==================================================
+                    ACTION
+================================================== */
+
+.hospital-action{
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border:1px solid rgba(148,163,184,.1);
+
+    border-radius:9px;
+
+    background:rgba(255,255,255,.035);
+
+    color:#7f9aae;
+
+    cursor:pointer;
+
+    transition:
+        color .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+
+}
+
+
+.hospital-action:hover{
+
+    color:#38bdf8;
+
+    background:rgba(56,189,248,.09);
+
+    border-color:rgba(56,189,248,.2);
+
+    transform:translateX(3px);
+
+}
+
+
+/* ==================================================
+                    SCROLLBAR
+================================================== */
+
+.hospital-table-wrapper::-webkit-scrollbar{
+
+    height:6px;
+
+}
+
+
+.hospital-table-wrapper::-webkit-scrollbar-track{
+
+    background:#071827;
+
+}
+
+
+.hospital-table-wrapper::-webkit-scrollbar-thumb{
+
+    background:#1b526f;
+
+    border-radius:20px;
+
+}
+
+
+.hospital-table-wrapper::-webkit-scrollbar-thumb:hover{
+
+    background:#38bdf8;
+
+}
+
+
+/* ==================================================
+                    LARGE TABLET
+================================================== */
+
+@media (max-width:1100px){
+
+    .hospital-stats{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+}
+
+
+/* ==================================================
+                    TABLET
+================================================== */
+
+@media (max-width:800px){
+
+    .hospitals-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+
+    .hospital-add-btn{
+
+        width:100%;
+
+    }
+
+
+    .hospitals-panel-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+
+    .hospital-search{
+
+        width:100%;
+
+    }
+
+}
+
+
+/* ==================================================
+                    MOBILE
+================================================== */
+
+@media (max-width:600px){
+
+    .hospitals-section{
+
+        padding-bottom:25px;
+
+    }
+
+
+    .hospitals-title h2{
+
+        font-size:1.65rem;
+
+    }
+
+
+    .hospitals-title p{
+
+        font-size:.82rem;
+
+    }
+
+
+    .hospital-stats{
+
+        grid-template-columns:1fr;
+
+        gap:12px;
+
+    }
+
+
+    .hospital-stat-card{
+
+        min-height:95px;
+
+        padding:16px;
+
+    }
+
+
+    .hospitals-panel-header{
+
+        padding:18px;
+
+    }
+
+
+    .hospital-table th,
+    .hospital-table td{
+
+        padding-left:18px;
+
+        padding-right:18px;
+
+    }
+
+}
+
+
+/* ==================================================
+                    REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .hospital-stat-card,
+    .hospital-add-btn,
+    .hospital-action{
+
+        transition:none;
+
+    }
+
+}

@@ -10,6 +10,8 @@
         - Delete notifications
         - Clear notifications
         - Calculate unread count
+        - Play notification sound
+        - Automatically open notification dropdown
 
         IMPORTANT:
         UI code belongs in notification-ui.js.
@@ -155,57 +157,30 @@ function addNotification(
     message
 ) {
 
-    /*
-        Set safe default values.
-    */
-
-    type =
-        type || "info";
-
-
-    title =
-        title || "Notification";
-
-
-    message =
-        message || "";
-
-
-    /*
-        Get existing notifications.
-    */
-
     const notifications =
         getNotifications();
 
 
-    /*
-        Create notification.
-    */
+    /*=====================================
+     * CREATE NOTIFICATION
+     *=====================================*/
 
-    const notification = {
+    const newNotification = {
 
         id:
-            Date.now().toString()
-            +
-            "-"
-            +
-            Math.random()
-                .toString(36)
-                .slice(2, 9),
+            Date.now(),
 
         type:
-            String(type),
+            type,
 
         title:
-            String(title),
+            title,
 
         message:
-            String(message),
+            message,
 
         time:
-            new Date()
-                .toLocaleString(),
+            new Date().toLocaleString(),
 
         read:
             false
@@ -213,19 +188,18 @@ function addNotification(
     };
 
 
-    /*
-        Put newest notification
-        at the beginning.
-    */
+    /*=====================================
+     * ADD TO TOP
+     *=====================================*/
 
     notifications.unshift(
-        notification
+        newNotification
     );
 
 
-    /*
-        Save notifications.
-    */
+    /*=====================================
+     * SAVE NOTIFICATION
+     *=====================================*/
 
     const saved =
         saveNotifications(
@@ -234,13 +208,21 @@ function addNotification(
 
 
     /*
-        Refresh UI if
-        notification-ui.js
-        is loaded.
+        Stop here if saving failed.
     */
 
+    if (!saved) {
+
+        return false;
+
+    }
+
+
+    /*=====================================
+     * UPDATE NOTIFICATION UI
+     *=====================================*/
+
     if (
-        saved &&
         typeof window.updateNotificationUI ===
         "function"
     ) {
@@ -250,7 +232,41 @@ function addNotification(
     }
 
 
-    return notification;
+    /*=====================================
+     * PLAY NOTIFICATION SOUND
+     *=====================================*/
+
+    if (
+        typeof window.playSound ===
+        "function"
+    ) {
+
+        window.playSound(
+            "notification"
+        );
+
+    }
+
+
+    /*=====================================
+     * AUTOMATICALLY OPEN DROPDOWN
+     *=====================================*/
+
+    if (
+        typeof window.openNotificationDropdown ===
+        "function"
+    ) {
+
+        window.openNotificationDropdown();
+
+    }
+
+
+    /*=====================================
+     * RETURN CREATED NOTIFICATION
+     *=====================================*/
+
+    return newNotification;
 
 }
 
@@ -458,7 +474,8 @@ function markNotificationRead(
         getNotifications();
 
 
-    let changed = false;
+    let changed =
+        false;
 
 
     /*
@@ -489,7 +506,8 @@ function markNotificationRead(
                         !notification.read
                     ) {
 
-                        changed = true;
+                        changed =
+                            true;
 
                     }
 
